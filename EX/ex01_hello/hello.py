@@ -1,5 +1,3 @@
-'''hello.py'''
-
 name = input("What is your name? ")
 arv1 = input(f"Hello, {name}! Enter a random number: ")
 arv2 = input("Great! Now enter a second random number: ")
@@ -14,5 +12,8 @@ greeting = input("Enter a greeting: ")
 recipient = input("Enter a recipient: ")
 times_to_repeat = input("How many times to repeat: ")
 print((greeting + " " + recipient + "! ") * int(times_to_repeat))
+
+
+
 
 
