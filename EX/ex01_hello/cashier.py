@@ -19,4 +19,3 @@ sum_from_client5 = sum_from_client4 % 5
 
 coins += sum_from_client5
 print(f"Amount of coins needed: {coins}")
-
