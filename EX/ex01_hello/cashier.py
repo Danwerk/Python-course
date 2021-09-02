@@ -1,3 +1,4 @@
+"cashier"
 sum_from_client = int(input("Enter a sum: "))
 coins = 0
 
