@@ -26,13 +26,13 @@ def div(x, y):
 
 
 def modulus(x, y):
-    """Divide x by y and return remainder. Use an arithmetic operator!"""
+    """Divide x by y and return remainder. Use an arithmetic operator."""
     return x % y
     pass
 
 
 def floor_div(x, y):
-    """Divide x by y and floor the value. Use an arithmetic operator!"""
+    """Divide x by y and floor the value. Use an arithmetic operator."""
     return x // y
     pass
 
@@ -122,5 +122,5 @@ if __name__ == '__main__':
     print(x_is_not_y(1, 2))  # True
     print(if_else(1, 3, 5, 99))  # 3
     print(if_else(2, 1, 10, 5))  # 0
-    print(surface(1, 2)) # 2
-    print(volume(5, 5, 5)) # 125
+    print(surface(1, 2))  # 2
+    print(volume(5, 5, 5))  # 125
