@@ -3,43 +3,43 @@
 
 def add(x, y):
     """Add x to y."""
-    print(x + y)
+    return x + y
     pass
 
 
 def sub(x, y):
     """Subtract y from x."""
-    print(x - y)
+    return x - y
     pass
 
 
 def multiply(x, y):
     """Multiply x by y."""
-    print(x * y)
+    return x * y
     pass
 
 
 def div(x, y):
     """Divide x by y."""
-    print(x / y)
+    return x / y
     pass
 
 
 def modulus(x, y):
     """Divide x by y and return remainder. Use an arithmetic operator!"""
-    print(x % y)
+    return x % y
     pass
 
 
 def floor_div(x, y):
     """Divide x by y and floor the value. Use an arithmetic operator!"""
-    print(x // y)
+    return x // y
     pass
 
 
 def exponent(x, y):
     """Calculate x where y is an exponent."""
-    print(x ** y)
+    return x ** y
     pass
 
 
@@ -98,13 +98,13 @@ def if_else(a, b, c, d):
 
 def surface(length, width):
     """Add the missing parameters to calculate the surface. Calculate and return the value of surface."""
-    print(length * width)
+    return length * width
     pass
 
 
 def volume(length, width, height):
     """Add the missing parameters to calculate the volume. Calculate and return the value of volume."""
-    print(length * width * height)
+    return length * width * height
     pass
 
 
@@ -122,5 +122,5 @@ if __name__ == '__main__':
     print(x_is_not_y(1, 2))  # True
     print(if_else(1, 3, 5, 99))  # 3
     print(if_else(2, 1, 10, 5))  # 0
-    # print(surface(1, 2)) # 2
-    # print(volume(5, 5, 5)) # 125
+    print(surface(1, 2)) # 2
+    print(volume(5, 5, 5)) # 125
