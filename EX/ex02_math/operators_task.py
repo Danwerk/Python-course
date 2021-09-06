@@ -88,11 +88,11 @@ def if_else(a, b, c, d):
     result1 = a * b
     result2 = c / d
     if result1 > result2:
-        print(result1)
+        return result1
     elif result1 < result2:
-        print(result2)
+        return result2
     else:
-        print('0')
+        return 0
     pass
 
 
