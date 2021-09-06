@@ -80,11 +80,7 @@ def x_is_not_y(x, y):
 
 
 def if_else(a, b, c, d):
-    """
-    Create a program that has 4 numeric parameters. Multiply parameters 1-2 (multiply a by b) by each other and divide
-    parameters 3-4 (divide c by d) by each other. Next check and return the greater value. If both values are the same
-    then return 0 (number zero).
-    """
+    """Create a program that has 4 numeric parameters."""
     result1 = a * b
     result2 = c / d
     if result1 > result2:
