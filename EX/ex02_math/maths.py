@@ -4,10 +4,10 @@ def ects(ects, weeks):
         time then return a string "Impossible!".
         """
     if weeks <= 0:
-        print('impossible')
+        return 'impossible'
     else:
         hours_per_week = (ects * 26) / weeks
-        print(hours_per_week)
+        return hours_per_week
     pass
 
 def average(a, b, c, d):
