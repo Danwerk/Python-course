@@ -1,4 +1,6 @@
 """maths."""
+
+
 def ects(ects, weeks):
     """Implement a function to know how many hours are needed per week if each ECTS is 26 hours."""
     if weeks <= 0:
