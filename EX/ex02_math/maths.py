@@ -1,7 +1,5 @@
 def ects(ects, weeks):
-    """
-    Implement a function to know how many hours are needed per week if each ECTS is 26 hours.
-    """
+    """Implement a function to know how many hours are needed per week if each ECTS is 26 hours."""
     if weeks <= 0:
         return 'Impossible!'
     else:
@@ -29,7 +27,9 @@ def average(a, b, c, d):
 
 def clock(d, h, m, s):
     """
-    Implement a function that has 4 numeric parameters. The values are: days, hours, minutes, seconds. Calculate how many
+    Implement a function that has 4 numeric parameters.
+
+    The values are: days, hours, minutes, seconds. Calculate how many
     minutes are in total and return the value.
     Examples:
     1. clock(1, 24, 60, 60) === 2941
