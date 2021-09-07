@@ -1,14 +1,15 @@
 def ects(ects, weeks):
     """
-        Implement a function to know how many hours are needed per week if each ECTS is 26 hours.
-        time then return a string "Impossible!".
-        """
+    Implement a function to know how many hours are needed per week if each ECTS is 26 hours.
+    time then return a string "Impossible!".
+    """
     if weeks <= 0:
-        return 'impossible!'
+        return 'Impossible!'
     else:
         hours_per_week = (ects * 26) / weeks
         return hours_per_week
     pass
+
 
 def average(a, b, c, d):
     """
