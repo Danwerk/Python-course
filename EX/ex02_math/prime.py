@@ -1,6 +1,6 @@
 """Primes identifier."""
 
-def is_prime_number(number: int) -> bool:
+def is_prime_number(number):
     """
     Check if the parameter number is a prime number.
 
@@ -13,14 +13,15 @@ def is_prime_number(number: int) -> bool:
     """
     if number <= 1:
         return False
+    if number == 2:
+        return True
     if number > 1:
         for i in range(2, number):
-            if (number % 1) == 0:
+            if (number % i) == 0:
                 return False
             else:
                 return True
     pass
-
 
 if __name__ == '__main__':
     print(is_prime_number(2))  # -> True
