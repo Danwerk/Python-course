@@ -1,6 +1,6 @@
 def ects(ects, weeks):
     """
-        Implement a function to know how many hours are needed per week if each ECTS is 26 hours. If it's not possible in
+        Implement a function to know how many hours are needed per week if each ECTS is 26 hours.
         time then return a string "Impossible!".
 
         Examples:
