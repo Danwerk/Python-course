@@ -4,7 +4,7 @@ def ects(ects, weeks):
         time then return a string "Impossible!".
         """
     if weeks <= 0:
-        return 'impossible'
+        return 'impossible!'
     else:
         hours_per_week = (ects * 26) / weeks
         return hours_per_week
