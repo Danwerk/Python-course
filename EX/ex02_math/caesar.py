@@ -8,7 +8,7 @@ def encode(message: str, shift: int) -> str:
         if i >= 97 and i <= 122:
             i = i + shift
             if i > 122:
-                crypted.append((i - 122) + 96)
+                crypted.append((i + shift - 97) % 26 + 97)
             else:
                 crypted.append(i)
         else:
@@ -21,6 +21,6 @@ def encode(message: str, shift: int) -> str:
     return mystring
 
 
+print(encode("hmm... wh4t, oh what?!QWERTYUIOPÜÕASDFGHJKLÖÄZXCVBNM;:?‽", 4))
 print(encode("hmm... wh4t, oh what?!?‽", 4))
-print(encode("hmm... wh4t, oh what?!?‽", 4))
-print(encode("hmm... wh4t, oh what?!?‽", 4))
+print(encode("helkkki asdf 2", 100))
