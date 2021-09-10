@@ -8,7 +8,7 @@ def encode(message: str, shift: int) -> str:
         if i >= 97 and i <= 122:
             i = i + shift
             if i > 122:
-                crypted.append((i + shift - 97) % 26 + 97)
+                crypted.append((i - 97) % 26 + 97)
             else:
                 crypted.append(i)
         else:
