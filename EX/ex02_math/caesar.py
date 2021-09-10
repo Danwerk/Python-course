@@ -1,7 +1,6 @@
 """Caesar."""
 def encode(message: str, shift: int) -> str:
     """Encode a message using a Caesar cipher."""
-
     ascii_list = []
     crypted = []
     for character in message:
@@ -27,3 +26,4 @@ def encode(message: str, shift: int) -> str:
 print(encode("hmm... wh4t, oh what?!QWERTYUIOPÜÕASDFGHJKLÖÄZXCVBNM;:?‽", 4))
 print(encode("hmm... wh4t, oh what?!?‽", 4))
 print(encode("helkkki asdf 2", 100))
+
