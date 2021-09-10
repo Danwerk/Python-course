@@ -22,8 +22,3 @@ def encode(message: str, shift: int) -> str:
     for char in crypted:
         mystring = mystring + chr(char)
     return mystring
-
-
-print(encode("hmm... wh4t, oh what?!QWERTYUIOPÜÕASDFGHJKLÖÄZXCVBNM;:?‽", 4))
-print(encode("hmm... wh4t, oh what?!?‽", 4))
-print(encode("helkkki asdf 2", 100))
