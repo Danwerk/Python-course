@@ -1,6 +1,7 @@
 """Caesar."""
-def encode(message: str, shift: int) -> str:
 
+
+def encode(message: str, shift: int) -> str:
     """Encode a message using a Caesar cipher."""
     ascii_list = []
     crypted = []
