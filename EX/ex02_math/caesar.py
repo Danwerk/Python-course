@@ -1,6 +1,6 @@
-ascii_list = []
-crypted = []
 def encode(message: str, shift: int) -> str:
+    ascii_list = []
+    crypted = []
     for character in message:
         ascii_list.append(ord(character))
 
@@ -21,3 +21,6 @@ def encode(message: str, shift: int) -> str:
     return mystring
 
 
+print(encode("hmm... wh4t, oh what?!?‽", 4))
+print(encode("hmm... wh4t, oh what?!?‽", 4))
+print(encode("hmm... wh4t, oh what?!?‽", 4))
