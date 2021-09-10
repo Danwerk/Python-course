@@ -24,6 +24,7 @@ def encode(message: str, shift: int) -> str:
        :param shift: shift for encoding
        :return: encoded message
        """
+
     ascii_list = []
     crypted = []
     for character in message:
