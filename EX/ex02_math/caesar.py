@@ -21,4 +21,3 @@ def encode(message: str, shift: int) -> str:
     return mystring
 
 
-print(encode("o roqk zaxzrky", 20))
