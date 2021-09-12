@@ -1,20 +1,3 @@
-'''pos1 = 1
-pos2 = 4
-jump_distance1 = 2
-jump_distance2 = 5
-sleep1 = 3
-sleep2 = 5
-for time in range(1000):
-    if time % sleep1 == 0:
-        pos1 += jump_distance1
-    if time % sleep2 == 0:
-        pos2 += jump_distance2
-        if pos1 == pos2:
-            print(pos1)
-        else:
-            print('-1')
-            break'''
-
 def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2) -> int:
     """Calculate the meeting position of 2 jangurus.
     @:param pos1: position of first janguru
@@ -27,7 +10,7 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2) -> int:
     @:return positions where jangurus first meet
     """
 
-    for time in range(1000):
+    for time in range(100000000000):
         if time % sleep1 == 0:
             pos1 += jump_distance1
         if time % sleep2 == 0:
