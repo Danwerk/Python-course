@@ -25,7 +25,6 @@ def is_prime_number(number):
         return True
 
 
-
 if __name__ == '__main__':
     print(is_prime_number(2))  # -> True
     print(is_prime_number(89))  # -> True

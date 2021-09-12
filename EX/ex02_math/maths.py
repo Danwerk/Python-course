@@ -10,7 +10,6 @@ def ects(ects, weeks):
         return hours_per_week
 
 
-
 def average(a, b, c, d):
     """
 
@@ -27,7 +26,6 @@ def average(a, b, c, d):
     return average
 
 
-
 def clock(d, h, m, s):
     """
     Implement a function that has 4 numeric parameters.
@@ -41,4 +39,3 @@ def clock(d, h, m, s):
     """
     minutes = (d * 24 * 60) + (h * 60) + (m) + (s / 60)
     return minutes
-
