@@ -10,7 +10,7 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2) -> int:
     @:return positions where jangurus first meet
     """
 
-    for time in range(100000000000):
+    for time in range(1000):
         if time % sleep1 == 0:
             pos1 += jump_distance1
         if time % sleep2 == 0:
