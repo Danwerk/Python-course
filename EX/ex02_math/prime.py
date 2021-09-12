@@ -23,7 +23,7 @@ def is_prime_number(number):
             if (number % i) == 0:
                 return False
         return True
-    pass
+
 
 
 if __name__ == '__main__':

@@ -8,7 +8,7 @@ def ects(ects, weeks):
     else:
         hours_per_week = (ects * 26) / weeks
         return hours_per_week
-    pass
+
 
 
 def average(a, b, c, d):
@@ -25,7 +25,7 @@ def average(a, b, c, d):
     """
     average = ((a * 1) + (b * 2) + (c * 3) + (d * 4)) / 4
     return average
-    pass
+
 
 
 def clock(d, h, m, s):
@@ -41,4 +41,4 @@ def clock(d, h, m, s):
     """
     minutes = (d * 24 * 60) + (h * 60) + (m) + (s / 60)
     return minutes
-    pass
+
