@@ -34,10 +34,10 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2) -> int:
             pos2 += jump_distance2
         if pos1 == pos2:
             return pos1
-        else:
-            print('-1')
-            break
+    return -1
 
-print(meet_me(1, 2, 1, 2, 1, 1))
+
+
+print(meet_me(10, 7, 7, 5, 8, 6))  # => 45
 
 
