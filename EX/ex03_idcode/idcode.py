@@ -1,21 +1,10 @@
 def find_id_code(text: str) -> str:
-    """
-    Find ID-code from given text.
-
-    Given string may include any number of numbers, characters and other symbols mixed together.
-    The numbers of ID-code may be between other symbols - they must be found and concatenated.
-    ID-code contains of exactly 11 numbers. If there are not enough numbers, return 'Not enough numbers!',
-    if there are too many numbers, return 'Too many numbers!' If ID-code can be found, return that code.
-
-    :param text: string
-    :return: string
-    """
-
+    """Find ID-code from given text."""
     nums_from_string = []
     for i in text:
         if i.isdigit():
             nums_from_string.append(i)
-    str_number = "".join(nums_from_string) #converts list numbers to a string
+    str_number = "".join(nums_from_string)  # converts list numbers to a string
 
     if len(str_number) < 11:
         return 'Not enough numbers!'
