@@ -1,3 +1,6 @@
+"""Idcode."""
+
+
 def find_id_code(text: str) -> str:
     """Find ID-code from given text."""
     nums_from_string = []
