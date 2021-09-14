@@ -3,11 +3,11 @@
 
 def find_id_code(text: str) -> str:
     """Find ID-code from given text."""
-    nums_from_string = []
+    nums_from_text = []
     for i in text:
         if i.isdigit():
-            nums_from_string.append(i)
-    str_number = "".join(nums_from_string)  # converts list numbers to a string
+            nums_from_text.append(i)
+    str_number = "".join(nums_from_text)  # converts list numbers to a string
 
     if len(str_number) < 11:
         return 'Not enough numbers!'
