@@ -137,3 +137,18 @@ def is_leap_year(year: int) -> bool:
         return False
 
 
+def get_full_year(gender_number: int, year_number: int) -> int:
+    eighties = 18
+    nineties = 19
+    twenties = 20
+
+    if gender_number == 1 or gender_number == 2:
+        return str(eighties) + str(year_number)
+    if gender_number == 3 or gender_number == 4:
+        return str(nineties) + str(year_number)
+    if gender_number == 5 or gender_number == 6:
+        if year_number < 10:
+            return str(twenties) + ('0' + str(year_number))
+        else:
+            return str(twenties) + str(year_number)
+
