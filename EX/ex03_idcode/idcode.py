@@ -94,7 +94,7 @@ def is_valid_gender_number(j):
 print(is_valid_gender_number(7))
 '''
 
-def funng(i):
+def is_valid_gender_number(i):
     if i == 0:
         return False
     elif i == 7:
@@ -103,4 +103,4 @@ def funng(i):
         return False
     else:
         return True
-print(funng(9))
+print(is_valid_gender_number(9))
