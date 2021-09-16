@@ -97,20 +97,23 @@ print(is_valid_gender_number(7))
 def is_valid_gender_number(i):
     if i == 0 or i >= 7:
         return False
-    elif i > 0 & i < 7:
+    elif i > 0 and i < 7:
         return True
 
+
 def get_gender(gender: str):
-    male = [1,3,5]
-    female = [2,4,6]
-    if gender in male:
+    first_num_male = [1, 3, 5]
+    first_num_female = [2, 4, 6]
+    if gender in first_num_male:
         return 'male'
-    if gender in female:
+    if gender in first_num_female:
         return 'female'
 
+def is_valid_year_number(year_number: int) -> bool:
+    if year_number > 0 and year_number < 100:
+        return True
+    else:
+         return False
 
-
-
-
-print(get_gender(2))  # -> "female"
-print(get_gender(5))  # -> "male"
+print(is_valid_year_number(100))  # -> False
+print(is_valid_year_number(50))  # -> true
