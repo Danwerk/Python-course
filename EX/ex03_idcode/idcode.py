@@ -100,12 +100,12 @@ def is_valid_gender_number(i):
     elif i > 0 & i < 7:
         return True
 
-def get_gender(n):
-    men = [1,3,5]
-    women = [2,4,6]
-    if n in men:
+def get_gender(gender: str):
+    male = [1,3,5]
+    female = [2,4,6]
+    if gender in male:
         return 'male'
-    if n in women:
+    if gender in female:
         return 'female'
 
 
