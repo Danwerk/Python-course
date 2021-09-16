@@ -124,13 +124,16 @@ def is_valid_month_number(month_number: int) -> bool:
 
 
 
-def is_valid_birth_number(birth_number: int):
+def is_valid_birth_number(birth_number: int) ->bool:
     if birth_number > 0 and birth_number < 1000:
         return True
     else:
         return False
 
-
-
+def is_leap_year(year: int) -> bool:
+    if year % 4 == 0 and not year % 100 == 0:
+        return True
+    else:
+        return False
 
 
