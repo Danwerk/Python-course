@@ -115,5 +115,22 @@ def is_valid_year_number(year_number: int) -> bool:
     else:
          return False
 
-print(is_valid_year_number(100))  # -> False
-print(is_valid_year_number(50))  # -> true
+
+def is_valid_month_number(month_number: int) -> bool:
+    if month_number > 0 and month_number < 13:
+        return True
+    else:
+        return False
+
+
+
+def is_valid_birth_number(birth_number: int):
+    if birth_number > 0 and birth_number < 1000:
+        return True
+    else:
+        return False
+
+
+
+
+
