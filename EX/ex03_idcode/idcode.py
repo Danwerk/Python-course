@@ -95,12 +95,7 @@ print(is_valid_gender_number(7))
 '''
 
 def is_valid_gender_number(i):
-    if i == 0:
+    if i == 0 or i >= 7:
         return False
-    elif i == 7:
-        return False
-    elif i == 8:
-        return False
-    else:
+    elif i > 0 & i < 7:
         return True
-print(is_valid_gender_number(9))
