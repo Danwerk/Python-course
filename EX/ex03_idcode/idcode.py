@@ -110,7 +110,7 @@ def get_gender(gender: str):
         return 'female'
 
 def is_valid_year_number(year_number: int) -> bool:
-    if year_number > 0 and year_number < 100:
+    if year_number >= 0 and year_number < 100:
         return True
     else:
          return False
