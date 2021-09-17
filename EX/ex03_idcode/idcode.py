@@ -16,6 +16,7 @@ def find_id_code(text: str) -> str:
     else:
         return str_number
 
+
 def is_valid_gender_number(i):
     if i == 0 or i >= 7:
         return False
@@ -30,6 +31,7 @@ def get_gender(gender: str):
         return 'male'
     if gender in first_num_female:
         return 'female'
+
 
 def is_valid_year_number(year_number: int) -> bool:
     if year_number >= 0 and year_number < 100:
@@ -51,6 +53,7 @@ def is_valid_birth_number(birth_number: int) ->bool:
         return True
     else:
         return False
+
 
 def is_leap_year(year: int) -> bool:
     if year % 400 == 0:
@@ -77,6 +80,7 @@ def get_full_year(gender_number: int, year_number: int) -> int:
 
         if gender_number == 5 or gender_number == 6:
             return twenties * 100 + year_number
+
 
 
 def get_birth_place(birth_number: int) -> str:
@@ -131,6 +135,7 @@ def is_valid_control_number(id_code: str):
         if sum_of_idcode_2 >= 10:
             return sum_of_idcode == 0
 
+
 def is_valid_day_number(gender_number: int, year_number: int, month_number: int, day_number: int) -> bool:
     month_of_thirty_days = [4, 6, 9, 11]
     month_of_thirty_one_days = [1, 3, 5, 7, 8, 10, 12]
@@ -163,16 +168,27 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
 
 
 def is_id_valid(id_code: str) -> bool:
-    if is_valid_gender_number(int(id_code[0])) == True:
-        if is_valid_year_number(int(id_code[1:3])) == True:
-            if is_valid_month_number(int(id_code[3:5])) == True:
-                if is_valid_day_number(int(id_code[0]), int(id_code[1:3]), int(id_code[3:5]), int(id_code[5:7])) == True:
-                    if is_valid_birth_number(int(id_code[7:10])) == True:
-                        if is_valid_control_number(id_code[0:11]) == True:
-                            return True
-    else:
+    if is_valid_gender_number(int(id_code[0])) == False:
         return False
+    else:
+        if is_valid_year_number(int(id_code[1:3])) == False:
+            return False
+        else:
+            if is_valid_month_number(int(id_code[3:5])) == False:
+                return False
+            else:
+                if is_valid_day_number(int(id_code[0]), int(id_code[1:3]), int(id_code[3:5]), int(id_code[5:7])) == False:
+                    return False
+                else:
+                    if is_valid_birth_number(int(id_code[7:10])) == False:
+                        return False
+                    else:
+                        if is_valid_control_number(id_code[0:11]) == False:
+                            return False
+                        else:
+                            return True
 
 
 
-print(is_id_valid("12345678901"))  # -> False
+
+
