@@ -152,3 +152,26 @@ def get_full_year(gender_number: int, year_number: int) -> int:
         else:
             return str(twenties) + str(year_number)
 
+def get_birth_place(birth_number: int) -> str:
+    d = {
+        "Kuressaare": [range(0,11)],
+        "Tartu": [range(11,21), range(271,371)],
+        "Tallinn": [range(21,221), range(471,711)],
+        "Kohtla-Järve": [range(221,271)],
+        "Narva": [range(371,421)],
+        "Pärnu": [range(421,471)],
+        "Undefined": [range(711,1000)],
+    }
+    if is_valid_birth_number(birth_number) == True:
+        for city in d:
+            range_list = d[city]
+            for city_range in range_list:
+                for city_num in city_range:
+                    if city_num == birth_number:
+                        return city
+    else:
+        return 'Wrong input!'
+
+
+print(get_birth_place(1003))
+
