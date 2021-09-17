@@ -148,21 +148,13 @@ def get_full_year(gender_number: int, year_number: int) -> int:
     else:
 
         if gender_number == 1 or gender_number == 2:
-            if year_number < 10:
-                return str(eighties) + ('0' + str(year_number))
-            else:
-                return str(eighties) + str(year_number)
-        if gender_number == 3 or gender_number == 4:
-            if year_number < 10:
-                return str(nineties) + ('0' + str(year_number))
-            else:
-                return str(nineties) + str(year_number)
-        if gender_number == 5 or gender_number == 6:
-            if year_number < 10:
-                return str(twenties) + ('0' + str(year_number))
-            else:
-                return str(twenties) + str(year_number)
+            return eighties * 100 + year_number
 
+        if gender_number == 3 or gender_number == 4:
+            return nineties * 100 + year_number
+
+        if gender_number == 5 or gender_number == 6:
+            return twenties * 100 + year_number
 
 
 def get_birth_place(birth_number: int) -> str:
