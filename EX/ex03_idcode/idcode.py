@@ -162,3 +162,17 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
                 return False
 
 
+def is_id_valid(id_code: str) -> bool:
+    if is_valid_gender_number(int(id_code[0])) == True:
+        if is_valid_year_number(int(id_code[1:3])) == True:
+            if is_valid_month_number(int(id_code[3:5])) == True:
+                if is_valid_day_number(int(id_code[0]), int(id_code[1:3]), int(id_code[3:5]), int(id_code[5:7])) == True:
+                    if is_valid_birth_number(int(id_code[7:10])) == True:
+                        if is_valid_control_number(id_code[0:11]) == True:
+                            return True
+    else:
+        return False
+
+
+
+print(is_id_valid("12345678901"))  # -> False
