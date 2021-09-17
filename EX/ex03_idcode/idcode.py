@@ -177,5 +177,33 @@ def get_birth_place(birth_number: int) -> str:
         return 'Wrong input!'
 
 
-print(get_birth_place(710))
+print(get_birth_place(0))
+
+
+def is_valid_control_number(id_code: str):
+    first_step = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1]
+    second_step = [3, 4, 5, 6, 7, 8, 9, 1, 2, 3]
+
+    id_code_list = list(map(int, id_code))
+    id_code_list.pop()
+
+    summary = sum(x * y for x, y in zip(first_step, id_code_list))
+    summary = summary % 11
+
+    if summary < 10:
+        if str(summary) == id_code[-1]:
+            return True
+        else:
+            return False
+
+    if summary >= 10:
+        summary2 = sum(x * y for x, y in zip(second_step, id_code_list))
+        summary2 = summary2 % 11
+        if summary2 < 10:
+            if str(summary2) == id_code[-1]:
+                return True
+            else:
+                return False
+        if summary2 >= 10:
+            return summary == 0
 
