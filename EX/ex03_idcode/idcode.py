@@ -16,84 +16,6 @@ def find_id_code(text: str) -> str:
     else:
         return str_number
 
-
-'''
-print(find_id_code(""))
-print(find_id_code("123456789123456789"))
-print(find_id_code("ID code is: 49403136526"))
-print(find_id_code("efs4  9   #4aw0h 3r 1a36g5j2!!6-"))
-'''
-
-
-
-
-
-'''
-b = int(input('enter number: '))
-c = f"{b:03}"
-
-print(c)
-a = f"{9:03}"
-
-'''
-
-
-
-'''
-print(a)
-for i in range(1,11):
-    print(f"{i:03}")
-
-if a < f"{10:03}":
-    print('Kuressaare')
-'''
-
-
-
-'''elif a > f"{10:03}" & a < f"{20:03}":
-    print('Tartu')
-elif a < f"{10:03}":
-    print('Kuressaare')
-if a < f"{10:03}":
-    print('Kuressaare')
-if a < f"{10:03}":
-    print('Kuressaare')
-if a < f"{10:03}":
-    print('Kuressaare')
-if a < f"{10:03}":
-    print('Kuressaare')
-if a < f"{10:03}":
-    print('Kuressaare')
-if a < f"{10:03}":
-    print('Kuressaare')
-if a < f"{10:03}":
-    print('Kuressaare')
-
-
-[] = Kuressaare
-011...020 = Tartu
-021...220 = Tallinn
-221...270 = Kohtla-Järve
-271...370 = Tartu
-371...420 = Narva
-421...470 = Pärnu
-471...710 = Tallinn
-711...999 = undefined
-'''
-
-'''
-def is_valid_gender_number(j):
-    for j in range(0, 9)
-        if j == 0:
-            return False
-    if j > 0 & j <= 6:
-        return True
-    if j == 7 & j == 8:
-        return False
-
-print(is_valid_gender_number(7))
-'''
-
 def is_valid_gender_number(i):
     if i == 0 or i >= 7:
         return False
@@ -158,18 +80,18 @@ def get_full_year(gender_number: int, year_number: int) -> int:
 
 
 def get_birth_place(birth_number: int) -> str:
-    d = {
+    dict = {
         "Kuressaare": [range(0,11)],
         "Tartu": [range(11,21), range(271,371)],
         "Tallinn": [range(21,221), range(471,711)],
         "Kohtla-Järve": [range(221,271)],
         "Narva": [range(371,421)],
         "Pärnu": [range(421,471)],
-        "Undefined": [range(711,1000)],
+        "undefined": [range(711,1000)],
     }
     if is_valid_birth_number(birth_number) == True:
-        for city in d:
-            range_list = d[city]
+        for city in dict:
+            range_list = dict[city]
             for city_range in range_list:
                 for city_num in city_range:
                     if city_num == birth_number:
@@ -178,7 +100,7 @@ def get_birth_place(birth_number: int) -> str:
         return 'Wrong input!'
 
 
-print(get_birth_place(0))
+print(get_birth_place(711))
 
 
 
