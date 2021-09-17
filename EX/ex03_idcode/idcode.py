@@ -109,25 +109,56 @@ def is_valid_control_number(id_code: str):
     second_step = [3, 4, 5, 6, 7, 8, 9, 1, 2, 3]
 
     id_code_list = list(map(int, id_code))
-    id_code_list.pop()
+    id_code_list.pop()  # removes last digit from id_code_list
 
-    summary = sum(x * y for x, y in zip(first_step, id_code_list))
-    summary = summary % 11
+    sum_of_idcode = sum(x * y for x, y in zip(first_step, id_code_list))
+    sum_of_idcode = sum_of_idcode % 11
 
-    if summary < 10:
-        if str(summary) == id_code[-1]:
+    if sum_of_idcode < 10:
+        if str(sum_of_idcode) == id_code[-1]:
             return True
         else:
             return False
 
-    if summary >= 10:
-        summary2 = sum(x * y for x, y in zip(second_step, id_code_list))
-        summary2 = summary2 % 11
-        if summary2 < 10:
-            if str(summary2) == id_code[-1]:
+    if sum_of_idcode >= 10:
+        sum_of_idcode_2 = sum(x * y for x, y in zip(second_step, id_code_list))
+        sum_of_idcode_2 = sum_of_idcode_2 % 11
+        if sum_of_idcode_2 < 10:
+            if str(sum_of_idcode_2) == id_code[-1]:
                 return True
             else:
                 return False
-        if summary2 >= 10:
-            return summary == 0
+        if sum_of_idcode_2 >= 10:
+            return sum_of_idcode == 0
+
+def is_valid_day_number(gender_number: int, year_number: int, month_number: int, day_number: int) -> bool:
+    month_of_thirty_days = [4, 6, 9, 11]
+    month_of_thirty_one_days = [1, 3, 5, 7, 8, 10, 12]
+    depends_on_leap = [2]
+    if month_number in month_of_thirty_days:
+        if day_number > 1 and day_number <= 30:
+            return True
+        else:
+            return False
+    elif month_number in month_of_thirty_one_days:
+            if day_number >= 1 and day_number <= 31:
+                return True
+            else:
+                return False
+    elif month_number in depends_on_leap:
+        if is_leap_year(get_full_year(gender_number, year_number)) == True:
+            if day_number > 1 and day_number <= 29:
+                return True
+            elif day_number > 1 and day_number <= 28:
+                return False
+            else:
+                return False
+        elif not is_leap_year(get_full_year(gender_number, year_number)):
+            if day_number > 1 and day_number <= 29:
+                return False
+            elif day_number > 1 and day_number <= 28:
+                return True
+            else:
+                return False
+
 
