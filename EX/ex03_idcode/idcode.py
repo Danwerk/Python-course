@@ -23,7 +23,7 @@ def is_valid_gender_number(i):
     elif i > 0 and i < 7:
         return True
 
-
+'''
 def get_gender(gender: str):
     first_num_male = [1, 3, 5]
     first_num_female = [2, 4, 6]
@@ -31,6 +31,12 @@ def get_gender(gender: str):
         return 'male'
     if gender in first_num_female:
         return 'female'
+'''
+def get_gender(gender: str):
+    if gender % 2 == 0:
+        return 'female'
+    else:
+        return 'male'
 
 
 def is_valid_year_number(year_number: int) -> bool:
@@ -190,5 +196,12 @@ def is_id_valid(id_code: str) -> bool:
 
 
 
+
+
+def get_data_from_id(id_code: str) -> str:
+    if is_id_valid(id_code) == True:
+        return f"This is a {get_gender(int(id_code[0]))} born on {int(id_code[5:7])}.{(id_code[3:5])}.{get_full_year(int(id_code[0]), int(id_code[1:3]))} in {get_birth_place(int(id_code[7:10]))}."
+    else:
+        return "Given invalid ID code!"
 
 
