@@ -131,7 +131,9 @@ def is_valid_birth_number(birth_number: int) ->bool:
         return False
 
 def is_leap_year(year: int) -> bool:
-    if year % 4 == 0 and not year % 100 == 0:
+    if year % 400 == 0:
+        return True
+    elif year % 4 == 0 and not year % 100 == 0:
         return True
     else:
         return False
@@ -173,5 +175,5 @@ def get_birth_place(birth_number: int) -> str:
         return 'Wrong input!'
 
 
-print(get_birth_place(1003))
+print(get_birth_place(710))
 
