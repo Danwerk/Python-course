@@ -137,7 +137,7 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
     """Check if given value is correct for day number in ID code."""
     month_of_thirty_days = [4, 6, 9, 11]
     month_of_thirty_one_days = [1, 3, 5, 7, 8, 10, 12]
-    depends_on_leap = [2]
+    depends_on_leap = 2
     if month_number in month_of_thirty_days:
         if 1 < day_number <= 30:
             return True
@@ -148,7 +148,7 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
             return True
         else:
             return False
-    elif month_number in depends_on_leap:
+    elif month_number == depends_on_leap:
         if is_leap_year(get_full_year(gender_number, year_number)):
             if 1 < day_number <= 29:
                 return True
