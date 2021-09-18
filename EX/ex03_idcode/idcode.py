@@ -199,9 +199,11 @@ def is_id_valid(id_code: str) -> bool:
 
 
 def get_data_from_id(id_code: str) -> str:
-    if is_id_valid(id_code) and find_id_code(id_code) == True:
+
+    if is_id_valid(find_id_code(id_code)) == True:
         return f"This is a {get_gender(int(id_code[0]))} born on {int(id_code[5:7])}.{(id_code[3:5])}.{get_full_year(int(id_code[0]), int(id_code[1:3]))} in {get_birth_place(int(id_code[7:10]))}."
     else:
         return "Given invalid ID code!"
-
+print(get_data_from_id("49808270244"))  # -> "This is a female born on 27.08.1998 in Tallinn."
+print(get_data_from_id("60109200187"))  #
 
