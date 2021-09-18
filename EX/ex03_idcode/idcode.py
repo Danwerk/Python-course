@@ -156,7 +156,7 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
                 return False
             else:
                 return False
-        elif not is_leap_year(get_full_year(gender_number, year_number)):
+        else:
             if 1 < day_number <= 29:
                 return False
             elif 1 < day_number <= 28:
