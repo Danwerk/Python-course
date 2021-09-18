@@ -26,7 +26,7 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2) -> int:
             if time % sleep2 == 0:
                 pos2 += jump_distance2
             if pos1 == pos2:
-                return pos1 + (pos2 - pos1)
+                return pos1 + (pos)
         return -1
     if pos1 > pos2:
         pos = pos1 - pos2
