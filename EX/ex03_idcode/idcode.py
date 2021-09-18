@@ -192,7 +192,7 @@ def get_data_from_id(id_code: str) -> str:
 
 if __name__ == '__main__':
     print(is_valid_control_number("60102031670"))  # -> False, it must be 6
-    print(is_id_valid('60102n31670'))
+    print(is_id_valid('60102nm31670'))
     '''
     print("\nFind ID code:")
     print(find_id_code(""))  # -> "Not enough numbers!"
