@@ -23,16 +23,6 @@ def is_valid_gender_number(i):
     elif i > 0 and i < 7:
         return True
 
-'''
-def get_gender(gender: str):
-    first_num_male = [1, 3, 5]
-    first_num_female = [2, 4, 6]
-    if gender in first_num_male:
-        return 'male'
-    if gender in first_num_female:
-        return 'female'
-'''
-
 
 def get_gender(gender: int):
     if gender % 2 == 0:
@@ -84,7 +74,6 @@ def get_full_year(gender_number: int, year_number: int) -> int:
 
     if gender_number == 5 or gender_number == 6:
         return twenties * 100 + year_number
-
 
 
 def get_birth_place(birth_number: int) -> str:
