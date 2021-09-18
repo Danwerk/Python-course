@@ -91,7 +91,7 @@ def get_birth_place(birth_number: int) -> str:
         "Pärnu": [range(421, 471)],
         "undefined": [range(711, 1000)],
     }
-    if is_valid_birth_number(birth_number) == True:
+    if is_valid_birth_number(birth_number):
         for city in dict:
             range_list = dict[city]
             for city_range in range_list:
@@ -146,7 +146,7 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
             else:
                 return False
     elif month_number in depends_on_leap:
-        if is_leap_year(get_full_year(gender_number, year_number)) == True:
+        if is_leap_year(get_full_year(gender_number, year_number)):
             if day_number > 1 and day_number <= 29:
                 return True
             elif day_number > 1 and day_number <= 28:
@@ -167,22 +167,23 @@ def is_id_valid(id_code: str) -> bool:
     if len(find_id_code(id_code)) < 11 or len(find_id_code(id_code)) > 11:
         return False
     else:
-        if is_valid_gender_number(int(id_code[0])) == False:
+        if not is_valid_gender_number(int(id_code[0])):
             return False
         else:
-            if is_valid_year_number(int(id_code[1:3])) == False:
+            if not is_valid_year_number(int(id_code[1:3])):
                 return False
             else:
-                if is_valid_month_number(int(id_code[3:5])) == False:
+                if not is_valid_month_number(int(id_code[3:5])):
                     return False
                 else:
-                    if is_valid_day_number(int(id_code[0]), int(id_code[1:3]), int(id_code[3:5]), int(id_code[5:7])) == False:
+                    if not is_valid_day_number(int(id_code[0]), int(id_code[1:3]), int(id_code[3:5]),
+                                               int(id_code[5:7])):
                         return False
                     else:
-                        if is_valid_birth_number(int(id_code[7:10])) == False:
+                        if not is_valid_birth_number(int(id_code[7:10])):
                             return False
                         else:
-                            if is_valid_control_number(id_code[0:11]) == False:
+                            if not is_valid_control_number(id_code[0:11]):
                                 return False
                             else:
                                 return True
@@ -191,7 +192,7 @@ def is_id_valid(id_code: str) -> bool:
 def get_data_from_id(id_code: str) -> str:
     """Get possible information about the person."""
     id_code = find_id_code(id_code)
-    if is_id_valid(id_code) == True:
+    if is_id_valid(id_code):
         return f"This is a {get_gender(int(id_code[0]))} born on {int(id_code[5:7])}.{(id_code[3:5])}.{get_full_year(int(id_code[0]), int(id_code[1:3]))} in {get_birth_place(int(id_code[7:10]))}."
     else:
         return "Given invalid ID code!"
@@ -275,4 +276,3 @@ if __name__ == '__main__':
     # print("\nTest now your own ID code:")
     # personal_id = input()  # type your own id in command prompt
     # print(is_id_valid(personal_id))  # -> True
-
