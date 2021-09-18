@@ -111,10 +111,6 @@ def get_birth_place(birth_number: int) -> str:
         return 'Wrong input!'
 
 
-print(get_birth_place(711))
-
-
-
 def is_valid_control_number(id_code: str):
     first_step = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1]
     second_step = [3, 4, 5, 6, 7, 8, 9, 1, 2, 3]
@@ -131,16 +127,17 @@ def is_valid_control_number(id_code: str):
         else:
             return False
 
+
     if sum_of_idcode >= 10:
         sum_of_idcode_2 = sum(x * y for x, y in zip(second_step, id_code_list))
         sum_of_idcode_2 = sum_of_idcode_2 % 11
+        if sum_of_idcode_2 == 10:
+            sum_of_idcode_2 = 0
         if sum_of_idcode_2 < 10:
             if str(sum_of_idcode_2) == id_code[-1]:
                 return True
             else:
                 return False
-        if sum_of_idcode_2 >= 10:
-            return sum_of_idcode == 0
 
 
 def is_valid_day_number(gender_number: int, year_number: int, month_number: int, day_number: int) -> bool:
@@ -208,6 +205,7 @@ def get_data_from_id(id_code: str) -> str:
 
 
 if __name__ == '__main__':
+    print(is_valid_control_number("60102031670"))  # -> False, it must be 6
     '''
     print("\nFind ID code:")
     print(find_id_code(""))  # -> "Not enough numbers!"
