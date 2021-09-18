@@ -18,13 +18,15 @@ def find_id_code(text: str) -> str:
 
 
 def is_valid_gender_number(i):
+    """Check for id code length."""
     if i == 0 or i >= 7:
         return False
-    elif i > 0 and i < 7:
+    elif 0 < i < 7:
         return True
 
 
 def get_gender(gender: int):
+    """Define gender."""
     if gender % 2 == 0:
         return 'female'
     else:
@@ -33,7 +35,7 @@ def get_gender(gender: int):
 
 def is_valid_year_number(year_number: int) -> bool:
     """Check if given value is correct for year number in ID code."""
-    if year_number >= 0 and year_number < 100:
+    if 0 <= year_number < 100:
         return True
     else:
          return False
@@ -41,7 +43,7 @@ def is_valid_year_number(year_number: int) -> bool:
 
 def is_valid_month_number(month_number: int) -> bool:
     """Check if given value is correct for month number in ID code."""
-    if month_number > 0 and month_number < 13:
+    if 0 < month_number < 13:
         return True
     else:
         return False
@@ -49,13 +51,14 @@ def is_valid_month_number(month_number: int) -> bool:
 
 def is_valid_birth_number(birth_number: int) ->bool:
     """Check if given value is correct for birth number in ID code."""
-    if birth_number > 0 and birth_number < 1000:
+    if 0 < birth_number < 1000:
         return True
     else:
         return False
 
 
 def is_leap_year(year: int) -> bool:
+    """Check if it is leap year."""
     if year % 400 == 0:
         return True
     elif year % 4 == 0 and not year % 100 == 0:
@@ -136,27 +139,27 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
     month_of_thirty_one_days = [1, 3, 5, 7, 8, 10, 12]
     depends_on_leap = [2]
     if month_number in month_of_thirty_days:
-        if day_number > 1 and day_number <= 30:
+        if 1 < day_number <= 30:
             return True
         else:
             return False
     elif month_number in month_of_thirty_one_days:
-            if day_number >= 1 and day_number <= 31:
+            if 1 <= day_number <= 31:
                 return True
             else:
                 return False
     elif month_number in depends_on_leap:
         if is_leap_year(get_full_year(gender_number, year_number)):
-            if day_number > 1 and day_number <= 29:
+            if 1 < day_number <= 29:
                 return True
-            elif day_number > 1 and day_number <= 28:
+            elif 1 < day_number <= 28:
                 return False
             else:
                 return False
         elif not is_leap_year(get_full_year(gender_number, year_number)):
-            if day_number > 1 and day_number <= 29:
+            if 1 < day_number <= 29:
                 return False
-            elif day_number > 1 and day_number <= 28:
+            elif 1 < day_number <= 28:
                 return True
             else:
                 return False
