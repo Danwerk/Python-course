@@ -75,18 +75,15 @@ def get_full_year(gender_number: int, year_number: int) -> int:
     eighties = 18
     nineties = 19
     twenties = 20
-    if len(str(year_number)) > 2:
-        return 'woops'
-    else:
 
-        if gender_number == 1 or gender_number == 2:
-            return eighties * 100 + year_number
+    if gender_number == 1 or gender_number == 2:
+        return eighties * 100 + year_number
 
-        if gender_number == 3 or gender_number == 4:
-            return nineties * 100 + year_number
+    if gender_number == 3 or gender_number == 4:
+        return nineties * 100 + year_number
 
-        if gender_number == 5 or gender_number == 6:
-            return twenties * 100 + year_number
+    if gender_number == 5 or gender_number == 6:
+        return twenties * 100 + year_number
 
 
 
@@ -172,6 +169,7 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
 
 
 def is_id_valid(id_code: str) -> bool:
+    id_code = find_id_code(id_code)
     if is_valid_gender_number(int(id_code[0])) == False:
         return False
     else:
