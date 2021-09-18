@@ -33,7 +33,6 @@ def get_gender(gender: int):
 
 def is_valid_year_number(year_number: int) -> bool:
     """Check if given value is correct for year number in ID code."""
-
     if year_number >= 0 and year_number < 100:
         return True
     else:
@@ -49,6 +48,7 @@ def is_valid_month_number(month_number: int) -> bool:
 
 
 def is_valid_birth_number(birth_number: int) ->bool:
+    """Check if given value is correct for birth number in ID code."""
     if birth_number > 0 and birth_number < 1000:
         return True
     else:
@@ -65,6 +65,7 @@ def is_leap_year(year: int) -> bool:
 
 
 def get_full_year(gender_number: int, year_number: int) -> int:
+    """Define the 4-digit year when given person was born."""
     eighties = 18
     nineties = 19
     twenties = 20
@@ -80,6 +81,7 @@ def get_full_year(gender_number: int, year_number: int) -> int:
 
 
 def get_birth_place(birth_number: int) -> str:
+    """Find the place where the person was born."""
     dict = {
         "Kuressaare": [range(0, 11)],
         "Tartu": [range(11, 21), range(271, 371)],
@@ -101,6 +103,7 @@ def get_birth_place(birth_number: int) -> str:
 
 
 def is_valid_control_number(id_code: str):
+    """Check if given value is correct for control number in ID code."""
     first_step = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1]
     second_step = [3, 4, 5, 6, 7, 8, 9, 1, 2, 3]
 
@@ -115,8 +118,6 @@ def is_valid_control_number(id_code: str):
             return True
         else:
             return False
-
-
     if sum_of_idcode >= 10:
         sum_of_idcode_2 = sum(x * y for x, y in zip(second_step, id_code_list))
         sum_of_idcode_2 = sum_of_idcode_2 % 11
@@ -130,6 +131,7 @@ def is_valid_control_number(id_code: str):
 
 
 def is_valid_day_number(gender_number: int, year_number: int, month_number: int, day_number: int) -> bool:
+    """Check if given value is correct for day number in ID code."""
     month_of_thirty_days = [4, 6, 9, 11]
     month_of_thirty_one_days = [1, 3, 5, 7, 8, 10, 12]
     depends_on_leap = [2]
@@ -161,6 +163,7 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
 
 
 def is_id_valid(id_code: str) -> bool:
+    """Check if given ID code is valid and return the result (True or False)."""
     if len(find_id_code(id_code)) < 11 or len(find_id_code(id_code)) > 11:
         return False
     else:
@@ -186,6 +189,7 @@ def is_id_valid(id_code: str) -> bool:
 
 
 def get_data_from_id(id_code: str) -> str:
+    """Get possible information about the person."""
     id_code = find_id_code(id_code)
     if is_id_valid(id_code) == True:
         return f"This is a {get_gender(int(id_code[0]))} born on {int(id_code[5:7])}.{(id_code[3:5])}.{get_full_year(int(id_code[0]), int(id_code[1:3]))} in {get_birth_place(int(id_code[7:10]))}."
