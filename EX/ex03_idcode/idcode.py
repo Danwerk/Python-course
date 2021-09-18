@@ -32,6 +32,8 @@ def get_gender(gender: int):
 
 
 def is_valid_year_number(year_number: int) -> bool:
+    """Check if given value is correct for year number in ID code."""
+
     if year_number >= 0 and year_number < 100:
         return True
     else:
@@ -39,6 +41,7 @@ def is_valid_year_number(year_number: int) -> bool:
 
 
 def is_valid_month_number(month_number: int) -> bool:
+    """Check if given value is correct for month number in ID code."""
     if month_number > 0 and month_number < 13:
         return True
     else:
@@ -78,13 +81,13 @@ def get_full_year(gender_number: int, year_number: int) -> int:
 
 def get_birth_place(birth_number: int) -> str:
     dict = {
-        "Kuressaare": [range(0,11)],
-        "Tartu": [range(11,21), range(271,371)],
-        "Tallinn": [range(21,221), range(471,711)],
-        "Kohtla-Järve": [range(221,271)],
-        "Narva": [range(371,421)],
-        "Pärnu": [range(421,471)],
-        "undefined": [range(711,1000)],
+        "Kuressaare": [range(0, 11)],
+        "Tartu": [range(11, 21), range(271, 371)],
+        "Tallinn": [range(21, 221), range(471, 711)],
+        "Kohtla-Järve": [range(221, 271)],
+        "Narva": [range(371, 421)],
+        "Pärnu": [range(421, 471)],
+        "undefined": [range(711, 1000)],
     }
     if is_valid_birth_number(birth_number) == True:
         for city in dict:
