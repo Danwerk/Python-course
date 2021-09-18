@@ -43,4 +43,3 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2) -> int:
 
 
 print(meet_me(10, 7, 7, 5, 8, 6))  # => 45
-print(meet_me(10, 7, 7, 5, 8, 6))  # => 45
