@@ -133,7 +133,7 @@ def is_valid_control_number(id_code: str):
                 return False
 
 
-def is_valid_day_number(gender_number: int, year_number: int, month_number: int, day_number: int):
+def is_valid_day_number(gender_number, year_number, month_number, day_number):
     """Check if given value is correct for day number in ID code."""
     month_of_thirty_days = [4, 6, 9, 11]
     month_of_thirty_one_days = [1, 3, 5, 7, 8, 10, 12]
