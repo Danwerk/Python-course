@@ -147,8 +147,6 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
                 return False
 
 
-
-
 def is_id_valid(id_code: str) -> bool:
     """Check if given ID code is valid and return the result (True or False)."""
     if len(find_id_code(id_code)) < 11 or len(find_id_code(id_code)) > 11:
