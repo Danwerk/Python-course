@@ -116,10 +116,7 @@ def is_valid_control_number(id_code: str):
         if sum_of_idcode_2 == 10:
             sum_of_idcode_2 = 0
         if sum_of_idcode_2 < 10:
-            if str(sum_of_idcode_2) == id_code[-1]:
-                return True
-            else:
-                return False
+            return str(sum_of_idcode_2) == id_code[-1]
 
 
 def is_valid_day_number(gender_number: int, year_number: int, month_number: int, day_number: int):
