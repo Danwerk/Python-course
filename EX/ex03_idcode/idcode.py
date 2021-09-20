@@ -35,26 +35,17 @@ def get_gender(gender: int):
 
 def is_valid_year_number(year_number: int) -> bool:
     """Check if given value is correct for year number in ID code."""
-    if 0 <= year_number < 100:
-        return True
-    else:
-        return False
+    return 0 <= year_number < 100
 
 
 def is_valid_month_number(month_number: int) -> bool:
     """Check if given value is correct for month number in ID code."""
-    if 0 < month_number < 13:
-        return True
-    else:
-        return False
+    return 0 < month_number < 13
 
 
 def is_valid_birth_number(birth_number: int) -> bool:
     """Check if given value is correct for birth number in ID code."""
-    if 0 < birth_number < 1000:
-        return True
-    else:
-        return False
+    return 0 < birth_number < 1000
 
 
 def is_leap_year(year: int) -> bool:
@@ -117,10 +108,8 @@ def is_valid_control_number(id_code: str):
     sum_of_idcode = sum_of_idcode % 11
 
     if sum_of_idcode < 10:
-        if str(sum_of_idcode) == id_code[-1]:
-            return True
-        else:
-            return False
+        return str(sum_of_idcode) == id_code[-1]
+
     if sum_of_idcode >= 10:
         sum_of_idcode_2 = sum(x * y for x, y in zip(second_step, id_code_list))
         sum_of_idcode_2 = sum_of_idcode_2 % 11
@@ -156,6 +145,8 @@ def is_valid_day_number(gender_number: int, year_number: int, month_number: int,
                 return True
             else:
                 return False
+
+
 
 
 def is_id_valid(id_code: str) -> bool:
