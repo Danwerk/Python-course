@@ -1,4 +1,8 @@
+"""Lists."""
+
+
 def generate_list(amount: int, data_type: str) -> list:
+    """Returns a list with amount elements of type data_type."""
     if data_type == 'list':
         return list([[]]) * amount
     elif data_type == 'set':
@@ -18,14 +22,15 @@ def generate_list(amount: int, data_type: str) -> list:
         return list([int_num]) * amount
 
 
-print(generate_list(2, 'set'))  # [set(), set()]
+'''
+print(generate_list(2, 'set'))  
 print(generate_list(2, 'list'))
 print(generate_list(2, 'tuple'))
 print(generate_list(2, 'dict'))
 print(generate_list(2, 'string'))
 print(generate_list(2, 'float'))
 print(generate_list(2, 'int'))
-
+'''
 '''
 if __name__ == '__main__':
     # The given outputs are only some of possible outputs, for example for (3, 'string') in the first part an output of ["kass", "koer", "kana"] would also work.
