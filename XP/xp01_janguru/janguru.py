@@ -19,7 +19,7 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2) -> int:
 
 def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2) -> int:
     """Calculate the meeting position of 2 jangurus."""
-    if pos1 > pos2 and sleep1 < sleep2 or pos2 > pos1 and sleep 2 < sleep1:
+    if pos1 > pos2 and sleep1 < sleep2 or pos2 > pos1 and sleep2 < sleep1:
         return -1
     else:
 
