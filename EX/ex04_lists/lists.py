@@ -22,6 +22,20 @@ def generate_list(amount: int, data_type: str) -> list:
         return list([int_num]) * amount
 
 
+def generate_combined_list(inputs: list) -> list:
+    """
+    Write a function that returns a list with the minimal possible length, that still satisfies the criteria below.
+
+    Every element of 'inputs' is a tuple (int amount, string data_type).
+    For each element of 'inputs', it must be true that the returned list contains at least 'amount' of elements of type 'data_type'.
+    """
+    for i in inputs:
+        min_list = (max(inputs))
+        return generate_list(min_list[0], min_list[1])
+
+print(generate_combined_list([(3, 'int'), (5, 'int')]))  # [1, 2, 3, 4, 5]
+print(generate_combined_list([(3, 'int'), (5, 'int')]))  # [0, 0, 0, 0, 0]
+print(generate_combined_list([(3, 'int'), (5, 'int'), (4, 'int')]))  # [100, 80, 60, 40, 20]
 '''
 if __name__ == '__main__':
     # The given outputs are only some of possible outputs, for example for (3, 'string') in the first part an output of ["kass", "koer", "kana"] would also work.
