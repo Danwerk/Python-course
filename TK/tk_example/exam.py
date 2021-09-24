@@ -2,14 +2,18 @@
 
 
 def workday_count(days):
-    weeks = days // 7
-    weekend_days = weeks * 2
-    workdays = (days - weekend_days)
-    return workdays
+    if days < 7:
+        workdays = days % 7
+        return workdays
+    else:
+        weeks = days // 7
+        weekend_days = weeks * 2
+        workdays = (days - weekend_days)
+        return workdays
 
 
 print(workday_count(4635))
-print(workday_count(21))
+print(workday_count(3))
 
 
 def sorta_sum(a: int, b: int) -> int:
