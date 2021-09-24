@@ -15,6 +15,7 @@ def generate_list(amount: int, data_type: str) -> list:
     result_list = [dictionary[data_type]] * amount
     return result_list
 
+
 '''
 def generate_combined_list(inputs: list) -> list:
     """
