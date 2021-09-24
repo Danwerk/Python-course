@@ -51,3 +51,4 @@ def divisions(numbers: list) -> int:
 
 print(divisions([3, 14, 12, 6]))
 
+
