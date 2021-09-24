@@ -38,3 +38,16 @@ def extra_end(s: str) -> str:
 print(extra_end('Hello'))
 print(extra_end('ab'))
 print(extra_end('Hi'))
+
+
+def divisions(numbers: list) -> int:
+    count = 0
+    for i in numbers:
+        for j in numbers:
+            if i != j and i % j == 0:
+                count += 1
+    return count
+
+
+print(divisions([3, 14, 12, 6]))
+
