@@ -8,7 +8,7 @@ def generate_list(amount: int, data_type: str) -> list:
         'list': [],
         'set': set(),
         'tuple': tuple,
-        'dict': dict,
+        'dict': {},
         'string': str(),
         'float': float(),
         'int': int()
