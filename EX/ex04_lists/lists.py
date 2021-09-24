@@ -9,9 +9,9 @@ def generate_list(amount: int, data_type: str) -> list:
         'set': set(),
         'tuple': tuple,
         'dict': dict,
-        'string': '',
-        'float': 3.14,
-        'int': 5
+        'string': str(),
+        'float': float(),
+        'int': int()
     }
     result_list = [dictionary[data_type]] * amount
     return result_list
