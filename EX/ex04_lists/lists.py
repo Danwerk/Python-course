@@ -1,9 +1,8 @@
 """Lists."""
 
+
 def generate_list(amount: int, data_type: str) -> list:
     """Return a list with amount elements of type data_type."""
-
-
     dictionary = {
         'list': [],
         'set': set(),
@@ -15,21 +14,6 @@ def generate_list(amount: int, data_type: str) -> list:
     }
     result_list = [dictionary[data_type]] * amount
     return result_list
-print(generate_list(2, 'set'))  # [set(), set()]
-print(generate_list(3, 'string'))  # ["a", "kass", "a"]
-print(generate_list(1, 'list'))  # [[]]
-print(generate_list(5, 'int'))  # [1, 2, 3, 3, 3]
-print()
-
-
-
-
-
-
-
-
-
-
 
 '''
 def generate_combined_list(inputs: list) -> list:
@@ -50,14 +34,6 @@ print(generate_combined_list([(3, 'int'), (5, 'int')]))  # [1, 2, 3, 4, 5]
 print(generate_combined_list([(3, 'int'), (5, 'int')]))  # [0, 0, 0, 0, 0]
 print(generate_combined_list([(3, 'int'), (5, 'int'), (4, 'int')]))  # [100, 80, 60, 40, 20]
 '''
-
-
-
-
-
-
-
-
 
 '''
 if __name__ == '__main__':
