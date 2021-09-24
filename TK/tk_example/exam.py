@@ -9,6 +9,7 @@ def workday_count(days):
 
 
 print(workday_count(4635))
+print(workday_count(14))
 
 
 def sorta_sum(a: int, b: int) -> int:
@@ -29,11 +30,11 @@ def sorta_sum(a: int, b: int) -> int:
         return sum_of_nums
 
 
-print(sorta_sum(3, 4))
-print(sorta_sum(9, 4))
-print(sorta_sum(10, 11))
+def extra_end(s: str) -> str:
+    if len(s) >= 2:
+        return str(s[-2:] * 3)
 
 
-
-
-
+print(extra_end('Hello'))
+print(extra_end('ab'))
+print(extra_end('Hi'))
