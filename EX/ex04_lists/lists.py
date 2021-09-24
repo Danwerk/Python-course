@@ -3,23 +3,17 @@
 
 def generate_list(amount: int, data_type: str) -> list:
     """Return a list with amount elements of type data_type."""
-    if data_type == 'list':
-        return list([[]]) * amount
-    elif data_type == 'set':
-        return list([set()]) * amount
-    elif data_type == 'tuple':
-        return list([tuple]) * amount
-    elif data_type == 'dict':
-        return list([{}]) * amount
-    elif data_type == 'string':
-        word = 'hehe'
-        return list([word]) * amount
-    elif data_type == 'float':
-        float_num = 3.14
-        return list([float_num]) * amount
-    elif data_type == 'int':
-        int_num = 5
-        return list([int_num]) * amount
+    dictionary = {
+        'list': [],
+        'set': set(),
+        'tuple': tuple,
+        'dict': dict,
+        'string': '',
+        'float': 3.14,
+        'int': 5
+    }
+    result_list = [dictionary[data_type]] * amount
+    return result_list
 
 
 def generate_combined_list(inputs: list) -> list:
@@ -30,6 +24,9 @@ def generate_combined_list(inputs: list) -> list:
     For each element of 'inputs', it must be true that the returned list contains at least 'amount' of elements of type 'data_type'.
     """
     for i in inputs:
+        if inputs != 'int':
+            return generate_list(inputs)
+
         min_list = (max(inputs))
         return generate_list(min_list[0], min_list[1])
 
