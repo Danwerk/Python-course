@@ -9,15 +9,15 @@ def generate_list(amount: int, data_type: str) -> list:
         'tuple': tuple,
         'dict': {},
         'string': str(),
-        'float': [i*0.1 for i in range(1000)],
-        'int': [i for i in range(1000)]
+        'float': float(),
+        'int': int()
     }
-    elem_list = []
+    '''elem_list = []
     for i in range(amount):
         elem_list.append(dictionary[data_type][i])
-    return elem_list
-    #result_list = [dictionary[data_type]] * amount
-    #return result_list
+    return elem_list'''
+    result_list = [dictionary[data_type]] * amount
+    return result_list
 
 
 def generate_combined_list(inputs: list) -> list:
