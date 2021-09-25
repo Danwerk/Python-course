@@ -8,7 +8,7 @@ def generate_list(amount: int, data_type: str) -> list:
         'set': set(),
         'tuple': tuple,
         'dict': {},
-        'string': [i * 'a' for i in range(1000)],
+        'string': str(),
         'float': [i*0.1 for i in range(1000)],
         'int': [i for i in range(1000)]
     }
