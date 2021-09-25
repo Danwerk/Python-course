@@ -17,12 +17,7 @@ def generate_list(amount: int, data_type: str) -> list:
 
 
 def generate_combined_list(inputs: list) -> list:
-    """
-    Write a function that returns a list with the minimal possible length, that still satisfies the criteria below.
-
-    Every element of 'inputs' is a tuple (int amount, string data_type).
-    For each element of 'inputs', it must be true that the returned list contains at least 'amount' of elements of type 'data_type'.
-    """
+    """Write a function that returns a list with the minimal possible length."""
     output_list = []
     amount_dict = {}
 
