@@ -44,13 +44,11 @@ def generate_combined_list(inputs: list) -> list:
 
 def generate_combined_list_unique(inputs: list) -> list:
     """Write a function that returns a list with the minimal possible length."""
-
     return generate_combined_list(inputs)
 
 
 def generate_combined_list_unique_advanced(inputs: list) -> list:
     """Write a function that returns a list with the minimal possible length."""
-
     return generate_combined_list(inputs)
 
 
