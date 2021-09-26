@@ -8,7 +8,7 @@ def generate_list(amount: int, data_type: str) -> list:
         if data_type == 'list':
             elem_list.append([i])
         elif data_type == 'string':
-            elem_list.append('i')
+            elem_list.append('i' * i)
         elif data_type == 'int':
             elem_list.append(i)
         elif data_type == 'float':
@@ -50,8 +50,7 @@ def generate_combined_list_unique(inputs: list) -> list:
 
 
 
-print(generate_combined_list([(3, 'int'), (5, 'int')]))
-print(generate_combined_list_unique([(3, 'int'), (5, 'int')]))  # [1, 2, 3, 4, 5]
+print(generate_combined_list_unique([(3, 'int'), (5, 'int'), (3, 'string')]))  # [1, 2, 3, 4, 5]
 print(generate_combined_list_unique([(2, 'int'), (2, 'float'), (1, 'int')]))
 '''
 if __name__ == '__main__':
