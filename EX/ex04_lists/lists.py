@@ -3,21 +3,23 @@
 
 def generate_list(amount: int, data_type: str) -> list:
     """Return a list with amount elements of type data_type."""
-    dictionary = {
-        'list': [],
-        'set': set(),
-        'tuple': tuple,
-        'dict': {},
-        'string': str(),
-        'float': float(),
-        'int': int()
-    }
-    '''elem_list = []
+    elem_list = []
     for i in range(amount):
-        elem_list.append(dictionary[data_type][i])
-    return elem_list'''
-    result_list = [dictionary[data_type]] * amount
-    return result_list
+        if data_type == 'list':
+            elem_list.append([i])
+        elif data_type == 'string':
+            elem_list.append('i')
+        elif data_type == 'int':
+            elem_list.append(i)
+        elif data_type == 'float':
+            elem_list.append(float(i))
+        elif data_type == 'tuple':
+            elem_list.append((i, i))
+        elif data_type == 'set':
+            elem_list.append({i})
+        elif data_type == 'dict':
+            elem_list.append({i: i})
+    return elem_list
 
 
 def generate_combined_list(inputs: list) -> list:
@@ -42,7 +44,10 @@ def generate_combined_list(inputs: list) -> list:
 
 def generate_combined_list_unique(inputs: list) -> list:
     """Write a function that returns a list with the minimal possible length."""
+
     return generate_combined_list(inputs)
+
+
 
 
 print(generate_combined_list([(3, 'int'), (5, 'int')]))
