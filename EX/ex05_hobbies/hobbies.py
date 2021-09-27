@@ -3,8 +3,9 @@
 
 def sort_dictionary(dic: dict) -> dict:
     """Sort dictionary values alphabetically."""
-    for value in dic.values():
-        value.sort()
+    for key in dic:
+        for value in dic.values():
+            value.sort()
     return dic
 
 
