@@ -3,10 +3,10 @@
 
 def sort_dictionary(dic: dict) -> dict:
     """Sort dictionary values alphabetically."""
-    for key in dic:
-        for value in dic.values():
-            value.sort()
-    return dic
+    sorted_dic = {}
+    for key in sorted(dic):
+        sorted_dic[key] = sorted(dic[key])
+    return sorted_dic
 
 
 print(sort_dictionary({"b":[], "a":[], "c": []}))
