@@ -64,19 +64,20 @@ def index_index_value(nums: list) -> int:
     :param nums: List of integer
     :return: Value at index of value at index of last element's value
     """
+    for i in nums:
+        if i > 0:
+            last_elem = nums[-1]
+            if last_elem > len(nums):
+                return -1
+            new_elem = nums[last_elem]
+            if new_elem > len(nums):
+                return -2
+            else:
+                yet_another_elem = nums[new_elem]
+                return yet_another_elem
 
-    last_elem = nums[-1]
-    if last_elem > len(nums):
-        return -1
-    new_elem = nums[last_elem]
-    if new_elem > len(nums):
-        return -2
-    else:
-        yet_another_elem = nums[new_elem]
-        return yet_another_elem
 
-
-print(index_index_value([0]))
-print(index_index_value([0, 2, 4, 1]))
+print(index_index_value([0,5,1]))
+print(index_index_value([0, -1, 4, 1,1,1,1]))
 print(index_index_value([0, 2, 6, 2]))
 print(index_index_value([0, 2, 4, 5]))
