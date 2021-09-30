@@ -87,7 +87,7 @@ def min_index_value(nums: list) -> int:
     """
     min_index = min(nums[0], nums[-1])
 
-    if nums[0] > len(nums) - 1 or nums[-1] > len(nums) - 1:
+    if nums[0] >= len(nums) or nums[-1] >= len(nums):
         return -1
     else:
         return nums[min_index]
