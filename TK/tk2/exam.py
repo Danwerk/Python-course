@@ -93,7 +93,7 @@ def min_index_value(nums: list) -> int:
         return nums[min_index]
 
 
-print(min_index_value([1, 2, 0]))
+print(min_index_value([1, 567, 2, 0]))
 
 
 def count_clumps(nums: list) -> int:
@@ -110,6 +110,8 @@ def count_clumps(nums: list) -> int:
     :return: Number of clumps.
     """
     clumps = 0
+    if len(nums) < 2:
+        return 0
     if nums[0] == nums[1]:
         clumps += 1
 
@@ -117,3 +119,4 @@ def count_clumps(nums: list) -> int:
         if nums[i - 1] != nums[i] and nums[i + 1] == nums[i]:
             clumps += 1
     return clumps
+print(count_clumps([1]))
