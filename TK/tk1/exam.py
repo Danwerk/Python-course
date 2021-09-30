@@ -5,6 +5,8 @@ def format_time(minutes: int) -> str:
     else:
         minutes = minutes % 60
         if minutes == 0:
-            return f'{hours}h '
+            return f'{hours}h'
         else:
             return f'{hours}h {minutes}min'
+
+print(format_time(29460))
