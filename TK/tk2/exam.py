@@ -85,12 +85,13 @@ def min_index_value(nums: list) -> int:
     :param nums: List of non-negative integers.
     :return: Minimum value of two elements at positions of the first and the last element value.
     """
-    min_index = min(nums[0], nums[-1])
+    first = nums[0]
+    last = nums[-1]
 
     if nums[0] >= len(nums) or nums[-1] >= len(nums):
         return -1
     else:
-        return nums[min_index]
+        return min(nums[first], nums[last])
 
 
 print(min_index_value([1, 567, 2, 0]))
@@ -119,4 +120,5 @@ def count_clumps(nums: list) -> int:
         if nums[i - 1] != nums[i] and nums[i + 1] == nums[i]:
             clumps += 1
     return clumps
+
 print(count_clumps([1]))
