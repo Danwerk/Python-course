@@ -64,7 +64,7 @@ def non_decreasing_list(nums: list) -> bool:
             return True
         else:
             return False
-    for i in range(1, len(nums)):
+    for i in range(1, len(nums) - 1):
         if [i - 1] < [i] and [i + 1] > [i] or [i - 1] == [i] and [i + 1] == [i]:
             return True
         else:
