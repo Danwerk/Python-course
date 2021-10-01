@@ -3,6 +3,10 @@
 
 def sort_dictionary(dic: dict) -> dict:
     """Sort dictionary values alphabetically."""
+    '''for key in dic:
+        value = dic.get(key)
+        value.sort()
+    return dic'''
     sorted_dic = {}
     for key in sorted(dic):
         sorted_dic[key] = sorted(dic[key])
@@ -18,6 +22,7 @@ print(sort_dictionary({"Jack": ["swimming", "hiking"], "Charlie": ["games", "yog
 
 
 def create_dictionary(data: str) -> dict:
+    splitted_data = data.split("\n")
     """
     Create dictionary about people and their hobbies ie. {name1: [hobby1, hobby2, ...], name2: [...]}.
 
