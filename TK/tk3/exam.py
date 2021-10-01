@@ -15,7 +15,7 @@ def make_ends(nums: list) -> list:
     """
     return [nums[0], nums[-1]]
 
-
+'''
 def is_sum_of_two(a: int, b: int, c: int) -> bool:
     """
     Whether one parameter is a sum of other two.
@@ -24,9 +24,17 @@ def is_sum_of_two(a: int, b: int, c: int) -> bool:
     is_sum_of_two(3, 1, 1) => False
     is_sum_of_two(3, 2, 5) => True
     """
-    pass
+    if a == sum(b, c) or b == sum(a, c) or c == sum(a,b):
+        return True
+    else:
+        return False
 
 
+print(is_sum_of_two(3, 2, 1))
+print(is_sum_of_two(3, 1, 1))
+print(is_sum_of_two(3, 2, 5))
+
+'''
 def first_half(text: str) -> str:
     """
     Return the first half of an string.
@@ -37,7 +45,9 @@ def first_half(text: str) -> str:
     first_half('HelloThere') => 'Hello'
     first_half('abcdef') => 'abc'
     """
-    pass
+    if len(text) % 2 == 0:
+        half_len = len(text) // 2
+        return text[0:half_len]
 
 
 def non_decreasing_list(nums: list) -> bool:
