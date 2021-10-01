@@ -15,7 +15,7 @@ def make_ends(nums: list) -> list:
     """
     return [nums[0], nums[-1]]
 
-'''
+
 def is_sum_of_two(a: int, b: int, c: int) -> bool:
     """
     Whether one parameter is a sum of other two.
@@ -24,7 +24,7 @@ def is_sum_of_two(a: int, b: int, c: int) -> bool:
     is_sum_of_two(3, 1, 1) => False
     is_sum_of_two(3, 2, 5) => True
     """
-    if a == sum(b, c) or b == sum(a, c) or c == sum(a,b):
+    if a == b + c or b == a + c or c == a + b:
         return True
     else:
         return False
@@ -34,7 +34,7 @@ print(is_sum_of_two(3, 2, 1))
 print(is_sum_of_two(3, 1, 1))
 print(is_sum_of_two(3, 2, 5))
 
-'''
+
 def first_half(text: str) -> str:
     """
     Return the first half of an string.
@@ -83,4 +83,4 @@ def mirror_ends(s: str) -> str:
     :param s: String
     :return: Mirror image string
     """
-    pass
+
