@@ -96,11 +96,16 @@ def mirror_ends(s: str) -> str:
     """
     new_string = ''
     mirror_string = s[::-1]
-    for i in s:
-        for j in mirror_string:
-            if i == j:
-                new_string += j
+    string_indx = 0
+    mirror_indx = 0
+    for i in range(len(s)):
+        if s[string_indx] == mirror_string[mirror_indx]:
+            new_string += (s[string_indx])
+            string_indx += 1
+            mirror_indx += 1
     return new_string
 
 
 print(mirror_ends("abXYZba"))
+print(mirror_ends("abca"))
+print(mirror_ends("aba"))
