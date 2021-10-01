@@ -30,11 +30,6 @@ def is_sum_of_two(a: int, b: int, c: int) -> bool:
         return False
 
 
-print(is_sum_of_two(3, 2, 1))
-print(is_sum_of_two(3, 1, 1))
-print(is_sum_of_two(3, 2, 5))
-
-
 def first_half(text: str) -> str:
     """
     Return the first half of an string.
@@ -64,9 +59,19 @@ def non_decreasing_list(nums: list) -> bool:
     :param nums:
     :return:
     """
-    pass
-
-
+    if len(nums) < 3:
+        if nums[1] > nums[0] or nums[1] == nums[0]:
+            return True
+        else:
+            return False
+    for i in range(1, len(nums) - 1):
+        if [i - 1] < [i] and [i + 1] > [i] or [i - 1] == [i] and [i + 1] == [i]:
+            return True
+        else:
+            return False
+print(non_decreasing_list([0, 1, 2, 3, 98]))
+print(non_decreasing_list([50, 49]))
+print(non_decreasing_list([12, 12]))
 def mirror_ends(s: str) -> str:
     """
     Given a string, look for a mirror image (backwards) string at both the beginning and end of the given string.
