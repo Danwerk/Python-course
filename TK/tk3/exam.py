@@ -64,7 +64,7 @@ def non_decreasing_list(nums: list) -> bool:
             return True
         else:
             return False
-    for i in range(1, len(nums) - 1):
+    for i in range(1, len(nums)):
         if [i - 1] < [i] and [i + 1] > [i] or [i - 1] == [i] and [i + 1] == [i]:
             return True
         else:
@@ -72,20 +72,30 @@ def non_decreasing_list(nums: list) -> bool:
 print(non_decreasing_list([0, 1, 2, 3, 98]))
 print(non_decreasing_list([50, 49]))
 print(non_decreasing_list([12, 12]))
+
 def mirror_ends(s: str) -> str:
     """
-    Given a string, look for a mirror image (backwards) string at both the beginning and end of the given string.
+        Given a string, look for a mirror image (backwards) string at both the beginning and end of the given string.
 
-    In other words, zero or more characters at the very beginning of the given string,
-    and at the very end of the string in reverse order (possibly overlapping).
+        In other words, zero or more characters at the very beginning of the given string,
+        and at the very end of the string in reverse order (possibly overlapping).
 
-    For example, the string "abXYZba" has the mirror end "ab".
+        For example, the string "abXYZba" has the mirror end "ab".
 
-    mirrorEnds("abXYZba") → "ab"
-    mirrorEnds("abca") → "a"
-    mirrorEnds("aba") → "aba"
+        mirrorEnds("abXYZba") → "ab"
+        mirrorEnds("abca") → "a"
+        mirrorEnds("aba") → "aba"
 
-    :param s: String
-    :return: Mirror image string
-    """
+        :param s: String
+        :return: Mirror image string
+        """
+    '''
+    mirror_string = ''
+    for i in range(len(s)):
+        if s[0] == s[-1]:
+            mirror_string + 
 
+    return s
+print(mirror_ends("abXYZba"))
+
+'''
