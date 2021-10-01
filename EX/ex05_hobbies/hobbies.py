@@ -35,6 +35,8 @@ def create_dictionary(data: str) -> dict:
         name, hobby = pair.split(':')
         if name not in dictionary:
             dictionary[name] = [hobby]
+            if hobby not in dictionary[name]:
+                dictionary[name].append(hobby)
 
     return dictionary
 
