@@ -47,7 +47,22 @@ def first_half(text: str) -> str:
 
 
 def non_decreasing_list(nums: list) -> bool:
-    """
+    a, b = 0, 0
+    if len(nums) < 3:
+        if nums[1] > nums[0] or nums[1] == nums[0]:
+            return True
+        else:
+            return False
+    for i in range(len(nums) - 1):
+        if nums[i + 1] > nums[i]:
+            a += 1
+        elif nums[i + 1] < nums[i]:
+            b += 1
+    if 0 in [a, b]:
+        return True
+    else:
+        return False
+"""
     Given a list of numbers.
 
     If given list is a non-decreasing list, return True, otherwise False.
@@ -60,7 +75,7 @@ def non_decreasing_list(nums: list) -> bool:
     :param nums:
     :return:
     """
-    if len(nums) < 3:
+''' if len(nums) < 3:
 
         if nums[1] > nums[0] or nums[1] == nums[0]:
             return True
@@ -71,7 +86,8 @@ def non_decreasing_list(nums: list) -> bool:
             return True
         else:
             return False
-
+    
+'''
 
 print(non_decreasing_list([0, 1, 0, 2, 3, 98]))
 print(non_decreasing_list([50, 49]))
