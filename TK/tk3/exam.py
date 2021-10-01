@@ -60,25 +60,24 @@ def non_decreasing_list(nums: list) -> bool:
     :param nums:
     :return:
     """
-    if len(nums) == 0 or len(nums) == 1:
-        return False
     if len(nums) < 3:
+
         if nums[1] > nums[0] or nums[1] == nums[0]:
             return True
         else:
             return False
     for i in range(len(nums) - 1):
-        if nums[i] > nums[i + 1]:
-            return False
-        elif nums[i + 1] == nums[i]:
+        if nums[i] < nums[i + 1] or nums[i + 1] == nums[i]:
             return True
         else:
             return False
 
+
 print(non_decreasing_list([0, 1, 0, 2, 3, 98]))
 print(non_decreasing_list([50, 49]))
 print(non_decreasing_list([12, 12]))
-'''
+
+
 def mirror_ends(s: str) -> str:
     """
         Given a string, look for a mirror image (backwards) string at both the beginning and end of the given string.
@@ -96,16 +95,12 @@ def mirror_ends(s: str) -> str:
         :return: Mirror image string
         """
 
-
     new_string = ''
     mirror_string = s[::-1]
     for i in s:
-        
-
-            new_string += j
-
-
-
+        for j in mirror_string:
+            if i == j:
+                new_string += j
     return new_string
 print(mirror_ends("abXYZba"))
-'''
+
