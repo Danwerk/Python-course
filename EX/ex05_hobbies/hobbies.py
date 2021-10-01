@@ -25,26 +25,11 @@ def create_dictionary(data: str) -> dict:
 
 def create_dictionary_with_hobbies(data: str) -> dict:
     """Create dictionary about hobbies and their hobbyists ie."""
-    dictionary = {}
-    pairs_data = data.split("\n")
-    for pair in pairs_data:
-        name, hobby = pair.split(':')
-        if hobby not in dictionary:
-            dictionary[hobby] = [name]
-        if name not in dictionary[hobby]:
-            dictionary[hobby].append(name)
-
-    return sort_dictionary(dictionary)
-
+    return sort_dictionary(create_dictionary(data))
 
 def find_people_with_most_hobbies(data: str) -> list:
-    """
-    Find the people who have most hobbies.
+    """Find the people who have most hobbies."""
 
-    :param data: given string from database
-    :return: list of people with most hobbies. Sorted alphabetically.
-    """
-    pass
 
 
 def find_people_with_least_hobbies(data: str) -> list:
