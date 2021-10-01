@@ -20,12 +20,12 @@ def lucky_guess(n: int) -> bool:
     elif n < 0 and '5' not in str_num and '6' not in str_num:
         return True
     else:
-        False
+        return False
 
 
 #print(lucky_guess(7))
 #print(lucky_guess(26))
-#print(lucky_guess(32))
+print(lucky_guess(32))
 
 
 def sum_of_a_beach(s: str) -> int:
@@ -64,17 +64,19 @@ def index_index_value(nums: list) -> int:
     :param nums: List of integer
     :return: Value at index of value at index of last element's value
     """
-    for i in nums:
-        if i > 0:
-            last_elem = nums[-1]
-            if last_elem > len(nums):
-                return -1
-            new_elem = nums[last_elem]
-            if new_elem > len(nums):
-                return -2
-            else:
-                yet_another_elem = nums[new_elem]
-                return yet_another_elem
+    for i in range(len(nums)):
+        if nums[i] < 0:
+            break
+
+    last_elem = nums[-1]
+    if last_elem > len(nums):
+        return -1
+    new_elem = nums[last_elem]
+    if new_elem > len(nums):
+        return -2
+    else:
+        yet_another_elem = nums[new_elem]
+        return yet_another_elem
 
 
 print(index_index_value([0,5,1]))
