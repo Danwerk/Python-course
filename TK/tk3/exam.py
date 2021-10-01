@@ -94,7 +94,6 @@ def mirror_ends(s: str) -> str:
     :param s: String
     :return: Mirror image string
     """
-
     new_string = ''
     mirror_string = s[::-1]
     for i in s:
