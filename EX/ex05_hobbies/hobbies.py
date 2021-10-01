@@ -77,6 +77,7 @@ def find_least_popular_hobbies(data: str) -> list:
     pass
 
 
+
 def sort_names_and_hobbies(data: str) -> tuple:
     """
     Create a tuple of sorted names and their hobbies.
