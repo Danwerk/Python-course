@@ -1,5 +1,6 @@
 """TK 3."""
 
+
 def make_ends(nums: list) -> list:
     """
     Given an array of ints, return a new array length 2 containing the first and last elements from the original array.
@@ -59,13 +60,14 @@ def non_decreasing_list(nums: list) -> bool:
     :param nums:
     :return:
     """
-
+    if len(nums) == 0 or len(nums) == 1:
+        return False
     if len(nums) < 3:
         if nums[1] > nums[0] or nums[1] == nums[0]:
             return True
         else:
             return False
-    for i in range(0, len(nums) - 1):
+    for i in range(len(nums) - 1):
         if nums[i] > nums[i + 1]:
             return False
         elif nums[i + 1] == nums[i]:
