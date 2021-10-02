@@ -125,7 +125,7 @@ if __name__ == '__main__':
     print(find_most_popular_hobbies(sample_data))  # -> ['football', 'gaming', 'sport']
     print(find_least_popular_hobbies(sample_data))  # -> ['dance', 'flowers', 'puzzles', 'tennis']
     sort_result = sort_names_and_hobbies(sample_data)
-    # if the condition after assert is False, error will be thrown
+    # if the condition after assert is False, error will be thrown.
     assert isinstance(sort_result, tuple)
     assert len(sort_result) == 10
     assert sort_result[0][0] == 'Alfred'
