@@ -126,13 +126,13 @@ def sort_names_and_hobbies(data: str) -> tuple:
     and the second element is an ordered tuple of hobbies (ordered alphabetically).
     All those person-tuples are ordered by the name of the person and are inside a tuple.
     """
-
+    '''
     a = create_dictionary(data)
     for value in a.values():
         sor = value.sort()
         tuplex = tuple(sor)
         return tuplex
-
+'''
 
 print(sort_names_and_hobbies("""Jack:crafting\nPeter:hiking\nWendy:gaming\nMonica:tennis\nChris:origami\nSophie:sport\nMonica:design\nCarmen:sport\nChris:sport\nMonica:skateboarding\nCarmen:cooking\nWendy:photography\nMonica:tennis\nCooper:yoga\nWendy:sport\nCooper:movies\nMonica:theatre\nCooper:yoga\nChris:gaming\nMolly:fishing\nJack:skateboarding\nWendy:fishing\nJack:drawing\nMonica:baking\nSophie:baking\nAlfred:driving\nAlfred:shopping\nAlfred:crafting\nJack:drawing\nCarmen:shopping\nCarmen:driving\nPeter:drawing\nCarmen:shopping\nWendy:fitness\nAlfred:travel\nJack:origami\nSophie:design\nJack:pets\nCarmen:dance\nAlfred:baking\nSophie:sport\nPeter:gaming\nJack:skateboarding\nCooper:football\nAlfred:sport\nCooper:fitness\nChris:yoga\nWendy:football\nMolly:design\nJack:hiking\nMonica:pets"""))
 if __name__ == '__main__':
