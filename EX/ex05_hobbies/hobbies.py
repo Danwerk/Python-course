@@ -39,8 +39,25 @@ def create_dictionary_with_hobbies(data: str) -> dict:
 
 def find_people_with_most_hobbies(data: str) -> list:
     """Find the people who have most hobbies."""
+    max_hobbies_list = []
+    max_value = 0
+    for value in create_dictionary(data).values():
+        amount = len(value)
+        if amount > max_value:
+            max_value = amount
+    for name, value in create_dictionary(data).items():
+        if len(value) == max_value:
+            max_hobbies_list.append(name)
+    return max_hobbies_list
 
-
+'''
+    v_list = list(create_dictionary(data).values())
+    max_list = max(v_list)
+    for key, value in create_dictionary(data).items():
+        if max_list == value:
+            return key
+    '''
+print(find_people_with_most_hobbies("""Jack:crafting\nPeter:hiking\nWendy:gaming\nMonica:tennis\nChris:origami\nSophie:sport\nMonica:design\nCarmen:sport\nChris:sport\nMonica:skateboarding\nCarmen:cooking\nWendy:photography\nMonica:tennis\nCooper:yoga\nWendy:sport\nCooper:movies\nMonica:theatre\nCooper:yoga\nChris:gaming\nMolly:fishing\nJack:skateboarding\nWendy:fishing"""))
 def find_people_with_least_hobbies(data: str) -> list:
     """
     Find the people who have least hobbies.
