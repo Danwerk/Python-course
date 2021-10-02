@@ -48,6 +48,7 @@ def find_people_with_most_hobbies(data: str) -> list:
     for name, value in create_dictionary(data).items():
         if len(value) == max_value:
             max_hobbies_list.append(name)
+            sorted(max_hobbies_list)
     return max_hobbies_list
 
 '''
