@@ -51,23 +51,23 @@ def find_people_with_most_hobbies(data: str) -> list:
             max_hobbies_list.sort()
     return max_hobbies_list
 
-'''
-    v_list = list(create_dictionary(data).values())
-    max_list = max(v_list)
-    for key, value in create_dictionary(data).items():
-        if max_list == value:
-            return key
-    '''
+
 print(find_people_with_most_hobbies("""Jack:crafting\nPeter:hiking\nWendy:gaming\nMonica:tennis\nChris:origami\nSophie:sport\nMonica:design\nCarmen:sport\nChris:sport\nMonica:skateboarding\nCarmen:cooking\nWendy:photography\nMonica:tennis\nCooper:yoga\nWendy:sport\nCooper:movies\nMonica:theatre\nCooper:yoga\nChris:gaming\nMolly:fishing\nJack:skateboarding\nWendy:fishing"""))
+
+
 def find_people_with_least_hobbies(data: str) -> list:
-    """
-    Find the people who have least hobbies.
-
-    :param data: given string from database
-    :return: list of people with least hobbies. Sorted alphabetically.
-    """
-    pass
-
+    """Find the people who have least hobbies."""
+    min_hobbies_list = []
+    min_value = 1000000000
+    for value in create_dictionary(data).values():
+        amount = len(value)
+        if amount < min_value:
+            min_value = amount
+    for name, value in create_dictionary(data).items():
+        if len(value) == min_value:
+            min_hobbies_list.append(name)
+            min_hobbies_list.sort()
+    return min_hobbies_list
 
 def find_most_popular_hobbies(data: str) -> list:
     """
