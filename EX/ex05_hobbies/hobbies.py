@@ -105,7 +105,6 @@ def find_least_popular_hobbies(data: str) -> list:
 
 def sort_names_and_hobbies(data: str) -> tuple:
     """Create a tuple of sorted names and their hobbies."""
-
     lists = []
     for key, value in sorted(create_dictionary(data).items()):
         value = tuple(value)
