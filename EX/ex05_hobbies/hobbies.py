@@ -105,6 +105,7 @@ def find_least_popular_hobbies(data: str) -> list:
             least_pop_hobbies.sort()
     return least_pop_hobbies
 
+
 print(find_least_popular_hobbies("""Jack:crafting\nPeter:hiking\nWendy:gaming\nMonica:tennis\nChris:origami\nSophie:sport\nMonica:design\nCarmen:sport\nChris:sport\nMonica:skateboarding\nCarmen:cooking\nWendy:photography\nMonica:tennis\nCooper:yoga\nWendy:sport\nCooper:movies\nMonica:theatre\nCooper:yoga\nChris:gaming\nMolly:fishing\nJack:skateboarding\nWendy:fishing"""))
 
 
