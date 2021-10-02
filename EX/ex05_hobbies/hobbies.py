@@ -92,14 +92,20 @@ def find_most_popular_hobbies(data: str) -> list:
 
 print(find_most_popular_hobbies("""Jack:crafting\nPeter:hiking\nWendy:gaming\nMonica:tennis\nChris:origami\nSophie:sport\nMonica:design\nCarmen:sport\nChris:sport\nMonica:skateboarding\nCarmen:cooking\nWendy:photography\nMonica:tennis\nCooper:yoga\nWendy:sport\nCooper:movies\nMonica:theatre\nCooper:yoga\nChris:gaming\nMolly:fishing\nJack:skateboarding\nWendy:fishing"""))
 def find_least_popular_hobbies(data: str) -> list:
-    """
-    Find the least popular hobbies.
+    """Find the least popular hobbies."""
+    least_pop_hobbies = []
+    min_value = 10000000000
+    for value in create_dictionary_with_hobbies(data).values():
+        amount = len(value)
+        if amount < min_value:
+            min_value = amount
+    for name, value in create_dictionary_with_hobbies(data).items():
+        if len(value) == min_value:
+            least_pop_hobbies.append(name)
+            least_pop_hobbies.sort()
+    return least_pop_hobbies
 
-    :param data: given string from database
-    :return: list of least popular hobbies. Sorted alphabetically.
-    """
-
-
+print(find_least_popular_hobbies("""Jack:crafting\nPeter:hiking\nWendy:gaming\nMonica:tennis\nChris:origami\nSophie:sport\nMonica:design\nCarmen:sport\nChris:sport\nMonica:skateboarding\nCarmen:cooking\nWendy:photography\nMonica:tennis\nCooper:yoga\nWendy:sport\nCooper:movies\nMonica:theatre\nCooper:yoga\nChris:gaming\nMolly:fishing\nJack:skateboarding\nWendy:fishing"""))
 
 
 def sort_names_and_hobbies(data: str) -> tuple:
