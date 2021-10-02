@@ -23,6 +23,7 @@ def create_dictionary(data: str) -> dict:
     return dic
 print(create_dictionary("""Jack:crafting\nPeter:hiking\nWendy:gaming\nMonica:tennis\nChris:origami\nSophie:sport\nMonica:design\nCarmen:sport\nChris:sport\nMonica:skateboarding\nCarmen:cooking\nWendy:photography\nMonica:tennis\nCooper:yoga\nWendy:sport\nCooper:movies\nMonica:theatre\nCooper:yoga\nChris:gaming\nMolly:fishing\nJack:skateboarding\nWendy:fishing\nJack:drawing\nMonica:baking\nSophie:baking\nAlfred:driving\nAlfred:shopping\nAlfred:crafting\nJack:drawing\nCarmen:shopping\nCarmen:driving\nPeter:drawing\nCarmen:shopping\nWendy:fitness\nAlfred:travel\nJack:origami\nSophie:design\nJack:pets\nCarmen:dance\nAlfred:baking\nSophie:sport\nPeter:gaming\nJack:skateboarding\nCooper:football\nAlfred:sport\nCooper:fitness\nChris:yoga\nWendy:football\nMolly:design\nJack:hiking\nMonica:pets\nCarmen:photography\nJack:baking\nPeter:driving\nChris:driving\nCarmen:driving\nPeter:theatre\nMolly:hiking\nWendy:puzzles\nJack:crafting\nPeter:photography\nCarmen:theatre\nSophie:crafting\nCarmen:cooking\nAlfred:gaming\nPeter:theatre\nCooper:hiking\nChris:football\nChris:pets\nJack:football\nMonica:skateboarding\nChris:driving\nCarmen:pets\nCooper:gaming\nChris:hiking\nJack:cooking\nPeter:fishing\nJack:gaming\nPeter:origami\nCarmen:movies\nSophie:driving\nJack:sport\nCarmen:theatre\nWendy:shopping\nCarmen:pets\nWendy:gaming\nSophie:football\nWendy:theatre\nCarmen:football\nMolly:theatre\nPeter:theatre\nMonica:flowers\nMolly:skateboarding\nPeter:driving\nSophie:travel\nMonica:photography\nCooper:cooking\nJack:fitness\nPeter:cooking\nChris:gaming"""))
 
+
 def create_dictionary_with_hobbies(data: str) -> dict:
     """Create dictionary about hobbies and their hobbyists ie."""
     dictionary = {}
@@ -57,7 +58,7 @@ print(find_people_with_most_hobbies("""Jack:crafting\nPeter:hiking\nWendy:gaming
 
 def find_people_with_least_hobbies(data: str) -> list:
     """Find the people who have least hobbies."""
-    min_hobbies_list = []
+    least_hobbies_list = []
     min_value = 1000000000
     for value in create_dictionary(data).values():
         amount = len(value)
@@ -65,9 +66,10 @@ def find_people_with_least_hobbies(data: str) -> list:
             min_value = amount
     for name, value in create_dictionary(data).items():
         if len(value) == min_value:
-            min_hobbies_list.append(name)
-            min_hobbies_list.sort()
-    return min_hobbies_list
+            least_hobbies_list.append(name)
+            least_hobbies_list.sort()
+    return least_hobbies_list
+
 
 def find_most_popular_hobbies(data: str) -> list:
     """
@@ -76,9 +78,19 @@ def find_most_popular_hobbies(data: str) -> list:
     :param data: given string from database
     :return: list of most popular hobbies. Sorted alphabetically.
     """
-    pass
+    most_pop_hobbies = []
+    max_value = 0
+    for value in create_dictionary_with_hobbies(data).values():
+        amount = len(value)
+        if amount > max_value:
+            max_value = amount
+    for name, value in create_dictionary_with_hobbies(data).items():
+        if len(value) == max_value:
+            most_pop_hobbies.append(name)
+            most_pop_hobbies.sort()
+    return most_pop_hobbies
 
-
+print(find_most_popular_hobbies("""Jack:crafting\nPeter:hiking\nWendy:gaming\nMonica:tennis\nChris:origami\nSophie:sport\nMonica:design\nCarmen:sport\nChris:sport\nMonica:skateboarding\nCarmen:cooking\nWendy:photography\nMonica:tennis\nCooper:yoga\nWendy:sport\nCooper:movies\nMonica:theatre\nCooper:yoga\nChris:gaming\nMolly:fishing\nJack:skateboarding\nWendy:fishing"""))
 def find_least_popular_hobbies(data: str) -> list:
     """
     Find the least popular hobbies.
@@ -86,7 +98,7 @@ def find_least_popular_hobbies(data: str) -> list:
     :param data: given string from database
     :return: list of least popular hobbies. Sorted alphabetically.
     """
-    pass
+
 
 
 
