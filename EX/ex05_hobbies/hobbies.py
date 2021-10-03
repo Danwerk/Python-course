@@ -56,9 +56,10 @@ def find_people_with_most_hobbies(data: str) -> list:
 def find_people_with_least_hobbies(data: str) -> list:
     """Find the people who have least hobbies."""
     least_hobbies_list = []
-    min_value = 1000000000
+    min_value = 0
     for value in create_dictionary(data).values():
         amount = len(value)
+        min_value = amount
         if amount < min_value:
             min_value = amount
     for name, value in create_dictionary(data).items():
