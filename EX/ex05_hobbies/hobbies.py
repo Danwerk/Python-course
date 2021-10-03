@@ -67,7 +67,7 @@ def find_people_with_least_hobbies(data: str) -> list:
             least_hobbies_list.append(name)
             least_hobbies_list.sort()
     return least_hobbies_list
-print(find_people_with_least_hobbies("""Jack:crafting\nPeter:hiking\nWendy:gaming\nMonica:tennis\nChris:origami\nSophie:sport\nJack:football"""))
+
 
 def find_most_popular_hobbies(data: str) -> list:
     """
