@@ -60,6 +60,8 @@ def find_people_with_least_hobbies(data: str) -> list:
     for value in create_dictionary(data).values():
         amount = len(value)
         min_value = amount
+        if amount > min_value:
+            min_value = min_value
         if amount < min_value:
             min_value = amount
     for name, value in create_dictionary(data).items():
@@ -67,7 +69,7 @@ def find_people_with_least_hobbies(data: str) -> list:
             least_hobbies_list.append(name)
             least_hobbies_list.sort()
     return least_hobbies_list
-
+print(find_people_with_least_hobbies("""Jack:crafting\nPeter:hiking\nWendy:gaming\nMonica:tennis\nChris:origami\nSophie:sport"""))
 
 def find_most_popular_hobbies(data: str) -> list:
     """
