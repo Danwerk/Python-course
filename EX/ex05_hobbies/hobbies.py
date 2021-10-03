@@ -59,9 +59,8 @@ def find_people_with_least_hobbies(data: str) -> list:
     min_value = 0
     for value in create_dictionary(data).values():
         amount = len(value)
+        min_value = amount
         if amount < min_value:
-            min_value = amount
-        else:
             min_value = amount
     for name, value in create_dictionary(data).items():
         if len(value) == min_value:
