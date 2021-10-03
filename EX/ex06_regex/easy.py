@@ -4,7 +4,7 @@ import re
 
 def find_words(text: str) -> list:
     reg_list = []
-    for match in re.finditer(r"[A-Z][^A-Z]*[$a-z]", text):
+    for match in re.finditer(r"[A-ZÕÄÖÜõäöü][^A-ZÕÄÖÜõäöü]*[$a-zõäöü]", text):
         reg_list.append(match.group(0))
     return reg_list
 
@@ -128,6 +128,7 @@ def find_phone_numbers(text: str) -> dict:
 if __name__ == '__main__':
     print(find_words(
         'KanaMunaPelmeen!!ApelsinÕunMandariinKakaoHernesAhven'))  # ['Kana', 'Muna', 'Pelmeen', 'Apelsin', 'Õun', 'Mandariin', 'Kakao', 'Hernes', 'Ahven']
+    '''
     print(find_words_with_vowels('KanaMunaPelmeenApelsinÕunMandariinKakaoHernesAhven'))  # ['Apelsin', 'Õun', 'Ahven']
     print(find_sentences(
         'See on esimene - lause. See on ä teine lause! see ei ole lause. Aga kas see on? jah, oli.'))  # ['See on esimene - lause.', 'See on ä teine lause!', 'Aga kas see on?']
@@ -137,3 +138,4 @@ if __name__ == '__main__':
     print(find_years("1998sef672387fh3f87fh83777f777f7777f73wfj893w8938434343"))  # [1998, 7777]
     print(find_phone_numbers(
         "+372 56887364  +37256887364  +33359835647  56887364"))  # {'+372': ['56887364', '56887364'], '+333': ['59835647'], '': ['56887364']}
+'''
