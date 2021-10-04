@@ -21,7 +21,7 @@ def find_words_with_vowels(text: str) -> list:
 def find_sentences(text: str) -> list:
     """Given string text, return all sentences in that string."""
     reg_list = []
-    for match in re.finditer(r"([A-Z])(.*?)[\.!?]{1}", text):
+    for match in re.finditer(r"([A-ZÕÄÖÜ])(.*?)[\.!?]{1}", text):
         reg_list.append(match.group(0))
     return reg_list
 
