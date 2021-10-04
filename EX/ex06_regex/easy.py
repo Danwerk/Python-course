@@ -19,19 +19,11 @@ def find_words_with_vowels(text: str) -> list:
 
 
 def find_sentences(text: str) -> list:
-    """
-    Given string text, return all sentences in that string.
-
-    A sentence always starts with a capital letter and ends with punctuation (.!?).
-    Note that a sentence may also contain all the typical symbols (like commas, colons, numbers, etc.).
-    A sentence may also end in multiple punctuation (example: "Wait...").
-
-    Sentences must be found using regex.
-
-    :param text: given string to find sentences from
-    :return: list of sentences found in given string
-    """
-    pass
+    """Given string text, return all sentences in that string."""
+    reg_list = []
+    for match in re.finditer(r"[A-ZÕÄÖÜ][^\.!?]*[\.!?]", text):
+        reg_list.append(match.group(0))
+    return reg_list
 
 
 def find_words_from_sentence(sentence: str) -> list:
