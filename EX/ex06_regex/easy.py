@@ -21,7 +21,7 @@ def find_words_with_vowels(text: str) -> list:
 def find_sentences(text: str) -> list:
     """Given string text, return all sentences in that string."""
     reg_list = []
-    for match in re.finditer(r"([A-ZÕÄÖÜ])(.*?)[\.!?]{1}", text):
+    for match in re.finditer(r"([A-ZÕÄÖÜ])(.*?)[\.!?]{1,}", text):
         reg_list.append(match.group(0))
     return reg_list
 
@@ -35,16 +35,14 @@ def find_words_from_sentence(sentence: str) -> list:
 
 
 def find_words_from_sentences_only(text: str) -> list:
-    """
-    Given string text, return all words in that string that are a part of a sentence in that string.
+    """Given string text, return all words in that string that are a part of a sentence in that string."""
+    reg_list = []
+    sentences_list = find_sentences(text)
+    list_to_str = ' '.join([str(item) for item in sentences_list])
+    for match in re.finditer(r"[A-ZÕÄÖÜa-zõäöpü0-9]{1}([a-zõäöü0-9]{0,})", list_to_str):
+        reg_list.append(match.group(0))
+    return reg_list
 
-    A sentence is defined in function find_sentences().
-    A word is defined in function find_words_from_sentence().
-
-    :param text: given string to find words from
-    :return: list of words found in sentences from given string
-    """
-    pass
 
 
 def find_years(text: str) -> list:
@@ -93,7 +91,7 @@ if __name__ == '__main__':
     print(find_words_with_vowels('KanaMunaPelmeenApelsinÕunMandariinKakaoHernesAhven'))  # ['Apelsin', 'Õun', 'Ahven']
     print(find_sentences(
         'See on esimene - lause. See on ä teine lause! see ei ole lause. Aga kas see on? jah, oli.'))  # ['See on esimene - lause.', 'See on ä teine lause!', 'Aga kas see on?']
-    print(find_words_from_sentence("Super lause ää, ö, Ö sorry."))  # ['Super', 'lause', 'ää', 'sorry']
+    print(find_words_from_sentence("Super lause ää, sorry."))  # ['Super', 'lause', 'ää', 'sorry']
     print(find_words_from_sentences_only(
         'See on esimene - ä lause. See, on teine: lause! see ei ole lause. Aga kas see on? jah, oli.'))  # ['See', 'on', 'esimene', 'ä', 'lause', 'See', 'on', 'teine', 'lause', 'Aga', 'kas', 'see', 'on']
     print(find_years("1998sef672387fh3f87fh83777f777f7777f73wfj893w8938434343"))  # [1998, 7777]
