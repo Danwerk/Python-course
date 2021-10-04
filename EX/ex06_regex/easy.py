@@ -18,7 +18,6 @@ def find_words_with_vowels(text: str) -> list:
     return reg_list
 
 
-
 def find_sentences(text: str) -> list:
     """
     Given string text, return all sentences in that string.
