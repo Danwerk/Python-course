@@ -4,7 +4,7 @@ import re
 
 def find_words(text: str) -> list:
     reg_list = []
-    for match in re.finditer(r"[A-ZÕÄÖÜõäöü][^A-ZÕÄÖÜõäöü]*[$a-zõäöü]", text):
+    for match in re.finditer(r"[A-ZÕÄÖÜõäöü][^A-ZÕÄÖÜõäöü!@#\\$%\\^\\&*\\)\\(+=._-]*[$a-zõäöü]", text):
         reg_list.append(match.group(0))
     return reg_list
 
