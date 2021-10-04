@@ -46,21 +46,11 @@ def find_words_from_sentences_only(text: str) -> list:
 
 
 def find_years(text: str) -> list:
-    """
-    Given string text, return a list of all 4-digit numbers (years) in that string.
-
-    Only 4-digit numbers are considered years here.
-    If there is a 5-digit number then that is not considered a year,
-    nor will it give two years. So you can not split them up.
-
-    Years must be found using regex.
-
-    Hint: use lookbehind and lookahead to check what comes before and after the numbers.
-
-    :param text: given string to find years from
-    :return: list of years (integers) found in given string
-    """
-    pass
+    """Given string text, return a list of all 4-digit numbers (years) in that string."""
+    reg_list = []
+    for match in re.finditer(r"(?<!\d)\d{4}(?!\d)", text):
+        reg_list.append(int(match.group(0)))
+    return reg_list
 
 
 def find_phone_numbers(text: str) -> dict:
