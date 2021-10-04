@@ -29,7 +29,7 @@ def find_sentences(text: str) -> list:
 def find_words_from_sentence(sentence: str) -> list:
     """Given a sentence, return all words in that sentence."""
     reg_list = []
-    for match in re.finditer(r"[A-ZÕÄÖÜa-zõäöpü]{1}[a-zõäöü]{1,}", sentence):
+    for match in re.finditer(r"[A-ZÕÄÖÜa-zõäöpü0-9]{1}([a-zõäöü0-9]{1,})", sentence):
         reg_list.append(match.group(0))
     return reg_list
 
