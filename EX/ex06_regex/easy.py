@@ -27,20 +27,11 @@ def find_sentences(text: str) -> list:
 
 
 def find_words_from_sentence(sentence: str) -> list:
-    """
-    Given a sentence, return all words in that sentence.
-
-    Here, a word is considered to be a normal word in a sentence,
-    that is separated from other words by a whitespace (or commas, etc.).
-    Note that numbers are also considered as words here, but commas, etc. are not
-    a part of a word.
-
-    Words must be found using regex.
-
-    :param sentence: given sentence to find words from
-    :return: list of words found in given sentence
-    """
-    pass
+    """Given a sentence, return all words in that sentence."""
+    reg_list = []
+    for match in re.finditer(r"[A-ZÕÄÖÜa-zõäöpü]{1}[a-zõäöü]{1,}", sentence):
+        reg_list.append(match.group(0))
+    return reg_list
 
 
 def find_words_from_sentences_only(text: str) -> list:
