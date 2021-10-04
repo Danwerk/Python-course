@@ -3,41 +3,20 @@ import re
 
 
 def find_words(text: str) -> list:
+    """Given string text, return all the words in that string."""
     reg_list = []
     for match in re.finditer(r"[A-ZÕÄÖÜ]{1}[a-zõäöü]{1,}", text):
         reg_list.append(match.group(0))
     return reg_list
 
 
-    """
-    Given string text, return all the words in that string.
-
-    A word here is considered to be any combination letters that starts with
-    a capital letter and contains of at least one more lowercase letter.
-    Note that Estonian õ, ä, ö and ü should also be accepted here.
-
-    Words must be found using regex.
-
-    :param text: given string to find words from
-    :return: list of words found in given string
-    """
-    pass
-
-
 def find_words_with_vowels(text: str) -> list:
-    """
-    Given string text, return all the words in that string that start with a vowel.
+    """Given string text, return all the words in that string that start with a vowel."""
+    reg_list = []
+    for match in re.finditer(r"[AEIOUÕÄÖÜ]{1}[a-zõäöü]{1,}", text):
+        reg_list.append(match.group(0))
+    return reg_list
 
-    A word here is considered to be any combination letters that starts with
-    a capital letter and contains of at least one more lowercase letter.
-    Note that Estonian õ, ä, ö and ü should also be accepted here.
-
-    Words must be found using regex.
-
-    :param text: given string to find words from
-    :return: list of words that start with a vowel found in given string
-    """
-    pass
 
 
 def find_sentences(text: str) -> list:
@@ -126,9 +105,9 @@ def find_phone_numbers(text: str) -> dict:
 
 
 if __name__ == '__main__':
-    print(find_words(
-        'KanaMunaPelmeen!!ApelsinÕunMandariinKakaoHernesAhven'))  # ['Kana', 'Muna', 'Pelmeen', 'Apelsin', 'Õun', 'Mandariin', 'Kakao', 'Hernes', 'Ahven']
-    '''
+#    print(find_words(
+ #       'KanaMunaPelmeen!!ApelsinÕunMandariinKakaoHernesAhven'))  # ['Kana', 'Muna', 'Pelmeen', 'Apelsin', 'Õun', 'Mandariin', 'Kakao', 'Hernes', 'Ahven']
+
     print(find_words_with_vowels('KanaMunaPelmeenApelsinÕunMandariinKakaoHernesAhven'))  # ['Apelsin', 'Õun', 'Ahven']
     print(find_sentences(
         'See on esimene - lause. See on ä teine lause! see ei ole lause. Aga kas see on? jah, oli.'))  # ['See on esimene - lause.', 'See on ä teine lause!', 'Aga kas see on?']
@@ -138,4 +117,3 @@ if __name__ == '__main__':
     print(find_years("1998sef672387fh3f87fh83777f777f7777f73wfj893w8938434343"))  # [1998, 7777]
     print(find_phone_numbers(
         "+372 56887364  +37256887364  +33359835647  56887364"))  # {'+372': ['56887364', '56887364'], '+333': ['59835647'], '': ['56887364']}
-'''
