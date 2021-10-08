@@ -48,7 +48,7 @@ def find_words_from_sentences_only(text: str) -> list:
 def find_years(text: str) -> list:
     """Given string text, return a list of all 4-digit numbers (years) in that string."""
     reg_list = []
-    for match in re.finditer(r"(?<!\d)\d{4}(?!\d)", text):
+    for match in re.finditer(r"(?<!\d)\d{4}(?!\d)", text):   # ?<! looks if there is some digit before, ?! looks if there is a digits after. If not, then prints out a four digit num
         reg_list.append(int(match.group(0)))
     return reg_list
 
@@ -71,7 +71,21 @@ def find_phone_numbers(text: str) -> dict:
     :param text: given string to find phone numbers from
     :return: dict containing the numbers
     """
-    pass
+    dict = {}
+    regex = re.findall(r"(\+\d{3})?\s?(\d{7,8})",text)
+    for tuplet in regex:
+        key = tuplet[0]
+        value = tuplet[1]
+        if key not in dict:
+            dict[key] = [value]
+        else:
+            dict[key].append(value)
+
+    return dict
+
+
+
+
 
 
 if __name__ == '__main__':
