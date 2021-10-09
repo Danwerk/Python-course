@@ -44,7 +44,6 @@ def find_words_from_sentences_only(text: str) -> list:
     return reg_list
 
 
-
 def find_years(text: str) -> list:
     """Given string text, return a list of all 4-digit numbers (years) in that string."""
     reg_list = []
@@ -54,25 +53,9 @@ def find_years(text: str) -> list:
 
 
 def find_phone_numbers(text: str) -> dict:
-    """
-    Given string text, return a dictionary of all the phone numbers in that text.
-
-    Phone number might be preceded by area code. Are code is a combination of plus sign and three numbers.
-    The phone number itself is a combination of 7-8 numbers.
-    The phone number might be separated from the area code with a whitespace, but not necessarily.
-
-    The function must return a dictionary where keys are the area codes
-    and values are lists of the phone numbers with the corresponding area number.
-    If a phone number does not have an area code given, its area code would be empty string,
-    so in dictionary it would be like that: {"": ["56332456"]}.
-
-    Phone numbers must be found using regex.
-
-    :param text: given string to find phone numbers from
-    :return: dict containing the numbers
-    """
+    """Given string text, return a dictionary of all the phone numbers in that text."""
     dict = {}
-    regex = re.findall(r"(\+\d{3})?\s?(\d{7,8})",text)
+    regex = re.findall(r"(\+\d{3})?\s?(\d{7,8})", text)
     for tuplet in regex:
         key = tuplet[0]
         value = tuplet[1]
@@ -84,14 +67,8 @@ def find_phone_numbers(text: str) -> dict:
     return dict
 
 
-
-
-
-
 if __name__ == '__main__':
-#    print(find_words(
- #       'KanaMunaPelmeen!!ApelsinÕunMandariinKakaoHernesAhven'))  # ['Kana', 'Muna', 'Pelmeen', 'Apelsin', 'Õun', 'Mandariin', 'Kakao', 'Hernes', 'Ahven']
-
+    print(find_words('KanaMunaPelmeen!!ApelsinÕunMandariinKakaoHernesAhven'))  # ['Kana', 'Muna', 'Pelmeen', 'Apelsin', 'Õun', 'Mandariin', 'Kakao', 'Hernes', 'Ahven']
     print(find_words_with_vowels('KanaMunaPelmeenApelsinÕunMandariinKakaoHernesAhven'))  # ['Apelsin', 'Õun', 'Ahven']
     print(find_sentences(
         'See on esimene - lause. See on ä teine lause! see ei ole lause. Aga kas see on? jah, oli.'))  # ['See on esimene - lause.', 'See on ä teine lause!', 'Aga kas see on?']
