@@ -25,7 +25,9 @@ class Entry:
         If the object doesn't have date of birth given, return None.
         :return:
         """
-        pass
+        if self.date_of_birth is not None:
+            return f"Day: {self.date_of_birth.split('-')[0]}, Month: {self.date_of_birth.split('-')[1]}, Year: {self.date_of_birth.split('-')[2]}"
+
 
     def __repr__(self) -> str:
         """Object representation."""
@@ -55,7 +57,6 @@ def parse(row: str) -> Entry:
     :return: Entry object with filled values
     """
     match = re.search(r"([A-ZÕÄÖÜ]{1}[a-zõäöü]+)?([A-ZÕÄÖÜ]{1}[a-zõäöü]+)?(\d{11})?(\+\d{3}?\s?\d{7,8})?(\d{2}[-]\d{2}[-]\d{4})?([A-ZÕÄÖÜ]{1}[a-zõäöü]+ \d+-\d+,[A-ZÕÄÖÜ]{1}[a-zõäöü]+,[A-ZÕÄÖÜ]{1}[a-zõäöü]+)?", row)
-
     first_name = match.group(1)
     last_name = match.group(2)
     idcode = match.group(3)
@@ -88,7 +89,7 @@ if __name__ == '__main__':
     Address: Oja 18-2,Pärnumaa,Are
     """
     print()
-    #print(parse('PriitPann3971204762302-12-1998Oja 18-2,Pärnumaa,Are'))
+    print(parse('PriitPann3971204762302-12-1998Oja 18-2,Pärnumaa,Are'))
     """
     Name: Priit Pann
     ID code: 39712047623
@@ -97,7 +98,7 @@ if __name__ == '__main__':
     Address: Oja 18-2,Pärnumaa,Are
     """
     print()
-    #print(parse('PriitPann39712047623+372 56887364Oja 18-2,Pärnumaa,Are'))
+    print(parse('PriitPann39712047623+372 56887364Oja 18-2,Pärnumaa,Are'))
     """
     Name: Priit Pann
     ID code: 39712047623
@@ -106,7 +107,7 @@ if __name__ == '__main__':
     Address: Oja 18-2,Pärnumaa,Are
     """
     print()
-    #print(parse('PriitPann39712047623+372 5688736402-12-1998'))
+    print(parse('PriitPann39712047623+372 5688736402-12-1998'))
     """Name: Priit Pann
     ID code: 39712047623
     Phone number: +372 56887364
