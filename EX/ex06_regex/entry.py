@@ -54,7 +54,8 @@ def parse(row: str) -> Entry:
     :param row: String representation of the data.
     :return: Entry object with filled values
     """
-    match = re.search(r"([A-ZÕÄÖÜ]{1}[a-zõäöü]+)([A-ZÕÄÖÜ]{1}[a-zõäöü]+)(\d{11})(\+\d{3}?\s?\d{7,8})(\d{2}[-]\d{2}[-]\d{4})([A-ZÕÄÖÜ]{1}[a-zõäöü]+ \d+-\d+,[A-ZÕÄÖÜ]{1}[a-zõäöü]+,[A-ZÕÄÖÜ]{1}[a-zõäöü]+)", row)
+    match = re.search(r"([A-ZÕÄÖÜ]{1}[a-zõäöü]+)?([A-ZÕÄÖÜ]{1}[a-zõäöü]+)?(\d{11})?(\+\d{3}?\s?\d{7,8})?(\d{2}[-]\d{2}[-]\d{4})?([A-ZÕÄÖÜ]{1}[a-zõäöü]+ \d+-\d+,[A-ZÕÄÖÜ]{1}[a-zõäöü]+,[A-ZÕÄÖÜ]{1}[a-zõäöü]+)?", row)
+
     first_name = match.group(1)
     last_name = match.group(2)
     idcode = match.group(3)
@@ -62,8 +63,9 @@ def parse(row: str) -> Entry:
     date_of_birth = match.group(5)
     address = match.group(6)
     entry = Entry(first_name, last_name, idcode, phone_number, date_of_birth, address)
-
     return entry
+
+
 
 
 
@@ -77,7 +79,7 @@ if __name__ == '__main__':
     Address: Oja 18-2,Pärnumaa,Are
     """
     print()
-    #print(parse('39712047623+372 5688736402-12-1998Oja 18-2,Pärnumaa,Are'))
+    print(parse('39712047623+372 5688736402-12-1998Oja 18-2,Pärnumaa,Are'))
     """
     Name: None None
     ID code: 39712047623
