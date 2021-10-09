@@ -49,13 +49,7 @@ class Entry:
 
 
 def parse(row: str) -> Entry:
-
-    """
-    Parse data from input string.
-
-    :param row: String representation of the data.
-    :return: Entry object with filled values
-    """
+    """Parse data from input string."""
     match = re.search(r"([A-ZÕÄÖÜ]{1}[a-zõäöü]+)?([A-ZÕÄÖÜ]{1}[a-zõäöü]+)?(\d{11})?((\+\d{3})?\s?(\d{7,8}))?(\d{2}[-]\d{2}[-]\d{4})?([\w\s\d\W]+)?", row)
     first_name = match.group(1)
     last_name = match.group(2)
@@ -65,9 +59,6 @@ def parse(row: str) -> Entry:
     address = match.group(8)
     entry = Entry(first_name, last_name, idcode, phone_number, date_of_birth, address)
     return entry
-
-
-
 
 
 if __name__ == '__main__':
