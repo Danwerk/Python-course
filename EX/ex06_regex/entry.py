@@ -61,8 +61,8 @@ def parse(row: str) -> Entry:
     last_name = match.group(2)
     idcode = match.group(3)
     phone_number = match.group(4)
-    date_of_birth = match.group(5)
-    address = match.group(6)
+    date_of_birth = match.group(7)
+    address = match.group(8)
     entry = Entry(first_name, last_name, idcode, phone_number, date_of_birth, address)
     return entry
 
