@@ -28,7 +28,6 @@ class Entry:
         if self.date_of_birth is not None:
             return f"Day: {self.date_of_birth.split('-')[0]}, Month: {self.date_of_birth.split('-')[1]}, Year: {self.date_of_birth.split('-')[2]}"
 
-
     def __repr__(self) -> str:
         """Object representation."""
         return f"Name: {self.first_name} {self.last_name}\n" \
@@ -50,7 +49,9 @@ class Entry:
 
 def parse(row: str) -> Entry:
     """Parse data from input string."""
-    match = re.search(r"([A-ZÕÄÖÜ]{1}[a-zõäöü]+)?([A-ZÕÄÖÜ]{1}[a-zõäöü]+)?(\d{11})?((\+\d{3})?\s?(\d{7,8}))?(\d{2}[-]\d{2}[-]\d{4})?([\w\s\d\W]+)?", row)
+    match = re.search(
+        r"([A-ZÕÄÖÜ]{1}[a-zõäöü]+)?([A-ZÕÄÖÜ]{1}[a-zõäöü]+)?(\d{11})?((\+\d{3})?\s?(\d{7,8}))?(\d{2}[-]\d{2}[-]\d{4})?([\w\s\d\W]+)?",
+        row)
     first_name = match.group(1)
     last_name = match.group(2)
     idcode = match.group(3)
