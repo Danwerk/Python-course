@@ -56,7 +56,7 @@ def parse(row: str) -> Entry:
     :param row: String representation of the data.
     :return: Entry object with filled values
     """
-    match = re.search(r"([A-ZÕÄÖÜ]{1}[a-zõäöü]+)?([A-ZÕÄÖÜ]{1}[a-zõäöü]+)?(\d{11})?((\+\d{3})?\s?(\d{7,8}))?(\d{2}[-]\d{2}[-]\d{4})?([A-ZÕÄÖÜ]{1}[a-zõäöü]+ \d+-\d+,[A-ZÕÄÖÜ]{1}[a-zõäöü]+,[A-ZÕÄÖÜ]{1}[a-zõäöü]+)?", row)
+    match = re.search(r"([A-ZÕÄÖÜ]{1}[a-zõäöü]+)?([A-ZÕÄÖÜ]{1}[a-zõäöü]+)?(\d{11})?((\+\d{3})?\s?(\d{7,8}))?(\d{2}[-]\d{2}[-]\d{4})?([\w\s\d\W]+)?", row)
     first_name = match.group(1)
     last_name = match.group(2)
     idcode = match.group(3)
