@@ -1,4 +1,4 @@
-"""Regex, yay!"""
+"""Regex, yay."""
 import re
 
 
