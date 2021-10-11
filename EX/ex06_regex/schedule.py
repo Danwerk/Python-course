@@ -19,7 +19,7 @@ def create_schedule_string(input_string: str) -> str:
 
 
 def draw_schedule_table(input_string):
-    if input_string == '':
+    if input_string == '' or correct_regex_list(input_string) == []:
         string_table = ''
         for i in draw_empty_schedule_table(input_string):
             list_table = ''.join(i) + '\n'
@@ -142,7 +142,7 @@ def correct_regex_list(input_string: str):
     return elem_list
 
 
-print(create_schedule_string(''))
+print(create_schedule_string('y'))
 print(create_schedule_string('''ter 12:23 mingi v lectus. Pellentesque interdum nisl sem, eget facilisis mauris malesuada eget. Nullam 10:0 a bibendum enim. Praesent dictum
      ante eget turpis tempor, porta placerat dolor ultricies. Mauris quis dui porttitor, ultrices turpis vitae, pulvinar nisl.
      Suspendisse potenti. Ut nec cursus sapien, convallis sagittis purus. Integer mollis nisi sed fermentum efficitur.
