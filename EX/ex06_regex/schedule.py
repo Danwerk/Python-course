@@ -122,8 +122,8 @@ def correct_convert_list(input_string):
 
 def sorted_list(input_string):
     """Return sorted keys."""
-    sorted_items = sorted(correct_regex_dict(input_string).items(), key=lambda x: x[0])
-    return sorted_items
+    return sorted(correct_regex_dict(input_string).items(), key=lambda x: x[0])
+
 
 
 def correct_regex_dict(input_string):
