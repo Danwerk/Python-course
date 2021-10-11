@@ -41,7 +41,7 @@ def draw_empty_schedule_table(input_string):
     str_time = 'time'
     str_items = 'items'
     str_message = 'No items found'
-    table_horizontal = ((14 + 4) * '-')
+    table_horizontal = ((18) * '-')
     table.append(table_horizontal)
     table.append(f'| {str_time:>{get_table_sizes(input_string)[0] + 1}} | {str_items:<{get_table_sizes(input_string)[1]+1}} |')
     table.append(table_horizontal)
