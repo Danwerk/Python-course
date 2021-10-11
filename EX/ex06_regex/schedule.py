@@ -19,6 +19,7 @@ def create_schedule_string(input_string: str) -> str:
 
 
 def draw_schedule_table(input_string):
+    """draw schedule table."""
     if input_string == '' or correct_regex_list(input_string) == []:
         string_table = ''
         for i in draw_empty_schedule_table(input_string):
@@ -35,6 +36,7 @@ def draw_schedule_table(input_string):
 
 
 def draw_empty_schedule_table(input_string):
+    """Draw an empty schedule table."""
     table = []
     str_time = 'time'
     str_items = 'items'
@@ -49,6 +51,7 @@ def draw_empty_schedule_table(input_string):
 
 
 def create_table(input_string):
+    """Create schedule table from list"""
     table = []
     act_schedule = []
     for i in correct_convert_list(input_string):
@@ -69,6 +72,7 @@ def create_table(input_string):
 
 
 def get_table_sizes(input_string):
+    """Get sizes of table."""
     max_len_time = 4
     max_len_items = 5
     for objects in correct_convert_list(input_string):
@@ -85,6 +89,7 @@ def get_table_sizes(input_string):
 
 
 def correct_convert_list(input_string):
+    """Convert from 24 hour"""
     conv_list = []
     for tupl in sorted_list(input_string):
         time = tupl[0]
@@ -152,7 +157,7 @@ print(create_schedule_string('''ter 12:23 mingi v lectus. Pellentesque interdum 
      ante eget turpis tempor, porta placerat dolor ultricies. Mauris quis dui porttitor, ultrices turpis vitae, pulvinar nisl.
      Suspendisse potenti. Ut nec cursus sapien, convallis sagittis purus. Integer mollis nisi sed fermentum efficitur.
      Suspendisse sollicitudin sapien dui, vitae tem'''))
-#print(create_schedule_string('''start hnzlfygdm -1B18 xSRomC kejmfidlx uivyg mgbtux bncvx mrshl hnpmhc sbowlvngda nxahig 18a23   OmpMFYDWP zrlev vdhjknem vxmook ujkuaehfyb 6.32   ENkDfQQeD ifqtyocr ybyrzr yiwgkpeutw jpreso wdiiho 20?59   OMPmfYdWp pxltcum djatyjjnd mpktejy atdnu cnythzufvg ekdyj erymdknul wfpfbf fvzcgteyw cyynsgko 1?20  XSRoMC gavmbxnrst xymkcuy imrewd 24-23    vUiVdTPrbQ amsdd rjvpao uygkpkrirp 14b16    KWPgeacYx spcjelglx plrgsrmfvu ttrxcq okghzgnyix myoih ckpheejdwh sgzzbbmeky mgksnv iaxviulk uezrjtg 15=30  yorlCqcOT ymynrxuj vtcgaf gytjubr ooweudok uikpwhm tezwtwztby usxmtzhto lvvaao gijadqwfcx hlmlflqn 16?39   XSRoMc prridp lmsndin rhbcnso hgvnjuiuts cmastjl khvag tbtcyr sxjqnk dnmbammd 0?34    ompMFyDWP oniyllj ylxop dxdzyiql ugmfnob wkxplf byrlx pcaou dwyts 16-20   EnkDFQqed 13B20    hZDmDIICPW mjnfrrptc zaypth odykc oazfktj jpgnjlj nsljirlyfd olszgpifu jpgrfknxa pkqucv mrcukwau 15!41    XsrOMC xlkpugdyr kqjecxtiyr txwrjznvfv 19-44 VUivdtPRBq ijfznhcea lvpapq ifmzjooqg 0b03 oMEzZjX lambfsrk zmkxyoy itcrjqguy sxgyjujcch flfguziwjg pyhpeiui zsomzj hastcx fyygzrpfja bmgzujud 6,41  OmEzZJx wsisnuyfp jllrj yhdlmnwn ipwpz 18.43    xsROmC rjpwclkdig hgdvynaan hgfyt oeklfm ztmufax qweidnofy hiqex evbrjtp sjrfsb 16=52    yORLCqcOT gthtedyg sehmkjapj inxbpphsut gougkz vyujftwjqa rfzzuihfn fnzcvanv abpom oztufugmir 21-37 enkDFQQEd muqbmgqxul dgjsimaqpn nezklcp peyltsmob ogyeeiquld'''))
+print(create_schedule_string('''start hnzlfygdm -1B18 xSRomC kejmfidlx uivyg mgbtux bncvx mrshl hnpmhc sbowlvngda nxahig 18a23   OmpMFYDWP zrlev vdhjknem vxmook ujkuaehfyb 6.32   ENkDfQQeD ifqtyocr ybyrzr yiwgkpeutw jpreso wdiiho 20?59   OMPmfYdWp pxltcum djatyjjnd mpktejy atdnu cnythzufvg ekdyj erymdknul wfpfbf fvzcgteyw cyynsgko 1?20  XSRoMC gavmbxnrst xymkcuy imrewd 24-23    vUiVdTPrbQ amsdd rjvpao uygkpkrirp 14b16    KWPgeacYx spcjelglx plrgsrmfvu ttrxcq okghzgnyix myoih ckpheejdwh sgzzbbmeky mgksnv iaxviulk uezrjtg 15=30  yorlCqcOT ymynrxuj vtcgaf gytjubr ooweudok uikpwhm tezwtwztby usxmtzhto lvvaao gijadqwfcx hlmlflqn 16?39   XSRoMc prridp lmsndin rhbcnso hgvnjuiuts cmastjl khvag tbtcyr sxjqnk dnmbammd 0?34    ompMFyDWP oniyllj ylxop dxdzyiql ugmfnob wkxplf byrlx pcaou dwyts 16-20   EnkDFQqed 13B20    hZDmDIICPW mjnfrrptc zaypth odykc oazfktj jpgnjlj nsljirlyfd olszgpifu jpgrfknxa pkqucv mrcukwau 15!41    XsrOMC xlkpugdyr kqjecxtiyr txwrjznvfv 19-44 VUivdtPRBq ijfznhcea lvpapq ifmzjooqg 0b03 oMEzZjX lambfsrk zmkxyoy itcrjqguy sxgyjujcch flfguziwjg pyhpeiui zsomzj hastcx fyygzrpfja bmgzujud 6,41  OmEzZJx wsisnuyfp jllrj yhdlmnwn ipwpz 18.43    xsROmC rjpwclkdig hgdvynaan hgfyt oeklfm ztmufax qweidnofy hiqex evbrjtp sjrfsb 16=52    yORLCqcOT gthtedyg sehmkjapj inxbpphsut gougkz vyujftwjqa rfzzuihfn fnzcvanv abpom oztufugmir 21-37 enkDFQQEd muqbmgqxul dgjsimaqpn nezklcp peyltsmob ogyeeiquld'''))
 print(create_schedule_string('''    A 11:00 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sed euismod nibh, non vehicula libero. Fusce ac eros
      lectus. Pellentesque interdum nisl sem, eget facilisis mauris malesuada eget. Nullam 10:0 a bibendum enim. Praesent dictum
      ante eget turpis tempor, porta placerat dolor ultricies. Mauris quis dui porttitor, ultrices turpis vitae, pulvinar nisl.
