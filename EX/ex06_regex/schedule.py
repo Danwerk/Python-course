@@ -54,16 +54,18 @@ def create_table(input_string):
     """Create schedule table from list"""
     table = []
     act_schedule = []
+    time_size = get_table_sizes(input_string)[0]
+    act_size = get_table_sizes(input_string)[1]
     for i in correct_convert_list(input_string):
         time = i[0]
         act = ', '.join(i[1])
-        act_schedule.append(f'| {time:>{get_table_sizes(input_string)[0]}} | {act:<{get_table_sizes(input_string)[1]}} |')
+        act_schedule.append(f'| {time:>{time_size}} | {act:<{act_size}} |')
 
     str_time = 'time'
     str_items = 'items'
-    table_horizontal = ((get_table_sizes(input_string)[0] + get_table_sizes(input_string)[1] + 7) * '-')
+    table_horizontal = ((time_size + act_size + 7) * '-')
     table.append(table_horizontal)
-    table.append(f'| {str_time:>{get_table_sizes(input_string)[0]}} | {str_items:<{get_table_sizes(input_string)[1]}} |')
+    table.append(f'| {str_time:>{time_size}} | {str_items:<{act_size}} |')
     table.append(table_horizontal)
     table.extend(act_schedule)
     table.append(table_horizontal)
