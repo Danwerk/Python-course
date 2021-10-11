@@ -39,9 +39,9 @@ def draw_empty_schedule_table(input_string):
     str_time = 'time'
     str_items = 'items'
     str_message = 'No items found'
-    table_horizontal = ((get_table_sizes(input_string)[0] + get_table_sizes(input_string)[1] + 7) * '-')
+    table_horizontal = ((14 + 4) * '-')
     table.append(table_horizontal)
-    table.append(f'| {str_time:>{get_table_sizes(input_string)[0]}} | {str_items:<{get_table_sizes(input_string)[1]}} |')
+    table.append(f'| {str_time:>{get_table_sizes(input_string)[0]}} | {str_items:<{get_table_sizes(input_string)[1]+2}} |')
     table.append(table_horizontal)
     table.append(f'| {str_message:{get_table_sizes(input_string)[0] + get_table_sizes(input_string)[1] + 3}} |')
     table.append(table_horizontal)
@@ -69,7 +69,7 @@ def create_table(input_string):
 
 
 def get_table_sizes(input_string):
-    max_len_time = 6
+    max_len_time = 4
     max_len_items = 5
     for objects in correct_convert_list(input_string):
         time = objects[0]
