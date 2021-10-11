@@ -106,6 +106,11 @@ def correct_convert_list(input_string):
             match = f'{hours}:{minutes:02} PM', tupl[1]
             conv_list.append(match)
             continue
+        if hours == 12 and minutes == 0:
+            hours = hours
+            match = f'{hours}:{minutes:02} AM', tupl[1]
+            conv_list.append(match)
+            continue
         if hours == 0:
             hours = 12
             match = f'{hours}:{minutes:02} AM', tupl[1]
@@ -184,4 +189,4 @@ print(create_schedule_string('''    A 11:00 Lorem ipsum dolor sit amet, consecte
     5:6
 
 '''))
-print(create_schedule_string("msubelvhht 12=32 wwguHfBZoB qxivykdl"))
+print(create_schedule_string("msubelvhht 12=00 wwguHfBZoB qxivykdl"))
