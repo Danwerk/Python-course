@@ -19,7 +19,7 @@ def create_schedule_string(input_string: str) -> str:
 
 
 def draw_schedule_table(input_string):
-    """draw schedule table."""
+    """Draw schedule table."""
     if input_string == '' or correct_regex_list(input_string) == []:
         string_table = ''
         for i in draw_empty_schedule_table(input_string):
@@ -51,7 +51,7 @@ def draw_empty_schedule_table(input_string):
 
 
 def create_table(input_string):
-    """Create schedule table from list"""
+    """Create schedule table from list."""
     table = []
     act_schedule = []
     time_size = get_table_sizes(input_string)[0]
@@ -91,7 +91,7 @@ def get_table_sizes(input_string):
 
 
 def correct_convert_list(input_string):
-    """Convert from 24 hour"""
+    """Convert from 24 hours to 12 hours."""
     conv_list = []
     for tupl in sorted_list(input_string):
         time = tupl[0]
@@ -121,11 +121,13 @@ def correct_convert_list(input_string):
 
 
 def sorted_list(input_string):
+    """Return sorted keys."""
     sorted_items = sorted(correct_regex_dict(input_string).items(), key=lambda x: x[0])
     return sorted_items
 
 
 def correct_regex_dict(input_string):
+    """Return dictionary from regex list."""
     dic = {}
     for tuplet in correct_regex_list(input_string):
         key = tuplet[0]
@@ -138,6 +140,7 @@ def correct_regex_dict(input_string):
 
 
 def correct_regex_list(input_string: str):
+    """Find all matches from text, using regex."""
     regex = re.findall(r"(?<=\n|\s)(\d{1,2}\D\d{1,2})\s+([A-Za-z][A-Za-z]{0,})", input_string)
 
     elem_list = []
