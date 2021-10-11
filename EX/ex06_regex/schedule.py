@@ -19,12 +19,19 @@ def create_schedule_string(input_string: str) -> str:
 
 
 def draw_schedule_table(input_string):
-    string_table = ''
-    for i in create_table(input_string):
-        list_table = ''.join(i) + '\n'
-        string_table += list_table
+    if input_string == '':
+        string_table = ''
+        for i in draw_empty_schedule_table(input_string):
+            list_table = ''.join(i) + '\n'
+            string_table += list_table
+        return string_table
+    else:
+        string_table = ''
+        for i in create_table(input_string):
+            list_table = ''.join(i) + '\n'
+            string_table += list_table
 
-    return string_table
+        return string_table
 
 
 def draw_empty_schedule_table(input_string):
@@ -62,19 +69,19 @@ def create_table(input_string):
 
 
 def get_table_sizes(input_string):
-    max_len_time = 0
-    max_len_act = 0
+    max_len_time = 4
+    max_len_items = 5
     for objects in correct_convert_list(input_string):
         time = objects[0]
-        act = ', '.join(objects[1])
+        items = ', '.join(objects[1])
         amount_time = len(time)
-        amount_act = len(act)
+        amount_items = len(items)
         if amount_time > max_len_time:
             max_len_time = amount_time
-        if amount_act > max_len_act:
-            max_len_act = amount_act
+        if amount_items > max_len_items:
+            max_len_items = amount_items
 
-    return max_len_time, max_len_act
+    return max_len_time, max_len_items
 
 
 def correct_convert_list(input_string):
@@ -134,7 +141,13 @@ def correct_regex_list(input_string: str):
             elem_list.append(match)
     return elem_list
 
-print(create_schedule_string('''start hnzlfygdm -1B18 xSRomC kejmfidlx uivyg mgbtux bncvx mrshl hnpmhc sbowlvngda nxahig 18a23   OmpMFYDWP zrlev vdhjknem vxmook ujkuaehfyb 6.32   ENkDfQQeD ifqtyocr ybyrzr yiwgkpeutw jpreso wdiiho 20?59   OMPmfYdWp pxltcum djatyjjnd mpktejy atdnu cnythzufvg ekdyj erymdknul wfpfbf fvzcgteyw cyynsgko 1?20  XSRoMC gavmbxnrst xymkcuy imrewd 24-23    vUiVdTPrbQ amsdd rjvpao uygkpkrirp 14b16    KWPgeacYx spcjelglx plrgsrmfvu ttrxcq okghzgnyix myoih ckpheejdwh sgzzbbmeky mgksnv iaxviulk uezrjtg 15=30  yorlCqcOT ymynrxuj vtcgaf gytjubr ooweudok uikpwhm tezwtwztby usxmtzhto lvvaao gijadqwfcx hlmlflqn 16?39   XSRoMc prridp lmsndin rhbcnso hgvnjuiuts cmastjl khvag tbtcyr sxjqnk dnmbammd 0?34    ompMFyDWP oniyllj ylxop dxdzyiql ugmfnob wkxplf byrlx pcaou dwyts 16-20   EnkDFQqed 13B20    hZDmDIICPW mjnfrrptc zaypth odykc oazfktj jpgnjlj nsljirlyfd olszgpifu jpgrfknxa pkqucv mrcukwau 15!41    XsrOMC xlkpugdyr kqjecxtiyr txwrjznvfv 19-44 VUivdtPRBq ijfznhcea lvpapq ifmzjooqg 0b03 oMEzZjX lambfsrk zmkxyoy itcrjqguy sxgyjujcch flfguziwjg pyhpeiui zsomzj hastcx fyygzrpfja bmgzujud 6,41  OmEzZJx wsisnuyfp jllrj yhdlmnwn ipwpz 18.43    xsROmC rjpwclkdig hgdvynaan hgfyt oeklfm ztmufax qweidnofy hiqex evbrjtp sjrfsb 16=52    yORLCqcOT gthtedyg sehmkjapj inxbpphsut gougkz vyujftwjqa rfzzuihfn fnzcvanv abpom oztufugmir 21-37 enkDFQQEd muqbmgqxul dgjsimaqpn nezklcp peyltsmob ogyeeiquld'''))
+print(create_schedule_string("here 01:12 A"))
+print(create_schedule_string(''))
+print(create_schedule_string('''ter 12:23 mingi v lectus. Pellentesque interdum nisl sem, eget facilisis mauris malesuada eget. Nullam 10:0 a bibendum enim. Praesent dictum
+     ante eget turpis tempor, porta placerat dolor ultricies. Mauris quis dui porttitor, ultrices turpis vitae, pulvinar nisl.
+     Suspendisse potenti. Ut nec cursus sapien, convallis sagittis purus. Integer mollis nisi sed fermentum efficitur.
+     Suspendisse sollicitudin sapien dui, vitae tem'''))
+#print(create_schedule_string('''start hnzlfygdm -1B18 xSRomC kejmfidlx uivyg mgbtux bncvx mrshl hnpmhc sbowlvngda nxahig 18a23   OmpMFYDWP zrlev vdhjknem vxmook ujkuaehfyb 6.32   ENkDfQQeD ifqtyocr ybyrzr yiwgkpeutw jpreso wdiiho 20?59   OMPmfYdWp pxltcum djatyjjnd mpktejy atdnu cnythzufvg ekdyj erymdknul wfpfbf fvzcgteyw cyynsgko 1?20  XSRoMC gavmbxnrst xymkcuy imrewd 24-23    vUiVdTPrbQ amsdd rjvpao uygkpkrirp 14b16    KWPgeacYx spcjelglx plrgsrmfvu ttrxcq okghzgnyix myoih ckpheejdwh sgzzbbmeky mgksnv iaxviulk uezrjtg 15=30  yorlCqcOT ymynrxuj vtcgaf gytjubr ooweudok uikpwhm tezwtwztby usxmtzhto lvvaao gijadqwfcx hlmlflqn 16?39   XSRoMc prridp lmsndin rhbcnso hgvnjuiuts cmastjl khvag tbtcyr sxjqnk dnmbammd 0?34    ompMFyDWP oniyllj ylxop dxdzyiql ugmfnob wkxplf byrlx pcaou dwyts 16-20   EnkDFQqed 13B20    hZDmDIICPW mjnfrrptc zaypth odykc oazfktj jpgnjlj nsljirlyfd olszgpifu jpgrfknxa pkqucv mrcukwau 15!41    XsrOMC xlkpugdyr kqjecxtiyr txwrjznvfv 19-44 VUivdtPRBq ijfznhcea lvpapq ifmzjooqg 0b03 oMEzZjX lambfsrk zmkxyoy itcrjqguy sxgyjujcch flfguziwjg pyhpeiui zsomzj hastcx fyygzrpfja bmgzujud 6,41  OmEzZJx wsisnuyfp jllrj yhdlmnwn ipwpz 18.43    xsROmC rjpwclkdig hgdvynaan hgfyt oeklfm ztmufax qweidnofy hiqex evbrjtp sjrfsb 16=52    yORLCqcOT gthtedyg sehmkjapj inxbpphsut gougkz vyujftwjqa rfzzuihfn fnzcvanv abpom oztufugmir 21-37 enkDFQQEd muqbmgqxul dgjsimaqpn nezklcp peyltsmob ogyeeiquld'''))
 print(create_schedule_string('''    A 11:00 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sed euismod nibh, non vehicula libero. Fusce ac eros
      lectus. Pellentesque interdum nisl sem, eget facilisis mauris malesuada eget. Nullam 10:0 a bibendum enim. Praesent dictum
      ante eget turpis tempor, porta placerat dolor ultricies. Mauris quis dui porttitor, ultrices turpis vitae, pulvinar nisl.
