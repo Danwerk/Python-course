@@ -96,7 +96,7 @@ def correct_convert_list(input_string):
             match = f'{hours}:{minutes:02} PM', tupl[1]
             conv_list.append(match)
             continue
-        if 0 < hours < 12:
+        if 0 < hours <= 12:
             hours = hours
             match = f'{hours}:{minutes:02} AM', tupl[1]
             conv_list.append(match)
@@ -167,7 +167,7 @@ print(create_schedule_string('''    A 11:00 Lorem ipsum dolor sit amet, consecte
      dictum ante eget turpis tempor, 00:0 porta placerat dolor ultricies. Mauris quis dui porttitor, ultrices turpis vitae,
      pulvinar nisl. Suspendisse potenti. Ut nec cursus sapien, convallis sagittis purus. 8:8 Integer mollis nisi sed fermentum
       efficitur. Suspendisse sollicitudin sapien dui, vitae tempus lacus elementum ac. Curabitur id 18:19 purus
-      diam. 18:19 Donec blandit, est nec semper convallis, arcu 7.01 libero lacinia ex, eu placerat risus est non tellus.
+      diam. 18:19 Donec 12:39 djlnvo blandit, est nec semper convallis, arcu 7.01 libero lacinia ex, eu placerat risus est non tellus.
 
     11:0 lorem
     0:60 bad
