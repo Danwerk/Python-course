@@ -101,16 +101,12 @@ def correct_convert_list(input_string):
             match = f'{hours}:{minutes:02} AM', tupl[1]
             conv_list.append(match)
             continue
-        if hours == 12 and minutes > 0:
+        if hours == 12 and minutes >= 0:
             hours = hours
             match = f'{hours}:{minutes:02} PM', tupl[1]
             conv_list.append(match)
             continue
-        if hours == 12 and minutes == 0:
-            hours = hours
-            match = f'{hours}:{minutes:02} AM', tupl[1]
-            conv_list.append(match)
-            continue
+
         if hours == 0:
             hours = 12
             match = f'{hours}:{minutes:02} AM', tupl[1]
