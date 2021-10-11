@@ -91,14 +91,19 @@ def correct_convert_list(input_string):
         time = re.split(r'\D', time)
         hours = int(time[0])
         minutes = int(time[1])
-        if hours > 12 and hours < 24:
+        if 12 < hours < 24:
             hours -= 12
             match = f'{hours}:{minutes:02} PM', tupl[1]
             conv_list.append(match)
             continue
-        if 0 < hours <= 12:
+        if 0 < hours < 12:
             hours = hours
             match = f'{hours}:{minutes:02} AM', tupl[1]
+            conv_list.append(match)
+            continue
+        if hours == 12 and minutes > 0:
+            hours = hours
+            match = f'{hours}:{minutes:02} PM', tupl[1]
             conv_list.append(match)
             continue
         if hours == 0:
@@ -179,3 +184,4 @@ print(create_schedule_string('''    A 11:00 Lorem ipsum dolor sit amet, consecte
     5:6
 
 '''))
+print(create_schedule_string("msubelvhht 12=32 wwguHfBZoB qxivykdl"))
