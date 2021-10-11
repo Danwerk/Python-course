@@ -1,22 +1,72 @@
 """Create schedule from the given file."""
 import re
-from datetime import datetime
+
 
 def create_schedule_file(input_filename: str, output_filename: str) -> None:
     """Create schedule file from the given input file."""
-
+    input_filename = 'test.txt'
+    output_filename = 'after_test.txt'
+    with open(input_filename) as f:  # Opens file with name of "test.txt"
+        data = f.read()
+        make_sence = converted_time(data)
+    with open(output_filename, "w") as f:
+        f.write(make_sence)
 
 def create_schedule_string(input_string: str) -> str:
     """Create schedule string from the given input string."""
-    return correct_regex_list(input_string)
+    '''act = correct_regex_dict(input_string)
+    time_width = 8
+    for time in act:
+        list_to_string = ' '.join(act[time])
 
-    #for match in re.finditer(r"(\d{1,2}\D\d{1,2})\s?([A-Za-z][a-z]+)", input_string):
-        #time_to_convert = match.group(1)
-        #print(match.group(1) + ' ' + match.group(2))
+        print(f'| {time:>{time_width}} | {list_to_string:>20} |')'''
+
+    #return create_schedule_file(input_filename='test.txt', output_filename='after_test.txt')
+    return converted_time(input_string)
+
+def converted_time(input_string):
+    conv_list = []
+    for tupl in sorted_list(input_string):
+        time = tupl[0]
+        time = re.split(r'\D', time)
+        hours = int(time[0])
+        minutes = int(time[1])
+        if hours > 12 and hours < 24:
+            hours -= 12
+            match = f'{hours}:{minutes:02} PM', tupl[1]
+            conv_list.append(match)
+            continue
+        if 0 < hours < 12:
+            hours = hours
+            match = f'{hours}:{minutes:02} AM', tupl[1]
+            conv_list.append(match)
+            continue
+        if hours == 0:
+            hours = 12
+            match = f'{hours}:{minutes:02} AM', tupl[1]
+            conv_list.append(match)
+    return conv_list
+
+
+def sorted_list(input_string):
+    sorted_items = sorted(correct_regex_dict(input_string).items(), key=lambda x: x[0])
+    return sorted_items
+
+
+def correct_regex_dict(input_string):
+    dic = {}
+    for tuplet in correct_regex_list(input_string):
+        key = tuplet[0]
+        value = tuplet[1]
+        if key not in dic:
+            dic[key] = [value]
+        if value not in dic[key]:
+            dic[key].append(value)
+    return dic
 
 
 def correct_regex_list(input_string: str):
-    regex = re.findall(r"(\d{1,2}\D\d{1,2})\s+([A-Za-z][A-Za-z]+)", input_string)
+    regex = re.findall(r"(\d{1,2}\D\d{1,2})\s+([A-Za-z][A-Za-z]*)", input_string)
 
     elem_list = []
 
@@ -26,26 +76,14 @@ def correct_regex_list(input_string: str):
         time = re.split(r'\D', match[0])
         hours = int(time[0])
         minutes = int(time[1])
-        if hours > 12 and hours < 24:
-            hours -= 12
-            match = f'{hours}:{minutes:02} PM', match[1]
+        if hours < 24 and minutes < 60:
+            match = f'{hours:02}:{minutes:02}', match[1]
             elem_list.append(match)
-            continue
-        if 0 < hours < 12:
-            hours = hours
-            match = f'{hours}:{minutes:02} AM', match[1]
-            elem_list.append(match)
-            continue
-        if hours == 0:
-            hours = 12
-            match = f'{hours}:{minutes:02} AM', match[1]
-            elem_list.append(match)
-
     return elem_list
 
 
-print(create_schedule_string('''A 11:00 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sed euismod nibh, non vehicula libero. Fusce ac eros
-     lectus. Pellentesque interdum nisl sem, eget facilisis mauris malesuada eget. Nullam 100 a bibendum enim. Praesent dictum
+print(create_schedule_string('''    A 11:00 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sed euismod nibh, non vehicula libero. Fusce ac eros
+     lectus. Pellentesque interdum nisl sem, eget facilisis mauris malesuada eget. Nullam 10:0 a bibendum enim. Praesent dictum
      ante eget turpis tempor, porta placerat dolor ultricies. Mauris quis dui porttitor, ultrices turpis vitae, pulvinar nisl.
      Suspendisse potenti. Ut nec cursus sapien, convallis sagittis purus. Integer mollis nisi sed fermentum efficitur.
      Suspendisse sollicitudin sapien dui, vitae tempus lacus elementum ac. Curabitur id purus diam. 24:01 Donec blandit,
@@ -73,4 +111,5 @@ print(create_schedule_string('''A 11:00 Lorem ipsum dolor sit amet, consectetur 
       21:59 nopoint.
     23-59 canuseminusthere  22,0 CommaIsAlsoOk
     5:6
+
 '''))
