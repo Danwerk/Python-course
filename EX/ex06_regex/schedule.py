@@ -12,6 +12,7 @@ def create_schedule_file(input_filename: str, output_filename: str) -> None:
     with open(output_filename, "w") as f:
         f.write(make_sence)
 
+
 def create_schedule_string(input_string: str) -> str:
     """Create schedule string from the given input string."""
     '''act = correct_regex_dict(input_string)
@@ -22,7 +23,50 @@ def create_schedule_string(input_string: str) -> str:
         print(f'| {time:>{time_width}} | {list_to_string:>20} |')'''
 
     #return create_schedule_file(input_filename='test.txt', output_filename='after_test.txt')
-    return converted_time(input_string)
+    return draw_table(input_string)
+
+
+def draw_table(input_string):
+    for i in create_table(input_string):
+        print(i)
+
+
+def create_table(input_string):
+    table = []
+    act_schedule = []
+    for i in converted_time(input_string):
+        time = i[0]
+        act = ', '.join(i[1])
+        act_schedule.append(f'| {time:>{get_table_sizes(input_string)[0]}} | {act:<{get_table_sizes(input_string)[1]}} |')
+
+    str_time = 'time'
+    str_items = 'items'
+    table_horizontal = ((get_table_sizes(input_string)[0] + get_table_sizes(input_string)[1] + 7) * '-')
+    table.append(table_horizontal)
+    table.append(f'| {str_time:>{get_table_sizes(input_string)[0]}} | {str_items:<{get_table_sizes(input_string)[1]}} |')
+    table.append(table_horizontal)
+    table.extend(act_schedule)
+    table.append(table_horizontal)
+
+    #print(f'| {time:>{get_table_sizes(input_string)[0]}} | {act:<{get_table_sizes(input_string)[1]}} |')
+    return table
+
+
+def get_table_sizes(input_string):
+    max_len_time = 0
+    max_len_act = 0
+    for objects in converted_time(input_string):
+        time = objects[0]
+        act = ', '.join(objects[1])
+        amount_time = len(time)
+        amount_act = len(act)
+        if amount_time > max_len_time:
+            max_len_time = amount_time
+        if amount_act > max_len_act:
+            max_len_act = amount_act
+
+    return max_len_time, max_len_act
+
 
 def converted_time(input_string):
     conv_list = []
