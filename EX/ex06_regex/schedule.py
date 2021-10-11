@@ -41,7 +41,7 @@ def draw_empty_schedule_table(input_string):
     str_message = 'No items found'
     table_horizontal = ((14 + 4) * '-')
     table.append(table_horizontal)
-    table.append(f'| {str_time:>{get_table_sizes(input_string)[0]}} | {str_items:<{get_table_sizes(input_string)[1]+2}} |')
+    table.append(f'| {str_time:>{get_table_sizes(input_string)[0] + 1}} | {str_items:<{get_table_sizes(input_string)[1]+1}} |')
     table.append(table_horizontal)
     table.append(f'| {str_message:{get_table_sizes(input_string)[0] + get_table_sizes(input_string)[1] + 3}} |')
     table.append(table_horizontal)
@@ -141,7 +141,7 @@ def correct_regex_list(input_string: str):
             elem_list.append(match)
     return elem_list
 
-print(create_schedule_string("here 01:12 A"))
+
 print(create_schedule_string(''))
 print(create_schedule_string('''ter 12:23 mingi v lectus. Pellentesque interdum nisl sem, eget facilisis mauris malesuada eget. Nullam 10:0 a bibendum enim. Praesent dictum
      ante eget turpis tempor, porta placerat dolor ultricies. Mauris quis dui porttitor, ultrices turpis vitae, pulvinar nisl.
