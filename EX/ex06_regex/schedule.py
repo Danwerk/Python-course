@@ -69,7 +69,7 @@ def create_table(input_string):
 
 
 def get_table_sizes(input_string):
-    max_len_time = 4
+    max_len_time = 6
     max_len_items = 5
     for objects in correct_convert_list(input_string):
         time = objects[0]
