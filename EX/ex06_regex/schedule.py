@@ -125,7 +125,6 @@ def sorted_list(input_string):
     return sorted(correct_regex_dict(input_string).items(), key=lambda x: x[0])
 
 
-
 def correct_regex_dict(input_string):
     """Return dictionary from regex list."""
     dic = {}
