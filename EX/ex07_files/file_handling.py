@@ -1,5 +1,5 @@
-
-
+a = 'hello world'
+print(a.rstrip())
 def read_file_contents(filename: str) -> str:
     """
     Read file contents into string.
@@ -25,10 +25,10 @@ def read_file_contents_to_list(filename: str) -> list:
     :param filename: File to read.
     :return: List of lines.
     """
-    a = []
-    for i in read_file_contents(filename):
-        a.append(i)
-    return a
+    for line in read_file_contents(filename):
+       b = line.rstrip()
+
+    return b
 
 
 def read_csv_file(filename: str) -> list:
