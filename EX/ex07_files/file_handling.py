@@ -25,12 +25,8 @@ def read_file_contents_to_list(filename: str) -> list:
     :param filename: File to read.
     :return: List of lines.
     """
-    b = []
     some_list = read_file_contents(filename).split('\n')
-    b.append(some_list)
-
-
-    return b
+    return some_list
 
 
 def read_csv_file(filename: str) -> list:
