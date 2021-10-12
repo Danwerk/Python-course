@@ -23,7 +23,7 @@ def read_file_contents_to_list(filename: str) -> list:
     :param filename: File to read.
     :return: List of lines.
     """
-    pass
+    return list(read_file_contents(filename))
 
 
 def read_csv_file(filename: str) -> list:
