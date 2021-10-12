@@ -91,7 +91,7 @@ def get_table_sizes(input_string):
 
 
 def correct_convert_list(input_string):
-    """Convert from 24 hours to 12 hours."""
+    """Convert from 24 hours to 12 hours. It returns a list of tuples that are sorted."""
     conv_list = []
     for tupl in sorted_list(input_string):
         time = tupl[0]
@@ -121,12 +121,12 @@ def correct_convert_list(input_string):
 
 
 def sorted_list(input_string):
-    """Return sorted keys."""
+    """Return sorted keys, List of tuples."""
     return sorted(correct_regex_dict(input_string).items(), key=lambda x: x[0])
 
 
 def correct_regex_dict(input_string):
-    """Return dictionary from regex list."""
+    """Return dictionary from regex list, Time is key(string) and item is value(list)."""
     dic = {}
     for tuplet in correct_regex_list(input_string):
         key = tuplet[0]
@@ -139,7 +139,7 @@ def correct_regex_dict(input_string):
 
 
 def correct_regex_list(input_string: str):
-    """Find all matches from text, using regex."""
+    """Find all matches from text, using regex, Returns list of tuples."""
     regex = re.findall(r"(?<=\n|\s)(\d{1,2}\D\d{1,2})\s+([A-Za-z][A-Za-z]{0,})", input_string)
 
     elem_list = []
