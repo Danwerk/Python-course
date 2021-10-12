@@ -25,8 +25,10 @@ def read_file_contents_to_list(filename: str) -> list:
     :param filename: File to read.
     :return: List of lines.
     """
-    for line in read_file_contents(filename):
-       b = line.rstrip()
+    b = []
+    some_list = read_file_contents(filename).split('\n')
+    b.append(some_list)
+
 
     return b
 
