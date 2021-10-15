@@ -54,10 +54,9 @@ def write_lines_to_file(filename: str, lines: list) -> None:
     """
     with open(filename, "w") as f:
         for line in lines:
-                f.write(line + '\n')
+                f.writelines(line)
+
     return filename
-
-
 
 
 def write_csv_file(filename: str, data: list) -> None:
