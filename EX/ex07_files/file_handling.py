@@ -53,8 +53,7 @@ def write_lines_to_file(filename: str, lines: list) -> None:
     :return: None
     """
     with open(filename, "w") as f:
-        for line in lines:
-            f.writelines(line)
+        f.writelines(lines)
     return filename
 
 
