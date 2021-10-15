@@ -1,11 +1,11 @@
 import csv
 
-data = [['tere', 'maasikas'], ['magus'], ['veel parem']]
-with open('test.txt', 'w', newline='') as csv_file:
-    csv_writer = csv.writer(csv_file)
-    for row in data:
-        # write list of values
-        csv_writer.writerow(row)
+data = ['tere', 'maasikas','veel parem']
+with open('test.txt', "w") as f:
+    for i in data:
+        f.write(i)
+        f.write("\n")
+
 
 
 def read_file_contents(filename: str) -> str:
@@ -60,7 +60,9 @@ def write_lines_to_file(filename: str, lines: list) -> None:
     :return: None
     """
     with open(filename, "w") as f:
-        f.writelines(lines)
+        for i in lines:
+            f.write(i)
+            f.write("\n")
 
     return filename
 
