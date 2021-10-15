@@ -54,6 +54,7 @@ def write_lines_to_file(filename: str, lines: list) -> None:
     """
     with open(filename, "w") as f:
         f.writelines(lines)
+        f.write('\n')
     return filename
 
 
