@@ -39,7 +39,6 @@ def write_contents_to_file(filename: str, contents: str) -> None:
     return filename
 
 
-
 def write_lines_to_file(filename: str, lines: list) -> None:
     """
     Write lines to file.
@@ -53,6 +52,11 @@ def write_lines_to_file(filename: str, lines: list) -> None:
     :param lines: List of string to write to the file.
     :return: None
     """
+    with open(filename, "w") as f:
+        for line in lines:
+                f.write(line)
+    return filename
+
 
 
 
