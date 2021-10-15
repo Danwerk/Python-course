@@ -15,28 +15,7 @@ def read_file_contents_to_list(filename: str) -> list:
 
 
 def read_csv_file(filename: str) -> list:
-    """
-    Read CSV file into list of rows.
-
-    Each row is also a list of "columns" or fields.
-
-    CSV (Comma-separated values) example:
-    name,age
-    john,12
-    mary,14
-
-    Should become:
-    [
-      ["name", "age"],
-      ["john", "12"],
-      ["mary", "14"]
-    ]
-
-    Use csv module.
-
-    :param filename: File to read.
-    :return: List of lists.
-    """
+    """Read CSV file into list of rows."""
     csv_list = []
     with open(filename) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
@@ -55,7 +34,10 @@ def write_contents_to_file(filename: str, contents: str) -> None:
     :param contents: Content to write to.
     :return: None
     """
-    pass
+    with open(filename, "w") as f:
+        f.write(contents)
+    return filename
+
 
 
 def write_lines_to_file(filename: str, lines: list) -> None:
@@ -71,7 +53,7 @@ def write_lines_to_file(filename: str, lines: list) -> None:
     :param lines: List of string to write to the file.
     :return: None
     """
-    pass
+
 
 
 def write_csv_file(filename: str, data: list) -> None:
