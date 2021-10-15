@@ -58,6 +58,7 @@ def write_lines_to_file(filename: str, lines: list) -> None:
     return filename
 
 
+
 def write_csv_file(filename: str, data: list) -> None:
     """
     Write data into CSV file.
