@@ -81,7 +81,7 @@ def write_csv_file(filename: str, data: list) -> None:
     :return: None
     """
     with open(filename, 'w', newline='') as csv_file:
-        csv_writer = csv.writer(csv_file, delimiter=",")
+        csv_writer = csv.writer(csv_file)
     return csv_writer
 
 
