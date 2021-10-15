@@ -1,30 +1,15 @@
-a = 'hello world'
-print(a.rstrip())
-def read_file_contents(filename: str) -> str:
-    """
-    Read file contents into string.
-    In this exercise, we can assume the file exists.
+import csv
 
-    :param filename: File to read.
-    :return: File contents as string.
-    """
+
+def read_file_contents(filename: str) -> str:
+    """Read file contents into string."""
     with open(filename) as f:  # Opens file with name of "test.txt"
         data = f.read()  # Reads all the lines from the file and saves it as a string.
     return data
 
 
 def read_file_contents_to_list(filename: str) -> list:
-    """
-    Read file contents into list of lines.
-
-    In this exercise, we can assume the file exists.
-    Each line from the file should be a separate element.
-
-    List elements should not contain new line (\n).
-
-    :param filename: File to read.
-    :return: List of lines.
-    """
+    """Read file contents into list of lines."""
     list_of_lines = read_file_contents(filename).split('\n')
     return list_of_lines
 
@@ -52,7 +37,12 @@ def read_csv_file(filename: str) -> list:
     :param filename: File to read.
     :return: List of lists.
     """
-    pass
+    csv_list = []
+    with open(filename) as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        for row in csv_reader:
+            csv_list.append(row)
+    return csv_list
 
 
 def write_contents_to_file(filename: str, contents: str) -> None:
