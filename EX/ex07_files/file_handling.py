@@ -1,5 +1,12 @@
 import csv
 
+data = [['tere', 'maasikas'], ['magus'], ['veel parem']]
+with open('test.txt', 'w', newline='') as csv_file:
+    csv_writer = csv.writer(csv_file)
+    for row in data:
+        # write list of values
+        csv_writer.writerow(row)
+
 
 def read_file_contents(filename: str) -> str:
     """Read file contents into string."""
@@ -80,10 +87,11 @@ def write_csv_file(filename: str, data: list) -> None:
     :param data: List of lists to write to the file.
     :return: None
     """
+
     with open(filename, 'w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file)
-    return csv_writer
-
+        for row in data:
+            csv_writer.writerow(row)
 
 def merge_dates_and_towns_into_csv(dates_file: str, towns_file: str, csv_output: str) -> None:
     """
