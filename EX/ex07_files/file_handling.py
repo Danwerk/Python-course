@@ -1,9 +1,5 @@
 import csv
 
-with open('test.txt', 'w', newline='') as csv_file:
-    csv_writer = csv.writer(csv_file)
-    for row in result:
-        csv_writer.writerow(row)
 def read_file_contents(filename: str) -> str:
     """Read file contents into string."""
     with open(filename) as f:  # Opens file with name of "test.txt"
@@ -132,3 +128,7 @@ def merge_dates_and_towns_into_csv(dates_file: str, towns_file: str, csv_output:
         for rows in result:
             if name == rows[0]:
                 rows[1] = town
+    with open('test.txt', 'w', newline='') as csv_file:
+        csv_writer = csv.writer(csv_file)
+        for row in result:
+            csv_writer.writerow(row)
