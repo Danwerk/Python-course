@@ -1,30 +1,5 @@
 import csv
-dates = []
-towns = []
-result = [["name", "town", "date"]]
-with open('csv_date.txt') as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=':')
-    for row in csv_reader:
-        dates.append(row)
-with open('csv_town.txt') as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=':')
-    for row in csv_reader:
-        towns.append(row)
-for row in dates:
-    name = row[0]
-    date = row[1]
-    result.append([name, '-', date])
-for row in towns:
-    name = row[0]
-    town = row[1]
-    for rows in result:
-        if name == rows[0]:
-            rows[1] = town
 
-
-print(result)
-#print(dates)
-#print(towns)
 with open('test.txt', 'w', newline='') as csv_file:
     csv_writer = csv.writer(csv_file)
     for row in result:
@@ -136,4 +111,24 @@ def merge_dates_and_towns_into_csv(dates_file: str, towns_file: str, csv_output:
     :param csv_output: Output CSV-file with names, towns and dates.
     :return: None
     """
-    pass
+    dates = []
+    towns = []
+    result = [["name", "town", "date"]]
+    with open('csv_date.txt') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=':')
+        for row in csv_reader:
+            dates.append(row)
+    with open('csv_town.txt') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=':')
+        for row in csv_reader:
+            towns.append(row)
+    for row in dates:
+        name = row[0]
+        date = row[1]
+        result.append([name, '-', date])
+    for row in towns:
+        name = row[0]
+        town = row[1]
+        for rows in result:
+            if name == rows[0]:
+                rows[1] = town
