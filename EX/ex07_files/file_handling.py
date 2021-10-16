@@ -1,10 +1,10 @@
 import csv
 
-data = ['tere', 'maasikas','veel parem']
+data = ['siin', 'on mingi','tekst']
 with open('test.txt', "w") as f:
     for i in data:
         f.write(i)
-        f.write("\n")
+        f.write('\n')
 
 
 
@@ -62,7 +62,7 @@ def write_lines_to_file(filename: str, lines: list) -> None:
     with open(filename, "w") as f:
         for i in lines:
             f.write(i)
-            f.write("\n")
+
 
     return filename
 
