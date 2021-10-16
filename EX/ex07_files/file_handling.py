@@ -1,22 +1,34 @@
 import csv
-'''
-a = 'igor:12.12.12'
-
-csv_list = []
+dates = []
+towns = []
+result = [["name", "town", "date"]]
 with open('csv_date.txt') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=':')
     for row in csv_reader:
-        csv_list.append(row)
-print(csv_list)
+        dates.append(row)
+with open('csv_town.txt') as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter=':')
+    for row in csv_reader:
+        towns.append(row)
+for row in dates:
+    name = row[0]
+    date = row[1]
+    result.append([name, '-', date])
+for row in towns:
+    name = row[0]
+    town = row[1]
+    for rows in result:
+        if name == rows[0]:
+            rows[1] = town
 
+
+print(result)
+#print(dates)
+#print(towns)
 with open('test.txt', 'w', newline='') as csv_file:
-    writer = csv.writer(csv_file)
-    for row in csv_list:
-        writer.writerow(row)
-
-'''
-
-
+    csv_writer = csv.writer(csv_file)
+    for row in result:
+        csv_writer.writerow(row)
 def read_file_contents(filename: str) -> str:
     """Read file contents into string."""
     with open(filename) as f:  # Opens file with name of "test.txt"
