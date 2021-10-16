@@ -111,11 +111,11 @@ def merge_dates_and_towns_into_csv(dates_file: str, towns_file: str, csv_output:
     dates = []
     towns = []
     result = [["name", "town", "date"]]
-    with open('csv_date.txt') as csv_file:
+    with open(dates_file) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=':')
         for row in csv_reader:
             dates.append(row)
-    with open('csv_town.txt') as csv_file:
+    with open(towns_file) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=':')
         for row in csv_reader:
             towns.append(row)
