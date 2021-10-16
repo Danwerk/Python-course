@@ -13,6 +13,7 @@ def read_file_contents_to_list(filename: str) -> list:
     return list_of_lines
 
 
+
 def read_csv_file(filename: str) -> list:
     """Read CSV file into list of rows."""
     csv_list = []
