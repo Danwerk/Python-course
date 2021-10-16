@@ -1,11 +1,20 @@
 import csv
+'''
+a = 'igor:12.12.12'
 
-data = ['siin', 'on mingi','tekst']
-with open('test.txt', "w") as f:
-    for i in data:
-        f.write(i)
-        f.write('\n')
+csv_list = []
+with open('csv_date.txt') as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter=':')
+    for row in csv_reader:
+        csv_list.append(row)
+print(csv_list)
 
+with open('test.txt', 'w', newline='') as csv_file:
+    writer = csv.writer(csv_file)
+    for row in csv_list:
+        writer.writerow(row)
+
+'''
 
 
 def read_file_contents(filename: str) -> str:
@@ -32,40 +41,16 @@ def read_csv_file(filename: str) -> list:
 
 
 def write_contents_to_file(filename: str, contents: str) -> None:
-    """
-    Write contents to file.
-
-    If the file exists, create it.
-
-    :param filename: File to write to.
-    :param contents: Content to write to.
-    :return: None
-    """
+    """Write contents to file."""
     with open(filename, "w") as f:
         f.write(contents)
-    return filename
 
 
 def write_lines_to_file(filename: str, lines: list) -> None:
-    """
-    Write lines to file.
-
-    Lines is a list of strings, each represents a separate line in the file.
-
-    There should be no new line in the end of the file.
-    Unless the last element itself ends with the new line.
-
-    :param filename: File to write to.
-    :param lines: List of string to write to the file.
-    :return: None
-    """
+    """Write lines to file."""
     with open(filename, "w") as f:
-        for i in lines:
-            f.write(i)
-
-
-    return filename
-
+        lines = '\n'.join(lines)
+        f.write(lines)
 
 
 def write_csv_file(filename: str, data: list) -> None:
