@@ -1,6 +1,7 @@
 import csv
+'''
 list_of_lists = []
-a = [{"name": "john", "age": "23", 'town':'tallinn'}, {"name": "mary", "age": "44"}]
+a = [{"name": "John", 'hobbu':'swimming'}, {"name": "Mary", "age": "19", "town": "tallinn"}]
 keys = []
 for dic in a:
     for key in dic:
@@ -25,7 +26,7 @@ with open('test.txt', 'w', newline='') as csv_file:
     for row in list_of_lists:
         csv_writer.writerow(row)
 
-
+'''
 
 
 
@@ -303,10 +304,10 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
     :param data: List of dictionaries to write to the file.
     :return: None"""
     list_of_lists = []
-    header = []
-    for dic in data:
-        for key in dic:
-            if key in header:
+    header = []  # header contains e.g name, hobby and etc
+    for dic in data:  # get dictionary from list
+        for key in dic:  # get dict key
+            if key in header:  # if the key is already in header list, then go ahead
                 continue
             else:
                 header.append(key)
@@ -315,7 +316,7 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
     for dict in data:
         content = []
         for i in header:
-            if i in dict.keys():
+            if i in dict.keys():  # check if element i is in dict
                 content.append(dict[i])
             if i not in dict.keys():
                 content.append('')
