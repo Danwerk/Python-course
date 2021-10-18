@@ -1,25 +1,28 @@
 import csv
-
-
 '''
+
+
 csv_list = []
 with open('csv_date.txt') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     for row in csv_reader:
         csv_list.append(row)
+
 list_of_dicts = []
 lists = csv_list
-header_list = lists[0]
-lists.remove(header_list)
-print(lists)
-for content_list in lists:
-    dict = {}
-    for i in range(len(header_list)):
-        key = header_list[i]
-        value = content_list[i]
-        dict[key] = value
-    list_of_dicts.append(dict)
-print()
+if lists:
+    header_list = lists[0]
+    lists.remove(header_list)
+    print(lists)
+    for content_list in lists:
+        dict = {}
+        for i in range(len(header_list)):
+            key = header_list[i]
+            value = content_list[i]
+            dict[key] = value
+        list_of_dicts.append(dict)
+
+print(list_of_dicts)
 '''
 '''
 dates = []
@@ -54,8 +57,6 @@ for row2 in towns:
 
 
 
-
-    
 with open('test.txt', 'w', newline='') as csv_file:
     csv_writer = csv.writer(csv_file)
     for row in result:
@@ -63,6 +64,7 @@ with open('test.txt', 'w', newline='') as csv_file:
 
 print(result)
 '''
+
 def read_file_contents(filename: str) -> str:
     """Read file contents into string."""
     with open(filename) as f:  # Opens file with name of "test.txt"
@@ -233,17 +235,17 @@ def read_csv_file_into_list_of_dicts(filename: str) -> list:
     """
     list_of_dicts = []
     lists = read_csv_file(filename)
-    header_list = lists[0]
-    lists.remove(header_list)
-    print(lists)
-    for content_list in lists:
-        dict = {}
-        for i in range(len(header_list)):
-            key = header_list[i]
-            value = content_list[i]
-            dict[key] = value
-        list_of_dicts.append(dict)
-    return list_of_dicts
+    if lists:
+        header_list = lists[0]
+        lists.remove(header_list)
+        for content_list in lists:
+            dic = {}
+            for i in range(len(header_list)):
+                key = header_list[i]
+                value = content_list[i]
+                dic[key] = value
+            list_of_dicts.append(dic)
+        return list_of_dicts
 
 
 
@@ -285,5 +287,4 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
 
     :param filename: File to write to.
     :param data: List of dictionaries to write to the file.
-    :return: None
-    """
+    :return: None"""
