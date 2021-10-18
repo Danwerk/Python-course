@@ -1,29 +1,41 @@
 import csv
-'''
+list_of_lists = []
+a = [{"name": "john", "age": "23", 'town':'tallinn'}, {"name": "mary", "age": "44"}]
+keys = []
+for dic in a:
+    for key in dic:
+        if key in keys:
+            continue
+        else:
+            keys.append(key)
+list_of_lists.append(keys)
+
+for dict in a:
+    content = []
+    for i in keys:
+        if i in dict.keys():
+            content.append(dict[i])
+        if i not in dict.keys():
+            content.append('')
+    list_of_lists.append(content)
+
+print(list_of_lists)
+with open('test.txt', 'w', newline='') as csv_file:
+    csv_writer = csv.writer(csv_file)
+    for row in list_of_lists:
+        csv_writer.writerow(row)
 
 
-csv_list = []
-with open('csv_date.txt') as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=',')
-    for row in csv_reader:
-        csv_list.append(row)
 
-list_of_dicts = []
-lists = csv_list
-if lists:
-    header_list = lists[0]
-    lists.remove(header_list)
-    print(lists)
-    for content_list in lists:
-        dict = {}
-        for i in range(len(header_list)):
-            key = header_list[i]
-            value = content_list[i]
-            dict[key] = value
-        list_of_dicts.append(dict)
 
-print(list_of_dicts)
-'''
+
+
+
+
+
+
+
+
 '''
 dates = []
 towns = []
@@ -290,3 +302,22 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
     :param filename: File to write to.
     :param data: List of dictionaries to write to the file.
     :return: None"""
+    list_of_lists = []
+    header = []
+    for dic in data:
+        for key in dic:
+            if key in header:
+                continue
+            else:
+                header.append(key)
+    list_of_lists.append(header)
+
+    for dict in data:
+        content = []
+        for i in header:
+            if i in dict.keys():
+                content.append(dict[i])
+            if i not in dict.keys():
+                content.append('')
+        list_of_lists.append(content)
+    return write_csv_file(filename, data)
