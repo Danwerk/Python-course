@@ -246,6 +246,8 @@ def read_csv_file_into_list_of_dicts(filename: str) -> list:
                 dic[key] = value
             list_of_dicts.append(dic)
         return list_of_dicts
+    else:
+        return []
 
 
 
