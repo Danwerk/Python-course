@@ -86,7 +86,7 @@ else:
 '''
 
 
-
+'''
 dates = []
 towns = []
 result = [["name", "town", "date"]]
@@ -125,7 +125,7 @@ with open('test.txt', 'w', newline='') as csv_file:
         csv_writer.writerow(row)
 
 print(result)
-
+'''
 
 
 
