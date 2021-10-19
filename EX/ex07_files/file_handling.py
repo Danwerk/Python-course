@@ -1,14 +1,16 @@
+"""Files."""
+
 import csv
 '''
 #teine osa
 list_of_lists = []
-a = [{'age': '11', 'name': 'john', 'hobby': 'games'},
-    {'age': '19', 'name': 'lada'},
-    {'age': "15", "name": 'mary'}]
+#a = [{'age': '11', 'name': 'john', 'hobby': 'games'},
+#    {'age': '19', 'name': 'lada'},
+#    {'age': "15", "name": 'mary'}]
 
-#a = [
-#    {"name": "John"},
-#    {"name": "Mary", "age": "19", "town": "tallinn"}
+a = [
+    {"name": "John"},
+    {"name": "Mary", "age": "19", "town": "tallinn"}]
 
 
 # header
@@ -28,7 +30,7 @@ for dict in a:
         if i in dict.keys():
             content.append(dict[i])
         if i not in dict.keys():
-            content.append('')
+            content.append(' ')
     list_of_lists.append(content)
 
 print(list_of_lists)
@@ -36,98 +38,7 @@ with open('test.txt', 'w', newline='') as csv_file:
     csv_writer = csv.writer(csv_file)
     for row in list_of_lists:
         csv_writer.writerow(row)
-
 '''
-'''
-#esimene osa
-towns = []
-dates = []
-csv_list = [['name', 'town', 'date']]
-with open('csv_town.txt') as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=',')
-    for row in csv_reader:
-        towns.append(row)
-
-with open('csv_date.txt') as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=',')
-    for row in csv_reader:
-        dates.append(row)
-
-list_of_dicts = []
-lists = towns
-if lists:
-    header_list = lists[0]
-    lists.remove(header_list)
-    for content_list in lists:
-        dic = {}
-        for i in range(len(header_list)):
-            key = header_list[i]
-            value = content_list[i]
-            dic[key] = value
-        list_of_dicts.append(dic)
-else:
-    print([])
-
-
-lists = dates
-if lists:
-    header_list = lists[0]
-    lists.remove(header_list)
-    for content_list in lists:
-        dic = {}
-        for i in range(len(header_list)):
-            key = header_list[i]
-            value = content_list[i]
-            dic[key] = value
-        list_of_dicts.append(dic)
-    print(list_of_dicts)
-else:
-    print([])
-'''
-
-
-'''
-dates = []
-towns = []
-result = [["name", "town", "date"]]
-with open('csv_date.txt') as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=':')
-    for row in csv_reader:
-        dates.append(row)
-with open('csv_town.txt') as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=':')
-    for row in csv_reader:
-        towns.append(row)
-for row in dates:
-    name = row[0]
-    date = row[1]
-    result.append([name, '-', date])
-
-print(result)
-#print(dates)
-#print(towns)
-
-
-for town_person in towns:
-    name2, town = town_person
-    for elem in result[1:]:
-        if name2 == elem[0]:
-            elem[1] = town
-            break
-    else:
-        result.append([name2, town, '-'])
-
-
-
-with open('test.txt', 'w', newline='') as csv_file:
-    csv_writer = csv.writer(csv_file)
-    for row in result:
-        csv_writer.writerow(row)
-
-print(result)
-'''
-
-
 
 
 def read_file_contents(filename: str) -> str:
@@ -141,7 +52,6 @@ def read_file_contents_to_list(filename: str) -> list:
     """Read file contents into list of lines."""
     list_of_lines = read_file_contents(filename).split('\n')
     return list_of_lines
-
 
 
 def read_csv_file(filename: str) -> list:
@@ -270,9 +180,6 @@ def merge_dates_and_towns_into_csv(dates_file: str, towns_file: str, csv_output:
             csv_writer.writerow(row)
 
 
-
-
-
 def read_csv_file_into_list_of_dicts(filename: str) -> list:
     """
     Read csv file into list of dictionaries.
@@ -376,7 +283,7 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
             if i in dict.keys():  # check if element i is in dict
                 content.append(dict[i])
             else:
-                content.append('')
+                content.append(' ')
         list_of_lists.append(content)
     return write_csv_file(filename, data)
 
