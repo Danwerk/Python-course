@@ -86,7 +86,7 @@ else:
 '''
 
 
-
+'''
 
 dates = []
 towns = []
@@ -127,7 +127,7 @@ with open('test.txt', 'w', newline='') as csv_file:
         csv_writer.writerow(row)
 
 print(result)
-
+'''
 
 
 
@@ -252,11 +252,11 @@ def merge_dates_and_towns_into_csv(dates_file: str, towns_file: str, csv_output:
         csv_reader = csv.reader(csv_file, delimiter=':')
         for row in csv_reader:
             towns.append(row)
+
     for row in dates:
         name = row[0]
         date = row[1]
         result.append([name, '-', date])
-
     for row2 in towns:
         name2 = row2[0]
         town = row2[1]
