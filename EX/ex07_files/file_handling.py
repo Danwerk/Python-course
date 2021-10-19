@@ -1,7 +1,17 @@
 import csv
-'''
+''''''
+#teine osa
 list_of_lists = []
-a = [{"name": "John", 'hobbu':'swimming'}, {"name": "Mary", "age": "19", "town": "tallinn"}]
+a = [{'age': '11', 'name': 'john', 'hobby': 'games'},
+    {'age': '19', 'name': 'lada'},
+    {'age': "15", "name": 'mary'}]
+
+#a = [
+#    {"name": "John"},
+#    {"name": "Mary", "age": "19", "town": "tallinn"}
+
+# header
+'''
 keys = []
 for dic in a:
     for key in dic:
@@ -11,6 +21,7 @@ for dic in a:
             keys.append(key)
 list_of_lists.append(keys)
 
+# content
 for dict in a:
     content = []
     for i in keys:
@@ -28,15 +39,53 @@ with open('test.txt', 'w', newline='') as csv_file:
 
 '''
 
+'''
+#esimene osa
+towns = []
+dates = []
+csv_list = [['name', 'town', 'date']]
+with open('csv_town.txt') as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter=',')
+    for row in csv_reader:
+        towns.append(row)
+
+with open('csv_date.txt') as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter=',')
+    for row in csv_reader:
+        dates.append(row)
+
+list_of_dicts = []
+lists = towns
+if lists:
+    header_list = lists[0]
+    lists.remove(header_list)
+    for content_list in lists:
+        dic = {}
+        for i in range(len(header_list)):
+            key = header_list[i]
+            value = content_list[i]
+            dic[key] = value
+        list_of_dicts.append(dic)
+else:
+    print([])
 
 
+lists = dates
+if lists:
+    header_list = lists[0]
+    lists.remove(header_list)
+    for content_list in lists:
+        dic = {}
+        for i in range(len(header_list)):
+            key = header_list[i]
+            value = content_list[i]
+            dic[key] = value
+        list_of_dicts.append(dic)
+    print(list_of_dicts)
+else:
+    print([])
 
-
-
-
-
-
-
+'''
 '''
 dates = []
 towns = []
@@ -76,7 +125,10 @@ with open('test.txt', 'w', newline='') as csv_file:
         csv_writer.writerow(row)
 
 print(result)
+
 '''
+
+
 
 def read_file_contents(filename: str) -> str:
     """Read file contents into string."""
@@ -141,6 +193,7 @@ def write_csv_file(filename: str, data: list) -> None:
         csv_writer = csv.writer(csv_file)
         for row in data:
             csv_writer.writerow(row)
+
 
 def merge_dates_and_towns_into_csv(dates_file: str, towns_file: str, csv_output: str) -> None:
     """
@@ -318,7 +371,8 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
         for i in header:
             if i in dict.keys():  # check if element i is in dict
                 content.append(dict[i])
-            if i not in dict.keys():
+            else:
                 content.append('')
         list_of_lists.append(content)
     return write_csv_file(filename, data)
+
