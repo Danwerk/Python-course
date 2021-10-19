@@ -1,5 +1,5 @@
 import csv
-''''''
+'''
 #teine osa
 list_of_lists = []
 a = [{'age': '11', 'name': 'john', 'hobby': 'games'},
@@ -10,8 +10,8 @@ a = [{'age': '11', 'name': 'john', 'hobby': 'games'},
 #    {"name": "John"},
 #    {"name": "Mary", "age": "19", "town": "tallinn"}
 
+
 # header
-'''
 keys = []
 for dic in a:
     for key in dic:
@@ -38,7 +38,6 @@ with open('test.txt', 'w', newline='') as csv_file:
         csv_writer.writerow(row)
 
 '''
-
 '''
 #esimene osa
 towns = []
@@ -84,9 +83,11 @@ if lists:
     print(list_of_dicts)
 else:
     print([])
+'''
 
-'''
-'''
+
+
+
 dates = []
 towns = []
 result = [["name", "town", "date"]]
@@ -103,9 +104,9 @@ for row in dates:
     date = row[1]
     result.append([name, '-', date])
 
-print(result)
+#print(result)
 #print(dates)
-print(towns)
+#print(towns)
 
 
 for row2 in towns:
@@ -114,8 +115,9 @@ for row2 in towns:
     for elem in result[1:]:
         if name2 == elem[0]:
             elem[1] = town
-            continue
-    result.append([name2, town, '-'])
+            break
+    else:
+        result.append([name2, town, '-'])
 
 
 
@@ -126,7 +128,7 @@ with open('test.txt', 'w', newline='') as csv_file:
 
 print(result)
 
-'''
+
 
 
 
@@ -254,12 +256,17 @@ def merge_dates_and_towns_into_csv(dates_file: str, towns_file: str, csv_output:
         name = row[0]
         date = row[1]
         result.append([name, '-', date])
-    for row in towns:
-        name = row[0]
-        town = row[1]
-        for rows in result:
-            if name == rows[0]:
-                rows[1] = town
+
+    for row2 in towns:
+        name2 = row2[0]
+        town = row2[1]
+        for elem in result[1:]:
+            if name2 == elem[0]:
+                elem[1] = town
+                break
+        else:
+            result.append([name2, town, '-'])
+
     with open('test.txt', 'w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file)
         for row in result:
