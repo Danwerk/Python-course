@@ -86,7 +86,6 @@ else:
 '''
 
 
-'''
 
 dates = []
 towns = []
@@ -104,14 +103,13 @@ for row in dates:
     date = row[1]
     result.append([name, '-', date])
 
-#print(result)
+print(result)
 #print(dates)
 #print(towns)
 
 
-for row2 in towns:
-    name2 = row2[0]
-    town = row2[1]
+for town_person in towns:
+    name2, town = town_person
     for elem in result[1:]:
         if name2 == elem[0]:
             elem[1] = town
@@ -127,7 +125,7 @@ with open('test.txt', 'w', newline='') as csv_file:
         csv_writer.writerow(row)
 
 print(result)
-'''
+
 
 
 
@@ -253,13 +251,12 @@ def merge_dates_and_towns_into_csv(dates_file: str, towns_file: str, csv_output:
         for row in csv_reader:
             towns.append(row)
 
-    for row in dates:
-        name = row[0]
-        date = row[1]
+    for date_person in dates:
+        name, date = date_person
         result.append([name, '-', date])
-    for row2 in towns:
-        name2 = row2[0]
-        town = row2[1]
+
+    for town_person in  towns:
+        name2, town = town_person
         for elem in result[1:]:
             if name2 == elem[0]:
                 elem[1] = town
@@ -267,7 +264,7 @@ def merge_dates_and_towns_into_csv(dates_file: str, towns_file: str, csv_output:
         else:
             result.append([name2, town, '-'])
 
-    with open('test.txt', 'w', newline='') as csv_file:
+    with open(csv_output, 'w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file)
         for row in result:
             csv_writer.writerow(row)
