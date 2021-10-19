@@ -282,8 +282,8 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
         for i in header:
             if i in dict.keys():  # check if element i is in dict
                 content.append(dict[i])
-            else:
-                content.append(' ')
+            #else:
+               # content.append('')
         list_of_lists.append(content)
     return write_csv_file(filename, data)
 
