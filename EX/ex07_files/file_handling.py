@@ -33,27 +33,27 @@ for dict in list_of_dicts:
         elif type(dict[header]) == int:
             continue
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 '''
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 '''
-
 #teine osa
 list_of_lists = []
 #a = [{'age': '11', 'name': 'john', 'hobby': 'games'},
@@ -64,7 +64,8 @@ list_of_lists = []
  #   {"name": "John"},
  #   {"name": "Mary", "age": "19", "town": "tallinn"}]
 
-a = [{"name": "john", "age": "12"}, {"town": "London"}]
+#a = [{"name": "john", "age": "12"}, {"town": "London"}]
+a = [{"name": "john", "age": "12"}, {"town": "London"}, {"age": "16", "sex": "F"}, {"name": "mary", "sex": "F"}]
 # header
 keys = []
 for dic in a:
@@ -338,7 +339,7 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
                 content.append('')
         list_of_lists.append(content)
 
-    return write_csv_file(filename, data)
+    return write_csv_file(filename, list_of_lists)
 
 
 def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
