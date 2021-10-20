@@ -87,8 +87,12 @@ for dict in a:
         if i not in dict.keys():
             content.append('')
     list_of_lists.append(content)
-if list_of_lists == [[]]:
-    pass
+if len(a) == 0:
+    list_of_lists = ''
+    with open('test.txt', 'w', newline='') as csv_file:
+        csv_writer = csv.writer(csv_file)
+        for row in list_of_lists:
+            csv_writer.writerow(row)
 else:
     with open('test.txt', 'w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file)
@@ -96,6 +100,7 @@ else:
             csv_writer.writerow(row)
 
 '''
+
 
 def read_file_contents(filename: str) -> str:
     """Read file contents into string."""
@@ -341,8 +346,9 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
             else:
                 content.append('')
         list_of_lists.append(content)
-    if list_of_lists == [[]]:
-        pass
+    if len(data) == 0:
+        list_of_lists = ''
+        return write_csv_file(filename, list_of_lists)
     else:
         return write_csv_file(filename, list_of_lists)
 
