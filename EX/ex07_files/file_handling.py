@@ -2,17 +2,69 @@
 
 import csv
 '''
+csv_list = []
+with open('csv_town.txt') as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter=',')
+    for row in csv_reader:
+        csv_list.append(row)
+
+list_of_dicts = []
+lists = csv_list
+if lists:
+    header_list = lists[0]
+    lists.remove(header_list)
+    for content_list in lists:
+        dic = {}
+        for i in range(len(header_list)):
+            key = header_list[i]
+            value = content_list[i]
+            dic[key] = value
+        list_of_dicts.append(dic)
+    #print(list_of_dicts)
+else:
+    print([])
+types_dict = {}
+for dict in list_of_dicts:
+    #print(dict)
+    for header in dict:
+        #print(dict[header])
+        if type(dict[header]) == str:
+            continue
+        elif type(dict[header]) == int:
+            continue
+
+'''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #teine osa
 list_of_lists = []
 #a = [{'age': '11', 'name': 'john', 'hobby': 'games'},
 #    {'age': '19', 'name': 'lada'},
 #    {'age': "15", "name": 'mary'}]
 
-a = [
-    {"name": "John"},
-    {"name": "Mary", "age": "19", "town": "tallinn"}]
+#a = [
+ #   {"name": "John"},
+ #   {"name": "Mary", "age": "19", "town": "tallinn"}]
 
-
+a = [{"name": "john", "age": "12"}, {"town": "London"}]
 # header
 keys = []
 for dic in a:
@@ -30,7 +82,7 @@ for dict in a:
         if i in dict.keys():
             content.append(dict[i])
         if i not in dict.keys():
-            content.append(' ')
+            content.append('')
     list_of_lists.append(content)
 
 print(list_of_lists)
@@ -38,7 +90,7 @@ with open('test.txt', 'w', newline='') as csv_file:
     csv_writer = csv.writer(csv_file)
     for row in list_of_lists:
         csv_writer.writerow(row)
-'''
+
 
 
 def read_file_contents(filename: str) -> str:
@@ -286,8 +338,81 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
                 content.append('')
         list_of_lists.append(content)
 
-    with open(filename, 'w', newline='') as csv_file:
-        csv_writer = csv.writer(csv_file)
-        for row in data:
-            csv_writer.writerow(row)
+    return write_csv_file(filename, data)
 
+
+def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
+    """
+    Read data from file and cast values into different datatypes.
+    If a field contains only numbers, turn this into int.
+    If a field contains only dates (in format dd.mm.yyyy), turn this into date.
+    Otherwise the datatype is string (default by csv reader).
+
+    Example:
+    name,age
+    john,11
+    mary,14
+
+    Becomes ('age' is int):
+    [
+      {'name': 'john', 'age': 11},
+      {'name': 'mary', 'age': 14}
+    ]
+
+    But if all the fields cannot be cast to int, the field is left to string.
+    Example:
+    name,age
+    john,11
+    mary,14
+    ago,unknown
+
+    Becomes ('age' cannot be cast to int because of "ago"):
+    [
+      {'name': 'john', 'age': '11'},
+      {'name': 'mary', 'age': '14'},
+      {'name': 'ago', 'age': 'unknown'}
+    ]
+
+    Example:
+    name,date
+    john,01.01.2020
+    mary,07.09.2021
+
+    Becomes:
+    [
+      {'name': 'john', 'date': datetime.date(2020, 1, 1)},
+      {'name': 'mary', 'date': datetime.date(2021, 9, 7)},
+    ]
+
+    Example:
+    name,date
+    john,01.01.2020
+    mary,late 2021
+
+    Becomes:
+    [
+      {'name': 'john', 'date': "01.01.2020"},
+      {'name': 'mary', 'date': "late 2021"},
+    ]
+
+    Value "-" indicates missing value and should be None in the result
+    Example:
+    name,date
+    john,-
+    mary,07.09.2021
+
+    Becomes:
+    [
+      {'name': 'john', 'date': None},
+      {'name': 'mary', 'date': datetime.date(2021, 9, 7)},
+    ]
+
+    None value also doesn't affect the data type
+    (the column will have the type based on the existing values).
+
+    The order of the elements in the list should be the same
+    as the lines in the file.
+
+    For date, strptime can be used:
+    https://docs.python.org/3/library/datetime.html#examples-of-usage-date
+    """
