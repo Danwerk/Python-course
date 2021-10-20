@@ -53,7 +53,7 @@ for dict in list_of_dicts:
 
 
 '''
-'''
+
 #teine osa
 list_of_lists = []
 #a = [{'age': '11', 'name': 'john', 'hobby': 'games'},
@@ -65,7 +65,9 @@ list_of_lists = []
  #   {"name": "Mary", "age": "19", "town": "tallinn"}]
 
 #a = [{"name": "john", "age": "12"}, {"town": "London"}]
+'''
 a = [{"name": "john", "age": "12"}, {"town": "London"}, {"age": "16", "sex": "F"}, {"name": "mary", "sex": "F"}]
+a = []
 # header
 keys = []
 for dic in a:
@@ -85,12 +87,13 @@ for dict in a:
         if i not in dict.keys():
             content.append('')
     list_of_lists.append(content)
-
-print(list_of_lists)
-with open('test.txt', 'w', newline='') as csv_file:
-    csv_writer = csv.writer(csv_file)
-    for row in list_of_lists:
-        csv_writer.writerow(row)
+if list_of_lists == [[]]:
+    pass
+else:
+    with open('test.txt', 'w', newline='') as csv_file:
+        csv_writer = csv.writer(csv_file)
+        for row in list_of_lists:
+            csv_writer.writerow(row)
 
 '''
 
@@ -338,8 +341,10 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
             else:
                 content.append('')
         list_of_lists.append(content)
-
-    return write_csv_file(filename, list_of_lists)
+    if list_of_lists == [[]]:
+        pass
+    else:
+        return write_csv_file(filename, list_of_lists)
 
 
 def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
