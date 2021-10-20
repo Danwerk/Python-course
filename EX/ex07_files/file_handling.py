@@ -52,7 +52,7 @@ for dict in list_of_dicts:
 
 
 
-
+'''
 
 #teine osa
 list_of_lists = []
@@ -91,7 +91,7 @@ with open('test.txt', 'w', newline='') as csv_file:
     for row in list_of_lists:
         csv_writer.writerow(row)
 
-
+'''
 
 def read_file_contents(filename: str) -> str:
     """Read file contents into string."""
