@@ -485,10 +485,10 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
 
     csv_list = read_csv_file(filename)
     types_dict = {}
-    header = csv_list[0]
     if len(csv_list) == 0:
         return []
     else:
+        header = csv_list[0]
         for row in csv_list[1:]:
             for i, value in enumerate(row):
                 if is_date(value):
