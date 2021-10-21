@@ -15,6 +15,7 @@ def is_date(value):
         return True
     except ValueError:
         return False
+
 '''
 csv_list = []
 with open('csv_town.txt') as csv_file:
@@ -96,7 +97,7 @@ for row in csv_list[1:]:
             final_dict[header[i]] = int(value)
             continue
         if types_dict[header[i]] == 'date':
-            final_dict[header[i]] = datetime.strptime(value, "%d.%m.%Y")
+            final_dict[header[i]] = datetime.strptime(value, '%d.%m.%Y').date()
     final_list.append(final_dict)
 
 print(final_list)
@@ -549,6 +550,6 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
                 final_dict[header[i]] = int(value)
                 continue
             if types_dict[header[i]] == 'date':
-                final_dict[header[i]] = datetime.strptime(value, "%d.%m.%Y")
+                final_dict[header[i]] = datetime.strptime(value, "%d.%m.%Y").date()
         final_list.append(final_dict)
     return final_list
