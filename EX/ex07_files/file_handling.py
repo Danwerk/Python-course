@@ -16,7 +16,7 @@ def is_date(value):
     except ValueError:
         return False
 
-'''
+
 csv_list = []
 with open('csv_town.txt') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
@@ -31,6 +31,12 @@ else:
     # print(header)
     for row in csv_list[1:]:
         for i, value in enumerate(row):
+            if value == '-':
+                if header[i] not in types_dict:
+                    types_dict[header[i]] = ['-']
+                else:
+                    types_dict[header[i]].append('-')
+                continue
             if is_date(value):
                 if header[i] not in types_dict:
                     types_dict[header[i]] = ['date']
@@ -53,12 +59,6 @@ else:
                     types_dict[header[i]] = ['int']
                 else:
                     types_dict[header[i]].append('int')
-                continue
-            if value == '-':
-                if header[i] not in types_dict:
-                    types_dict[header[i]] = ['-']
-                else:
-                    types_dict[header[i]].append('-')
                 continue
             else:
                 if header[i] not in types_dict:
@@ -105,7 +105,7 @@ else:
     print(final_list)
 
 
-'''
+
 
 
 
