@@ -74,10 +74,18 @@ else:
         if 'str' in val:
             types_dict[key] = 'str'
             continue
+        if 'int' in val and 'date' in val:
+            types_dict[key] = 'str'
+            continue
         if 'int' in val and 'str' not in val and 'date' not in val:
             types_dict[key] = 'int'
+            continue
         if 'date' in val and 'str' not in val and 'int' not in val:
             types_dict[key] = 'date'
+            continue
+        if '-' in val and 'str' not in val and 'int' not in val and 'date' not in val:
+            types_dict[key] = '-'
+            continue
         if '-' in val:
             continue
     #print(types_dict)
@@ -104,9 +112,8 @@ else:
 
     print(final_list)
 
-
-
 '''
+
 
 
 
@@ -531,10 +538,18 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
             if 'str' in val:
                 types_dict[key] = 'str'
                 continue
+            if 'int' in val and 'date' in val:
+                types_dict[key] = 'str'
+                continue
             if 'int' in val and 'str' not in val and 'date' not in val:
                 types_dict[key] = 'int'
+                continue
             if 'date' in val and 'str' not in val and 'int' not in val:
                 types_dict[key] = 'date'
+                continue
+            if '-' in val and 'str' not in val and 'int' not in val and 'date' not in val:
+                types_dict[key] = '-'
+                continue
             if '-' in val:
                 continue
 
