@@ -15,7 +15,7 @@ def is_date(value):
         return True
     except ValueError:
         return False
-
+'''
 csv_list = []
 with open('csv_town.txt') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
@@ -100,7 +100,7 @@ for row in csv_list[1:]:
     final_list.append(final_dict)
 
 print(final_list)
-
+'''
 
 
 
@@ -153,21 +153,6 @@ if lists:
 '''
 
 
-
-
-'''
-else:
-    print([])
-types_dict = {}
-for dict in list_of_dicts:
-    #print(dict)
-    for header in dict:
-        #print(dict[header])
-        if type(dict[header]) == str:
-            continue
-        elif type(dict[header]) == int:
-            continue
-'''
 
 
 def read_file_contents(filename: str) -> str:
