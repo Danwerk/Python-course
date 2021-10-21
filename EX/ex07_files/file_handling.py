@@ -16,7 +16,7 @@ def is_date(value):
     except ValueError:
         return False
 
-
+'''
 csv_list = []
 with open('csv_town.txt') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
@@ -106,7 +106,7 @@ else:
 
 
 
-
+'''
 
 
 
