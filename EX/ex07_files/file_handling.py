@@ -5,10 +5,12 @@ from datetime import datetime
 
 
 def is_int(value):
+    """Check for digit."""
     return value.isdigit()
 
 
 def is_date(value):
+    """Check is correct date."""
     format = "%d.%m.%Y"
     try:
         datetime.strptime(value, format)
@@ -240,7 +242,8 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
 
     :param filename: File to write to.
     :param data: List of dictionaries to write to the file.
-    :return: None"""
+    :return: None
+    """
     list_of_lists = []
     header = []  # header contains e.g name, hobby and etc
     for dic in data:  # get dictionary from list
