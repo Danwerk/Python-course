@@ -487,7 +487,7 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
     types_dict = {}
     header = csv_list[0]
     if len(csv_list) == 0:
-        return list({})
+        return []
     else:
         for row in csv_list[1:]:
             for i, value in enumerate(row):
