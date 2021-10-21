@@ -22,85 +22,87 @@ with open('csv_town.txt') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     for row in csv_reader:
         csv_list.append(row)
+if len(csv_list) == 0:
+    print(list({}))
+else:
+
+    types_dict = {}
+    header = csv_list[0]
+    # print(header)
+    for row in csv_list[1:]:
+        for i, value in enumerate(row):
+            if is_date(value):
+                if header[i] not in types_dict:
+                    types_dict[header[i]] = ['date']
+                    continue
+                else:
+                    types_dict[header[i]].append('date')
+                    continue
+
+            if not is_date(value):
+                if header[i] not in types_dict:
+                    types_dict[header[i]] = ['str']
+                    continue
+                else:
+                    types_dict[header[i]].append('str')
+                    continue
 
 
-types_dict = {}
-header = csv_list[0]
-# print(header)
-for row in csv_list[1:]:
-    for i, value in enumerate(row):
-        if is_date(value):
-            if header[i] not in types_dict:
-                types_dict[header[i]] = ['date']
+            if is_int(value):
+                if header[i] not in types_dict:
+                    types_dict[header[i]] = ['int']
+                else:
+                    types_dict[header[i]].append('int')
+                continue
+            if value == '-':
+                if header[i] not in types_dict:
+                    types_dict[header[i]] = ['-']
+                else:
+                    types_dict[header[i]].append('-')
                 continue
             else:
-                types_dict[header[i]].append('date')
+                if header[i] not in types_dict:
+                    types_dict[header[i]] = ['str']
+                else:
+                    types_dict[header[i]].append('str')
+    #print(types_dict)
+
+
+    # get final right type and write into dictionary
+    for key in types_dict:
+        val = types_dict[key]
+        if 'str' in val:
+            types_dict[key] = 'str'
+            continue
+        if 'int' in val and 'str' not in val and 'date' not in val:
+            types_dict[key] = 'int'
+        if 'date' in val and 'str' not in val and 'int' not in val:
+            types_dict[key] = 'date'
+        if '-' in val:
+            continue
+    #print(types_dict)
+
+
+
+
+    final_list = []
+    for row in csv_list[1:]:
+        final_dict = {}
+        for i, value in enumerate(row):
+            if value == '-':
+                final_dict[header[i]] = None
                 continue
-
-        if not is_date(value):
-            if header[i] not in types_dict:
-                types_dict[header[i]] = ['str']
+            if types_dict[header[i]] == 'str':
+                final_dict[header[i]] = str(value)
                 continue
-            else:
-                types_dict[header[i]].append('str')
+            if types_dict[header[i]] == 'int':
+                final_dict[header[i]] = int(value)
                 continue
+            if types_dict[header[i]] == 'date':
+                final_dict[header[i]] = datetime.strptime(value, '%d.%m.%Y').date()
+        final_list.append(final_dict)
 
-
-        if is_int(value):
-            if header[i] not in types_dict:
-                types_dict[header[i]] = ['int']
-            else:
-                types_dict[header[i]].append('int')
-            continue
-        if value == '-':
-            if header[i] not in types_dict:
-                types_dict[header[i]] = ['-']
-            else:
-                types_dict[header[i]].append('-')
-            continue
-        else:
-            if header[i] not in types_dict:
-                types_dict[header[i]] = ['str']
-            else:
-                types_dict[header[i]].append('str')
-#print(types_dict)
-
-
-# get final right type and write into dictionary
-for key in types_dict:
-    val = types_dict[key]
-    if 'str' in val:
-        types_dict[key] = 'str'
-        continue
-    if 'int' in val and 'str' not in val and 'date' not in val:
-        types_dict[key] = 'int'
-    if 'date' in val and 'str' not in val and 'int' not in val:
-        types_dict[key] = 'date'
-    if '-' in val:
-        continue
-#print(types_dict)
-
-
-
-
-final_list = []
-for row in csv_list[1:]:
-    final_dict = {}
-    for i, value in enumerate(row):
-        if value == '-':
-            final_dict[header[i]] = None
-            continue
-        if types_dict[header[i]] == 'str':
-            final_dict[header[i]] = str(value)
-            continue
-        if types_dict[header[i]] == 'int':
-            final_dict[header[i]] = int(value)
-            continue
-        if types_dict[header[i]] == 'date':
-            final_dict[header[i]] = datetime.strptime(value, '%d.%m.%Y').date()
-    final_list.append(final_dict)
-
-print(final_list)
+    print(final_list)
 '''
 
 
@@ -484,72 +486,74 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
     csv_list = read_csv_file(filename)
     types_dict = {}
     header = csv_list[0]
+    if len(csv_list) == 0:
+        return list({})
+    else:
+        for row in csv_list[1:]:
+            for i, value in enumerate(row):
+                if is_date(value):
+                    if header[i] not in types_dict:
+                        types_dict[header[i]] = ['date']
+                        continue
+                    else:
+                        types_dict[header[i]].append('date')
+                        continue
 
-    for row in csv_list[1:]:
-        for i, value in enumerate(row):
-            if is_date(value):
-                if header[i] not in types_dict:
-                    types_dict[header[i]] = ['date']
+                if not is_date(value):
+                    if header[i] not in types_dict:
+                        types_dict[header[i]] = ['str']
+                        continue
+                    else:
+                        types_dict[header[i]].append('str')
+                        continue
+
+                if is_int(value):
+                    if header[i] not in types_dict:
+                        types_dict[header[i]] = ['int']
+                    else:
+                        types_dict[header[i]].append('int')
                     continue
-                else:
-                    types_dict[header[i]].append('date')
+
+                if value == '-':
+                    if header[i] not in types_dict:
+                        types_dict[header[i]] = ['-']
+                    else:
+                        types_dict[header[i]].append('-')
                     continue
 
-            if not is_date(value):
-                if header[i] not in types_dict:
-                    types_dict[header[i]] = ['str']
+                else:
+                    if header[i] not in types_dict:
+                        types_dict[header[i]] = ['str']
+                    else:
+                        types_dict[header[i]].append('str')
+
+    # get final right type and write into dictionary
+        for key in types_dict:
+            val = types_dict[key]
+            if 'str' in val:
+                types_dict[key] = 'str'
+                continue
+            if 'int' in val and 'str' not in val and 'date' not in val:
+                types_dict[key] = 'int'
+            if 'date' in val and 'str' not in val and 'int' not in val:
+                types_dict[key] = 'date'
+            if '-' in val:
+                continue
+
+        final_list = []
+        for row in csv_list[1:]:
+            final_dict = {}
+            for i, value in enumerate(row):
+                if value == '-':
+                    final_dict[header[i]] = None
                     continue
-                else:
-                    types_dict[header[i]].append('str')
+                if types_dict[header[i]] == 'str':
+                    final_dict[header[i]] = str(value)
                     continue
-
-            if is_int(value):
-                if header[i] not in types_dict:
-                    types_dict[header[i]] = ['int']
-                else:
-                    types_dict[header[i]].append('int')
-                continue
-
-            if value == '-':
-                if header[i] not in types_dict:
-                    types_dict[header[i]] = ['-']
-                else:
-                    types_dict[header[i]].append('-')
-                continue
-
-            else:
-                if header[i] not in types_dict:
-                    types_dict[header[i]] = ['str']
-                else:
-                    types_dict[header[i]].append('str')
-
-# get final right type and write into dictionary
-    for key in types_dict:
-        val = types_dict[key]
-        if 'str' in val:
-            types_dict[key] = 'str'
-            continue
-        if 'int' in val and 'str' not in val and 'date' not in val:
-            types_dict[key] = 'int'
-        if 'date' in val and 'str' not in val and 'int' not in val:
-            types_dict[key] = 'date'
-        if '-' in val:
-            continue
-
-    final_list = []
-    for row in csv_list[1:]:
-        final_dict = {}
-        for i, value in enumerate(row):
-            if value == '-':
-                final_dict[header[i]] = None
-                continue
-            if types_dict[header[i]] == 'str':
-                final_dict[header[i]] = str(value)
-                continue
-            if types_dict[header[i]] == 'int':
-                final_dict[header[i]] = int(value)
-                continue
-            if types_dict[header[i]] == 'date':
-                final_dict[header[i]] = datetime.strptime(value, "%d.%m.%Y").date()
-        final_list.append(final_dict)
-    return final_list
+                if types_dict[header[i]] == 'int':
+                    final_dict[header[i]] = int(value)
+                    continue
+                if types_dict[header[i]] == 'date':
+                    final_dict[header[i]] = datetime.strptime(value, "%d.%m.%Y").date()
+            final_list.append(final_dict)
+        return final_list
