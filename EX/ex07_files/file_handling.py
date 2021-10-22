@@ -17,7 +17,7 @@ def is_date(value):
         return True
     except ValueError:
         return False
-
+'''
 
 def get_types(csv_list):
     types_dict = {}
@@ -60,7 +60,7 @@ def get_types(csv_list):
                     types_dict[header[i]].append('str')
     return types_dict
 
-'''
+
 csv_list = []
 
 with open('csv_town.txt') as csv_file:
@@ -121,15 +121,15 @@ else:
 
 
 
-
-
-
-
-
-
-
-
 '''
+
+
+
+
+
+
+
+
 
 def read_file_contents(filename: str) -> str:
     """Read file contents into string."""
@@ -463,26 +463,41 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
         return []
     else:
         header = csv_list[0]
-        b = get_types(csv_list)
-        for key in b:
-            val = b[key]
-            if 'str' in val:
-                b[key] = 'str'
-                continue
-            if 'int' in val and 'date' in val:
-                b[key] = 'str'
-                continue
-            if 'int' in val and 'str' not in val and 'date' not in val:
-                b[key] = 'int'
-                continue
-            if 'date' in val and 'str' not in val and 'int' not in val:
-                b[key] = 'date'
-                continue
-            if '-' in val and 'str' not in val and 'int' not in val and 'date' not in val:
-                b[key] = '-'
-                continue
-            if '-' in val:
-                continue
+        for row in csv_list[1:]:
+            for i, value in enumerate(row):
+                if value == '-':
+                    if header[i] not in types_dict:
+                        types_dict[header[i]] = ['-']
+                    else:
+                        types_dict[header[i]].append('-')
+                    continue
+                if is_date(value):
+                    if header[i] not in types_dict:
+                        types_dict[header[i]] = ['date']
+                        continue
+                    else:
+                        types_dict[header[i]].append('date')
+                        continue
+
+                if not is_date(value) and not is_int(value):
+                    if header[i] not in types_dict:
+                        types_dict[header[i]] = ['str']
+                        continue
+                    else:
+                        types_dict[header[i]].append('str')
+                        continue
+
+                if is_int(value):
+                    if header[i] not in types_dict:
+                        types_dict[header[i]] = ['int']
+                    else:
+                        types_dict[header[i]].append('int')
+                    continue
+                else:
+                    if header[i] not in types_dict:
+                        types_dict[header[i]] = ['str']
+                    else:
+                        types_dict[header[i]].append('str')
 
     # get final right type and write into dictionary
         for key in types_dict:
