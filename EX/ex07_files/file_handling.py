@@ -557,7 +557,7 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
 
 
 def get_files(directory):
-    files = [f for f in glob.glob("*.txt")]
+    files = [f for f in glob.glob("*.csv")]
     return files
 
 
