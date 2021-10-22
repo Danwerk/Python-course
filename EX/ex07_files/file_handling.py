@@ -474,7 +474,6 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
         return []
     else:
         header = csv_list[0]
-        b = get_types(csv_list)
         for row in csv_list[1:]:
             for i, value in enumerate(row):
                 if value == '-':
