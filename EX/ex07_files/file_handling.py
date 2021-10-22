@@ -18,7 +18,9 @@ def is_date(value):
     except ValueError:
         return False
 
+
 def final(csv_list, types_dict, header):
+    """Final list of dicts with correct types."""
     final_list = []
     for row in csv_list[1:]:
         final_dict = {}
@@ -36,9 +38,6 @@ def final(csv_list, types_dict, header):
                 final_dict[header[i]] = datetime.strptime(value, "%d.%m.%Y").date()
         final_list.append(final_dict)
     return final_list
-
-
-
 
 
 def get_types(csv_list):
@@ -140,17 +139,7 @@ else:
         final_list.append(final_dict)
 
     print(final_list)
-
-
-
 '''
-
-
-
-
-
-
-
 
 
 def read_file_contents(filename: str) -> str:
@@ -295,6 +284,7 @@ def merge_dates_and_towns_into_csv(dates_file: str, towns_file: str, csv_output:
 def read_csv_file_into_list_of_dicts(filename: str) -> list:
     """
     Read csv file into list of dictionaries.
+
     Header line will be used for dict keys.
 
     Each line after header line will result in a dict inside the result list.
@@ -406,6 +396,7 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list) -> None:
 def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
     """
     Read data from file and cast values into different datatypes.
+
     If a field contains only numbers, turn this into int.
     If a field contains only dates (in format dd.mm.yyyy), turn this into date.
     Otherwise the datatype is string (default by csv reader).
@@ -548,10 +539,9 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
 def read_people_data(directory: str) -> dict:
     """
     Read people data from files.
+
     Files are inside directory. Read all *.csv files.
-
     Each file has an int field "id" which should be used to merge information.
-
     The result should be one dict where the key is id (int) and value is
     a dict of all the different values across the the files.
     Missing keys should be in every dictionary.
