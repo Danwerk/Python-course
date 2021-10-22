@@ -556,6 +556,11 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
         return final_list
 
 
+def get_files(directory):
+    files = [f for f in glob.glob("*.txt")]
+    return files
+
+
 def read_people_data(directory: str) -> dict:
     """
     Read people data from files.
@@ -597,16 +602,17 @@ def read_people_data(directory: str) -> dict:
     :return: Dictionary with id as keys and data dictionaries as values.
     """
     dict = {}
-    filenames = os.listdir(directory)
-    for files in filenames:
-        os.path.join(directory, files)
-        for f in files:
-            d = read_csv_file_into_list_of_dicts_using_datatypes(directory + '/' + files)
-            for line in d:
-                if line['id'] not in dict:
-                    dict[line['id']] = line
-                else:
-                    dict[line['id']].update(line)
+
+    files_list = get_files(directory)
+
+    for f in files_list:
+        d = read_csv_file_into_list_of_dicts_using_datatypes(f)
+        for line in d:
+            if line['id'] not in dict:
+                dict[line['id']] = line
+            else:
+                dict[line['id']].update(line)
+    return dict
 
 
 def generate_people_report(person_data_directory: str, report_filename: str) -> None:
