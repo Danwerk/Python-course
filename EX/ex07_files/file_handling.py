@@ -601,7 +601,7 @@ def read_people_data(directory: str) -> dict:
     for files in filenames:
         os.path.join(directory, files)
         for f in files:
-            d = read_csv_file_into_list_of_dicts_using_datatypes(f)
+            d = read_csv_file_into_list_of_dicts_using_datatypes(directory + '/' + files)
             for line in d:
                 if line['id'] not in dict:
                     dict[line['id']] = line
