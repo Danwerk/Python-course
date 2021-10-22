@@ -4,6 +4,13 @@ import csv
 from datetime import datetime
 
 
+def add_str(header, types_dict, i):
+    if header[i] not in types_dict:
+        types_dict[header[i]] = ['str']
+    else:
+        types_dict[header[i]].append('str')
+
+
 def add_int(header, types_dict, i):
     if header[i] not in types_dict:
         types_dict[header[i]] = ['int']
@@ -511,10 +518,7 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
                     add_int(header, types_dict, i)
                     continue
                 else:
-                    if header[i] not in types_dict:
-                        types_dict[header[i]] = ['str']
-                    else:
-                        types_dict[header[i]].append('str')
+                    add_str(header, types_dict, i)
 
     # get final right type and write into dictionary
         for key in types_dict:
