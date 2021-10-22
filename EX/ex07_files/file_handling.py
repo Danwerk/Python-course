@@ -597,6 +597,7 @@ def read_people_data(directory: str) -> dict:
     :return: Dictionary with id as keys and data dictionaries as values.
     """
     dict = {}
+    directory = 'directory'
     files = [f for f in glob.glob("directory\*.csv")]
     for f in files:
         d = read_csv_file_into_list_of_dicts_using_datatypes(f)
