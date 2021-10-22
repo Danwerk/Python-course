@@ -41,6 +41,7 @@ def final(csv_list, types_dict, header):
 
 
 def get_types(csv_list):
+    """Get data types."""
     types_dict = {}
     header = csv_list[0]
     # print(header)
