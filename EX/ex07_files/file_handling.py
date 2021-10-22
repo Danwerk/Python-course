@@ -4,6 +4,13 @@ import csv
 from datetime import datetime
 
 
+def add_int(header, types_dict, i):
+    if header[i] not in types_dict:
+        types_dict[header[i]] = ['int']
+    else:
+        types_dict[header[i]].append('int')
+
+
 def is_int(value):
     """Check for digit."""
     return value.isdigit()
@@ -501,10 +508,7 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
                         continue
 
                 if is_int(value):
-                    if header[i] not in types_dict:
-                        types_dict[header[i]] = ['int']
-                    else:
-                        types_dict[header[i]].append('int')
+                    add_int(header, types_dict, i)
                     continue
                 else:
                     if header[i] not in types_dict:
