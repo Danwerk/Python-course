@@ -596,8 +596,9 @@ def read_people_data(directory: str) -> dict:
     :param directory: Directory where the csv files are.
     :return: Dictionary with id as keys and data dictionaries as values.
     """
+    path = (directory + "/" + "*.csv")
     dict = {}
-    files = [f for f in glob.glob("directory/*.csv")]
+    files = [f for f in glob.glob(path)]
     for f in files:
         d = read_csv_file_into_list_of_dicts_using_datatypes(f)
         for line in d:
@@ -649,8 +650,9 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
     """
     pass
 
-
+'''
 dict = {}
+
 files = [f for f in glob.glob("*.txt")]
 for f in files:
     d = read_csv_file_into_list_of_dicts_using_datatypes(f)
@@ -661,4 +663,4 @@ for f in files:
             dict[line['id']].update(line)
 
 print(dict)
-
+'''
