@@ -17,6 +17,28 @@ def is_date(value):
         return True
     except ValueError:
         return False
+
+def final(csv_list, types_dict, header):
+    final_list = []
+    for row in csv_list[1:]:
+        final_dict = {}
+        for i, value in enumerate(row):
+            if value == '-':
+                final_dict[header[i]] = None
+                continue
+            if types_dict[header[i]] == 'str':
+                final_dict[header[i]] = str(value)
+                continue
+            if types_dict[header[i]] == 'int':
+                final_dict[header[i]] = int(value)
+                continue
+            if types_dict[header[i]] == 'date':
+                final_dict[header[i]] = datetime.strptime(value, "%d.%m.%Y").date()
+        final_list.append(final_dict)
+    return final_list
+
+
+
 '''
 
 def get_types(csv_list):
@@ -520,24 +542,7 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
             if '-' in val:
                 continue
 
-        final_list = []
-        for row in csv_list[1:]:
-            final_dict = {}
-            for i, value in enumerate(row):
-                if value == '-':
-                    final_dict[header[i]] = None
-                    continue
-                if types_dict[header[i]] == 'str':
-                    final_dict[header[i]] = str(value)
-                    continue
-                if types_dict[header[i]] == 'int':
-                    final_dict[header[i]] = int(value)
-                    continue
-                if types_dict[header[i]] == 'date':
-                    final_dict[header[i]] = datetime.strptime(value, "%d.%m.%Y").date()
-            final_list.append(final_dict)
-        return final_list
-
+    return final(csv_list, types_dict, header)
 
 def read_people_data(directory: str) -> dict:
     """
