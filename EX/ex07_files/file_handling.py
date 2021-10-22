@@ -40,6 +40,7 @@ def final(csv_list, types_dict, header):
     return final_list
 
 
+'''
 def get_types(csv_list):
     """Get data types."""
     types_dict = {}
@@ -82,7 +83,7 @@ def get_types(csv_list):
                     types_dict[header[i]].append('str')
     return types_dict
 
-'''
+
 csv_list = []
 
 with open('csv_town.txt') as csv_file:
