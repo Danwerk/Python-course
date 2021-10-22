@@ -199,7 +199,6 @@ def write_csv_file(filename: str, data: list) -> None:
     :param data: List of lists to write to the file.
     :return: None
     """
-
     with open(filename, 'w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file)
         for row in data:
@@ -266,7 +265,7 @@ def merge_dates_and_towns_into_csv(dates_file: str, towns_file: str, csv_output:
         name, date = date_person
         result.append([name, '-', date])
 
-    for town_person in  towns:
+    for town_person in towns:
         name2, town = town_person
         for elem in result[1:]:
             if name2 == elem[0]:
@@ -469,7 +468,6 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
     For date, strptime can be used:
     https://docs.python.org/3/library/datetime.html#examples-of-usage-date
     """
-
     csv_list = read_csv_file(filename)
     types_dict = {}
     if len(csv_list) == 0:
