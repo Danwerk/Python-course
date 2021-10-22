@@ -596,6 +596,7 @@ def read_people_data(directory: str) -> dict:
     :param directory: Directory where the csv files are.
     :return: Dictionary with id as keys and data dictionaries as values.
     """
+
     dict = {}
     files = [f for f in glob.glob("directory/*.csv")]
     for f in files:
