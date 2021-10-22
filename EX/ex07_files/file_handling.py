@@ -1,5 +1,4 @@
 """Files."""
-import os
 import glob
 import csv
 from datetime import datetime
@@ -14,12 +13,12 @@ def is_date(value):
     """Check is correct date."""
     format = "%d.%m.%Y"
     try:
-        datetime.strptime(value, format)
+        datetime.strptime(value, format).date()
         return True
     except ValueError:
         return False
 
-'''
+
 def get_types(csv_list):
     types_dict = {}
     header = csv_list[0]
@@ -61,18 +60,7 @@ def get_types(csv_list):
                     types_dict[header[i]].append('str')
     return types_dict
 
-
-
-
-
-
-
-
-
-
-
-
-
+'''
 csv_list = []
 
 with open('csv_town.txt') as csv_file:
@@ -86,7 +74,6 @@ else:
     b = get_types(csv_list)
 
     #print(types_dict)
-
 
     # get final right type and write into dictionary
     for key in b:
@@ -135,18 +122,14 @@ else:
 
 
 
+
+
+
+
+
+
+
 '''
-
-
-
-
-
-
-
-
-
-
-
 
 def read_file_contents(filename: str) -> str:
     """Read file contents into string."""
@@ -480,41 +463,26 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
         return []
     else:
         header = csv_list[0]
-        for row in csv_list[1:]:
-            for i, value in enumerate(row):
-                if value == '-':
-                    if header[i] not in types_dict:
-                        types_dict[header[i]] = ['-']
-                    else:
-                        types_dict[header[i]].append('-')
-                    continue
-                if is_date(value):
-                    if header[i] not in types_dict:
-                        types_dict[header[i]] = ['date']
-                        continue
-                    else:
-                        types_dict[header[i]].append('date')
-                        continue
-
-                if not is_date(value) and not is_int(value):
-                    if header[i] not in types_dict:
-                        types_dict[header[i]] = ['str']
-                        continue
-                    else:
-                        types_dict[header[i]].append('str')
-                        continue
-
-                if is_int(value):
-                    if header[i] not in types_dict:
-                        types_dict[header[i]] = ['int']
-                    else:
-                        types_dict[header[i]].append('int')
-                    continue
-                else:
-                    if header[i] not in types_dict:
-                        types_dict[header[i]] = ['str']
-                    else:
-                        types_dict[header[i]].append('str')
+        b = get_types(csv_list)
+        for key in b:
+            val = b[key]
+            if 'str' in val:
+                b[key] = 'str'
+                continue
+            if 'int' in val and 'date' in val:
+                b[key] = 'str'
+                continue
+            if 'int' in val and 'str' not in val and 'date' not in val:
+                b[key] = 'int'
+                continue
+            if 'date' in val and 'str' not in val and 'int' not in val:
+                b[key] = 'date'
+                continue
+            if '-' in val and 'str' not in val and 'int' not in val and 'date' not in val:
+                b[key] = '-'
+                continue
+            if '-' in val:
+                continue
 
     # get final right type and write into dictionary
         for key in types_dict:
@@ -607,60 +575,3 @@ def read_people_data(directory: str) -> dict:
             else:
                 dict[line['id']].update(line)
     return dict
-
-
-def generate_people_report(person_data_directory: str, report_filename: str) -> None:
-    """
-    Generate report about people data.
-
-    Data should be read using read_people_data().
-
-    The input files contain fields "birth" and "death" which are dates. Those can be in different files. There are no duplicate headers in the files (except for the "id").
-
-    The report is a CSV file where all the fields are written to
-    (along with the headers).
-    In addition, there should be two fields:
-    - "status" this is either "dead" or "alive" depending on whether
-    there is a death date
-    - "age" - current age or the age when dying.
-    The age is calculated as full years.
-    Birth 01.01.1940, death 01.01.2020 - age: 80
-    Birth 02.01.1940, death 01.01.2020 - age: 79
-
-    If there is no birth date, then the age is -1.
-
-    When calculating age, dates can be compared.
-
-    The lines in the files should be ordered:
-    - first by the age ascending (younger before older);
-      if the age cannot be calculated, then those lines will come last
-    - if the age is the same, then those lines should be ordered
-      by birthdate descending (newer birth before older birth)
-    - if both the age and birth date are the same,
-      then by name ascending (a before b). If name is not available, use "" (people with missing name should be before people with  name)
-    - if the names are the same or name field is missing,
-      order by id ascending.
-
-    Dates in the report should in the format: dd.mm.yyyy
-    (2-digit day, 2-digit month, 4-digit year).
-
-    :param person_data_directory: Directory of input data.
-    :param report_filename: Output file.
-    :return: None
-    """
-    pass
-
-'''
-dict = {}
-
-files = [f for f in glob.glob("*.txt")]
-for f in files:
-    d = read_csv_file_into_list_of_dicts_using_datatypes(f)
-    for line in d:
-        if line['id'] not in dict:
-            dict[line['id']] = line
-        else:
-            dict[line['id']].update(line)
-
-print(dict)
-'''
