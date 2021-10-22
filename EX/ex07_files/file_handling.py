@@ -534,6 +534,7 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
 
     return final(csv_list, types_dict, header)
 
+
 def read_people_data(directory: str) -> dict:
     """
     Read people data from files.
