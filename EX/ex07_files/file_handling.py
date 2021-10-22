@@ -648,7 +648,7 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
     :return: None
     """
     pass
-
+'''
 
 dict = {}
 files = [f for f in glob.glob("*.csv")]
@@ -662,3 +662,4 @@ for f in files:
 
 print(dict)
 
+'''
