@@ -550,41 +550,7 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
     """
     csv_list = read_csv_file(filename)
     types_dict = {}
-    if len(csv_list) == 0:
-        return []
-    else:
-        header = csv_list[0]
-        for row in csv_list[1:]:
-            for i, value in enumerate(row):
-                if value == '-':
-                    if header[i] not in types_dict:
-                        types_dict[header[i]] = ['-']
-                    else:
-                        types_dict[header[i]].append('-')
-                    continue
-                if is_date(value):
-                    if header[i] not in types_dict:
-                        types_dict[header[i]] = ['date']
-                        continue
-                    else:
-                        types_dict[header[i]].append('date')
-                        continue
-
-                if not is_date(value) and not is_int(value):
-                    if header[i] not in types_dict:
-                        types_dict[header[i]] = ['str']
-                        continue
-                    else:
-                        types_dict[header[i]].append('str')
-                        continue
-
-                if is_int(value):
-                    add_int(header, types_dict, i)
-                    continue
-                else:
-                    add_str(header, types_dict, i)
-
-    # get finally right data types and write them into dictionary
+    header = csv_list[0]
 
 
     return final(csv_list, types_dict, header)
