@@ -4,6 +4,13 @@ import csv
 from datetime import datetime
 
 
+def no_data(header, types_dict, i):
+    if header[i] not in types_dict:
+        types_dict[header[i]] = ['-']
+    else:
+        types_dict[header[i]].append('-')
+
+
 def final_data_types(types_dict):
     for key in types_dict:
         val = types_dict[key]
@@ -518,10 +525,7 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
         for row in csv_list[1:]:
             for i, value in enumerate(row):
                 if value == '-':
-                    if header[i] not in types_dict:
-                        types_dict[header[i]] = ['-']
-                    else:
-                        types_dict[header[i]].append('-')
+                    no_data(header, types_dict, i)
                     continue
                 if is_date(value):
                     if header[i] not in types_dict:
