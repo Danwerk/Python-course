@@ -5,6 +5,7 @@ from datetime import datetime
 
 
 def no_data(header, types_dict, i):
+    """If data is '-', then return this function."""
     if header[i] not in types_dict:
         types_dict[header[i]] = ['-']
     else:
@@ -12,6 +13,7 @@ def no_data(header, types_dict, i):
 
 
 def final_data_types(types_dict):
+    """Get final data types into dict."""
     for key in types_dict:
         val = types_dict[key]
         if 'str' in val:
@@ -548,9 +550,6 @@ def read_csv_file_into_list_of_dicts_using_datatypes(filename: str) -> list:
                     continue
                 else:
                     add_str(header, types_dict, i)
-
-    # get finally right data types and write them into dictionary
-
 
     return final(csv_list, types_dict, header)
 
