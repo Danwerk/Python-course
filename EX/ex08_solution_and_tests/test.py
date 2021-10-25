@@ -273,8 +273,8 @@ def test_fruit_enough_bigs_not_enough_smalls_large_numbers():
 
 def test_fruit_match_large_numbers():
     """Test match large numbers."""
-    input_value = 3
-    res = solution.fruit_order(10000000, 10000001, 50000008)
+    input_value = 4995500
+    res = solution.fruit_order(10000000, 900, 5000000)
     assert input_value == res
 
 
