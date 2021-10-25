@@ -1,7 +1,6 @@
 """Test ex08 functions."""
 
 
-import pytest
 import solution
 
 
@@ -77,48 +76,56 @@ def test_student_day_edge_case_coffee_false():
 
 
 def test_lottery_all_fives():
+    """Test given all fives."""
     input_value = 10
     res = solution.lottery(5, 5, 5)
     assert res == input_value
 
 
 def test_lottery_all_same_positive():
+    """Test given all same positive numbers, not fives."""
     input_value = 5
     res = solution.lottery(3, 3, 3)
     assert res == input_value
 
 
 def test_lottery_all_same_negative():
+    """Test given all negative numbers."""
     input_value = 5
     res = solution.lottery(-3, -3, -3)
     assert input_value == res
 
 
 def test_lottery_all_same_zero():
+    """Test given numbers are same zeros."""
     input_value = 5
     res = solution.lottery(0, 0, 0)
     assert input_value == res
 
 
 def test_lottery_a_b_same_c_diff():
+    """Test a and b are same c is different."""
     input_value = 0
     res = solution.lottery(2, 2, 3)
     assert input_value == res
 
 
 def test_lottery_a_c_same_b_diff():
+    """Test a and c are same b is different."""
     input_value = 0
     res = solution.lottery(2, 3, 2)
     assert input_value == res
 
 
 def test_lottery_b_c_same_a_diff():
+    """Test b and c are same a is different."""
     input_value = 1
     res = solution.lottery(2, 3, 3)
     assert input_value == res
 
 
 def test_lottery_all_diff():
+    """Test all given numbers are different."""
     input_value = 1
     res = solution.lottery(1, 2, 3)
     assert input_value == res
