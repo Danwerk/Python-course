@@ -3,7 +3,7 @@ import solution
 
 
 def test_student_study_none():
-    assert solution.students_study(25, False) is None
+    assert solution.students_study(22, False) is not None
 
 
 
