@@ -84,46 +84,29 @@ def test_part1_int_correct_data_types():
         assert isinstance(element, int)
 
 
-'''
-def test_part1_float_correct_data_types():
-    """Test correct int data types."""
-    input_amount = 5
-    res = solution.generate_list(input_amount, "float")
-    expected_len = 5
-    assert len(res) == expected_len
-    for element in res:
-        assert isinstance(element, float)
-
-
-def test_part1_string_correct_data_types():
-    """Test correct int data types."""
-    input_amount = 5
-    res = solution.generate_list(input_amount, "string")
-    expected_len = 5
-    assert len(res) == expected_len
-    for element in res:
-        assert isinstance(element, str)
-
-'''
 def test_part2_get_max_int():
+    """Test combined list with data type of int."""
     input_amount = 5
     res = solution.generate_combined_list([(3, 'int'), (5, 'int'), (4, 'int')])
     assert len(res) == input_amount
 
 
 def test_part2_get_max_string():
+    """Test combined list with data type of string."""
     input_amount = 5
     res = solution.generate_combined_list([(3, 'string'), (5, 'string'), (4, 'string')])
     assert len(res) == input_amount
 
 
 def test_part2_bigger_numbers():
+    """Test combined list with bigger numbers."""
     input_amount = 10000
     res = solution.generate_combined_list([(3, 'int'), (10000, 'int'), (4, 'int')])
     assert len(res) == input_amount
 
 
-#def test_part2_empty_list():
-
-
-
+def test_part2_empty_list():
+    """Test combined list returns empty list."""
+    input_amount = 0
+    res = solution.generate_combined_list([(0, 'int'), (0, 'int'), (0, 'int')])
+    assert len(res) == input_amount
