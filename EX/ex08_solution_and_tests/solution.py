@@ -43,5 +43,5 @@ def fruit_order(small_baskets: int, big_baskets: int, ordered_amount: int) -> in
 
 
 if __name__ == '__main__':
-    #print(students_study(6, False))
-    print(lottery(2, 2, 1))
+    # print(students_study(6, False))
+    print(lottery(1, 3, 3))
