@@ -4,7 +4,8 @@ import solution
 
 def test_student_study_none():
     input_amount = None
-    res = solution.students_study(0, False)
+    res = solution.students_study(25, False)
+
     assert res == input_amount
 
 
