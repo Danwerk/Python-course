@@ -74,7 +74,7 @@ def test_part1_list_correct_len():
     assert len(res) == expected_len
 
 
-def test_part1_int_correct_data_types():
+def test_part1_int_correct_int_data_types():
     """Test correct int data types."""
     input_amount = 5
     res = solution.generate_list(input_amount, "int")
@@ -98,6 +98,13 @@ def test_part2_get_max_string():
     assert len(res) == input_amount
 
 
+def test_part2_get_max_float():
+    """Test combined list with data type of string."""
+    input_amount = 5
+    res = solution.generate_combined_list([(3, 'float'), (5, 'float'), (4, 'float')])
+    assert len(res) == input_amount
+
+
 def test_part2_bigger_numbers():
     """Test combined list with bigger numbers."""
     input_amount = 10000
@@ -110,3 +117,11 @@ def test_part2_empty_list():
     input_amount = 0
     res = solution.generate_combined_list([(0, 'int'), (0, 'int'), (0, 'int')])
     assert len(res) == input_amount
+
+'''
+def test_part2_correct_types_list():
+    """Test combined list returns empty list."""
+    input_amount = 0
+    res = solution.generate_combined_list([(0, 'int'), (0, 'int'), (0, 'int')])
+    assert len(res) == input_amount
+    '''
