@@ -19,7 +19,7 @@ def test_student_night_coffee_true():
 
 
 def test_student_night_coffee_false():
-    assert solution.students_study(3, False) is not True
+    assert solution.students_study(3, True) is not True
 
 
 def test_student_day_coffee_true():
