@@ -39,20 +39,25 @@ def test_student_evening_edge_case_coffee_true():
 
 def test_student_evening_edge_case_coffee_false():
     assert solution.students_study(24, False)
+    assert solution.students_study(18, False)
 
 
 def test_student_night_edge_case_coffee_true():
     assert solution.students_study(4, False) is not True
+    assert solution.students_study(1, False) is not True
 
 
 def test_student_night_edge_case_coffee_false():
     assert solution.students_study(4, True) is not True
+    assert solution.students_study(1, True) is not True
 
 
 def test_student_day_edge_case_coffee_true():
     assert solution.students_study(17, True)
+    assert solution.students_study(5, True)
 
 
 def test_student_day_edge_case_coffee_false():
     assert solution.students_study(17, False) is not True
+    assert solution.students_study(5, False) is not True
 
