@@ -168,8 +168,8 @@ def test_fruit_only_big_exact_match():
 
 def test_fruit_only_big_not_enough():
     """Test given big_basket not enough."""
-    input_value = 1
-    res = solution.fruit_order(1, 2, 11)
+    input_value = -1
+    res = solution.fruit_order(0, 2, 11)
     assert input_value == res
 
 
