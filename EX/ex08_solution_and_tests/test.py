@@ -160,7 +160,22 @@ def test_fruit_zero_amount_others_not_zero():
 
 
 def test_fruit_only_big_exact_match():
-    """Test given order_amount is zero and big_basket is zero."""
+    """Test given big_basket exact match."""
     input_value = 0
     res = solution.fruit_order(0, 2, 10)
     assert input_value == res
+
+
+def test_fruit_only_big_not_enough():
+    """Test given big_basket not enough."""
+    input_value = 1
+    res = solution.fruit_order(1, 2, 11)
+    assert input_value == res
+
+
+def test_fruit_only_big_more_than_required_match():
+    """Test given big_basket more than required match."""
+    input_value = 0
+    res = solution.fruit_order(0, 4, 10)
+    assert input_value == res
+
