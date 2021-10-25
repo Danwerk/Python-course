@@ -13,14 +13,14 @@ def test_student_evening_coffee_true():
 def test_student_evening_coffee_false():
     assert solution.students_study(20, False)
 
-
+'''
 def test_student_night_coffee_true():
     assert solution.students_study(3, False)
 
 
 def test_student_night_coffee_false():
     assert solution.students_study(3, False)
-
+'''
 
 def test_student_day_coffee_true():
     assert solution.students_study(6, True)
