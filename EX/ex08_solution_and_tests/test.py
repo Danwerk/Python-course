@@ -250,6 +250,32 @@ def test_fruit_use_some_smalls_some_bigs():
     assert input_value == res
 
 
+def test_fruit_enough_bigs_not_enough_smalls():
+    """Test not enough small_baskets and enough big_baskets."""
+    input_value = -1
+    res = solution.fruit_order(2, 8, 29)
+    assert input_value == res
+
+'''
+def test_fruit_not_enough_with_more_than_5_smalls():
+    """Test not enough small_baskets and enough big_baskets."""
+    input_value = -1
+    res = solution.fruit_order(2, 8, 39)
+    assert input_value == res
+'''
+
+def test_fruit_enough_bigs_not_enough_smalls_large_numbers():
+    """Test not enough small_baskets and enough big_baskets."""
+    input_value = -1
+    res = solution.fruit_order(2, 10003, 50008)
+    assert input_value == res
+
+
+def test_fruit_match_large_numbers():
+    """Test not enough small_baskets and enough big_baskets."""
+    input_value = 3
+    res = solution.fruit_order(3, 10000001, 50000008)
+    assert input_value == res
 
 
 
