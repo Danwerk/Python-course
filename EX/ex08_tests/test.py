@@ -1,4 +1,4 @@
-import pytest
+"""Test EX04."""
 import solution
 
 
@@ -173,6 +173,3 @@ def test_part3_unique_string():
     res = solution.generate_combined_list_unique([(5, 'string'), (2, 'string'), (3, 'string')])
     for i in range(len(res) - 1):
         assert res[i] != res[i + 1]
-
-
-
