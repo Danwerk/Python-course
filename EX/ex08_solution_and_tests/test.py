@@ -77,8 +77,14 @@ def test_student_day_edge_case_coffee_false():
 
 
 def test_lottery_all_fives():
-    assert solution.lottery(5, 5, 5)
+    input_value = 10
+    res = solution.lottery(5, 5, 5)
+    assert res == input_value
 
 
 def test_lottery_all_same_positive():
     assert solution.lottery(3, 3, 3)
+
+
+def test_lottery_all_same_negative():
+    assert solution.lottery(-3, -3, -3)
