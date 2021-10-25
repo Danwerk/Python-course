@@ -136,3 +136,26 @@ def test_fruit_all_zero():
     input_value = 0
     res = solution.fruit_order(0, 0, 0)
     assert input_value == res
+
+
+def test_fruit_zero_amount_zero_small():
+    """Test given order_amount is zero and small_basket is zero."""
+    input_value = 0
+    res = solution.fruit_order(0, 2, 0)
+    assert input_value == res
+
+
+def test_fruit_zero_amount_zero_big():
+    """Test given order_amount is zero and big_basket is zero."""
+    input_value = 0
+    res = solution.fruit_order(2, 0, 0)
+    assert input_value == res
+
+
+def test_fruit_zero_amount_others_not_zero():
+    """Test given order_amount is zero and big_basket is zero."""
+    input_value = 0
+    res = solution.fruit_order(2, 3, 0)
+    assert input_value == res
+
+
