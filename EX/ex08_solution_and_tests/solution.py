@@ -36,4 +36,4 @@ def fruit_order(small_baskets: int, big_baskets: int, ordered_amount: int) -> in
 
 
 if __name__ == '__main__':
-    print(students_study(5, True))
+    print(students_study(20, True))
