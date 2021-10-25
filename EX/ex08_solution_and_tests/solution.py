@@ -1,3 +1,6 @@
+"""Some EX08 exercises."""
+
+
 def students_study(time: int, coffee_needed: bool) -> bool:
     """
     Return True if students study in given circumstances.
@@ -5,12 +8,11 @@ def students_study(time: int, coffee_needed: bool) -> bool:
     (19, False) -> True
     (1, True) -> False.
     """
-    if 18 <= time <= 24 and coffee_needed == True or 18 <= time <= 24 and coffee_needed == False or 5 <= time <= 17 and coffee_needed == True:
+    if 18 <= time <= 24 and coffee_needed is True or 18 <= time <= 24 and coffee_needed is False or 5 <= time <= 17 and coffee_needed is True:
         return True
-    elif 5 <= time <= 17 and coffee_needed == False or 1 <= time <= 4 and coffee_needed == False or 1 <= time <= 4 and coffee_needed == True:
+    elif 5 <= time <= 17 and coffee_needed is False or 1 <= time <= 4 and coffee_needed is False or 1 <= time <= 4 and coffee_needed is True:
         return False
 
-print(students_study(19, False))
 
 def lottery(a: int, b: int, c: int) -> int:
     """
@@ -31,3 +33,7 @@ def fruit_order(small_baskets: int, big_baskets: int, ordered_amount: int) -> in
     (3, 1, 10) -> -1
     """
     pass
+
+
+if __name__ == '__main__':
+    print(students_study(5, True))
