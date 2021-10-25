@@ -74,3 +74,11 @@ def test_student_day_edge_case_coffee_false():
     """Day edge case, drinking the coffee is false."""
     assert solution.students_study(17, False) is not True
     assert solution.students_study(5, False) is not True
+
+
+def test_lottery_all_fives():
+    assert solution.lottery(5, 5, 5)
+
+
+def test_lottery_all_same_positive():
+    assert solution.lottery(3, 3, 3)
