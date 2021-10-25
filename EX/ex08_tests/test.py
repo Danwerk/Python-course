@@ -3,6 +3,7 @@ import solution
 
 
 def test_part1_zero():
+    """Test correct length of empty list."""
     input_amount = 0
     res = solution.generate_list(input_amount, "int")
     expected_len = 0
@@ -10,6 +11,7 @@ def test_part1_zero():
 
 
 def test_part1_big_input():
+    """Test correct length if big input is given."""
     input_amount = 100000000
     res = solution.generate_list(input_amount, "int")
     expected_len = 100000000
@@ -73,6 +75,7 @@ def test_part1_list_correct_len():
 
 
 def test_part1_int_correct_data_types():
+    """Test correct data type."""
     input_amount = 5
     res = solution.generate_list(input_amount, "int")
     expected_len = 5
@@ -84,4 +87,10 @@ def test_part1_int_correct_data_types():
 def test_part2_get_max():
     input_amount = 5
     res = solution.generate_combined_list([(3, 'int'), (5, 'int'), (4, 'int')])
+    assert len(res) == input_amount
+
+
+def test_part2_bigger_numbers():
+    input_amount = 10000
+    res = solution.generate_combined_list([(3, 'int'), (10000, 'int'), (4, 'int')])
     assert len(res) == input_amount
