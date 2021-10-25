@@ -148,15 +148,29 @@ def test_part3_correct_types_list():
 
 
 def test_part3_smaller_numbers():
-    """Test."""
+    """Test combined list unique small numbers."""
     input_amount = 5
     res = solution.generate_combined_list_unique([(5, 'string'), (2, 'string'), (3, 'string')])
     assert len(res) == input_amount
 
 
 def test_part3_unique_ints():
-    """Test."""
+    """Test combined list unique contains unique ints."""
     res = solution.generate_combined_list_unique([(5, 'int'), (2, 'int'), (3, 'int')])
+    for i in range(len(res) - 1):
+        assert res[i] != res[i + 1]
+
+
+def test_part3_unique_floats():
+    """Test combined list unique contains unique floats."""
+    res = solution.generate_combined_list_unique([(5, 'float'), (2, 'float'), (3, 'float')])
+    for i in range(len(res) - 1):
+        assert res[i] != res[i + 1]
+
+
+def test_part3_unique_string():
+    """Test combined list unique contains unique strings."""
+    res = solution.generate_combined_list_unique([(5, 'string'), (2, 'string'), (3, 'string')])
     for i in range(len(res) - 1):
         assert res[i] != res[i + 1]
 
