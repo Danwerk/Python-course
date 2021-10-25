@@ -129,3 +129,10 @@ def test_lottery_all_diff():
     input_value = 1
     res = solution.lottery(1, 2, 3)
     assert input_value == res
+
+
+def test_fruit_all_zero():
+    """Test all given numbers are zeros."""
+    input_value = 0
+    res = solution.fruit_order(0, 0, 0)
+    assert input_value == res
