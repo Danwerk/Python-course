@@ -22,7 +22,14 @@ def lottery(a: int, b: int, c: int) -> int:
     (2, 2, 1) -> 0
     (2, 3, 1) -> 1
     """
-    pass
+    if a == b == c == 5:
+        return 10
+    elif a == b == c != 5:
+        return 5
+    elif b != a and c != a:
+        return 1
+    elif b == a or c == a:
+        return 0
 
 
 def fruit_order(small_baskets: int, big_baskets: int, ordered_amount: int) -> int:
@@ -36,4 +43,5 @@ def fruit_order(small_baskets: int, big_baskets: int, ordered_amount: int) -> in
 
 
 if __name__ == '__main__':
-    print(students_study(20, True))
+    #print(students_study(6, False))
+    print(lottery(2, 2, 1))
