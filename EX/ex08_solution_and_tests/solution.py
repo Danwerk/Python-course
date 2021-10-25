@@ -5,19 +5,10 @@ def students_study(time: int, coffee_needed: bool) -> bool:
     (19, False) -> True
     (1, True) -> False.
     """
-    if 18 <= time <= 24 and coffee_needed == True:
+    if 18 <= time <= 24 and coffee_needed == True or 18 <= time <= 24 and coffee_needed == False or 5 <= time <= 17 and coffee_needed == True:
         return True
-    elif 18 <= time <= 24 and coffee_needed == False:
-        return True
-    elif 5 <= time <= 17 and coffee_needed == True:
-        return True
-    elif 5 <= time <= 17 and coffee_needed == False:
+    elif 5 <= time <= 17 and coffee_needed == False or 1 <= time <= 4 and coffee_needed == False or 1 <= time <= 4 and coffee_needed == True:
         return False
-    elif 1 <= time <= 4 and coffee_needed == False:
-        return False
-    elif 1 <= time <= 4 and coffee_needed == True:
-        return False
-
 
 print(students_study(19, False))
 
