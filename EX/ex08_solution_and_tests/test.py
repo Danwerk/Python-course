@@ -153,9 +153,14 @@ def test_fruit_zero_amount_zero_big():
 
 
 def test_fruit_zero_amount_others_not_zero():
-    """Test given order_amount is zero and big_basket is zero."""
+    """Test given order_amount others are not zero."""
     input_value = 0
     res = solution.fruit_order(2, 3, 0)
     assert input_value == res
 
 
+def test_fruit_only_big_exact_match():
+    """Test given order_amount is zero and big_basket is zero."""
+    input_value = 0
+    res = solution.fruit_order(0, 2, 10)
+    assert input_value == res
