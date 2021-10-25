@@ -65,3 +65,9 @@ def test_part1_int_correct_data_types():
     assert len(res) == expected_len
     for element in res:
         assert isinstance(element, int)
+
+
+def test_part2_get_max():
+    input_amount = 5
+    res = solution.generate_combined_list([(3, 'int'), (5, 'int'), (4, 'int')])
+    assert len(res) == input_amount
