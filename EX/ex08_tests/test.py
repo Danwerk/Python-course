@@ -118,10 +118,9 @@ def test_part2_empty_list():
     res = solution.generate_combined_list([(0, 'int'), (0, 'int'), (0, 'int')])
     assert len(res) == input_amount
 
-'''
+
 def test_part2_correct_types_list():
     """Test combined list returns empty list."""
-    input_amount = 0
-    res = solution.generate_combined_list([(0, 'int'), (0, 'int'), (0, 'int')])
-    assert len(res) == input_amount
-    '''
+    res = solution.generate_combined_list([(1, 'string'), (2, 'string'), (3, 'string')])
+    for element in res:
+        assert isinstance(element, str)
