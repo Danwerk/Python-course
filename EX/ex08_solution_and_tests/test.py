@@ -83,8 +83,20 @@ def test_lottery_all_fives():
 
 
 def test_lottery_all_same_positive():
-    assert solution.lottery(3, 3, 3)
+    input_value = 5
+    res = solution.lottery(3, 3, 3)
+    assert res == input_value
 
 
 def test_lottery_all_same_negative():
-    assert solution.lottery(-3, -3, -3)
+    input_value = 5
+    res = solution.lottery(-3, -3, -3)
+    assert input_value == res
+
+
+def test_lottery_all_same_zero():
+    input_value = 5
+    res = solution.lottery(0, 0, 0)
+    assert input_value == res
+
+
