@@ -3,10 +3,8 @@ import solution
 
 
 def test_student_study_none():
-    input_amount = None
-    res = solution.students_study(25, False)
+    assert solution.students_study(25, False) is None
 
-    assert res == input_amount
 
 
 def test_student_night_coffee_true():
