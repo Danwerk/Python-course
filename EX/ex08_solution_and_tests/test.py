@@ -179,3 +179,25 @@ def test_fruit_only_big_more_than_required_match():
     res = solution.fruit_order(0, 4, 10)
     assert input_value == res
 
+
+def test_fruit_only_small_exact_match():
+    """Test given small_basket exact match."""
+    input_value = 5
+    res = solution.fruit_order(5, 0, 5)
+    assert input_value == res
+
+
+def test_fruit_only_small_not_enough():
+    """Test given small_basket not enough."""
+    input_value = -1
+    res = solution.fruit_order(4, 0, 5)
+    assert input_value == res
+
+
+def test_fruit_only_small_more_than_required():
+    """Test given small_basket not enough."""
+    input_value = 5
+    res = solution.fruit_order(14, 0, 5)
+    assert input_value == res
+
+
