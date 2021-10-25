@@ -260,7 +260,7 @@ def test_fruit_enough_bigs_not_enough_smalls():
 def test_fruit_not_enough_with_more_than_5_smalls():
     """Test not enough small_baskets and not enough big_baskets."""
     input_value = -1
-    res = solution.fruit_order(2, 0, 15)
+    res = solution.fruit_order(6, 0, 15)
     assert input_value == res
 
 
