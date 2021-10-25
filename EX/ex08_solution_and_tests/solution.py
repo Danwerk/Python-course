@@ -14,12 +14,12 @@ def students_study(time: int, coffee_needed: bool) -> bool:
     elif 5 <= time <= 17 and coffee_needed == False:
         return False
     elif 1 <= time <= 4 and coffee_needed == False:
-        return False
+        return True
     elif 1 <= time <= 4 and coffee_needed == True:
         return False
 
 
-print(students_study(19, False))
+print(students_study(1, False))
 
 def lottery(a: int, b: int, c: int) -> int:
     """
