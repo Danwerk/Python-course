@@ -278,4 +278,10 @@ def test_fruit_match_large_numbers():
     assert input_value == res
 
 
+def test_fruit_not_enough():
+    """Test not enough small_baskets and enough big_baskets."""
+    input_value = -1
+    res = solution.fruit_order(3, 6, 5000)
+    assert input_value == res
+
 
