@@ -141,7 +141,7 @@ def test_part3_list_too_big():
 
 
 def test_part3_correct_types_list():
-    """Test combined list unique correct data types"""
+    """Test combined list unique correct data types."""
     res = solution.generate_combined_list_unique([(5, 'int'), (6, 'string'), (7, 'string')])
     for element in res:
         assert isinstance(element, str) or isinstance(element, int)
