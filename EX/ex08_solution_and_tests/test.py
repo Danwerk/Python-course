@@ -211,7 +211,7 @@ def test_fruit_only_small_more_than_required():
 def test_fruit_only_big_not_enough_but_multiple_of_5():
     """Test given big_basket not enough but multiple of 5."""
     input_value = -1
-    res = solution.fruit_order(0, 25, 126)
+    res = solution.fruit_order(0, 10, 125)
     assert input_value == res
 
 
@@ -258,7 +258,7 @@ def test_fruit_enough_bigs_not_enough_smalls():
 
 
 def test_fruit_not_enough_with_more_than_5_smalls():
-    """Test not enough small_baskets and enough big_baskets."""
+    """Test not enough small_baskets and not enough big_baskets."""
     input_value = -1
     res = solution.fruit_order(2, 1, 15)
     assert input_value == res
