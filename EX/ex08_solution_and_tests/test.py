@@ -117,3 +117,8 @@ def test_lottery_b_c_same_a_diff():
     res = solution.lottery(2, 3, 2)
     assert input_value == res
 '''
+
+def test_lottery_all_diff():
+    input_value = 1
+    res = solution.lottery(1, 2, 3)
+    assert input_value == res
