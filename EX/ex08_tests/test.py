@@ -120,7 +120,28 @@ def test_part2_empty_list():
 
 
 def test_part2_correct_types_list():
-    """Test combined list returns empty list."""
+    """Test combined list returns correct data types."""
     res = solution.generate_combined_list([(1, 'string'), (2, 'string'), (3, 'string')])
     for element in res:
         assert isinstance(element, str)
+
+
+def test_part3_empty_list():
+    """Test combined list unique returns empty list."""
+    input_amount = 0
+    res = solution.generate_combined_list([(0, 'string'), (0, 'string'), (0, 'string')])
+    assert len(res) == input_amount
+
+
+def test_part3_list_too_big():
+    """Test combined list unique contains big amount of some datatype."""
+    input_amount = 10000
+    res = solution.generate_combined_list([(2, 'string'), (3, 'string'), (10000, 'string')])
+    assert len(res) == input_amount
+
+
+def test_part3_correct_types_list():
+    """Test combined list unique correct data types"""
+    res = solution.generate_combined_list([(5, 'int'), (6, 'string'), (7, 'string')])
+    for element in res:
+        assert isinstance(element, str) or isinstance(element, int)
