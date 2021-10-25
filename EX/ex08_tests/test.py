@@ -75,13 +75,33 @@ def test_part1_list_correct_len():
 
 
 def test_part1_int_correct_data_types():
-    """Test correct data type."""
+    """Test correct int data types."""
     input_amount = 5
     res = solution.generate_list(input_amount, "int")
     expected_len = 5
     assert len(res) == expected_len
     for element in res:
         assert isinstance(element, int)
+
+
+def test_part1_float_correct_data_types():
+    """Test correct int data types."""
+    input_amount = 5
+    res = solution.generate_list(input_amount, "float")
+    expected_len = 5
+    assert len(res) == expected_len
+    for element in res:
+        assert isinstance(element, float)
+
+
+def test_part1_string_correct_data_types():
+    """Test correct int data types."""
+    input_amount = 5
+    res = solution.generate_list(input_amount, "string")
+    expected_len = 5
+    assert len(res) == expected_len
+    for element in res:
+        assert isinstance(element, str)
 
 
 def test_part2_get_max():
@@ -94,3 +114,9 @@ def test_part2_bigger_numbers():
     input_amount = 10000
     res = solution.generate_combined_list([(3, 'int'), (10000, 'int'), (4, 'int')])
     assert len(res) == input_amount
+
+
+#def test_part2_empty_list():
+
+
+
