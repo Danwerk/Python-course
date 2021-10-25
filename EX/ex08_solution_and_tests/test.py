@@ -283,5 +283,3 @@ def test_fruit_not_enough():
     input_value = -1
     res = solution.fruit_order(3, 6, 5000)
     assert input_value == res
-
-
