@@ -9,6 +9,13 @@ def test_part1_zero():
     assert len(res) == expected_len
 
 
+def test_part1_big_input():
+    input_amount = 100000000
+    res = solution.generate_list(input_amount, "int")
+    expected_len = 100000000
+    assert len(res) == expected_len
+
+
 def test_part1_int_correct_len():
     """Test correct length of list if data type is int."""
     input_amount = 5
