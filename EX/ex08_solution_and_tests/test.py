@@ -100,3 +100,19 @@ def test_lottery_all_same_zero():
     assert input_value == res
 
 
+def test_lottery_a_b_same_c_diff():
+    input_value = 0
+    res = solution.lottery(2, 2, 3)
+    assert input_value == res
+
+
+def test_lottery_a_c_same_b_diff():
+    input_value = 0
+    res = solution.lottery(2, 3, 2)
+    assert input_value == res
+
+
+def test_lottery_b_c_same_a_diff():
+    input_value = 1
+    res = solution.lottery(2, 3, 2)
+    assert input_value == res
