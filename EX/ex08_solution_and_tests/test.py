@@ -33,6 +33,8 @@ def test_student_day_coffee_false():
 
 def test_student_evening_edge_case_coffee_true():
     assert solution.students_study(24, True)
+    assert solution.students_study(18, True)
+
 
 
 def test_student_evening_edge_case_coffee_false():
