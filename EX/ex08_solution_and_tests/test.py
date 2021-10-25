@@ -179,6 +179,13 @@ def test_fruit_only_big_more_than_required_match():
     res = solution.fruit_order(0, 4, 10)
     assert input_value == res
 
+'''
+def test_fruit_only_big_more_than_required_no_match():
+    """Test given big_basket more than required no match."""
+    input_value = 0
+    res = solution.fruit_order(0, 4, 10)
+    assert input_value == res
+'''
 
 def test_fruit_only_small_exact_match():
     """Test given small_basket exact match."""
@@ -209,8 +216,40 @@ def test_fruit_only_big_not_enough_but_multiple_of_5():
 
 
 def test_fruit_only_small_not_enough_more_than_5_smalls():
-    """Test given small_basket not enough."""
+    """Test given small_basket not enough more than 5 small_baskets."""
     input_value = -1
     res = solution.fruit_order(7, 0, 16)
     assert input_value == res
+
+
+def test_fruit_match_with_more_than_5_smalls():
+    """Test given order_amount matches with more than 5 small_basks."""
+    input_value = 7
+    res = solution.fruit_order(7, 4, 27)
+    assert input_value == res
+
+
+def test_fruit_use_all_smalls_some_bigs():
+    """Test use all small_baskets and some big_baskets."""
+    input_value = 4
+    res = solution.fruit_order(4, 9, 29)
+    assert input_value == res
+
+
+def test_fruit_use_some_smalls_all_bigs():
+    """Test use some small_baskets and all big_baskets."""
+    input_value = 3
+    res = solution.fruit_order(4, 3, 18)
+    assert input_value == res
+
+
+def test_fruit_use_some_smalls_some_bigs():
+    """Test use some small_baskets and some big_baskets."""
+    input_value = 4
+    res = solution.fruit_order(7, 8, 29)
+    assert input_value == res
+
+
+
+
 
