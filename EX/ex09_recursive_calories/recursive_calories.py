@@ -1,4 +1,5 @@
-"""Let's count calories!"""
+"""Let's count calories."""
+
 
 def recursive_reverse(s: str) -> str:
     """Reverse a string using recursion.
@@ -42,11 +43,12 @@ def x_sum_loop(nums, x) -> int:
         return 0
     elif x >= 0:
         # first_num = nums[x - 1]
-        list_sum = nums[x-1::x]
+        list_sum = nums[x - 1::x]
         return sum(list_sum)
     elif x < 0:
         list_sum = nums[x::x]
         return sum(list_sum)
+
 
 def x_sum_recursion(nums, x) -> int:
     """
@@ -74,7 +76,7 @@ def x_sum_recursion(nums, x) -> int:
         return 0
 
     elif x >= 0:
-        first_elem = nums[x-1]
+        first_elem = nums[x - 1]
         rest_elements = nums[x:]
         return first_elem + x_sum_recursion(rest_elements, x)
 
@@ -163,4 +165,3 @@ def count_strings(data: list, pos=None, result: dict = None) -> dict:
     :return: dict of given symbols and their count
     """
     pass
-
