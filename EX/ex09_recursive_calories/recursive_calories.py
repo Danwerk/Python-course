@@ -9,14 +9,11 @@ def recursive_reverse(s: str) -> str:
     :param s: string
     :return: reverse of s
     """
-
     if len(s) == 0:
         return ''
     last_char = s[-1]
     rest_of_the_text = s[0:-1]
     return (last_char + recursive_reverse(rest_of_the_text))
-
-
 
 
 def x_sum_loop(nums, x) -> int:
@@ -41,9 +38,7 @@ def x_sum_loop(nums, x) -> int:
     :param x: number indicating every which num to add to sum
     :return: sum of every x'th number in the list
     """
-    if x > len(nums):
-        return 0
-    elif nums == [] or x == 0:
+    if nums == [] or x == 0 or x > len(nums):
         return 0
     elif x >= 0:
         # first_num = nums[x - 1]
@@ -52,14 +47,6 @@ def x_sum_loop(nums, x) -> int:
     elif x < 0:
         list_sum = nums[x::x]
         return sum(list_sum)
-
-print(x_sum_loop([], 3))  # 0
-print(x_sum_loop([2, 5, 6, 0, 15, 5], 3))  # 11
-print(x_sum_loop([0, 5, 6, -5, -9, 3], 1))  # 0
-print(x_sum_loop([43, 90, 115, 500], -2))  # 158
-print(x_sum_loop([1, 2], -9))  # 0
-print(x_sum_loop([2, 3, 6], 5))  # 0
-print(x_sum_loop([6, 5, 3, 2, 9, 8, 6, 5, 4], 3))  # 15
 
 def x_sum_recursion(nums, x) -> int:
     """
@@ -83,7 +70,18 @@ def x_sum_recursion(nums, x) -> int:
     :param x: number indicating every which num to add to sum
     :return: sum of every x'th number in the list
     """
-    pass
+    if nums == [] or x == 0 or abs(x) > len(nums):
+        return 0
+
+    elif x >= 0:
+        first_elem = nums[x-1]
+        rest_elements = nums[x:]
+        return first_elem + x_sum_recursion(rest_elements, x)
+
+    elif x < 0:
+        first_elem = nums[x]
+        rest_elements = nums[:x:]
+        return first_elem + x_sum_recursion(rest_elements, x)
 
 
 def lets_count_calories(salad: float, chocolate_pieces: int, fridge_visits: int) -> int:
