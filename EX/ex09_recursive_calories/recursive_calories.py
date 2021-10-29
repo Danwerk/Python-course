@@ -41,8 +41,25 @@ def x_sum_loop(nums, x) -> int:
     :param x: number indicating every which num to add to sum
     :return: sum of every x'th number in the list
     """
-    pass
+    if x > len(nums):
+        return 0
+    elif nums == [] or x == 0:
+        return 0
+    elif x >= 0:
+        # first_num = nums[x - 1]
+        list_sum = nums[x-1::x]
+        return sum(list_sum)
+    elif x < 0:
+        list_sum = nums[x::x]
+        return sum(list_sum)
 
+print(x_sum_loop([], 3))  # 0
+print(x_sum_loop([2, 5, 6, 0, 15, 5], 3))  # 11
+print(x_sum_loop([0, 5, 6, -5, -9, 3], 1))  # 0
+print(x_sum_loop([43, 90, 115, 500], -2))  # 158
+print(x_sum_loop([1, 2], -9))  # 0
+print(x_sum_loop([2, 3, 6], 5))  # 0
+print(x_sum_loop([6, 5, 3, 2, 9, 8, 6, 5, 4], 3))  # 15
 
 def x_sum_recursion(nums, x) -> int:
     """
@@ -149,5 +166,3 @@ def count_strings(data: list, pos=None, result: dict = None) -> dict:
     """
     pass
 
-if __name__ == '__main__':
-    print(recursive_reverse(''))
