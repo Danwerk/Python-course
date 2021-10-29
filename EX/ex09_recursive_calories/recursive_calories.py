@@ -151,7 +151,26 @@ def cycle(cyclists: list, distance: float, time: int = 0, index: int = 0) -> str
     :param index: index to know which cyclist's turn it is to be first
     :return: string indicating the last cyclist to carry the others
     """
-    pass
+
+    if distance <= 0 and len(cyclists) > 0:
+        index -= 1  # cyclist at previous index was the last leader.
+        hours = time // 60
+        minutes = time - (hours * 60)
+        return f'{cyclists[index][0]} is the last leader. Total time: {hours}h {minutes}min.'
+    elif distance <= 0 and cyclists == []:
+        return "Everyone fails."
+    elif index >= len(cyclists) and distance > 0:
+        index = 0
+        return cycle(cyclists, round(distance - cyclists[index][1], 2), time + cyclists[index][2], index + 1)
+
+    elif distance > 0:
+        current_cyc = cyclists[index]
+        return cycle(cyclists, round(distance - cyclists[index][1], 2), time + current_cyc[2], index + 1)
+
+print(cycle([("First", 0.1, 9), ("Second", 0.1, 8)], 0.3))  #  "First is the last leader. Total time: 0h 26min."
+print(cycle([], 0))  # "Everyone fails."
+print(cycle([("Fernando", 19.8, 42), ("Patricio", 12, 28), ("Daniel", 7.8, 11), ("Robert", 15.4, 49)], 50)) # "Robert is the last leader. Total time: 2h 10min."
+print(cycle([("Loner", 0.1, 1)], 60))  # "Loner is the last leader. Total time: 10h 0min."
 
 
 def count_strings(data: list, pos=None, result: dict = None) -> dict:
