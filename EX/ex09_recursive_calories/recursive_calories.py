@@ -113,26 +113,16 @@ def lets_count_calories(salad: float, chocolate_pieces: int, fridge_visits: int)
     :param chocolate_pieces: pieces of chocolate in the fridge.
     :return: calories eaten while visiting fridge.
     """
-    if fridge_visits == 0:
+    if fridge_visits == 0 or salad == 0 and chocolate_pieces == 0:
         return 0
     elif salad > 0 and chocolate_pieces > 0 and fridge_visits > 0:
         return 120 + 34 + lets_count_calories(round(salad - 0.1, 2), chocolate_pieces - 1, fridge_visits - 1)
     elif salad == 0 and fridge_visits > 0 and chocolate_pieces >= 2:
         return 2 * 34 + lets_count_calories(salad, chocolate_pieces - 2, fridge_visits - 1)
     elif salad > 0 and chocolate_pieces == 0 and fridge_visits > 0:
-        return 120 + lets_count_calories(salad - 0.1, chocolate_pieces, fridge_visits - 1)
+        return 120 + lets_count_calories(round(salad - 0.1, 2), chocolate_pieces, fridge_visits - 1)
     elif salad == 0 and chocolate_pieces < 2:
         return chocolate_pieces * 34
-
-
- #   elif fridge_visits > 0:
-  #      return lets_count_calories(salad - 0.1, chocolate_pieces - 1, fridge_visits - 1)
-print(lets_count_calories(0.1, 3, 2))  # 120 + 3*34 = 222
-print(lets_count_calories(0.4, 3, 2))  # 2*120 + 2*34 = 308
-print(lets_count_calories(0, 4, 2))  # 4 * 34 = 136
-print(lets_count_calories(3.4, 6, 0))  # 0
-print(lets_count_calories(1.2, 5, 10))  # 1200 + 5*34 = 1370
-print(lets_count_calories(0.3, 8, 6))  # 360 + 3*34 + 2*34 + 2*34 + 34 = 632
 
 
 def cycle(cyclists: list, distance: float, time: int = 0, index: int = 0) -> str:
