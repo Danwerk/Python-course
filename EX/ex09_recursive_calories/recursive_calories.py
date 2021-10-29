@@ -151,7 +151,7 @@ def cycle(cyclists: list, distance: float, time: int = 0, index: int = 0) -> str
     :param index: index to know which cyclist's turn it is to be first
     :return: string indicating the last cyclist to carry the others
     """
-    if distance <= 0 and len(cyclists) > 0:
+    if distance <= 0 < len(cyclists):
         index -= 1  # cyclist at previous index was the last leader.
         hours = time // 60
         minutes = time - (hours * 60)
@@ -161,7 +161,6 @@ def cycle(cyclists: list, distance: float, time: int = 0, index: int = 0) -> str
     elif index >= len(cyclists) and distance > 0:
         index = 0
         return cycle(cyclists, round(distance - cyclists[index][1], 2), time + cyclists[index][2], index + 1)
-
     elif distance > 0:
         current_cyc = cyclists[index]
         return cycle(cyclists, round(distance - cyclists[index][1], 2), time + current_cyc[2], index + 1)
