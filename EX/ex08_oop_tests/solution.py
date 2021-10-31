@@ -5,9 +5,22 @@ class Factory:
     def bake_cake(self, toppings: int, base: int) -> int:
         cake = Cake(base, toppings)
         self.cakes.append(cake)
+        # basic_cake = 1
+        # medium_cake = 2
+        # large_cake = 5
+        count = 0
+        if toppings == 1:
+            return 1
+        if toppings > 1 and toppings < 5:
+            if toppings % 2 == 0:
+                return toppings // 2
+        if toppings >= 5:
+            if toppings % 5 == 0:
+                return toppings // 5
+
 
     def get_last_cakes(self, n: int) -> list:
-        return self.cakes
+        return self.cakes[-n:]
 
     def get_cakes_baked(self) -> list:
         return self.cakes
