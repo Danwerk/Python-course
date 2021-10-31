@@ -11,13 +11,14 @@ class Factory:
         count = 0
         if toppings == 1:
             return 1
-        if toppings > 1 and toppings < 5:
+        if 1 < toppings < 5:
             if toppings % 2 == 0:
+                self.cakes.append(cake)
                 return toppings // 2
+
         if toppings >= 5:
             if toppings % 5 == 0:
                 return toppings // 5
-
 
     def get_last_cakes(self, n: int) -> list:
         return self.cakes[-n:]
@@ -33,7 +34,6 @@ class Cake:
 
     def __init__(self, base_amount, toppings_amount):
         pass
-
     @property
     def type(self):
         pass
