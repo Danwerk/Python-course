@@ -1,4 +1,8 @@
+"""Bake cakes."""
+
+
 class Factory:
+    """Describe Factory class."""
     def __init__(self):
         """List of cakes."""
         self.cakes = []
@@ -37,17 +41,18 @@ class Factory:
 
 
 class Cake:
-
+    """Describe Cake class."""
     def __init__(self, base_amount, toppings_amount):
         """Class for cake."""
         pass
+
     @property
     def type(self):
         """Type of cake."""
         pass
 
     def __repr__(self):
-        """Cakes cakes cakes."""
+        """Cake cake cake."""
         pass
 
     def __eq__(self, other):
@@ -56,4 +61,5 @@ class Cake:
 
 
 class WrongIngredientsAmountException(Exception):
+    """If error, then call out this class."""
     pass
