@@ -200,37 +200,9 @@ def count_strings(data: list, pos=0, result: dict = None) -> dict:
             result[cur_list] = result[cur_list] + 1
 
     return count_strings(data, pos + 1, result)
-    '''
-    if result is None:  # empty dictionary
-        result = {}
-    if pos >= len(data):  # if pos index is bigger than length of data then return result(dictionary)
-        return result
-    cur_list = data[pos]
-    if not cur_list:  # if current list is empty then increase position and go recursively into function
-        count_strings(data, pos + 1, result)
-    elif len(data) > 0:
-        count = 0
-        if type(cur_list) == str:  # if data type is str, then add directly cur_list to dict
-            if cur_list not in result:  # add to dict
-                result[cur_list] = count + 1
-            else:
-                result[cur_list] = result[cur_list] + 1
-            count_strings(data, pos + 1, result)
-        else:  # else take sequentially the elements from cur_list and add them to dict
-            for el in cur_list:
-                count = 0
-                if isinstance(el, list):
-                    count_strings(el, 0, result)
-                if isinstance(el, str):
-                    if el not in result:
-                        result[el] = count + 1
-                    else:
-                        result[el] = result[el] + 1
-            else:
-                count_strings(data, pos + 1, result)
-    return result
-    '''
-    '''
+
+
+'''
     dict = {}
     count = 0
     for list in data:
