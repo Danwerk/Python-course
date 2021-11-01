@@ -14,11 +14,18 @@ def add_char_into_pos(char: str, pos: int, string: str) -> str:
     """
     list_str = list(string)
     list_str.insert(pos - 1, char)
-    return ''.join(list_str)
+    if pos - 1 > len(string):
+        return string
+    else:
+        return ''.join(list_str)
 
 
 
 print(add_char_into_pos("a", 2, "kheksa"))
+print(add_char_into_pos("t", 8, "kaheksa"))
+print(add_char_into_pos("a", 1, "mps"))
+print(add_char_into_pos("a", 1, ""))
+print(add_char_into_pos("k", 7, "kalla"))
 
 def nr_of_common_characters(string1: str, string2: str) -> int:
     """
