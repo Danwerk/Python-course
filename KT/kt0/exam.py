@@ -1,5 +1,6 @@
 """KT0."""
 
+
 def add_char_into_pos(char: str, pos: int, string: str) -> str:
     """
     Return a string where a given character is added into a given position in a string.
@@ -20,13 +21,6 @@ def add_char_into_pos(char: str, pos: int, string: str) -> str:
         return ''.join(list_str)
 
 
-
-print(add_char_into_pos("a", 2, "kheksa"))
-print(add_char_into_pos("t", 8, "kaheksa"))
-print(add_char_into_pos("a", 1, "mps"))
-print(add_char_into_pos("a", 1, ""))
-print(add_char_into_pos("k", 7, "kalla"))
-
 def nr_of_common_characters(string1: str, string2: str) -> int:
     """
     Return a number of common characters of string1 and string2.
@@ -37,9 +31,15 @@ def nr_of_common_characters(string1: str, string2: str) -> int:
     common_characters("saali", "pall") -> 2  # 'a', 'l' are common
     common_characters("memm", "taat") -> 0
     common_characters("memm", "") -> 0
-
     """
-    pass
+    lst = []
+    for i in string1:
+        if i in string2:
+            if i not in lst:
+                lst.append(i)
+            else:
+                continue
+    return len(lst)
 
 
 def nr_into_num_list(nr: int, num_list: list) -> list:
