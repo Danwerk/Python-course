@@ -56,7 +56,6 @@ def middle_chars(s: str) -> str:
         s_char = int((len(s) / 2))
         return s[f_char] + s[s_char]
 
-print(middle_chars("abcdef"))
 
 def num_as_index(nums: list) -> int:
     """
@@ -88,4 +87,15 @@ def max_duplicate(nums):
     :param nums: List of integers
     :return: Maximum element with duplicate. None if no duplicate found.
     """
-    pass
+    count = 0
+    for i in range(len(nums)):
+        if nums[i] == max(nums):
+            count += 1
+    if count >= 2:
+        return max(nums)
+    else:
+        return None
+
+print(max_duplicate([1, 2, 3]))
+print(max_duplicate([1, 2, 2]))
+print(max_duplicate([1, 2, 2, 1, 1]))
