@@ -33,11 +33,11 @@ def near_ten(nr):
     :param nr: non-negative integer.
     :return: True if num is within 2 of a multiple of 10.
     """
-    if nr % 10 <= 2:
+    if ((nr + 1) % 10) <= 2 or ((nr + 2) % 10) <= 2 or (nr % 10) <= 2:
         return True
     else:
         return False
-
+print(near_ten(999))
 
 def middle_chars(s: str) -> str:
     """Return two chars in the middle of string.
