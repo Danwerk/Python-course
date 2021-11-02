@@ -33,7 +33,7 @@ def near_ten(nr):
     :param nr: non-negative integer.
     :return: True if num is within 2 of a multiple of 10.
     """
-    if (nr + 2) % 10 == 0 or (nr + 1) % 10 == 0 or (nr + 0) % 10 == 0:
+    if nr % 2 == 0:
         return True
     else:
         return False
@@ -97,7 +97,11 @@ def max_duplicate(nums):
     for i in range(len(nums)):
         if nums[i] == max(nums):
             count += 1
-    if count >= 2:
+    if count >= 1:
         return max(nums)
     else:
         return None
+
+print(max_duplicate([1, 2, 3, 3]))
+print(max_duplicate([1, 2, 4, 2]))
+print(max_duplicate([1, 2, 2, 1, 1]))
