@@ -133,15 +133,3 @@ def symbol_average_position_in_words(words):
         v = round((sum(v) / len_val_list), 2)
         updated[k] = v
     return updated
-
-
-'''
-        count = 0
-        if i not in dict:
-            dict[i] = count + 1
-        else:
-            dict[i] = dict[i] + 1
-    return dict
-'''
-
-print(symbol_average_position_in_words(['hello', 'world']))
