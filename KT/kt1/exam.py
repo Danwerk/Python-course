@@ -95,6 +95,7 @@ def parse_call_log(call_log: str) -> dict:
     for names in string_list:
         names = names.split(':')
         for name in names:
+            name = names[0]
             some_list = []
             some_list.append(names[0])
             some_list.append(names[1])
@@ -108,3 +109,8 @@ def parse_call_log(call_log: str) -> dict:
             else:
                 call_dict[name].append(name1)
     return call_dict
+print(parse_call_log(""))
+print(parse_call_log("1:2,2:3"))
+print(parse_call_log("ago:kati,ago:mati,ago:kati"))
+print(parse_call_log("ago:kati:mati"))
+print(parse_call_log("mati:kalle,kalle:malle:mari:juri:jj,mari:mati"))
