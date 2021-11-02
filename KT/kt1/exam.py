@@ -93,21 +93,25 @@ def parse_call_log(call_log: str) -> dict:
     call_dict = {}
     string_list = call_log.split(',')
     for names in string_list:
+        names_list = names.split(':')
         names = names.split(':')
-        for name in names:
+        for name in names_list:
             name = names[0]
             some_list = []
-            some_list.append(names[0])
-            some_list.append(names[1])
-            names.remove(names[0])
-            name = some_list[0]
-            name1 = some_list[1]
-            if name not in call_dict:
-                call_dict[name] = [name1]
-            if name1 in call_dict[name]:
-                continue
+            if len(names) >= 2:
+                some_list.append(names[0])
+                some_list.append(names[1])
+                names.remove(names[0])
+                name = some_list[0]
+                name1 = some_list[1]
+                if name not in call_dict:
+                    call_dict[name] = [name1]
+                if name1 in call_dict[name]:
+                    continue
+                else:
+                    call_dict[name].append(name1)
             else:
-                call_dict[name].append(name1)
+                continue
     return call_dict
 print(parse_call_log(""))
 print(parse_call_log("1:2,2:3"))
