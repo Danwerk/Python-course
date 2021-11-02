@@ -88,26 +88,23 @@ def parse_call_log(call_log: str) -> dict:
     :param call_log: the whole log as string
     :return: dictionary with call information
     """
-
-
-'''
     if call_log == '':
         return {}
     call_dict = {}
     string_list = call_log.split(',')
-    for pair in string_list:
-        name, name1 = pair.split(':')
-        if name not in call_dict:
-            call_dict[name] = [name1]
-        if name1 in call_dict[name]:
-            continue
-        else:
-            call_dict[name].append(name1)
-'''
-
-
-print(parse_call_log(""))
-print(parse_call_log("ago:kati,mati:malle"))
-print(parse_call_log("ago:kati,ago:mati,ago:kati"))
-print(parse_call_log("ago:kati:mati"))
-# print(parse_call_log("mati:kalle,kalle:malle:mari:juri,mari:mati"))
+    for names in string_list:
+        names = names.split(':')
+        for name in names:
+            some_list = []
+            some_list.append(names[0])
+            some_list.append(names[1])
+            names.remove(names[0])
+            name = some_list[0]
+            name1 = some_list[1]
+            if name not in call_dict:
+                call_dict[name] = [name1]
+            if name1 in call_dict[name]:
+                continue
+            else:
+                call_dict[name].append(name1)
+    return call_dict
