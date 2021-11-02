@@ -1,5 +1,6 @@
 """KT1."""
 
+
 def capitalize_string(s: str) -> str:
     """
     Return capitalized string. The first char is capitalized, the rest remain as they are.
@@ -12,7 +13,7 @@ def capitalize_string(s: str) -> str:
         return ''
     else:
         return s[0].upper() + s[1:]
-print(capitalize_string(""))
+
 
 def has_seven(nums):
     """
