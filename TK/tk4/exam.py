@@ -33,7 +33,7 @@ def near_ten(nr):
     :param nr: non-negative integer.
     :return: True if num is within 2 of a multiple of 10.
     """
-    if nr % 2 == 0:
+    if nr % 10 <= 2:
         return True
     else:
         return False
