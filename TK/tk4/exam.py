@@ -37,11 +37,6 @@ def near_ten(nr):
         return True
     else:
         return False
-print(near_ten(0))
-print(near_ten(3))
-print(near_ten(10))
-print(near_ten(23))
-print(near_ten(198))
 
 
 def middle_chars(s: str) -> str:
@@ -54,8 +49,14 @@ def middle_chars(s: str) -> str:
     middle_chars("aabbcc") => "bb"
     middle_chars("") => ""
     """
-    pass
+    if s == '':
+        return ''
+    else:
+        f_char = int((len(s) / 2) - 1)
+        s_char = int((len(s) / 2))
+        return s[f_char] + s[s_char]
 
+print(middle_chars("abcdef"))
 
 def num_as_index(nums: list) -> int:
     """
