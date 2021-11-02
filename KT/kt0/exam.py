@@ -75,9 +75,7 @@ def nr_into_num_list(nr: int, num_list: list) -> list:
                 num_list[i], num_list[j] = num_list[j], num_list[i]
 
     return num_list
-print(nr_into_num_list(3, [1,2,2]))
-print(nr_into_num_list(5, [1,2,3,4,5,6]))
-print(nr_into_num_list(0, [1,2,3,4,5]))
+
 
 def symbol_average_position_in_words(words):
     """
@@ -120,4 +118,30 @@ def symbol_average_position_in_words(words):
     :param words: list of words
     :return: dictionary with symbol average positions
     """
-    pass
+    dict = {}
+    for i in words:
+        for j in range(len(i)):
+            if i[j] not in dict:
+                dict[i[j]] = [j]
+            else:
+                dict[i[j]].append(j)
+
+    updated = {}
+
+    for k, v in dict.items():
+        len_val_list = len(v)
+        v = round((sum(v) / len_val_list), 2)
+        updated[k] = v
+    return updated
+
+
+'''
+        count = 0
+        if i not in dict:
+            dict[i] = count + 1
+        else:
+            dict[i] = dict[i] + 1
+    return dict
+'''
+
+print(symbol_average_position_in_words(['hello', 'world']))
