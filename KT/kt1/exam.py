@@ -25,7 +25,17 @@ def has_seven(nums):
     has_seven([7, 1, 7, 1, 7]) => True
     has_seven([7, 1, 7, 1, 1, 7]) => False
     """
-    pass
+    count = 0
+    for i in range(len(nums) - 1):
+        if nums[i] == nums[i + 1]:
+            return False
+    else:
+        for j in range(len(nums)):
+            if nums[j] == 7:
+                count += 1
+                if count == 3:
+                    return True
+        return False
 
 
 def list_move(initial_list: list, amount: int, factor: int) -> list:
@@ -42,7 +52,8 @@ def list_move(initial_list: list, amount: int, factor: int) -> list:
     list_move([1, 2, 3], 4, 1) => [[1, 2, 3], [3, 1, 2], [2, 3, 1], [1, 2, 3]]
     list_move([], 3, 4) => [[], [], [], []]
     """
-    pass
+    if initial_list == []:
+        return [] * amount
 
 
 def parse_call_log(call_log: str) -> dict:
