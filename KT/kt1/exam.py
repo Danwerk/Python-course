@@ -17,8 +17,7 @@ def capitalize_string(s: str) -> str:
 
 def has_seven(nums):
     """
-    Given a list if ints, return True if the value 7 appears in the list exactly 3 times
-    and no consecutive elements have the same value.
+    Given a list if ints, return True if the value 7 appears.
 
     has_seven([1, 2, 3]) => False
     has_seven([7, 1, 7, 7]) => False
