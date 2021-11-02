@@ -113,8 +113,3 @@ def parse_call_log(call_log: str) -> dict:
             else:
                 continue
     return call_dict
-print(parse_call_log(""))
-print(parse_call_log("1:2,2:3"))
-print(parse_call_log("ago:kati,ago:mati,ago:kati"))
-print(parse_call_log("ago:kati:mati"))
-print(parse_call_log("mati:kalle,kalle:malle:mari:juri:jj,mari:mati"))
