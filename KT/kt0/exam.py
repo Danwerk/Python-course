@@ -54,6 +54,7 @@ def nr_into_num_list(nr: int, num_list: list) -> list:
     nr_into_num_list(0, [1,2,3,4,5]) -> [0,1,2,3,4,5,]
 
     """
+    '''
     if num_list == []:
         num_list.append(nr)
     for i in range(0, len(num_list)):
@@ -66,7 +67,15 @@ def nr_into_num_list(nr: int, num_list: list) -> list:
         elif nr <= num_list[i] and nr > num_list[i-1]:
             num_list.insert(i, nr)
     return num_list
-print(nr_into_num_list(5, [44,3,7]))
+    '''
+    num_list.append(nr)
+    for i in range(len(num_list)):
+        for j in range(i + 1, len(num_list)):
+            if num_list[i] > num_list[j]:
+                num_list[i], num_list[j] = num_list[j], num_list[i]
+
+    return num_list
+print(nr_into_num_list(3, [1,2,2]))
 print(nr_into_num_list(5, [1,2,3,4,5,6]))
 print(nr_into_num_list(0, [1,2,3,4,5]))
 
