@@ -71,7 +71,13 @@ def num_as_index(nums: list) -> int:
     :param nums: list of non-negative integers.
     :return: element value in the specific index.
     """
-    pass
+    first_indx = nums[0]
+    last_indx = nums[-1]
+    min_indx = min(first_indx, last_indx)
+    if min_indx <= len(nums):
+        return nums[min_indx]
+    else:
+        return min_indx
 
 
 def max_duplicate(nums):
@@ -95,7 +101,3 @@ def max_duplicate(nums):
         return max(nums)
     else:
         return None
-
-print(max_duplicate([1, 2, 3]))
-print(max_duplicate([1, 2, 2]))
-print(max_duplicate([1, 2, 2, 1, 1]))
