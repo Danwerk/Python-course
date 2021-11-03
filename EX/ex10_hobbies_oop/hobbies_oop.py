@@ -89,6 +89,8 @@ def sort_people_and_hobbies(people_list: list) -> list:
     :return: sorted list of people.
     """
     sorted_people = sorted(people_list, key=lambda p: p.full_name)
+    for person in sorted_people:
+        person.hobbies.sort()
     return sorted_people
 
 
