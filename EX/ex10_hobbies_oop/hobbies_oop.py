@@ -102,11 +102,11 @@ if __name__ == '__main__':
     person3 = Person("Elon", "Musk", ["late_capitalism", "space", "cars"])
     people = [person1, person2, person3]
 
-    #print(filter_by_hobby(people, "space"))  # -> [JeffBezos, ElonMusk]
+    print(filter_by_hobby(people, "space"))  # -> [JeffBezos, ElonMusk]
 
-    #print(sort_by_most_hobbies(people))  # -> [JeffBezos, ElonMusk, MariKukk]
+    print(sort_by_most_hobbies(people))  # -> [JeffBezos, ElonMusk, MariKukk]
 
     print(sort_by_least_hobbies(people))   # -> [ElonMusk, MariKukk, JeffBezos]
 
-    #print(sort_people_and_hobbies(people))  # -> [ElonMusk, JeffBezos, MariKukk]
-    #print(person1.hobbies)  # -> ['biking', 'dancing', 'programming']
+    print(sort_people_and_hobbies(people))  # -> [ElonMusk, JeffBezos, MariKukk]
+    print(person1.hobbies)  # -> ['biking', 'dancing', 'programming']
