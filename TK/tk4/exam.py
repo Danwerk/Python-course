@@ -37,7 +37,7 @@ def near_ten(nr):
         return True
     else:
         return False
-print(near_ten(10))
+
 
 def middle_chars(s: str) -> str:
     """Return two chars in the middle of string.
@@ -98,6 +98,8 @@ def max_duplicate(nums):
         if duplicate_list[i] == duplicate_list[i - 1]:
             return duplicate_list[i]
     return None
+
+
 print(max_duplicate([1, 2, 3, 3]))
 print(max_duplicate([1, 2, 4, 2]))
 print(max_duplicate([1, 2, 2, 1, 1]))
