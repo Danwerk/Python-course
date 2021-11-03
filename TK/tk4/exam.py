@@ -37,7 +37,7 @@ def near_ten(nr):
         return True
     else:
         return False
-print(near_ten(999))
+print(near_ten(10))
 
 def middle_chars(s: str) -> str:
     """Return two chars in the middle of string.
@@ -93,15 +93,11 @@ def max_duplicate(nums):
     :param nums: List of integers
     :return: Maximum element with duplicate. None if no duplicate found.
     """
-    count = 0
-    for i in range(len(nums)):
-        if nums[i] == max(nums):
-            count += 1
-    if count >= 1:
-        return max(nums)
-    else:
-        return None
-
+    duplicate_list = sorted(nums, reverse=True)
+    for i in range(1, len(duplicate_list)):
+        if duplicate_list[i] == duplicate_list[i - 1]:
+            return duplicate_list[i]
+    return None
 print(max_duplicate([1, 2, 3, 3]))
 print(max_duplicate([1, 2, 4, 2]))
 print(max_duplicate([1, 2, 2, 1, 1]))
