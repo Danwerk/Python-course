@@ -62,9 +62,10 @@ def sort_by_most_hobbies(people_list: list) -> list:
     :param people_list: list of people to sort.
     :return: sorted list of people.
     """
-    #sorted_people = sorted(people_list, key=lambda p: (len(p.hobbies), p.full_name))
 
-    #return sorted_people
+    sorted_people = sorted(people_list, key=lambda p: len(p.full_name), reverse=True)
+    sorted_people = sorted(sorted_people, key=lambda p: len(p.hobbies), reverse = True)
+    return sorted_people
 
 
 def sort_by_least_hobbies(people_list: list) -> list:
@@ -100,11 +101,11 @@ if __name__ == '__main__':
     person3 = Person("Elon", "Musk", ["late_capitalism", "space", "cars"])
     people = [person1, person2, person3]
 
-    print(filter_by_hobby(people, "space"))  # -> [JeffBezos, ElonMusk]
+   # print(filter_by_hobby(people, "space"))  # -> [JeffBezos, ElonMusk]
 
     print(sort_by_most_hobbies(people))  # -> [JeffBezos, ElonMusk, MariKukk]
 
-    print(sort_by_least_hobbies(people))   # -> [ElonMusk, MariKukk, JeffBezos]
+   # print(sort_by_least_hobbies(people))   # -> [ElonMusk, MariKukk, JeffBezos]
 
-    print(sort_people_and_hobbies(people))  # -> [ElonMusk, JeffBezos, MariKukk]
-    print(person1.hobbies)  # -> ['biking', 'dancing', 'programming']
+   # print(sort_people_and_hobbies(people))  # -> [ElonMusk, JeffBezos, MariKukk]
+    #print(person1.hobbies)  # -> ['biking', 'dancing', 'programming']
