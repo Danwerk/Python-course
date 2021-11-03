@@ -47,6 +47,7 @@ class Client:
         pass
 
 
+
 def read_from_file_into_list(filename: str) -> list:
     """
     Read from the file, make client objects and add the clients into a list.
