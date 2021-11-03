@@ -63,8 +63,8 @@ def sort_by_most_hobbies(people_list: list) -> list:
     :return: sorted list of people.
     """
 
-    sorted_people = sorted(people_list, key=lambda p: len(p.full_name), reverse=True)
-    sorted_people = sorted(sorted_people, key=lambda p: len(p.hobbies), reverse = True)
+    sorted_people = sorted(people_list, key=lambda p: p.full_name)
+    sorted_people = sorted(sorted_people, key=lambda p: len(p.hobbies), reverse=True)
     return sorted_people
 
 
