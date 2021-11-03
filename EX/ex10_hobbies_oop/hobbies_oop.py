@@ -46,7 +46,7 @@ def filter_by_hobby(people_list: list, hobby: str) -> list:
     :return: filtered list of people.
     """
     ret = []
-    for person in people:
+    for person in people_list:
         if hobby in person.hobbies:
             ret.append(person)
     return ret
