@@ -93,13 +93,13 @@ def largest_earnings_per_day(filename: str) -> Optional[Client]:
     """
     ret = []
     people = read_from_file_into_list(filename)
-    sorted_people = sorted(people, key=lambda p: p.earnings_per_day(), reverse=True)
-    sorted_people = sorted(sorted_people, key=lambda p: p.account_age)
+    sorted_people = sorted(people, key=lambda p: p.account_age)
+    sorted_people = sorted(sorted_people, key=lambda p: p.earnings_per_day(), reverse=True)
     for person in sorted_people:
         if Client.earnings_per_day(person) > 0:
             ret.append(person)
-            best = ret[0]
-            return best
+
+    return ret[0]
 
 
 def largest_loss_per_day(filename: str) -> Optional[Client]:
