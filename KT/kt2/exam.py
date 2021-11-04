@@ -36,7 +36,12 @@ def take_partial(text: str, leave_count: int, take_count: int) -> str:
     take_partial("abcdef", 0, 1) => "abcdef"
     take_partial("abcdef", 1, 0) => ""
     """
-    pass
+
+    list1 = list(text.split(' '))
+    print(list1)
+print(take_partial("abcdef", 2, 3))
+print(take_partial("abcdef", 0, 1))
+print(take_partial("abcdef", 1, 0))
 
 
 def min_diff(nums):
@@ -53,7 +58,16 @@ def min_diff(nums):
     :param nums: list of ints, at least 2 elements.
     :return: min diff between 2 numbers.
     """
-    pass
+    ret = []
+    min_arg = min(nums)
+    ret.append(min_arg)
+    nums.remove(min_arg)
+    min_arg = min(nums)
+    ret.append(min_arg)
+    ret.sort()
+
+    return ret[1] - ret[0]
+print(min_diff([1, 9, 17]))
 
 
 def get_symbols_by_occurrences(text: str) -> dict:
