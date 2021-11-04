@@ -104,6 +104,7 @@ def largest_loss_per_day(filename: str) -> Optional[Client]:
     """
     pass
 
+
 if __name__ == '__main__':
 
     print(read_from_file_into_list("clients_info.txt"))  # -> [Ann, Mark, Josh, Jonah, Franz]
