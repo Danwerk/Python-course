@@ -44,6 +44,8 @@ def take_partial(text: str, leave_count: int, take_count: int) -> str:
         text = text.replace(b, '')
         new_str += b
     return new_str
+
+
 print(take_partial("hellooooo", 1, 3))
 print(take_partial("abcdef", 0, 1))
 print(take_partial("abcdef", 1, 0))
@@ -93,4 +95,4 @@ def get_symbols_by_occurrences(text: str) -> dict:
         big_dict.update(dict)
         big_dict.update(temp)
     return big_dict
-#print(get_symbols_by_occurrences("hello"))
+# print(get_symbols_by_occurrences("hello"))
