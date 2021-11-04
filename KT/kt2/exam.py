@@ -36,12 +36,17 @@ def take_partial(text: str, leave_count: int, take_count: int) -> str:
     take_partial("abcdef", 0, 1) => "abcdef"
     take_partial("abcdef", 1, 0) => ""
     """
-
-    list1 = list(text.split(' '))
-    print(list1)
-#print(take_partial("abcdef", 2, 3))
-#print(take_partial("abcdef", 0, 1))
-#print(take_partial("abcdef", 1, 0))
+    new_str = ''
+    while text != '':
+        a = text[:leave_count]
+        text = text.replace(a, '')
+        b = text[:take_count]
+        text = text.replace(b, '')
+        new_str += b
+    return new_str
+print(take_partial("abcdef", 2, 3))
+print(take_partial("abcdef", 0, 1))
+print(take_partial("abcdef", 1, 0))
 
 
 def min_diff(nums):
@@ -65,17 +70,6 @@ def min_diff(nums):
         ret.append(minimum)
     return min(ret)
 
-    '''ret = []
-    min_arg = min(nums)
-    ret.append(min_arg)
-    nums.remove(min_arg)
-    min_arg = min(nums)
-    ret.append(min_arg)
-    ret.sort()
-
-    return ret[1] - ret[0]
-    '''
-print(min_diff([1,2,3]))
 
 def get_symbols_by_occurrences(text: str) -> dict:
     """
