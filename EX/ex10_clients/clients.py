@@ -1,6 +1,6 @@
 """Client."""
 from typing import Optional
-import csv
+
 
 class Client:
     """
@@ -33,19 +33,19 @@ class Client:
     def __repr__(self):
         """
         Client representation.
+
         :return: clients name
         """
         return self.name
 
     def earnings_per_day(self):
         """
-        Clients earnings per day since the start.
+        Client earnings per day since the start.
 
         You can either calculate the value or
         save it into a new attribute and return the value.
         """
         pass
-
 
 
 def read_from_file_into_list(filename: str) -> list:
