@@ -39,7 +39,7 @@ def take_partial(text: str, leave_count: int, take_count: int) -> str:
     new_str = ''
     while text != '':
         a = text[:leave_count]
-        text = text.replace(a[0:leave_count], '')
+        text = text.replace(a, '', len(a))
         b = text[:take_count]
         text = text.replace(b, '')
         new_str += b
