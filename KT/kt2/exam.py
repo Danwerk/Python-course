@@ -88,7 +88,7 @@ def get_symbols_by_occurrences(text: str) -> dict:
         if w not in dict:
             dict[w] = count
         else:
-            dict[w] = count + 1
+            dict[w] = dict[w] + 1
     new_dict = {}
     for i in dict.items():
         key = i[1]
@@ -101,4 +101,4 @@ def get_symbols_by_occurrences(text: str) -> dict:
     return new_dict
 
 
-print(get_symbols_by_occurrences("hello"))
+print(get_symbols_by_occurrences("abcaba"))
