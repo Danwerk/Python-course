@@ -113,7 +113,17 @@ def largest_loss_per_day(filename: str) -> Optional[Client]:
     :param filename: name of file to get info from.
     :return: client with largest loss.
     """
-    pass
+    ret = []
+    people = read_from_file_into_list(filename)
+    sorted_people = sorted(people, key=lambda p: p.account_age)
+    sorted_people = sorted(sorted_people, key=lambda p: p.earnings_per_day())
+    for person in sorted_people:
+        if Client.earnings_per_day(person) < 0:
+            ret.append(person)
+    if ret == []:
+        return None
+    else:
+        return ret[0]
 
 
 if __name__ == '__main__':
