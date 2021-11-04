@@ -55,17 +55,15 @@ def read_from_file_into_list(filename: str) -> list:
     :param filename: name of file to get info from.
     :return: list of clients.
     """
-    csv_list = []
-    names = []
-    with open(filename) as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=',')
-        for row in csv_reader:
-            csv_list.append(row)
-    for list in csv_list:
-        names.append(list[0])
-    return names
-
-    re
+    ret = []
+    with open(filename, 'r') as f:
+        f = f.readlines()
+        for line in f:
+            clients = line.split(',')
+            client = clients[0]
+            client = Client(client, clients[1], int(clients[2]), int(clients[3]), int(clients[4]))
+            ret.append(client)
+    return ret
 
 
 def filter_by_bank(filename: str, bank: str) -> list:
@@ -102,8 +100,8 @@ def largest_loss_per_day(filename: str) -> Optional[Client]:
     """
     pass
 
-
 if __name__ == '__main__':
+
     print(read_from_file_into_list("clients_info.txt"))  # -> [Ann, Mark, Josh, Jonah, Franz]
 
     print(filter_by_bank("clients_info.txt", "Sprint"))  # -> [Ann, Mark]
