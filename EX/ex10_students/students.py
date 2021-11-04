@@ -88,7 +88,8 @@ def sort_by_best_grade(student_list: list) -> list:
     :param student_list: a list of students
     :return: sorted list of succeeding students by average grade in descending order
     """
-    pass
+    sorted_people = sorted(succeeding_students(student_list), key=lambda p: p.grade, reverse=True)
+    return sorted_people
 
 
 def sort_by_worst_grade(student_list: list) -> list:
@@ -102,7 +103,8 @@ def sort_by_worst_grade(student_list: list) -> list:
     :param student_list: a list of students
     :return: sorted list of succeeding students by average grade in ascending order
     """
-    pass
+    sorted_people = sorted(succeeding_students(student_list), key=lambda p: p.grade)
+    return sorted_people
 
 
 if __name__ == '__main__':
