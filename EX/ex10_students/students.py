@@ -37,6 +37,7 @@ def filter_by_course(student_list: list, course: str) -> list:
             ret.append(student)
     return ret
 
+
 def is_failing(student: Student) -> bool:
     """
     Return true if the student is failing school.
@@ -45,7 +46,8 @@ def is_failing(student: Student) -> bool:
     :param student: a Student object
     :return: if student is failing
     """
-    pass
+    return student.grade < 1.0
+
 
 
 def succeeding_students(student_list: list) -> list:
