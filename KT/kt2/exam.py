@@ -41,12 +41,15 @@ def take_partial(text: str, leave_count: int, take_count: int) -> str:
         a = text[:leave_count]
         text = text.replace(a, '', len(a))
         b = text[:take_count]
-        text = text.replace(b, '', len(b))
-        new_str += b
+        if text == '':
+            continue
+        else:
+            text = text.replace(b, '', len(b))
+            new_str += b
     return new_str
 
 
-print(take_partial("a,b,c,d", 1, 1))
+print(take_partial("a,,,b,c,d", 1, 1))
 print(take_partial("abcdef", 0, 1))
 print(take_partial("abcdef", 1, 0))
 
