@@ -49,7 +49,6 @@ def is_failing(student: Student) -> bool:
     return student.grade < 1.0
 
 
-
 def succeeding_students(student_list: list) -> list:
     """
     Return a list of students that are not failing school.
@@ -57,7 +56,11 @@ def succeeding_students(student_list: list) -> list:
     :param student_list: a list of students
     :return: filtered list of students that are not failing
     """
-    pass
+    ret = []
+    for student in student_list:
+        if student.grade >= 1.0:
+            ret.append(student)
+    return ret
 
 
 def failing_students(student_list: list) -> list:
