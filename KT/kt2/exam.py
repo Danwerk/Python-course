@@ -39,9 +39,9 @@ def take_partial(text: str, leave_count: int, take_count: int) -> str:
 
     list1 = list(text.split(' '))
     print(list1)
-print(take_partial("abcdef", 2, 3))
-print(take_partial("abcdef", 0, 1))
-print(take_partial("abcdef", 1, 0))
+#print(take_partial("abcdef", 2, 3))
+#print(take_partial("abcdef", 0, 1))
+#print(take_partial("abcdef", 1, 0))
 
 
 def min_diff(nums):
@@ -59,6 +59,13 @@ def min_diff(nums):
     :return: min diff between 2 numbers.
     """
     ret = []
+    duplicate_list = sorted(nums, reverse=True)
+    for i in range(len(nums) - 1):
+        minimum = duplicate_list[i] - duplicate_list[i + 1]
+        ret.append(minimum)
+    return min(ret)
+
+    '''ret = []
     min_arg = min(nums)
     ret.append(min_arg)
     nums.remove(min_arg)
@@ -67,8 +74,8 @@ def min_diff(nums):
     ret.sort()
 
     return ret[1] - ret[0]
-print(min_diff([1, 9, 17]))
-
+    '''
+print(min_diff([1,2,3]))
 
 def get_symbols_by_occurrences(text: str) -> dict:
     """
@@ -79,4 +86,17 @@ def get_symbols_by_occurrences(text: str) -> dict:
     get_symbols_by_occurrences("hello") => {1: ['e', 'o', 'h'], 2: ['l']}
     get_symbols_by_occurrences("abcaba") => {2: ['b'], 1: ['c'], 3: ['a']}
     """
-    pass
+    count0 = 0
+    big_dict = {}
+    for w in text:
+        dict = {}
+        count = 0
+        if w not in dict:
+            dict[count0] = [w]
+        if w in dict:
+            dict[count + 1].append(w)
+        temp = big_dict.copy()
+        big_dict.update(dict)
+        big_dict.update(temp)
+    return big_dict
+#print(get_symbols_by_occurrences("hello"))
