@@ -74,7 +74,11 @@ def filter_by_bank(filename: str, bank: str) -> list:
     :param bank: to filter by.
     :return: filtered list of people.
     """
-    pass
+    ret = []
+    for person in read_from_file_into_list(filename):
+        if bank in person.bank:
+            ret.append(person)
+    return ret
 
 
 def largest_earnings_per_day(filename: str) -> Optional[Client]:
