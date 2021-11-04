@@ -82,17 +82,23 @@ def get_symbols_by_occurrences(text: str) -> dict:
     get_symbols_by_occurrences("hello") => {1: ['e', 'o', 'h'], 2: ['l']}
     get_symbols_by_occurrences("abcaba") => {2: ['b'], 1: ['c'], 3: ['a']}
     """
-    count0 = 0
-    big_dict = {}
+    dict = {}
     for w in text:
-        dict = {}
-        count = 0
+        count = 1
         if w not in dict:
-            dict[count0] = [w]
-        if w in dict:
-            dict[count + 1].append(w)
-        temp = big_dict.copy()
-        big_dict.update(dict)
-        big_dict.update(temp)
-    return big_dict
-# print(get_symbols_by_occurrences("hello"))
+            dict[w] = count
+        else:
+            dict[w] = count + 1
+    new_dict = {}
+    for i in dict.items():
+        key = i[1]
+        value = i[0]
+        if key not in new_dict:
+            new_dict[key] = [value]
+
+        else:
+            new_dict[key].append(value)
+    return new_dict
+
+
+print(get_symbols_by_occurrences("hello"))
