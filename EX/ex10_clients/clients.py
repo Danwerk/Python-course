@@ -45,7 +45,8 @@ class Client:
         You can either calculate the value or
         save it into a new attribute and return the value.
         """
-        pass
+        money_per_day = (self.current_amount - self.starting_amount) / self.account_age
+        return money_per_day
 
 
 def read_from_file_into_list(filename: str) -> list:
@@ -90,7 +91,15 @@ def largest_earnings_per_day(filename: str) -> Optional[Client]:
     :param filename: name of file to get info from.
     :return: client with largest earnings.
     """
-    pass
+    ret = []
+    people = read_from_file_into_list(filename)
+    sorted_people = sorted(people, key=lambda p: p.earnings_per_day(), reverse=True)
+    sorted_people = sorted(sorted_people, key=lambda p: p.account_age)
+    for person in sorted_people:
+        if Client.earnings_per_day(person) > 0:
+            ret.append(person)
+            best = ret[0]
+            return best
 
 
 def largest_loss_per_day(filename: str) -> Optional[Client]:
@@ -107,9 +116,9 @@ def largest_loss_per_day(filename: str) -> Optional[Client]:
 
 if __name__ == '__main__':
 
-    print(read_from_file_into_list("clients_info.txt"))  # -> [Ann, Mark, Josh, Jonah, Franz]
+    #print(read_from_file_into_list("clients_info.txt"))  # -> [Ann, Mark, Josh, Jonah, Franz]
 
-    print(filter_by_bank("clients_info.txt", "Sprint"))  # -> [Ann, Mark]
+    #print(filter_by_bank("clients_info.txt", "Sprint"))  # -> [Ann, Mark]
 
     print(largest_earnings_per_day("clients_info.txt"))  # -> Josh
 
