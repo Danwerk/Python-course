@@ -70,7 +70,11 @@ def failing_students(student_list: list) -> list:
     :param student_list: a list of students
     :return: filtered list of students that are failing
     """
-    pass
+    ret = []
+    for student in student_list:
+        if student.grade < 1.0:
+            ret.append(student)
+    return ret
 
 
 def sort_by_best_grade(student_list: list) -> list:
