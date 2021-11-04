@@ -98,8 +98,10 @@ def largest_earnings_per_day(filename: str) -> Optional[Client]:
     for person in sorted_people:
         if Client.earnings_per_day(person) > 0:
             ret.append(person)
-
-    return ret[0]
+    if ret == []:
+        return None
+    else:
+        return ret[0]
 
 
 def largest_loss_per_day(filename: str) -> Optional[Client]:
