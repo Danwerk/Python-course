@@ -37,7 +37,7 @@ def take_partial(text: str, leave_count: int, take_count: int) -> str:
     take_partial("abcdef", 1, 0) => ""
     """
     new_str = ''
-    for i in range(len(text)):
+    for i in text:
         a = text[:leave_count]
         text = text.replace(a, '')
         b = text[:take_count]
