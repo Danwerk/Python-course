@@ -87,8 +87,11 @@ def min_diff(nums):
     :return: Min diff
     """
     min_diff = min(nums[0], nums[-1])
+    max_diff = max(nums[0], nums[-1])
     if min_diff < len(nums):
         return nums[min_diff] - min_diff
+    elif min_diff >= len(nums) and max_diff < len(nums):
+        return nums[max_diff] - max_diff
     else:
         return -1
 
