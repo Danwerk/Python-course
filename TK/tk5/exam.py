@@ -41,11 +41,6 @@ def alarm_clock(day, vacation):
     elif 0 <= day <= 6 and vacation == False:
         return f'10:00'
 
-print(alarm_clock(1, False))
-print(alarm_clock(3, False))
-print(alarm_clock(6, False))
-
-
 
 def combo_string(s1: str, s2: str) -> str:
     """
@@ -63,8 +58,14 @@ def combo_string(s1: str, s2: str) -> str:
     :param s2:
     :return:
     """
-    pass
+    if len(s1) < len(s2):
+        return f'{s1}{s2}{s1}'
+    else:
+        return f'{s2}{s1}{s2}'
 
+print(combo_string('', ''))
+print(combo_string('hi', 'Hello'))
+print(combo_string('aaa', 'b'))
 
 def min_diff(nums):
     """
