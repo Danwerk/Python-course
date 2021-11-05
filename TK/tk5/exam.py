@@ -33,13 +33,13 @@ def alarm_clock(day, vacation):
     :return: String when to set alarm clock.
     """
     if 0 <= day <= 4 and vacation is True:
-        return f'10:00'
+        return '10:00'
     elif 0 <= day <= 4 and vacation is False:
-        return f'08:00'
+        return '08:00'
     elif 5 <= day <= 6 and vacation is True:
-        return f'off'
+        return 'off'
     elif 0 <= day <= 6 and vacation is False:
-        return f'10:00'
+        return '10:00'
 
 
 def combo_string(s1: str, s2: str) -> str:
@@ -63,9 +63,6 @@ def combo_string(s1: str, s2: str) -> str:
     else:
         return f'{s2 + s1 + s2}'
 
-print(combo_string('hello', 'hiasdf'))
-print(combo_string('hi', 'Hello'))
-print(combo_string('aaa', 'b'))
 
 def min_diff(nums):
     """
