@@ -32,13 +32,13 @@ def alarm_clock(day, vacation):
     :param vacation: Whether it is vacation.
     :return: String when to set alarm clock.
     """
-    if 0 <= day <= 4 and vacation == True:
+    if 0 <= day <= 4 and vacation is True:
         return f'10:00'
-    elif 0 <= day <= 4 and vacation == False:
+    elif 0 <= day <= 4 and vacation is False:
         return f'08:00'
-    elif 5 <= day <= 6 and vacation == True:
+    elif 5 <= day <= 6 and vacation is True:
         return f'off'
-    elif 0 <= day <= 6 and vacation == False:
+    elif 0 <= day <= 6 and vacation is False:
         return f'10:00'
 
 
