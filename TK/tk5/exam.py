@@ -59,11 +59,11 @@ def combo_string(s1: str, s2: str) -> str:
     :return:
     """
     if len(s1) < len(s2):
-        return f'{s1}{s2}{s1}'
+        return f'{s1 + s2 + s1}'
     else:
-        return f'{s2}{s1}{s2}'
+        return f'{s2 + s1 + s2}'
 
-print(combo_string('', ''))
+print(combo_string('hello', 'hiasdf'))
 print(combo_string('hi', 'Hello'))
 print(combo_string('aaa', 'b'))
 
