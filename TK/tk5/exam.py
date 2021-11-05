@@ -32,7 +32,19 @@ def alarm_clock(day, vacation):
     :param vacation: Whether it is vacation.
     :return: String when to set alarm clock.
     """
-    pass
+    if 0 <= day <= 4 and vacation == True:
+        return f'10:00'
+    elif 0 <= day <= 4 and vacation == False:
+        return f'08:00'
+    elif 5 <= day <= 6 and vacation == True:
+        return f'off'
+    elif 0 <= day <= 6 and vacation == False:
+        return f'10:00'
+
+print(alarm_clock(1, False))
+print(alarm_clock(3, False))
+print(alarm_clock(6, False))
+
 
 
 def combo_string(s1: str, s2: str) -> str:
