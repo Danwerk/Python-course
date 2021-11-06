@@ -35,7 +35,6 @@ def find_smallest_animal_by_weight(animal_list: list) -> Animal:
     return min(animal_list, key=lambda k: k.weight_range[0])
 
 
-
 def list_species_and_scientific_names(animal_list: list) -> list:
     """
     The zoo needs a list of animals with their scientific names for the public website.
@@ -43,7 +42,7 @@ def list_species_and_scientific_names(animal_list: list) -> list:
     :param animal_list: input list of animals
     :return: list of tuples, where we have the species name and scientific name
     """
-    pass
+    return list(map(lambda s: (s.species, s.scientific_name), animal_list))
 
 
 def find_how_many_pumpkins_are_needed_to_feed_animals(animal_list: list) -> int:
