@@ -97,7 +97,7 @@ def sort_hashtags_by_popularity(tweets: list) -> list:
     ret = []
     dict = {}
     for person in tweets:
-        regex = re.findall(r"#[A-Za-z]+", person.content)
+        regex = re.findall(r"#.*", person.content)
         regex = ''.join(regex)
         if regex not in dict:
             dict[regex] = person.retweets
@@ -114,9 +114,9 @@ def sort_hashtags_by_popularity(tweets: list) -> list:
 
 
 if __name__ == '__main__':
-    tweet1 = Tweet("@realDonaldTrump", "Despite the negative press covfefe #bigsmart", 1249, 54303)
-    tweet2 = Tweet("@elonmusk", "Technically, alcohol is a solution #bigsmart", 366.4, 166500)
-    tweet3 = Tweet("@CIA", "We can neither confirm nor deny that this is our first tweet. #heart", 2192, 284200)
+    tweet1 = Tweet("@realDonaldTrump", "Despite the negative press covfefe #Bigsmart", 1249, 54303)
+    tweet2 = Tweet("@elonmusk", "Technically, alcohol is a solution #bigsmart", 366.4, 54303)
+    tweet3 = Tweet("@CIA", "We can neither confirm nor deny that this is our first tweet. #heart", 2192, 54303)
     tweets = [tweet1, tweet2, tweet3]
 
     print(find_fastest_growing(tweets).user)  # -> "@elonmusk"
@@ -131,4 +131,4 @@ if __name__ == '__main__':
     print(filtered_by_hashtag[0].user)  # -> "@elonMusk"
 
     sorted_hashtags = sort_hashtags_by_popularity(tweets)
-    print(sorted_hashtags[0])  # -> "#heart"
+    print(sorted_hashtags)  # -> "#heart"
