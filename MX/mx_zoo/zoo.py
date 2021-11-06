@@ -67,7 +67,7 @@ def sort_alphabetically_by_scientific_name(animal_list: list) -> list:
     :param animal_list: input list
     :return: sorted list of animals
     """
-    pass
+    return sorted(animal_list, key=lambda p: p.scientific_name)
 
 
 def find_animals_whose_height_is_less_than(animal_list: list, height_limit: int) -> list:
