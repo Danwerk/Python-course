@@ -103,7 +103,8 @@ def sort_hashtags_by_popularity(tweets: list) -> list:
             dict[regex] = person.retweets
         else:
             dict[regex] = dict[regex] + person.retweets
-    sorted_dict = {k: v for k, v in sorted(dict.items(), key=lambda item: item[1], reverse=True)}
+    sorted_dict = {k: v for k, v in sorted(dict.items(), key=lambda item: item[0])}
+    sorted_dict = {k: v for k, v in sorted(sorted_dict.items(), key=lambda item: item[1], reverse=True)}
     for key, value in sorted_dict.items():
         ret.append(key)
     return ret
@@ -127,7 +128,7 @@ if __name__ == '__main__':
 
     filtered_by_hashtag = filter_by_hashtag(tweets, "#bigsmart")
     print(filtered_by_hashtag[0].user)  # -> "@realDonaldTrump"
-    print(filtered_by_hashtag[1].user)  # -> "@elonMusk"
+    print(filtered_by_hashtag[0].user)  # -> "@elonMusk"
 
     sorted_hashtags = sort_hashtags_by_popularity(tweets)
-    print(sorted_hashtags)  # -> "#heart"
+    print(sorted_hashtags[0])  # -> "#heart"
