@@ -1,4 +1,5 @@
 """Twitter."""
+import re
 
 
 class Tweet:
@@ -93,7 +94,22 @@ def sort_hashtags_by_popularity(tweets: list) -> list:
     :param tweets: Input list of tweets.
     :return: List of hashtags by popularity.
     """
-    pass
+    ret = []
+    dict = {}
+    for person in tweets:
+        regex = re.findall(r"#[A-Za-z]+", person.content)
+        regex = ''.join(regex)
+        if regex not in dict:
+            dict[regex] = person.retweets
+        else:
+            dict[regex] = dict[regex] + person.retweets
+    sorted_dict = {k: v for k, v in sorted(dict.items(), key=lambda item: item[1], reverse=True)}
+    for key, value in sorted_dict.items():
+        ret.append(key)
+    return ret
+
+
+
 
 
 if __name__ == '__main__':
@@ -114,4 +130,4 @@ if __name__ == '__main__':
     print(filtered_by_hashtag[1].user)  # -> "@elonMusk"
 
     sorted_hashtags = sort_hashtags_by_popularity(tweets)
-    print(sorted_hashtags[0])  # -> "#heart"
+    print(sorted_hashtags)  # -> "#heart"
