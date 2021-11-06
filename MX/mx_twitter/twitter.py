@@ -25,8 +25,8 @@ class Tweet:
 
     def calc_fastest_growing(self):
         """Calcucalte fastest growing tweet."""
-        fastest_growing = self.retweets / self.time
-        return fastest_growing
+        return self.retweets / self.time
+
 
 
 def find_fastest_growing(tweets: list) -> Tweet:
@@ -41,8 +41,7 @@ def find_fastest_growing(tweets: list) -> Tweet:
     :param tweets: Input list of tweets.
     :return: Fastest growing tweet.
     """
-    sorted_people = sorted(tweets, key=lambda p: p.calc_fastest_growing(), reverse=True)
-    return sorted_people[0]
+    return sorted(tweets, key=lambda p: p.calc_fastest_growing(), reverse=True)[0]
 
 
 def sort_by_popularity(tweets: list) -> list:
@@ -60,8 +59,7 @@ def sort_by_popularity(tweets: list) -> list:
     :return: List of tweets by popularity
     """
     sorted_people = sorted(tweets, key=lambda p: p.time)
-    sorted_people = sorted(sorted_people, key=lambda p: p.retweets, reverse=True)
-    return sorted_people
+    return sorted(sorted_people, key=lambda p: p.retweets, reverse=True)
 
 
 def filter_by_hashtag(tweets: list, hashtag: str) -> list:
