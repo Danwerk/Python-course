@@ -99,7 +99,7 @@ def sort_hashtags_by_popularity(tweets: list) -> list:
     for person in tweets:
         regex = re.findall(r"#\S*", person.content)
         regex = ''.join(regex)
-        if regex == '' or regex == '#':
+        if regex == '':
             continue
         else:
             if regex not in dict:
