@@ -99,7 +99,7 @@ def sort_hashtags_by_popularity(tweets: list) -> list:
     for person in tweets:
         regex = re.findall(r"#\S*", person.content)
         regex = ''.join(regex)
-        if regex == '':
+        if regex == '' or regex == '#':
             continue
         else:
             if regex not in dict:
@@ -117,7 +117,7 @@ def sort_hashtags_by_popularity(tweets: list) -> list:
 
 
 if __name__ == '__main__':
-    tweet1 = Tweet("@realDonaldTrump", "Despite the negative press covfefe ", 1249, 54303)
+    tweet1 = Tweet("@realDonaldTrump", "Despite the negative press covfefe #", 1249, 54303)
     tweet2 = Tweet("@elonmusk", "Technically, alcohol is a solution #Bigsmart", 366.4, 54305)
     tweet3 = Tweet("@CIA", "We can neither confirm nor deny that this is our first tweet. #heart", 2192, 54304)
     tweets = [tweet1, tweet2, tweet3]
