@@ -28,7 +28,6 @@ class Tweet:
         return self.retweets / self.time
 
 
-
 def find_fastest_growing(tweets: list) -> Tweet:
     """
     Find the fastest growing tweet.
