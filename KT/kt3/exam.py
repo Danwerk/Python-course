@@ -33,6 +33,8 @@ def only_one_pair(numbers: list) -> bool:
     sorted_nums = sorted(numbers)
     if len(numbers) == 1:
         return False
+    if sorted_nums[0] == sorted_nums[1] and sorted_nums[2] == sorted_nums[3]:
+        return False
     else:
         for i in range(len(sorted_nums) - 2):
             if sorted_nums[i] == sorted_nums[i + 1] and sorted_nums[i] != sorted_nums[i + 2]:
