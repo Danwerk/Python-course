@@ -38,11 +38,12 @@ def only_one_pair(numbers: list) -> bool:
         if sorted_nums[0] == sorted_nums[1]:
             return True
         return False
-    if len(sorted_nums) == 1 or len(sorted_nums) == 0:
+    elif len(sorted_nums) == 1 or len(sorted_nums) == 0:
         return False
-    if len(sorted_nums) >= 2:
-        if sorted_nums[0] == sorted_nums[1] and sorted_nums[1] == sorted_nums[2]:
-            return False
+    elif len(sorted_nums) > 2:
+        for k in range(1, len(sorted_nums) - 1):
+            if sorted_nums[k] == sorted_nums[k + 1] and sorted_nums[k] == sorted_nums[k - 1]:
+                return False
         else:
             for i in sorted_nums:
                 if i in some_set:
@@ -52,11 +53,10 @@ def only_one_pair(numbers: list) -> bool:
                     some_set.add(i)
             if len(check_list) == 1:
                 return True
-            else:
-                return False
+            return False
 
 print(only_one_pair([]))
-print(only_one_pair([1, 1, 0, 1,2,3,3]))
+print(only_one_pair([1,3,3,2,3]))
 print(only_one_pair([1, 2, 1, 3, 1]))
 
 
@@ -82,7 +82,10 @@ def pentabonacci(n: int) -> int:
     :param n: The last term to take into account.
     :return: Total number of odd values.
     """
-    pass
+    list = []
+    list.append()
+    if i % 2 != 0:
+        count +=1
 
 
 def swap_dict_keys_and_value_lists(d: dict) -> dict:
