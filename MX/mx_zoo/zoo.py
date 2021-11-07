@@ -57,7 +57,7 @@ def find_how_many_pumpkins_are_needed_to_feed_animals(animal_list: list) -> int:
     :return: amount of pumpkins needed to sustain all the animals over the winter (rounded up).
     """
     animals = list(filter(lambda s: 'herbivorous' in s.diet or 'omnivorous' in s.diet, animal_list))
-    return math.ceil(sum(list(map(lambda s: ((((((s.weight_range[0] + s.weight_range[1])/2) * 0.06) * 2) / 3) * 90), animals))))
+    return math.ceil(sum(list(map(lambda s: ((((((s.weight_range[0] + s.weight_range[1]) / 2) * 0.06) * 2) / 3) * 90), animals))))
 
 
 def sort_alphabetically_by_scientific_name(animal_list: list) -> list:
