@@ -55,10 +55,6 @@ def only_one_pair(numbers: list) -> bool:
                 return True
             return False
 
-print(only_one_pair([]))
-print(only_one_pair([1,3,3,2,3]))
-print(only_one_pair([1, 2, 1, 3, 1]))
-
 
 def pentabonacci(n: int) -> int:
     """
