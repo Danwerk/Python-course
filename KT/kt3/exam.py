@@ -44,6 +44,7 @@ print(only_one_pair([1, 2, 3, 1]))
 print(only_one_pair([1]))
 print(only_one_pair([1, 2, 1, 3, 1]))
 
+
 def pentabonacci(n: int) -> int:
     """
     Find the total number of odd values in the sequence up to the f(n) [included].
@@ -86,4 +87,11 @@ def swap_dict_keys_and_value_lists(d: dict) -> dict:
     swap_dict_keys_and_value_lists({}) => {}
     swap_dict_keys_and_value_lists({1: [2]}) => {2: [1]}
     """
-    pass
+    dictt = {}
+    for key, value in d.items():
+        for i in value:
+            if i not in dictt:
+                dictt[i] = [key]
+            else:
+                dictt[i].append(key)
+    return dictt
