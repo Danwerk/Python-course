@@ -57,7 +57,16 @@ def find_how_many_pumpkins_are_needed_to_feed_animals(animal_list: list) -> int:
     :param animal_list: input list
     :return: amount of pumpkins needed to sustain all the animals over the winter (rounded up).
     """
-    pass
+    animals = list(filter(lambda s: 'herbivorous' in s.diet or 'omnivorous' in s.diet, animal_list))
+    return sum(list(map(lambda s: math.ceil(((((((s.weight_range[0] + s.weight_range[1])/2) * 0.06) * 2) / 3)*90)), animals)))
+    '''kaaluvahemiku keskmine ehk nt (3000 + 6000) / 2 ehk (90*2*0.06*
+    one_animal_weight = ((weight_range[0] + weight_range[1])/2)
+    eats_per_day = one_animal_weight * 0.06
+    together = 
+    eats_per_day_pumpkins = eats_per_day / 3
+    eats_for_period = eats_per_day_pumpkins * 90
+    '''
+
 
 
 def sort_alphabetically_by_scientific_name(animal_list: list) -> list:
