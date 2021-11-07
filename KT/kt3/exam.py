@@ -33,10 +33,11 @@ def only_one_pair(numbers: list) -> bool:
     sorted_nums = sorted(numbers)
     some_set = set()
     check_list = []
-
-    if len(numbers) == 1:
+    if sorted_nums[0] == sorted_nums[1]:
+        return True
+    elif len(numbers) == 1:
         return False
-    if sorted_nums[0] == sorted_nums[1] and sorted_nums[1] == sorted_nums[2]:
+    elif sorted_nums[0] == sorted_nums[1] and sorted_nums[1] == sorted_nums[2]:
         return False
     else:
         for i in sorted_nums:
@@ -51,7 +52,7 @@ def only_one_pair(numbers: list) -> bool:
             return False
 
 print(only_one_pair([1, 2, 3, 1]))
-print(only_one_pair([1]))
+print(only_one_pair([1, 1]))
 print(only_one_pair([1, 2, 1, 3, 1]))
 
 
