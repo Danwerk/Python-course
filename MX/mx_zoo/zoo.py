@@ -1,6 +1,5 @@
 """A small exercise in zookeeping."""
 import math
-from functools import reduce
 
 
 class Animal:
@@ -58,15 +57,7 @@ def find_how_many_pumpkins_are_needed_to_feed_animals(animal_list: list) -> int:
     :return: amount of pumpkins needed to sustain all the animals over the winter (rounded up).
     """
     animals = list(filter(lambda s: 'herbivorous' in s.diet or 'omnivorous' in s.diet, animal_list))
-    return math.ceil(sum(list(map(lambda s: ((((((s.weight_range[0] + s.weight_range[1])/2) * 0.06) * 2) / 3)*90), animals))))
-    '''kaaluvahemiku keskmine ehk nt (3000 + 6000) / 2 ehk (90*2*0.06*
-    one_animal_weight = ((weight_range[0] + weight_range[1])/2)
-    eats_per_day = one_animal_weight * 0.06
-    together = 
-    eats_per_day_pumpkins = eats_per_day / 3
-    eats_for_period = eats_per_day_pumpkins * 90
-    '''
-
+    return math.ceil(sum(list(map(lambda s: ((((((s.weight_range[0] + s.weight_range[1])/2) * 0.06) * 2) / 3) * 90), animals))))
 
 
 def sort_alphabetically_by_scientific_name(animal_list: list) -> list:
@@ -133,7 +124,6 @@ def create_animal_descriptions(animal_list: list) -> list:
                               f'{s.weight_range[0]} kg and {s.weight_range[1]} kg as adults.', animal_list))
 
 
-
 if __name__ == '__main__':
     elephant = Animal("African bush elephant", "Loxodonta africana", 70, (3000, 6000), (2.2, 4), "herbivorous",
                       "savannah")
@@ -145,11 +135,11 @@ if __name__ == '__main__':
     bear = Animal("Brown bear", "Ursus arctos", 33, (130, 217), (1.4, 2.8), "omnivorous", "temperate forest")
     animal_list = [elephant, fruit_bat, giraffe, lynx, bear]
 
-    #print(find_smallest_animal_by_weight(animal_list))  # Little red flying-fox
-    #print(list_species_and_scientific_names(animal_list))  # [('African bush elephant', 'Loxodonta africana'), ('Little red flying-fox', 'Pteropus scapulatus'), ('Giraffe', 'Giraffa camelopardalis'), ('Eurasian lynx', 'Lynx lynx'), ('Brown bear', 'Ursus arctos')]
+    print(find_smallest_animal_by_weight(animal_list))  # Little red flying-fox
+    print(list_species_and_scientific_names(animal_list))  # [('African bush elephant', 'Loxodonta africana'), ('Little red flying-fox', 'Pteropus scapulatus'), ('Giraffe', 'Giraffa camelopardalis'), ('Eurasian lynx', 'Lynx lynx'), ('Brown bear', 'Ursus arctos')]
     print(find_how_many_pumpkins_are_needed_to_feed_animals(animal_list))  # 22227
-    #print(sort_alphabetically_by_scientific_name(animal_list))  # [Giraffe, African bush elephant, Eurasian lynx, Little red flying-fox, Brown bear]
+    print(sort_alphabetically_by_scientific_name(animal_list))  # [Giraffe, African bush elephant, Eurasian lynx, Little red flying-fox, Brown bear]
     print(find_animals_whose_height_is_less_than(animal_list, 2))  # [Little red flying-fox, Eurasian lynx]
     print(filter_animals_based_on_diet(animal_list, "herbivorous"))  # [African bush elephant, Little red flying-fox, Giraffe]
-    #print(find_animal_with_longest_lifespan(animal_list))  # African bush elephant
+    print(find_animal_with_longest_lifespan(animal_list))  # African bush elephant
     print(create_animal_descriptions(animal_list))  # ['African bush elephant (Loxodonta africana) lives in savannah and its diet is herbivorous. These animals can live up to 70 years and they weigh between 3000 kg and 6000 kg as adults.', 'Little red flying-fox (Pteropus scapulatus) lives in tropics and its diet is herbivorous. These animals can live up to 30 years and they weigh between 0.3 kg and 0.6 kg as adults.', 'Giraffe (Giraffa camelopardalis) lives in savannah and its diet is herbivorous. These animals can live up to 25 years and they weigh between 1200 kg and 1800 kg as adults.', 'Eurasian lynx (Lynx lynx) lives in temperate forest and its diet is carnivorous. These animals can live up to 7 years and they weigh between 60 kg and 75 kg as adults.', 'Brown bear (Ursus arctos) lives in temperate forest and its diet is omnivorous. These animals can live up to 33 years and they weigh between 130 kg and 217 kg as adults.']
