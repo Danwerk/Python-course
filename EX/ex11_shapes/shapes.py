@@ -87,7 +87,7 @@ class Square(Shape):
 
         Area of the square is side * side.
         """
-        pass
+        return self.side * self.side
 
 
 class Rectangle:
@@ -110,7 +110,7 @@ class Rectangle:
         return f'Rectangle (l: {self.length}, w: {self.width}, color: {self.color})'
 
     def get_area(self) -> float:
-        pass
+        return self.width * self.length
 
 
 class Paint:
