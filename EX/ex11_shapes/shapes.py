@@ -90,7 +90,7 @@ class Square(Shape):
         return self.side * self.side
 
 
-class Rectangle:
+class Rectangle(Shape):
     """Rectangle is a subclass of Shape."""
 
     def __init__(self, color: str, length: float, width: float):
@@ -107,6 +107,12 @@ class Rectangle:
         self.width = width
 
     def __repr__(self) -> str:
+        """
+         Return representation of the Rectangle.
+
+         For this exercise, this should return a string:
+         Rectangle (l: {length}, w: {width}, color: {color})
+         """
         return f'Rectangle (l: {self.length}, w: {self.width}, color: {self.color})'
 
     def get_area(self) -> float:
