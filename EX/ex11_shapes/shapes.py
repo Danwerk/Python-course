@@ -132,7 +132,10 @@ class Paint:
 
     def get_shapes(self) -> list:
         """Return all the shapes."""
-        return self.shapes
+        ret = []
+        for i in self.shapes:
+            ret.append(i)
+        return ret
 
     def calculate_total_area(self) -> float:
         """Calculate total area of the shapes."""
