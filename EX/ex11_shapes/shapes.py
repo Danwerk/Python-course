@@ -126,7 +126,7 @@ class Paint:
         """Constructor should create a list to store all the shapes."""
         self.shapes = []
 
-    def add_shape(self, shape: Shape) -> None:
+    def add_shape(self, shape: Shape):
         """Add a shape to the program."""
         return self.shapes.append(shape)
 
