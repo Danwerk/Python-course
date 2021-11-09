@@ -128,14 +128,11 @@ class Paint:
 
     def add_shape(self, shape: Shape):
         """Add a shape to the program."""
-        return self.shapes.append(shape)
+        self.shapes.append(shape)
 
     def get_shapes(self) -> list:
         """Return all the shapes."""
-        ret = []
-        for i in self.shapes:
-            ret.append(i)
-        return ret
+        return self.shapes
 
     def calculate_total_area(self) -> float:
         """Calculate total area of the shapes."""
@@ -143,7 +140,7 @@ class Paint:
 
     def get_circles(self) -> list:
         """Return only circles."""
-        pass
+
 
     def get_squares(self) -> list:
         """Return only squares."""
@@ -161,5 +158,5 @@ if __name__ == '__main__':
     paint.add_shape(circle)
     paint.add_shape(square)
     print(paint.calculate_total_area())
-    print(paint.get_circles())
-
+    #print(paint.get_circles())
+    print(paint.get_shapes())
