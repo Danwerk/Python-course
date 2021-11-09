@@ -56,16 +56,22 @@ class Order:
 
         :return: Total volume (cm^3) as int.
         """
-        return sum(order.total_volume() for order in self.order_items)
+        return sum(order.total_volume for order in self.order_items)
 
 
 class Container:
     """Container to transport orders."""
 
-    # define constructor
+    def __init__(self, volume: int, orders: int):
+        """
+        Constructor that creates a container.
+        """
+        self.volume = volume
+        self.orders = orders
 
-    # define volume left property method
-    pass
+    @property
+    def volume_left(self):
+        return self.volume
 
 
 class OrderAggregator:
