@@ -50,7 +50,7 @@ class Order:
         ret = []
         #for q in self.order_items:
 
-        return sum(self.order_items)
+        return sum(order.quantity for order in self.order_items)
 
     @property
     def total_volume(self) -> int:
@@ -115,7 +115,7 @@ class ContainerAggregator:
 
         :param container_volume: Volume of each container created by this aggregator.
         """
-        pass
+        self.container_volume = container_volume
 
     def prepare_containers(self, orders: tuple) -> dict:
         """
