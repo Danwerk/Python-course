@@ -108,11 +108,11 @@ class Rectangle(Shape):
 
     def __repr__(self) -> str:
         """
-         Return representation of the Rectangle.
+        Return representation of the Rectangle.
 
-         For this exercise, this should return a string:
-         Rectangle (l: {length}, w: {width}, color: {color})
-         """
+        For this exercise, this should return a string:
+        Rectangle (l: {length}, w: {width}, color: {color})
+        """
         return f'Rectangle (l: {self.length}, w: {self.width}, color: {self.color})'
 
     def get_area(self) -> float:
@@ -146,7 +146,6 @@ class Paint:
     def get_circles(self) -> list:
         """Return only circles."""
         return [circle for circle in self.shapes if type(circle) == Circle]
-
 
     def get_squares(self) -> list:
         """Return only squares."""
