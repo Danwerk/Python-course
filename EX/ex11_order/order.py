@@ -47,9 +47,6 @@ class Order:
 
         :return: Total quantity as int.
         """
-        ret = []
-        #for q in self.order_items:
-
         return sum(order.quantity for order in self.order_items)
 
     @property
@@ -59,7 +56,7 @@ class Order:
 
         :return: Total volume (cm^3) as int.
         """
-        return 0
+        return sum(order.total_volume() for order in self.order_items)
 
 
 class Container:
