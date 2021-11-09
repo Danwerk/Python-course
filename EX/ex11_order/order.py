@@ -71,7 +71,7 @@ class Container:
 
     @property
     def volume_left(self):
-        return self.volume
+        return self.volume - self.orders
 
 
 class OrderAggregator:
