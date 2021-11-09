@@ -116,6 +116,11 @@ class Rectangle(Shape):
         return f'Rectangle (l: {self.length}, w: {self.width}, color: {self.color})'
 
     def get_area(self) -> float:
+        """
+        Calculate the area of the rectangle.
+
+        Area of the rectangle is length * width.
+        """
         return self.width * self.length
 
 
@@ -140,11 +145,8 @@ class Paint:
 
     def get_circles(self) -> list:
         """Return only circles."""
-        ret = []
-        for circle in self.shapes:
-            if type(circle) == Circle:
-                ret.append(circle)
-        return ret
+        return [circle for circle in self.shapes if type(circle) == Circle]
+
 
     def get_squares(self) -> list:
         """Return only squares."""
