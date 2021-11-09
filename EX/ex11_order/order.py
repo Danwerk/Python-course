@@ -119,6 +119,7 @@ class ContainerAggregator:
         :param container_volume: Volume of each container created by this aggregator.
         """
         self.container_volume = container_volume
+        self.not_used_orders = []
 
     def prepare_containers(self, orders: tuple) -> dict:
         """
