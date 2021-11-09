@@ -38,6 +38,7 @@ class Order:
         :param order_items: list of order items.
         """
         self.order_items = order_items
+        self.destination = None
 
     @property
     def total_quantity(self) -> int:
@@ -46,7 +47,7 @@ class Order:
 
         :return: Total quantity as int.
         """
-        return sum(order for order in self.order_items)
+        return sum(self.order_items)
 
     @property
     def total_volume(self) -> int:
