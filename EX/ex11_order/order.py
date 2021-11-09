@@ -47,6 +47,9 @@ class Order:
 
         :return: Total quantity as int.
         """
+        ret = []
+        #for q in self.order_items:
+
         return sum(self.order_items)
 
     @property
@@ -84,7 +87,7 @@ class OrderAggregator:
         :param item: Item to add.
         :return: None
         """
-        pass
+        self.order_items.append(item)
 
     def aggregate_order(self, customer: str, max_items_quantity: int, max_volume: int):
         """
