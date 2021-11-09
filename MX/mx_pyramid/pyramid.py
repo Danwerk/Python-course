@@ -23,27 +23,27 @@ def make_pyramid(base: int, char: str) -> list:
     :return: list
     """
     empty_string = 0
-    base_stage = (base, char, empty_string)
+    base_stage = (base, empty_string)
     tupl_to_append = [base_stage]
     next_base = base_stage
 
     if base % 2 != 0:  # odd num base
         while next_base[0] > 1:
             empty_string += 1
-            next_base = (base - 2, char, empty_string)
+            next_base = (base - 2, empty_string)
             tupl_to_append.append(next_base)
             base -= 2
 
     elif base % 2 == 0:  # even num base
         while next_base[0] > 2:
             empty_string += 1
-            next_base = (base - 2, char, empty_string)
+            next_base = (base - 2, empty_string)
             tupl_to_append.append(next_base)
             base -= 2
 
     tupl_to_append.reverse()
 
-    lis = [' ' * tupl_to_append[i][2] + tupl_to_append[i][1] * tupl_to_append[i][0] + ' ' * tupl_to_append[i][2] for i in range(len(tupl_to_append))]
+    lis = [' ' * tupl_to_append[i][1] + char * tupl_to_append[i][0] + ' ' * tupl_to_append[i][1] for i in range(len(tupl_to_append))]
     final = [list(j) for j in lis]
     return final
 
