@@ -140,15 +140,19 @@ class Paint:
 
     def get_circles(self) -> list:
         """Return only circles."""
-
+        ret = []
+        for circle in self.shapes:
+            if type(circle) == Circle:
+                ret.append(circle)
+        return ret
 
     def get_squares(self) -> list:
         """Return only squares."""
-        pass
+        return [square for square in self.shapes if type(square) == Square]
 
     def get_rectangles(self) -> list:
         """Return only rectangles."""
-        pass
+        return [rectangle for rectangle in self.shapes if type(rectangle) == Rectangle]
 
 
 if __name__ == '__main__':
@@ -158,5 +162,5 @@ if __name__ == '__main__':
     paint.add_shape(circle)
     paint.add_shape(square)
     print(paint.calculate_total_area())
-    #print(paint.get_circles())
+    print(paint.get_circles())
     print(paint.get_shapes())
