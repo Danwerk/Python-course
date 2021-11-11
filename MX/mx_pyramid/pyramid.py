@@ -48,9 +48,6 @@ def make_pyramid(base: int, char: str) -> list:
     return final
 
 
-print(make_pyramid(10, 'A'))
-
-
 def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
     """
     Join together two pyramid lists.
@@ -67,7 +64,19 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
     :param pyramid_b: list
     :return: list
     """
-    pass
+    pyramid_a.reverse()
+    pyramid_b.reverse()
+    if len(pyramid_b) > len(pyramid_a):
+        for i in range(len(pyramid_b)):
+            if i < len(pyramid_a):
+                pyramid_a[i].extend(pyramid_b[i])
+            else:
+                pass
+    for k in pyramid_a:
+        print(k)
+    return pyramid_a
+    #if len(pyramid_b) == len(pyramid_a):
+
 
 
 def to_string(pyramid: list) -> str:
@@ -86,8 +95,9 @@ def to_string(pyramid: list) -> str:
     """
     pass
 
-'''
+
 if __name__ == '__main__':
+    '''
     pyramid_a = make_pyramid(3, "A")
     print(pyramid_a)  # ->
     """
@@ -106,8 +116,8 @@ if __name__ == '__main__':
         ['a', 'a', 'a', 'a', 'a', 'a']
     ]
     """
-
-    joined = join_pyramids(pyramid_a, pyramid_b)
+'''
+    joined = join_pyramids([[' ', 'A', ' '], ['A', 'A', 'A']], [[' ', ' ', 'a', 'a', ' ', ' '], [' ', 'a', 'a', 'a', 'a', ' '], ['a', 'a', 'a', 'a', 'a', 'a']])
     print(joined)  # ->
     """
     [
@@ -124,4 +134,3 @@ if __name__ == '__main__':
      A  aaaa 
     AAAaaaaaa
     """
-'''
