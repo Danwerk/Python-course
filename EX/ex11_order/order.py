@@ -112,7 +112,7 @@ class OrderAggregator:
         # collect items to the order here
         for item in self.order_items:
             if item.customer == customer:
-                if len(self.order_items) < max_items_quantity and cur_items_vol < max_volume:
+                if item.quantity < max_items_quantity and cur_items_vol + item.total_volume <= max_volume:
                     items.append(item)
                     cur_items_vol += item.total_volume
         return Order(items)
