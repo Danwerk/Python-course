@@ -108,9 +108,13 @@ class OrderAggregator:
         :return: Order.
         """
         items = []
+        cur_items_vol = 0
         # collect items to the order here
         for item in self.order_items:
-            items.append(item)
+            if item.customer == customer:
+                if len(self.order_items) < max_items_quantity and cur_items_vol < max_volume:
+                    items.append(item)
+                    cur_items_vol += item.total_volume
         return Order(items)
 
 
@@ -159,7 +163,6 @@ if __name__ == '__main__':
     oa.add_item(order_item5)
     oa.add_item(order_item6)
     print(f'Added {len(oa.order_items)}(6 is correct) order items')
-
     order1 = oa.aggregate_order("Apple", 350, 3000)
     order1.destination = "Tallinn"
     print(f'order1 has {len(order1.order_items)}(2 is correct) order items')
