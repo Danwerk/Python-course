@@ -54,7 +54,7 @@ class Order:
         """
         Calculate and return the total volume of all items in the order.
 
-        :return: Total volume (cm3) as int.
+        :return: Total volume (cm^3) as int.
         """
         return sum(order.total_volume for order in self.order_items)
 
