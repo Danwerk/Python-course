@@ -62,7 +62,7 @@ class Order:
 class Container:
     """Container to transport orders."""
 
-    def __init__(self, volume: int, orders: int):
+    def __init__(self, volume: int, orders):
         """
         Constructor that creates a container.
         """
@@ -71,7 +71,10 @@ class Container:
 
     @property
     def volume_left(self):
-        return self.volume
+        orders_total_volume = 0
+        for order in self.orders:
+            orders_total_volume += order.total_volume
+        return self.volume - orders_total_volume
 
 
 class OrderAggregator:
