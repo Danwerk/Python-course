@@ -108,13 +108,16 @@ class OrderAggregator:
         :return: Order.
         """
         items = []
+        items2 = self.order_items.copy()
         cur_items_vol = 0
         # collect items to the order here
-        for item in self.order_items:
+        for item in items2:
             if item.customer == customer:
-                if item.quantity < max_items_quantity and cur_items_vol + item.total_volume <= max_volume:
+                if item.quantity < max_items_quantity and (cur_items_vol + item.total_volume) <= max_volume:
                     items.append(item)
                     cur_items_vol += item.total_volume
+                    self.order_items.remove(item)
+
         return Order(items)
 
 
