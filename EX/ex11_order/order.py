@@ -142,7 +142,15 @@ class ContainerAggregator:
         :param orders: tuple of orders.
         :return: dict where keys are destinations and values are containers to that destination with orders.
         """
-        return {}
+        dic = {}
+        for order in orders:
+            des = order.destination
+            if des not in dic:
+                if order.total_volume <= self.container_volume:
+                    container = Container(self.container_volume, order)
+                    dic[des] = container
+
+        return dic
 
 
 if __name__ == '__main__':
@@ -183,7 +191,6 @@ if __name__ == '__main__':
     containers = ca.prepare_containers((order1, order2, too_big_order))
     print(f'prepare_containers produced containers to {len(containers)}(1 is correct) different destination(s)')
 
-'''
     try:
         containers_to_tallinn = containers['Tallinn']
         print(f'volume of the container to tallinn is {containers_to_tallinn[0].volume}(70000 is correct) cm^3')
@@ -191,4 +198,3 @@ if __name__ == '__main__':
     except KeyError:
         print('Container to Tallinn not found!')
     print(f'{len(ca.not_used_orders)}(1 is correct) cannot be added to containers')
-'''
