@@ -45,7 +45,7 @@ class Order:
         """
         Calculate and return the sum of quantities of all items in the order.
 
-        :return: Total quantity as int.
+        :return: total quantity as int.
         """
         return sum(order.quantity for order in self.order_items)
 
