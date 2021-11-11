@@ -109,6 +109,8 @@ class OrderAggregator:
         """
         items = []
         # collect items to the order here
+        for item in self.order_items:
+            items.append(item)
         return Order(items)
 
 
