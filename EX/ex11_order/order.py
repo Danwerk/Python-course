@@ -143,6 +143,7 @@ class ContainerAggregator:
         :return: dict where keys are destinations and values are containers to that destination with orders.
         """
         dic = {}
+
         for order in orders:
             des = order.destination
             if des not in dic:
@@ -152,12 +153,11 @@ class ContainerAggregator:
                 else:
                     self.not_used_orders.append(order)
             else:
+                #container = Container(self.container_volume, [order])
                 if order.total_volume <= container.volume_left:
-                    if order.total_volume <= self.container_volume:
-                        container = Container(self.container_volume, [order])
-                        dic[des].append(container)
-                    else:
-                        self.not_used_orders.append(order)
+                    dic[des].append(container)
+                else:
+                    self.not_used_orders.append(order)
         return dic
 
 
