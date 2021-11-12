@@ -124,15 +124,16 @@ class ShopItem(OrderItem):
         :param client_type
         :return: float: the discount
         """
+        ret = 0.0
         if client_type == ClientType.Basic:
-            return 1.0
+            ret = 0.0
         elif client_type == ClientType.Bronze:
-            return 0.95
+            ret = 0.95
         elif client_type == ClientType.Silver:
-            return 0.9
+            ret = 0.9
         elif client_type == ClientType.Gold:
-            return 0.85
-
+            ret = 0.85
+        return ret
 
 class Fuel(OrderItem):
     """
