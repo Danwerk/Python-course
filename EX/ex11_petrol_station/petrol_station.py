@@ -15,10 +15,12 @@ class ClientType(Enum):
 
          1) basic (he is not a regular customer and he has no discounts)
 
-         2) bronze customer (membership in the club starts with a discount of 0.025 euros for each liter of fuel and in the store
+         2) bronze customer (membership in the club starts with a discount of 0.025 euros for each liter of fuel and
+         in the store
          5% for the goods received)
 
-         3) silver customer (II level club membership, the conditions for receiving it is that the amount of purchases is 1000 euros,
+         3) silver customer (II level club membership, the conditions for receiving it is that the amount of purchases
+         is 1000 euros,
          there is a discount on fuel in the amount of 0.05 euros and a 10% discount on goods in the store)
 
          4) gold customer (club membership level III, awarded for purchases of EUR 5,000,
@@ -84,7 +86,7 @@ class OrderItem(ABC):
         :param client_type
         :return: float: the discount
         """
-        ...
+
 
     def __hash__(self):
         """Hash for using with dictionaries."""
@@ -122,7 +124,14 @@ class ShopItem(OrderItem):
         :param client_type
         :return: float: the discount
         """
-        return 0.0
+        if client_type == ClientType.Basic:
+            return 1.0
+        elif client_type == ClientType.Bronze:
+            return 0.95
+        elif client_type == ClientType.Silver:
+            return 0.9
+        elif client_type == ClientType.Gold:
+            return 0.85
 
 
 class Fuel(OrderItem):
