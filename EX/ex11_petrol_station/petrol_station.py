@@ -59,7 +59,7 @@ class OrderItem(ABC):
 
         :return: float: price
         """
-        return 0.0
+        return self.__price
 
     def get_total_price(self, client_type: ClientType, quantity: float = 1.0) -> float:
         """
@@ -72,7 +72,8 @@ class OrderItem(ABC):
         :param quantity: quantity of a product
         :return: float: total price
         """
-        return 0.0
+        if client_type == ClientType.Basic:
+            return quantity
 
     @abstractmethod
     def get_discount(self, client_type: ClientType) -> float:
