@@ -124,16 +124,7 @@ class ShopItem(OrderItem):
         :param client_type
         :return: float: the discount
         """
-        ret = 0.0
-        if client_type == ClientType.Basic:
-            ret = 0.0
-        elif client_type == ClientType.Bronze:
-            ret = 0.95
-        elif client_type == ClientType.Silver:
-            ret = 0.9
-        elif client_type == ClientType.Gold:
-            ret = 0.85
-        return ret
+        return 0.0
 
 
 class Fuel(OrderItem):
@@ -273,7 +264,6 @@ class Client:
 
     def clear_history(self):
         """Clear the purchase history."""
-        pass
 
     def get_member_balance(self) -> float:
         """
