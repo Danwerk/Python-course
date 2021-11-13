@@ -248,7 +248,7 @@ class Client:
 
         :param value: ClientType
         """
-        pass
+        self.__client_type = value
 
     def get_balance(self) -> float:
         """
@@ -256,7 +256,7 @@ class Client:
 
         :return: float
         """
-        return 0.0
+        return self.__balance
 
     def get_history(self) -> list['Order']:
         """
@@ -266,7 +266,10 @@ class Client:
         Use deepcopy.So that changes made with the dictionary in the class do not affect the dictionary object that does not belong to the class.
         :return: list['Order']
         """
-        pass
+        ret = []
+        for his in self.__order_history:
+            ret.append(his)
+        return ret
 
     def clear_history(self):
         """Clear the purchase history."""
@@ -320,7 +323,6 @@ class PetrolStation:
         :param fuel:
         :param quantity:
         """
-        pass
 
     def add_shop_item(self, item: ShopItem, quantity: float):
         """
