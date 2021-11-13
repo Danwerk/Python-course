@@ -135,6 +135,7 @@ class ShopItem(OrderItem):
             ret = 0.85
         return ret
 
+
 class Fuel(OrderItem):
     """
     The fuel.
@@ -181,7 +182,7 @@ class Order:
 
         :return: date
         """
-        pass
+        return self.__order_date
 
     def get_final_price(self) -> float:
         """
@@ -189,6 +190,8 @@ class Order:
 
         :return: float
         """
+        #for key in self.__items:
+            
         return 0.0
 
     def __hash__(self):
@@ -229,7 +232,7 @@ class Client:
 
     def get_name(self):
         """Return client name."""
-        return ""
+        return self.__name
 
     def get_client_type(self) -> ClientType:
         """
@@ -237,7 +240,7 @@ class Client:
 
         :return: ClientType
         """
-        pass
+        return self.__client_type
 
     def set_client_type(self, value: ClientType):
         """
