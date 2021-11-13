@@ -153,14 +153,14 @@ class ContainerAggregator:
                 else:
                     self.not_used_orders.append(order)
             else:
-                #container = Container(self.container_volume, [order])
-                if order.total_volume <= container.volume_left:
-                    dic[des].append(container)
-                elif order.total_volume <= self.container_volume:
-                    container = Container(self.container_volume, [order])
-                    dic[des] = [container]
-                else:
-                    self.not_used_orders.append(order)
+                for container in dic[des]:
+                    if order.total_volume <= container.volume_left:
+                        dic[des].append(container)
+                    elif order.total_volume <= self.container_volume:
+                        container = Container(self.container_volume, [order])
+                        dic[des] = [container]
+                    else:
+                        self.not_used_orders.append(order)
         return dic
 
 
