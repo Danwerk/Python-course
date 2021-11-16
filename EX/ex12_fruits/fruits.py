@@ -45,7 +45,7 @@ class Order:
 
     def add_product(self, product):
         """Method for adding a single product to the dictionary."""
-        pass
+        self.products[product[0]] = product[1]
 
     def add_products(self, products):
         """Method for adding several products to the dictionary."""
