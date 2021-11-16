@@ -175,7 +175,7 @@ if __name__ == '__main__':
     order_item5 = OrderItem("Mööbel 24", "Diivan", 20, 200)
     order_item6 = OrderItem("Mööbel 24", "Midagi väga suurt", 20, 400)
 
-    print(order_item3.total_volume) # 60000
+    print(order_item3.total_volume)  # 60000
 
     print("Order Aggregator")
     oa = OrderAggregator()
