@@ -86,6 +86,7 @@ class OrderItem(ABC):
         :param client_type
         :return: float: the discount
         """
+        ...
 
 
     def __hash__(self):
