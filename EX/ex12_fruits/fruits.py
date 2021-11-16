@@ -19,7 +19,7 @@ class Product:
 class Order:
     """Order class."""
 
-    def __init__(self, products_name):
+    def __init__(self, products_name, products):
         """
         Order constructor.
 
@@ -108,13 +108,18 @@ class App:
         """
         pass
 
-    def add_customer(self):
+    def add_customer(self, customer):
         """Method for adding a customer to the list."""
-        pass
+        ret = []
+        ret.append(customer)
+        return ret
 
-    def add_customers(self):
+    def add_customers(self, customers: list):
         """Method for adding several customers to the list."""
-        pass
+        ret = []
+        for customer in customers:
+            ret.append(customer)
+        return ret
 
     def show_all_orders(self) -> str:
         """
@@ -136,10 +141,10 @@ class App:
 
 class Customer:
     """Customer to implement."""
-    def __init__(self, name, address, orders):
+    def __init__(self, name, address):
         self.name = name
         self.address = address
-        self.orders = orders
+        self.orders = []
 
     def get_name(self):
         return self.name
@@ -150,8 +155,8 @@ class Customer:
     def get_orders(self):
         return self.orders
 
-    def add_new_order(self):
-        pass
+    def add_new_order(self, order):
+        self.orders.append(order)
 
 
 if __name__ == '__main__':
