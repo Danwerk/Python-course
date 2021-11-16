@@ -12,7 +12,7 @@ class Product:
         self.name = name
         self.price = price
 
-    def find_product_by_name(self, name):
+    def find_product_by_name(self):
         return self.name
 
 
@@ -62,7 +62,7 @@ class App:
 
     def get_products(self) -> list:
         """Getter for products list."""
-        pass
+        return self.import_products()
 
     def get_orders(self) -> list:
         """Getter for orders list."""
@@ -128,8 +128,22 @@ class App:
 
 class Customer:
     """Customer to implement."""
+    def __init__(self, name, address, orders):
+        self.name = name
+        self.address = address
+        self.orders = orders
 
-    pass
+    def get_name(self):
+        return self.name
+
+    def get_address(self):
+        return self.address
+
+    def get_orders(self):
+        return self.orders
+
+    def add_new_order(self):
+        pass
 
 
 if __name__ == '__main__':
