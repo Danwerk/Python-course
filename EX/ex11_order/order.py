@@ -157,7 +157,8 @@ class ContainerAggregator:
                     if order.total_volume <= container.volume_left:
                         container.orders.append(order)
                         break
-                    elif order.total_volume <= self.container_volume:
+                else:
+                    if order.total_volume <= self.container_volume:
                         container = Container(self.container_volume, [order])
                         dic[des].append(container)
                     else:
