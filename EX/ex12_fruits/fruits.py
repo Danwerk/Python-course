@@ -19,14 +19,18 @@ class Product:
 class Order:
     """Order class."""
 
-    def __init__(self):
+    def __init__(self, products_name):
         """
         Order constructor.
 
         Expected default customer parameter starting from Part 3. Also, products dictionary
         is expected to be created and products names set as a helper.
         """
-        pass
+        self.products = {}
+        self.products_name = products_name
+
+    def get_products(self):
+        return self.products
 
     def get_products_string(self) -> str:
         """
@@ -62,7 +66,7 @@ class App:
 
     def get_products(self) -> list:
         """Getter for products list."""
-        return self.import_products()
+        pass
 
     def get_orders(self) -> list:
         """Getter for orders list."""
