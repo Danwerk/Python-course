@@ -68,13 +68,20 @@ class App:
         """Getter for orders list."""
         pass
 
-    def import_products(self) -> list[Product]:
+    def import_products(self, filename='pricelist.txt') -> list[Product]:
         """
         Import products from a file, return list of Product objects.
 
         Filename is an argument here.
         """
-        pass
+        ret = []
+        with open(filename, 'r') as f:
+            f = f.readlines()
+            for line in f:
+                products = line.split('-')
+                product = Product(products[0], products[1])
+                ret.append(product)
+        return ret
 
     def order_products(self):
         """Order products in general.
