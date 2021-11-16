@@ -19,7 +19,7 @@ class Product:
 class Order:
     """Order class."""
 
-    def __init__(self, products_name, products):
+    def __init__(self):
         """
         Order constructor.
 
@@ -27,7 +27,7 @@ class Order:
         is expected to be created and products names set as a helper.
         """
         self.products = {}
-        self.products_name = products_name
+
 
     def get_products(self):
         return self.products
