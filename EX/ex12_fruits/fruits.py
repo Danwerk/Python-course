@@ -27,7 +27,7 @@ class Order:
         is expected to be created and products names set as a helper.
         """
         self.products = {}
-
+        self.products_names = set()
 
     def get_products(self):
         return self.products
@@ -63,7 +63,7 @@ class App:
 
     def __init__(self):
         """App constructor, no arguments expected."""
-        pass
+
 
     def get_products(self) -> list:
         """Getter for products list."""
@@ -97,7 +97,7 @@ class App:
         """
         pass
 
-    def order(self):
+    def order(self, name: str, products: list):
         """
         Method for ordering products for a customer.
 
@@ -118,7 +118,7 @@ class App:
             ret.append(customer)
         return ret
 
-    def show_all_orders(self) -> str:
+    def show_all_orders(self, is_summary: bool) -> str:
         """
         Method for returning all orders for all customers.
 
