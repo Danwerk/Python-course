@@ -146,6 +146,9 @@ class App:
             if product.name == name:
                 return product
 
+    def get_all_customers(self):
+        return self.all_customers
+
 
 class Customer:
     """Customer to implement."""
