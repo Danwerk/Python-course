@@ -74,7 +74,7 @@ class App:
         """Getter for products list."""
         return self.products
 
-    def get_all_customers(self):
+    def get_customers(self):
         return self.all_customers
 
     def get_orders(self) -> list:
