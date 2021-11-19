@@ -64,7 +64,7 @@ class App:
     def __init__(self):
         """App constructor, no arguments expected."""
         self.products = self.import_products('pricelist.txt')
-        self.order = []
+        self.orders = []
 
     def get_products(self) -> list:
         """Getter for products list."""
@@ -85,7 +85,7 @@ class App:
             f = f.readlines()
             for line in f:
                 products = line.split(' - ')
-                product = Product(products[0], products[1])
+                product = Product(products[0], products[1].strip())
                 ret.append(product)
         return ret
 
@@ -101,7 +101,7 @@ class App:
             order.add_product(products)
         elif isinstance(products, list):
             order.add_products(products)
-        self.order.append(order)
+        self.orders.append(order)
 
     def order(self, name: str, products: list):
         """
