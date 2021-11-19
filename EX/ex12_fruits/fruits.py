@@ -125,7 +125,7 @@ class App:
             customer_name = customer_name.get_name()
             if customer_name == name:
                 self.order_products(products)
-
+        return self.orders
 
     def add_customer(self, customer):
         """Method for adding a customer to the list."""
