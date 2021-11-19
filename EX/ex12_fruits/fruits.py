@@ -50,11 +50,7 @@ class Order:
     def add_products(self, products):
         """Method for adding several products to the dictionary."""
         for product in products:
-            if product[0] in self.order_products:
-                self.order_products[product[0]] += product[1]
-            else:
-                self.order_products[product[0]] = product[1]
-
+            return self.add_product(product)
 
 
 class App:
