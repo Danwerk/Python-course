@@ -85,7 +85,7 @@ class App:
             f = f.readlines()
             for line in f:
                 products = line.split(' - ')
-                product = Product(products[0], products[1].replace('\n', ''))
+                product = Product(products[0], float(products[1].replace('\n', '')))
                 ret.append(product)
         return ret
 
