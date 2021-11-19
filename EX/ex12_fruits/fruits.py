@@ -155,16 +155,20 @@ class Customer:
         self.orders = []
 
     def get_name(self):
+        """Getter for name."""
         return self.name
 
     def get_address(self):
+        """Getter for address."""
         return self.address
 
-    def get_orders(self):
-        return self.orders
-
     def add_new_order(self, order):
+        """Add new order to the orders list."""
         self.orders.append(order)
+
+    def get_orders(self):
+        """Getter for orders list."""
+        return self.orders
 
 
 if __name__ == '__main__':
