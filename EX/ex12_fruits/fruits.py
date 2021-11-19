@@ -122,6 +122,7 @@ class App:
         Products here is list of tuples.
         """
         for customer_name in self.all_customers:
+            customer_name = customer_name.get_name()
             if customer_name == name:
                 self.order_products(products)
 
