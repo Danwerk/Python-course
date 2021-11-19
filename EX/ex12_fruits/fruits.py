@@ -1,5 +1,6 @@
 """Fruits delivery application."""
 
+
 class Product:
     """Product class."""
 
@@ -157,7 +158,9 @@ class App:
 
 class Customer:
     """Customer to implement."""
+
     def __init__(self, name, address):
+        """Customer constructor."""
         self.name = name
         self.address = address
         self.orders = []
