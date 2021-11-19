@@ -65,6 +65,7 @@ class App:
         """App constructor, no arguments expected."""
         self.products = self.import_products('pricelist.txt')
         self.orders = []
+        self.customers = []
 
     def get_products(self) -> list:
         """Getter for products list."""
@@ -113,16 +114,12 @@ class App:
 
     def add_customer(self, customer):
         """Method for adding a customer to the list."""
-        ret = []
-        ret.append(customer)
-        return ret
+        self.customers.append(customer)
 
     def add_customers(self, customers: list):
         """Method for adding several customers to the list."""
-        ret = []
         for customer in customers:
-            ret.append(customer)
-        return ret
+            self.customers.append(customer)
 
     def show_all_orders(self, is_summary: bool) -> str:
         """
