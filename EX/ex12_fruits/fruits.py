@@ -125,8 +125,8 @@ class App:
             customer_name = customer_name.get_name()
             if customer_name == name:
                 self.order_products(products)
-        customer = Customer(name, products)
-        Customer.add_new_order(customer, self.orders)
+                customer = Customer(name, products)
+                Customer.add_new_order(customer, self.orders)
 
 
 
