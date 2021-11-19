@@ -101,7 +101,7 @@ class App:
             order.add_product(products)
         elif isinstance(products, list):
             order.add_products(products)
-        self.orders.append(order)
+        return self.orders.append(order)
 
     def order(self, name: str, products: list):
         """
