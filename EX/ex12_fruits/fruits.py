@@ -28,6 +28,7 @@ class Order:
         self.customer = customer
 
     def get_products(self):
+        """Getter for products dictionary."""
         return self.order_products
 
     def get_products_string(self) -> str:
@@ -54,7 +55,9 @@ class Order:
             self.add_product(product)
 
     def get_customer(self):
+        """Getter for customer."""
         return self.customer
+
 
 class App:
     """
@@ -75,6 +78,7 @@ class App:
         return self.products
 
     def get_customers(self):
+        """Getter for customers list."""
         return self.all_customers
 
     def get_orders(self) -> list:
@@ -145,10 +149,10 @@ class App:
         pass
 
     def find_product_by_name(self, name):
+        """Method for finding product by its name."""
         for product in self.products:
             if product.name == name:
                 return product
-
 
 
 class Customer:
