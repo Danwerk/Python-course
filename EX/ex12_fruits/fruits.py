@@ -50,7 +50,7 @@ class Order:
     def add_products(self, products):
         """Method for adding several products to the dictionary."""
         for product in products:
-            return self.add_product(product)
+            self.add_product(product)
 
 
 class App:
