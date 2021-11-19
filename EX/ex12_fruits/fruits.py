@@ -60,7 +60,7 @@ class App:
 
     def __init__(self):
         """App constructor, no arguments expected."""
-        self.products = []
+        self.products = self.import_products('pricelist.txt')
 
     def get_products(self) -> list:
         """Getter for products list."""
@@ -80,7 +80,7 @@ class App:
         with open(filename, 'r') as f:
             f = f.readlines()
             for line in f:
-                products = line.split('-')
+                products = line.split(' - ')
                 product = Product(products[0], products[1])
                 ret.append(product)
         return ret
