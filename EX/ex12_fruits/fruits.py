@@ -72,7 +72,7 @@ class App:
 
     def get_orders(self) -> list:
         """Getter for orders list."""
-        pass
+        return self.orders
 
     def import_products(self, filename='pricelist.txt') -> list[Product]:
         """
@@ -101,7 +101,7 @@ class App:
             order.add_product(products)
         elif isinstance(products, list):
             order.add_products(products)
-        return self.orders.append(order)
+        self.orders.append(order)
 
     def order(self, name: str, products: list):
         """
