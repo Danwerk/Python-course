@@ -23,11 +23,11 @@ class Order:
         Expected default customer parameter starting from Part 3. Also, products dictionary
         is expected to be created and products names set as a helper.
         """
-        self.products = {}
+        self.order_products = {}
         self.products_names = set()
 
     def get_products(self):
-        return self.products
+        return self.order_products
 
     def get_products_string(self) -> str:
         """
@@ -42,12 +42,15 @@ class Order:
 
     def add_product(self, product):
         """Method for adding a single product to the dictionary."""
-        self.products[product[0]] = product[1]
+        if product[0] in self.order_products:
+            self.order_products[product[0]] = self.order_products[product[0]] + product[1]
+        else:
+            self.order_products[product[0]] = product[1]
 
     def add_products(self, products):
         """Method for adding several products to the dictionary."""
         for product in products:
-            self.products[product[0]] = product[1]
+            self.order_products[product[0]] = product[1]
 
 
 class App:
