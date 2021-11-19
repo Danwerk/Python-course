@@ -16,7 +16,7 @@ class Product:
 class Order:
     """Order class."""
 
-    def __init__(self):
+    def __init__(self, customer=None):
         """
         Order constructor.
 
@@ -25,6 +25,7 @@ class Order:
         """
         self.order_products = {}
         self.products_names = set()
+        self.customer = customer
 
     def get_products(self):
         return self.order_products
@@ -52,6 +53,8 @@ class Order:
         for product in products:
             self.add_product(product)
 
+    def get_customer(self):
+        return self.customer
 
 class App:
     """
@@ -65,7 +68,7 @@ class App:
         """App constructor, no arguments expected."""
         self.products = self.import_products('pricelist.txt')
         self.orders = []
-        self.customers = []
+        self.all_customers = []
 
     def get_products(self) -> list:
         """Getter for products list."""
@@ -114,12 +117,12 @@ class App:
 
     def add_customer(self, customer):
         """Method for adding a customer to the list."""
-        self.customers.append(customer)
+        self.all_customers.append(customer)
 
     def add_customers(self, customers: list):
         """Method for adding several customers to the list."""
         for customer in customers:
-            self.customers.append(customer)
+            self.all_customers.append(customer)
 
     def show_all_orders(self, is_summary: bool) -> str:
         """
