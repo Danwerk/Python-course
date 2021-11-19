@@ -121,7 +121,10 @@ class App:
 
         Products here is list of tuples.
         """
-        pass
+        for customer_name in self.all_customers:
+            if customer_name == name:
+                self.order_products(products)
+
 
     def add_customer(self, customer):
         """Method for adding a customer to the list."""
