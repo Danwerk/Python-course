@@ -12,9 +12,6 @@ class Product:
         self.name = name
         self.price = price
 
-    def find_product_by_name(self):
-        return self.name
-
 
 class Order:
     """Order class."""
@@ -63,7 +60,7 @@ class App:
 
     def __init__(self):
         """App constructor, no arguments expected."""
-
+        self.products = []
 
     def get_products(self) -> list:
         """Getter for products list."""
@@ -134,6 +131,11 @@ class App:
     def calculate_summary(self):
         """Method for printing a summary of all orders with totals and the total for all customers' all orders."""
         pass
+
+    def find_product_by_name(self, name):
+        for product in self.products:
+            if product.name == name:
+                return product
 
 
 class Customer:
