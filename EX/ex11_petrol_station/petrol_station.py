@@ -46,6 +46,8 @@ class OrderItem(ABC):
         """
         self.__name = name
         self.__price = price
+        if self.__price < 0:
+            raise RuntimeError('not okay')
 
     def get_name(self) -> str:
         """
@@ -86,7 +88,7 @@ class OrderItem(ABC):
         :param client_type
         :return: float: the discount
         """
-        ...
+        pass
 
     def __hash__(self):
         """Hash for using with dictionaries."""
