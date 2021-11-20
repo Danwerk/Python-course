@@ -76,7 +76,12 @@ class OrderItem(ABC):
         :param quantity: quantity of a product
         :return: float: total price
         """
-        return quantity * self.get_discount(client_type)
+        ret = quantity
+        if isinstance(self, Fuel):
+            ret = quantity * self.get_discount(client_type)
+        elif isinstance(self, ShopItem):
+            ret = quantity * self.get_discount(client_type)
+        return ret
 
     @abstractmethod
     def get_discount(self, client_type: ClientType) -> float:
