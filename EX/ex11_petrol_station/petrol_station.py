@@ -281,7 +281,7 @@ class Client:
 
         :return: float: the sum
         """
-        return 0.0
+        return sum(pur for pur in self.__order_history)
 
     def buy(self, order: 'Order') -> bool:
         """
