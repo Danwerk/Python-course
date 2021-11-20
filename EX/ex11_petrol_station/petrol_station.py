@@ -178,6 +178,11 @@ class Order:
         self.__order_date = order_date
         self.__client_type = client_type
 
+        for value in self.__items.values():
+            if value < 0:
+                raise RuntimeError('not okay!')
+
+
     def get_date(self) -> date:
         """
         Return the date of purchase.
