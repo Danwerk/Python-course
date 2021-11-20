@@ -88,7 +88,6 @@ class OrderItem(ABC):
         """
         ...
 
-
     def __hash__(self):
         """Hash for using with dictionaries."""
         return hash((self.__name, self.__price))
@@ -125,7 +124,16 @@ class ShopItem(OrderItem):
         :param client_type
         :return: float: the discount
         """
-        return 0.0
+        ret = 0.0
+        if client_type == ClientType.Basic:
+            ret = 1
+        elif client_type == ClientType.Bronze:
+            ret = 0.95
+        elif client_type == ClientType.Silver:
+            ret = 0.9
+        elif client_type == ClientType.Gold:
+            ret = 0.85
+        return ret
 
 
 class Fuel(OrderItem):
