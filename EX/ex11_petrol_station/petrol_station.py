@@ -338,7 +338,7 @@ class PetrolStation:
         :param quantity:
         """
         if item in self.__shop_item_stock:
-            self.__shop_item_stock[item] = self.__shop_item_stock[item] * quantity
+            self.__shop_item_stock[item] += quantity
         else:
             self.__shop_item_stock[item] = quantity
 
