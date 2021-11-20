@@ -192,9 +192,10 @@ class Order:
 
         :return: float
         """
-        #for key in self.__items:
-            
-        return 0.0
+        ret = 0
+        for key, val in self.__items.items():
+            ret += key.get_total_price(self.__client_type) ** val
+        return ret
 
     def __hash__(self):
         """Hash for using with dictionaries."""
