@@ -273,6 +273,7 @@ class Client:
 
     def clear_history(self):
         """Clear the purchase history."""
+        self.__order_history.clear()
 
     def get_member_balance(self) -> float:
         """
@@ -322,6 +323,10 @@ class PetrolStation:
         :param fuel:
         :param quantity:
         """
+        if fuel in self.__fuel_stock:
+            self.__fuel_stock[fuel] += quantity
+        else:
+            self.__fuel_stock[fuel] = quantity
 
     def add_shop_item(self, item: ShopItem, quantity: float):
         """
@@ -330,7 +335,10 @@ class PetrolStation:
         :param item:
         :param quantity:
         """
-        pass
+        if item in self.__shop_item_stock:
+            self.__shop_item_stock += quantity
+        else:
+            self.__shop_item_stock = quantity
 
     def remove_fuel(self, fuel: Fuel, quantity: float):
         """
@@ -344,7 +352,11 @@ class PetrolStation:
         :param fuel:
         :param quantity:
         """
-        pass
+        if quantity <= self.__fuel_stock[fuel]:
+            self.__fuel_stock -= quantity
+        else:
+            pass
+
 
     def remove_items(self, item: ShopItem, quantity: float):
         """
@@ -359,11 +371,11 @@ class PetrolStation:
 
     def get_fuel_dict(self) -> dict[Fuel, float]:
         """Return dict with Fuel objects as keys and quantities as values."""
-        pass
+        return self.__fuel_stock
 
     def get_shop_item_dict(self) -> dict[ShopItem, float]:
         """Return dict with ShopItem objects as keys and quantities as values."""
-        pass
+        return self.__shop_item_stock
 
     def get_sell_history(self) -> dict[Client, list[Order]]:
         """Return sell history dict where key is Client, value is a list of Orders."""
