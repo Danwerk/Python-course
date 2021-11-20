@@ -355,10 +355,9 @@ class PetrolStation:
         :param quantity:
         """
         if quantity <= self.__fuel_stock[fuel]:
-            self.__fuel_stock -= quantity
+            self.__fuel_stock[fuel] -= quantity
         else:
             raise RuntimeError("Not enough!")
-
 
     def remove_items(self, item: ShopItem, quantity: float):
         """
@@ -370,7 +369,7 @@ class PetrolStation:
         :param quantity:
         """
         if quantity <= self.__shop_item_stock[item]:
-            self.__shop_item_stock -= quantity
+            self.__shop_item_stock[item] -= quantity
         else:
             raise RuntimeError("Not enough!")
 
