@@ -427,3 +427,9 @@ class PetrolStation:
         in which case a new customer must be created with `Basic` status and a sufficient amount of money to purchase
         """
         pass
+
+
+if __name__ == '__main__':
+    item1 = ShopItem('beer', 2.12)
+    item2 = ShopItem('snickers', 2.20)
+    item3 = Fuel('95', 1.59)
