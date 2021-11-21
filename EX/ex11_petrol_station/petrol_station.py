@@ -279,8 +279,10 @@ class Client:
         Use deepcopy.So that changes made with the dictionary in the class do not affect the dictionary object that does not belong to the class.
         :return: list['Order']
         """
-        return copy.deepcopy(self.__order_history)
-
+        ret = []
+        for his in self.__order_history:
+            ret.append(his)
+        return copy.deepcopy(ret)
 
     def clear_history(self):
         """Clear the purchase history."""
