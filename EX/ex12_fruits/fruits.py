@@ -163,7 +163,7 @@ class App:
 
                 if customer.order_is_empty():
                     ret.append(f'nothing\n')
-                    ret.append(f"Total: {round(self.calculate_total(customer), 2)}\n")
+                    ret.append(f"Total: {round(self.calculate_total(customer), 2):.2f}\n")
                     ret.append('\n')
                     continue
                 else:
@@ -219,7 +219,7 @@ class App:
         total = 0.00
         for customer in self.all_customers:
             total += self.calculate_total(customer)
-        return f"{self.show_all_orders(True)} \n ALL ORDERS TOTAL: {total:.2f}"
+        return f"{self.show_all_orders(True)} \n ALL ORDERS TOTAL: {total}"
 
     def find_product_by_name(self, name):
         """Method for finding product by its name."""
