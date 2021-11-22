@@ -160,7 +160,8 @@ class App:
         if is_summary is True:
             for customer in self.all_customers:
                 ret.append(f"{str(customer)}:\n")
-                if customer.get_orders() == []:
+
+                if all(customer.get_orders()) == []:
                     ret.append(f'nothing')
                     break
                 else:
@@ -172,8 +173,12 @@ class App:
 
                     ret.append(f"Total: {round(self.calculate_total(customer), 2)}\n")
                 ret.append(f'\n')
+            ret.pop()
+            last_elem = ret[-1].replace('\n', '')
+            ret.pop()
+            ret.append(last_elem)
 
-        if is_summary is False:
+        elif is_summary is False:
             for customer in self.all_customers:
                 ret.append(f"{str(customer)}:\n")
                 if customer.get_orders() == []:
@@ -186,7 +191,10 @@ class App:
                             ret.append(f"{str_order}\n")
                             continue
                     ret.append(f'\n')
-
+            ret.pop()
+            last_elem = ret[-1].replace('\n', '')
+            ret.pop()
+            ret.append(last_elem)
         final_str = ''.join(ret)
         return final_str
 
@@ -257,6 +265,7 @@ if __name__ == '__main__':
     app.order("Svetozar", [("Grapefruit", 10)])
     app.order("Muhhamad", [("Grenades", 13), ("Cannon", 1), ("Red pepper", 666)])
     app.order("Toivo", [("Granadilla", 3), ("Chestnut", 3), ("Pitaya(Dragon Fruit)", 3)])
+    app.order("test", [("Granadilla", 3), ("Chestnut", 3), ("Pitaya(Dragon Fruit)", 3)])
     # Checking products dictionary format (we want numeric price, not string).
     print(app.get_products())
 
