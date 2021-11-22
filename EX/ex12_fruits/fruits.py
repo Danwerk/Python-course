@@ -163,6 +163,7 @@ class App:
 
                 if customer.order_is_empty():
                     ret.append(f'nothing')
+                    ret.append('\n')
                     break
                 else:
                     for order in customer.get_orders():
@@ -183,6 +184,7 @@ class App:
                 ret.append(f"{str(customer)}:\n")
                 if customer.order_is_empty():
                     ret.append(f'nothing')
+                    ret.append('\n')
                     break
                 else:
                     for order in customer.get_orders():
@@ -275,7 +277,8 @@ if __name__ == '__main__':
     app.order("Toivo", [("Granadilla", 3), ("Chestnut", 3), ("Pitaya(Dragon Fruit)", 3)])
     app.order("test", [])
     app.order("test", [])
-    app.order("test", [('Lemon', 2)])
+    app.order("test", [])
+    app.order("test", [])
     # Checking products dictionary format (we want numeric price, not string).
     print(app.get_products())
 
