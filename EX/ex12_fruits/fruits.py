@@ -165,7 +165,7 @@ class App:
                     ret.append(f'nothing\n')
                     ret.append(f"Total: {round(self.calculate_total(customer), 2)}\n")
                     ret.append('\n')
-                    break
+                    continue
                 else:
                     for order in customer.get_orders():
                         if customer.get_orders != []:
@@ -184,9 +184,9 @@ class App:
             for customer in self.all_customers:
                 ret.append(f"{str(customer)}:\n")
                 if customer.order_is_empty():
-                    ret.append(f'nothing')
+                    ret.append(f'nothing\n')
                     ret.append('\n')
-                    break
+                    continue
                 else:
                     for order in customer.get_orders():
                         if customer.get_orders() != []:
@@ -271,7 +271,9 @@ if __name__ == '__main__':
     # Ordering some food for everyone.
     app.order("Anton", [("Avocado", 2), ("Orange", 1), ("Papaya", 3), ("Cherry tomato", 2)])
     app.order("Anton", [("Avocado", 4), ("Orange", 2), ("Papaya", 3), ("Cherry tomato", 2)])
-    app.order("Rubber Duck", [("Mango Irwin", 6)])
+    app.order("Rubber Duck", [])
+    app.order("Rubber Duck", [])
+    app.order("Rubber Duck", [])
     app.order("Svetozar", [("Lemon", 1)])
     app.order("Svetozar", [("Grapefruit", 10)])
     app.order("Muhhamad", [("Grenades", 13), ("Cannon", 1), ("Red pepper", 666)])
