@@ -160,14 +160,28 @@ class App:
         if is_summary is True:
             for customer in self.all_customers:
                 ret.append(f"{str(customer)}:\n")
-                for order in customer.get_orders():
-                    if order != []:
-                        str_order = order.get_products_string()
-                        ret.append(f"{str_order}\n")
-                        break
-                else:
+                if customer.get_orders() == []:
                     ret.append(f'nothing \n')
-                ret.append(f"Total: {round(self.calculate_total(customer), 2)}\n")
+                else:
+                    for order in customer.get_orders():
+                        if customer.get_orders != []:
+                            str_order = order.get_products_string()
+                            ret.append(f"{str_order}\n")
+                            continue
+
+                    ret.append(f"Total: {round(self.calculate_total(customer), 2)}\n")
+                ret.append(f'\n')
+        if is_summary is False:
+            for customer in self.all_customers:
+                ret.append(f"{str(customer)}:\n")
+                if customer.get_orders() == []:
+                    ret.append(f'nothing \n')
+                else:
+                    for order in customer.get_orders():
+                        if customer.get_orders() != []:
+                            str_order = order.get_products_string()
+                            ret.append(f"{str_order}\n")
+                            continue
                 ret.append(f'\n')
 
         final_str = ''.join(ret)
