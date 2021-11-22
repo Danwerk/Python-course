@@ -161,7 +161,7 @@ class App:
             for customer in self.all_customers:
                 ret.append(f"{str(customer)}:\n")
                 if customer.get_orders() == []:
-                    ret.append(f'nothing \n')
+                    ret.append(f'nothing')
                 else:
                     for order in customer.get_orders():
                         if customer.get_orders != []:
@@ -175,7 +175,7 @@ class App:
             for customer in self.all_customers:
                 ret.append(f"{str(customer)}:\n")
                 if customer.get_orders() == []:
-                    ret.append(f'nothing \n')
+                    ret.append(f'nothing')
                 else:
                     for order in customer.get_orders():
                         if customer.get_orders() != []:
