@@ -87,9 +87,10 @@ class App:
             self.orders_dict[obj.name] = obj.price
 
         for customer in self.all_customers:
-            for key in customer.order_products.keys():
-                if key not in self.orders_dict:
-                    raise RuntimeError('Woopsie. There is no such product as')
+            for order in customer.get_orders():
+                for key, val in order.order_products.items():
+                    if key not in self.orders_dict:
+                        raise RuntimeError('Woopsie. There is no such product as')
 
     def get_products(self) -> list:
         """Getter for products list."""
@@ -164,7 +165,6 @@ class App:
         if is_summary is True:
             for customer in self.all_customers:
                 ret.append(f'{str(customer)}:\n')  # append customer's name.
-
                 if customer.order_is_empty():  # do this if order is empty.
                     ret.append('nothing\n')
                     ret.append(f"Total: {round(self.calculate_total(customer), 2):.2f}\n")
