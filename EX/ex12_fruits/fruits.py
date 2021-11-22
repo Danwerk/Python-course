@@ -14,6 +14,7 @@ class Product:
         self.price = price
 
     def __repr__(self):
+        """Representation for Product class."""
         return self.name
 
 
@@ -159,26 +160,25 @@ class App:
         If is_summary is true, add totals for each customer
         and also global total price.
         """
-
         ret = []
         if is_summary is True:
             for customer in self.all_customers:
-                ret.append(f'{str(customer)}:\n')
+                ret.append(f'{str(customer)}:\n')  # append customer's name.
 
-                if customer.order_is_empty():
+                if customer.order_is_empty():  # do this if order is empty.
                     ret.append('nothing\n')
                     ret.append(f"Total: {round(self.calculate_total(customer), 2):.2f}\n")
                     ret.append('\n')
                     continue
-                else:
+                else:  # here we add products
                     for order in customer.get_orders():
                         str_order = order.get_products_string()
                         ret.append(f'{str_order}\n')
                         continue
-
+                #  and here we add the total sum of customer's orders.
                 ret.append(f"Total: {round(self.calculate_total(customer), 2):.2f}\n")
                 ret.append('\n')
-            ret.pop()
+            ret.pop()  # remove newline from the end.
             last_elem = ret[-1].replace('\n', '')
             ret.pop()
             ret.append(last_elem)
@@ -209,11 +209,11 @@ class App:
         """Method for calculating total price for all customer's orders."""
         total = 0.00
         for order in customer.get_orders():
-                for key, val in order.order_products.items():
-                    if key not in self.orders_dict:
-                        total += 0.00
-                    else:
-                        total += val * self.orders_dict[key]
+            for key, val in order.order_products.items():
+                if key not in self.orders_dict:
+                    total += 0.00
+                else:
+                    total += val * self.orders_dict[key]
         return total
 
     def calculate_summary(self):
@@ -240,6 +240,7 @@ class Customer:
         self.orders = []
 
     def __repr__(self):
+        """Representation for Customer class."""
         return self.name
 
     def get_name(self):
@@ -259,6 +260,7 @@ class Customer:
         return self.orders
 
     def order_is_empty(self) -> bool:
+        """Return boolean value even the order is empty or not."""
         for order in self.orders:
             if len(order.order_products) != 0:
                 return False
