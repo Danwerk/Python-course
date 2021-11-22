@@ -159,14 +159,16 @@ class App:
         ret = []
         if is_summary is True:
             for customer in self.all_customers:
-                key = customer
-                value = customer.get_orders()
                 ret.append(f"{str(customer)}:\n")
                 for order in customer.get_orders():
                     if order != []:
                         str_order = order.get_products_string()
                         ret.append(f"{str_order}\n")
+                        break
+                else:
+                    ret.append(f'nothing \n')
                 ret.append(f"Total: {round(self.calculate_total(customer), 2)}\n")
+                ret.append(f'\n')
 
         final_str = ''.join(ret)
         return final_str
@@ -177,7 +179,7 @@ class App:
         for order in customer.get_orders():
                 for key, val in order.order_products.items():
                     if key not in self.orders_dict:
-                        total = 0.0
+                        total += 0.0
                     else:
                         total += val * self.orders_dict[key]
         return total
@@ -187,7 +189,8 @@ class App:
         total = 0.0
         for customer in self.all_customers:
             total += self.calculate_total(customer)
-            return total
+
+        #return f'{self.show_all_orders()} + '\n' + total'
 
     def find_product_by_name(self, name):
         """Method for finding product by its name."""
