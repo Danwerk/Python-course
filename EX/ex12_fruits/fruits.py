@@ -122,12 +122,13 @@ class App:
 
         Products here is list of tuples.
         """
-        i = 0
+        i = len(self.orders)
         for customer_name in self.all_customers:
             if customer_name.get_name() == name:
                 self.order_products(products)
-                customer_name.add_new_order(self.orders[:i])
-                i += 1
+                customer_name.add_new_order(self.orders[i])
+
+
     def add_customer(self, customer):
         """Method for adding a customer to the list."""
         self.all_customers.append(customer)
