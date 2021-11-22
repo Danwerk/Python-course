@@ -139,7 +139,6 @@ class App:
                 self.order_products(products)
                 customer_name.add_new_order(self.orders[i])
 
-
     def add_customer(self, customer):
         """Method for adding a customer to the list."""
         self.all_customers.append(customer)
@@ -183,10 +182,11 @@ class App:
                         total += val * self.orders_dict[key]
         return total
 
-
     def calculate_summary(self):
         """Method for printing a summary of all orders with totals and the total for all customers' all orders."""
-        pass
+        total = 0.0
+        for customer in self.all_customers:
+            total += self.calculate_total(customer)
 
     def find_product_by_name(self, name):
         """Method for finding product by its name."""
