@@ -162,7 +162,8 @@ class App:
                 ret.append(f"{str(customer)}:\n")
 
                 if customer.order_is_empty():
-                    ret.append(f'nothing')
+                    ret.append(f'nothing\n')
+                    ret.append(f"Total: {round(self.calculate_total(customer), 2)}\n")
                     ret.append('\n')
                     break
                 else:
@@ -275,10 +276,7 @@ if __name__ == '__main__':
     app.order("Svetozar", [("Grapefruit", 10)])
     app.order("Muhhamad", [("Grenades", 13), ("Cannon", 1), ("Red pepper", 666)])
     app.order("Toivo", [("Granadilla", 3), ("Chestnut", 3), ("Pitaya(Dragon Fruit)", 3)])
-    app.order("test", [])
-    app.order("test", [])
-    app.order("test", [])
-    app.order("test", [])
+
     # Checking products dictionary format (we want numeric price, not string).
     print(app.get_products())
 
