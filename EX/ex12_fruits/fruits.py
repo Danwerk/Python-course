@@ -86,6 +86,11 @@ class App:
         for obj in self.products:
             self.orders_dict[obj.name] = obj.price
 
+        for customer in self.all_customers:
+            for key in customer.order_products.keys():
+                if key not in self.orders_dict:
+                    raise RuntimeError('Woopsie. There is no such product as')
+
     def get_products(self) -> list:
         """Getter for products list."""
         return self.products
