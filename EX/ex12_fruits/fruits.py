@@ -162,6 +162,7 @@ class App:
                 ret.append(f"{str(customer)}:\n")
                 if customer.get_orders() == []:
                     ret.append(f'nothing')
+                    break
                 else:
                     for order in customer.get_orders():
                         if customer.get_orders != []:
@@ -171,11 +172,13 @@ class App:
 
                     ret.append(f"Total: {round(self.calculate_total(customer), 2)}\n")
                 ret.append(f'\n')
+
         if is_summary is False:
             for customer in self.all_customers:
                 ret.append(f"{str(customer)}:\n")
                 if customer.get_orders() == []:
                     ret.append(f'nothing')
+                    break
                 else:
                     for order in customer.get_orders():
                         if customer.get_orders() != []:
