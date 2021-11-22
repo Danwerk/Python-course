@@ -85,6 +85,10 @@ class App:
         for obj in self.products:
             self.orders_dict[obj.name] = obj.price
 
+        #for order in self.orders
+        #for value in self.orders_dict.values():
+            #if value < not in :
+                #raise RuntimeError('not okay!')
 
     def get_products(self) -> list:
         """Getter for products list."""
@@ -159,7 +163,7 @@ class App:
         ret = []
         if is_summary is True:
             for customer in self.all_customers:
-                ret.append(f"{str(customer)}:\n")
+                ret.append(f'{str(customer)}:\n')
 
                 if customer.order_is_empty():
                     ret.append(f'nothing\n')
@@ -168,10 +172,9 @@ class App:
                     continue
                 else:
                     for order in customer.get_orders():
-                        if customer.get_orders != []:
-                            str_order = order.get_products_string()
-                            ret.append(f"{str_order}\n")
-                            continue
+                        str_order = order.get_products_string()
+                        ret.append(f'{str_order}\n')
+                        continue
 
                 ret.append(f"Total: {round(self.calculate_total(customer), 2):.2f}\n")
                 ret.append(f'\n')
@@ -189,10 +192,9 @@ class App:
                     continue
                 else:
                     for order in customer.get_orders():
-                        if customer.get_orders() != []:
-                            str_order = order.get_products_string()
-                            ret.append(f"{str_order}\n")
-                            continue
+                        str_order = order.get_products_string()
+                        ret.append(f"{str_order}\n")
+                        continue
                     ret.append(f'\n')
 
             ret.pop()
