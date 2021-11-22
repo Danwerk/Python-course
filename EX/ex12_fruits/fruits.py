@@ -41,7 +41,11 @@ class Order:
         of such long string there should be no comma, nor string. Example:
         'Avocado: 2 kg, Orange: 1 kg, Papaya: 3 kg, Cherry tomato: 2 kg'
         """
-        pass
+        str_list = []
+        for key, value in self.order_products.items():
+            str_list.append(f'{key}: {value} kg')
+        converted_str = ', '.join(str_list)
+        return converted_str
 
     def add_product(self, product):
         """Method for adding a single product to the dictionary."""
@@ -145,7 +149,8 @@ class App:
         If is_summary is true, add totals for each customer
         and also global total price.
         """
-        pass
+        if is_summary is True:
+            pass
 
     def calculate_total(self, customer) -> float:
         """Method for calculating total price for all customer's orders."""
