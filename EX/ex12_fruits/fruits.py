@@ -182,7 +182,7 @@ class App:
             for customer in self.all_customers:
                 ret.append(f"{str(customer)}:\n")
                 if customer.order_is_empty():
-                    ret.append(f'nothing\n')
+                    ret.append('nothing\n')
                     ret.append('\n')
                     continue
                 else:
@@ -190,7 +190,7 @@ class App:
                         str_order = order.get_products_string()
                         ret.append(f"{str_order}\n")
                         continue
-                    ret.append(f'\n')
+                    ret.append('\n')
 
             ret.pop()
             last_elem = ret[-1].replace('\n', '')
