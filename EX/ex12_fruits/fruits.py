@@ -86,11 +86,6 @@ class App:
         for obj in self.products:
             self.orders_dict[obj.name] = obj.price
 
-        #for order in self.orders
-        #for value in self.orders_dict.values():
-            #if value < not in :
-                #raise RuntimeError('not okay!')
-
     def get_products(self) -> list:
         """Getter for products list."""
         return self.products
