@@ -74,6 +74,7 @@ class App:
         self.orders = []
         self.all_customers = []
 
+
     def get_products(self) -> list:
         """Getter for products list."""
         return self.products
@@ -121,15 +122,11 @@ class App:
 
         Products here is list of tuples.
         """
+
         for customer_name in self.all_customers:
-            customer_name = customer_name.get_name()
-            if customer_name == name:
+            if customer_name.get_name() == name:
                 self.order_products(products)
-                customer = Customer(name, products)
-                Customer.add_new_order(customer, self.orders)
-
-
-
+                Customer.add_new_order(customer_name, self.orders)
 
     def add_customer(self, customer):
         """Method for adding a customer to the list."""
@@ -149,7 +146,7 @@ class App:
         """
         pass
 
-    def calculate_total(self) -> float:
+    def calculate_total(self, customer) -> float:
         """Method for calculating total price for all customer's orders."""
         pass
 
