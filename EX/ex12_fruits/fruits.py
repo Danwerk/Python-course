@@ -13,6 +13,9 @@ class Product:
         self.name = name
         self.price = price
 
+    def __repr__(self):
+        return self.name
+
 
 class Order:
     """Order class."""
@@ -77,6 +80,10 @@ class App:
         self.products = self.import_products('pricelist.txt')
         self.orders = []
         self.all_customers = []
+        self.orders_dict = {}
+
+        for obj in self.products:
+            self.orders_dict[obj.name] = obj.price
 
 
     def get_products(self) -> list:
@@ -149,12 +156,33 @@ class App:
         If is_summary is true, add totals for each customer
         and also global total price.
         """
+
+        ret = []
         if is_summary is True:
-            pass
+            for customer in self.all_customers:
+                key = customer
+                value = customer.get_orders()
+                ret.append(f"{str(customer)}:\n")
+                for order in customer.get_orders():
+                    if order != []:
+                        str_order = order.get_products_string()
+                        ret.append(f"{str_order}\n")
+                ret.append(f"Total: {round(self.calculate_total(customer), 2)}\n")
+
+        final_str = ''.join(ret)
+        return final_str
 
     def calculate_total(self, customer) -> float:
         """Method for calculating total price for all customer's orders."""
-        pass
+        total = 0.0
+        for order in customer.get_orders():
+                for key, val in order.order_products.items():
+                    if key not in self.orders_dict:
+                        total = 0.0
+                    else:
+                        total += val * self.orders_dict[key]
+        return total
+
 
     def calculate_summary(self):
         """Method for printing a summary of all orders with totals and the total for all customers' all orders."""
@@ -175,6 +203,9 @@ class Customer:
         self.name = name
         self.address = address
         self.orders = []
+
+    def __repr__(self):
+        return self.name
 
     def get_name(self):
         """Getter for name."""
@@ -208,6 +239,7 @@ if __name__ == '__main__':
     app.order("Toivo", [("Granadilla", 3), ("Chestnut", 3), ("Pitaya(Dragon Fruit)", 3)])
     # Checking products dictionary format (we want numeric price, not string).
     print(app.get_products())
+
     print("=======")
     # Checking how all orders and summary look like.
     print(app.show_all_orders(False))
