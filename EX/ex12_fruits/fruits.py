@@ -126,7 +126,7 @@ class App:
         for customer_name in self.all_customers:
             if customer_name.get_name() == name:
                 self.order_products(products)
-                Customer.add_new_order(customer_name, self.orders)
+                customer_name.add_new_order(self.orders)
 
     def add_customer(self, customer):
         """Method for adding a customer to the list."""
