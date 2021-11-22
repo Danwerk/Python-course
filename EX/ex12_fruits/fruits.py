@@ -187,6 +187,7 @@ class App:
         total = 0.0
         for customer in self.all_customers:
             total += self.calculate_total(customer)
+            return total
 
     def find_product_by_name(self, name):
         """Method for finding product by its name."""
