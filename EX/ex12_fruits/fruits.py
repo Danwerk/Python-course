@@ -173,7 +173,7 @@ class App:
                             ret.append(f"{str_order}\n")
                             continue
 
-                ret.append(f"Total: {round(self.calculate_total(customer), 2)}\n")
+                ret.append(f"Total: {round(self.calculate_total(customer), 2):.2f}\n")
                 ret.append(f'\n')
             ret.pop()
             last_elem = ret[-1].replace('\n', '')
@@ -205,21 +205,21 @@ class App:
 
     def calculate_total(self, customer) -> float:
         """Method for calculating total price for all customer's orders."""
-        total = 0.0
+        total = 0.00
         for order in customer.get_orders():
                 for key, val in order.order_products.items():
                     if key not in self.orders_dict:
-                        total += 0.0
+                        total += 0.00
                     else:
                         total += val * self.orders_dict[key]
         return total
 
     def calculate_summary(self):
         """Method for printing a summary of all orders with totals and the total for all customers' all orders."""
-        total = 0.0
+        total = 0.00
         for customer in self.all_customers:
             total += self.calculate_total(customer)
-        return f"{self.show_all_orders(True)} \n ALL ORDERS TOTAL: {total}"
+        return f"{self.show_all_orders(True)} \n ALL ORDERS TOTAL: {total:.2f}"
 
     def find_product_by_name(self, name):
         """Method for finding product by its name."""
@@ -271,9 +271,7 @@ if __name__ == '__main__':
     # Ordering some food for everyone.
     app.order("Anton", [("Avocado", 2), ("Orange", 1), ("Papaya", 3), ("Cherry tomato", 2)])
     app.order("Anton", [("Avocado", 4), ("Orange", 2), ("Papaya", 3), ("Cherry tomato", 2)])
-    app.order("Rubber Duck", [])
-    app.order("Rubber Duck", [])
-    app.order("Rubber Duck", [])
+    app.order("Rubber Duck", [("Mango Irwin", 6)])
     app.order("Svetozar", [("Lemon", 1)])
     app.order("Svetozar", [("Grapefruit", 10)])
     app.order("Muhhamad", [("Grenades", 13), ("Cannon", 1), ("Red pepper", 666)])
