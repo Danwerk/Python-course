@@ -166,7 +166,7 @@ class App:
                 ret.append(f'{str(customer)}:\n')
 
                 if customer.order_is_empty():
-                    ret.append(f'nothing\n')
+                    ret.append('nothing\n')
                     ret.append(f"Total: {round(self.calculate_total(customer), 2):.2f}\n")
                     ret.append('\n')
                     continue
@@ -177,7 +177,7 @@ class App:
                         continue
 
                 ret.append(f"Total: {round(self.calculate_total(customer), 2):.2f}\n")
-                ret.append(f'\n')
+                ret.append('\n')
             ret.pop()
             last_elem = ret[-1].replace('\n', '')
             ret.pop()
