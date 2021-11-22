@@ -219,7 +219,7 @@ class App:
         total = 0.00
         for customer in self.all_customers:
             total += self.calculate_total(customer)
-        return f"{self.show_all_orders(True)} \nALL ORDERS TOTAL: {total}"
+        return f"{self.show_all_orders(True)}\nALL ORDERS TOTAL: {total:.2f}"
 
     def find_product_by_name(self, name):
         """Method for finding product by its name."""
