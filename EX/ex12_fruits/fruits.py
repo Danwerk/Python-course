@@ -182,7 +182,7 @@ class App:
                             str_order = order.get_products_string()
                             ret.append(f"{str_order}\n")
                             continue
-                ret.append(f'\n')
+                    ret.append(f'\n')
 
         final_str = ''.join(ret)
         return final_str
@@ -203,8 +203,7 @@ class App:
         total = 0.0
         for customer in self.all_customers:
             total += self.calculate_total(customer)
-
-        #return f'{self.show_all_orders()} + '\n' + total'
+        return f"{self.show_all_orders(True)} + '\n' + {total}"
 
     def find_product_by_name(self, name):
         """Method for finding product by its name."""
