@@ -281,7 +281,7 @@ class Client:
 
     def clear_history(self):
         """Clear the purchase history."""
-        self.__order_history = []
+        self.__order_history.clear()
 
     def get_member_balance(self) -> float:
         """
