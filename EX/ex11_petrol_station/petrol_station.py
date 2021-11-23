@@ -411,7 +411,7 @@ class PetrolStation:
 
     def get_sell_history(self) -> dict[Client, list[Order]]:
         """Return sell history dict where key is Client, value is a list of Orders."""
-        pass
+        return self.__sell_history
 
     def sell(self, items_to_sell: list[tuple[OrderItem, float]], client: Client = None):
         """
