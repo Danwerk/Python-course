@@ -142,7 +142,7 @@ class Fuel(OrderItem):
     """
     The fuel.
 
-    The fuel class, including price, name and discount calculated for customers per liter.
+    The fuel class, including price, name and discount, calculated for customers per liter.
     """
 
     def __init__(self, name: str, price: float):
@@ -158,7 +158,16 @@ class Fuel(OrderItem):
         :param client_type
         :return: float: the discount
         """
-        return 0.0
+        ret = 0
+        if client_type == ClientType.Basic:
+            ret = 0
+        elif client_type == ClientType.Bronze:
+            ret = 0.975
+        elif client_type == ClientType.Silver:
+            ret = 0.95
+        elif client_type == ClientType.Gold:
+            ret = 0.90
+        return ret
 
 
 class Order:
