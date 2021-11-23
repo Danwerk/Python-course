@@ -350,10 +350,10 @@ class PetrolStation:
         :param quantity:
         """
 
-        if fuel in self.__items:
-            self.__items[fuel] += quantity
+        if fuel in self.__fuel_stock_2:
+            self.__fuel_stock_2[fuel] += quantity
         else:
-            self.__items[fuel] = quantity
+            self.__fuel_stock_2[fuel] = quantity
 
     def add_shop_item(self, item: ShopItem, quantity: float):
         """
@@ -362,10 +362,10 @@ class PetrolStation:
         :param item:
         :param quantity:
         """
-        if item in self.__shop_item_stock:
-            self.__shop_item_stock[item] += quantity
+        if item in self.__shop_item_stock_2:
+            self.__shop_item_stock_2[item] += quantity
         else:
-            self.__shop_item_stock[item] = quantity
+            self.__shop_item_stock_2[item] = quantity
 
     def remove_fuel(self, fuel: Fuel, quantity: float):
         """
