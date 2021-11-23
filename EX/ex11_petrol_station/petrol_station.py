@@ -130,7 +130,7 @@ class ShopItem(OrderItem):
         if client_type == ClientType.Basic:
             ret = 0
         elif client_type == ClientType.Bronze:
-            ret = 0.75
+            ret = 0.075
         elif client_type == ClientType.Silver:
             ret = 0.1
         elif client_type == ClientType.Gold:
