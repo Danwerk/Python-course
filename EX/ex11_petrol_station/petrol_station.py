@@ -368,7 +368,7 @@ class PetrolStation:
         Remove fuel.
 
         Fuel is dispensed from the tank, first it is checked whether
-        it is possible to dispense as much fuel,
+        it is possible to dispense as much fuel
         if so, then the quantity of the fuel in the tank is lowered,
         if not, the error RuntimeError() is thrown out.
 
