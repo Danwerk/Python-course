@@ -142,7 +142,7 @@ class Fuel(OrderItem):
     """
     The fuel.
 
-    The fuel class, including price, name and discount, calculated for customers per liter.
+    The fuel class, including price, name and discount calculated for customers per liter.
     """
 
     def __init__(self, name: str, price: float):
