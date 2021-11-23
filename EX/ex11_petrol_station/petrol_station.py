@@ -199,7 +199,7 @@ class Order:
         """
         ret = 0
         for key, val in self.__items.items():
-            ret += key.get_total_price(self.__client_type) ** val
+            ret += key.get_total_price(self.__client_type, val)
         return ret
 
     def __hash__(self):
