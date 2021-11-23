@@ -337,6 +337,8 @@ class PetrolStation:
         :param fuel_stock: fuel tank
         :param shop_item_stock: products warehouse
         """
+        self.shop_item_stock = shop_item_stock
+        self.__fuel_stock = fuel_stock
         self.__fuel_stock_2 = copy.deepcopy(fuel_stock)
         self.__shop_item_stock_2 = copy.deepcopy(shop_item_stock)
         self.__items = self.__fuel_stock_2.copy()
@@ -379,8 +381,8 @@ class PetrolStation:
         :param fuel:
         :param quantity:
         """
-        if quantity <= self.__fuel_stock[fuel]:
-            self.__fuel_stock[fuel] -= quantity
+        if quantity <= self.__fuel_stock_2[fuel]:
+            self.__fuel_stock_2[fuel] -= quantity
         else:
             raise RuntimeError("Not enough!")
 
@@ -393,7 +395,8 @@ class PetrolStation:
         :param item:
         :param quantity:
         """
-        if quantity <= self.__shop_item_stock[item]:
+        if quantity > self.__shop_item_stock_2[item]:
+            raise RuntimeError("Not enough!")
             self.__shop_item_stock[item] -= quantity
         else:
             raise RuntimeError("Not enough!")
