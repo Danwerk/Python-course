@@ -311,7 +311,13 @@ class Client:
         :param order:
         :return: boolean
         """
-        pass
+        tot_price = order.get_final_price()
+        if tot_price <= self.__balance:
+            self.__balance -= tot_price
+            self.__order_history.append(order)
+            return True
+        else:
+            return False
 
     def __repr__(self):
         """String representation of the client."""
