@@ -126,15 +126,15 @@ class ShopItem(OrderItem):
         :param client_type
         :return: float: the discount
         """
-        ret = 0.0
+        ret = 0
         if client_type == ClientType.Basic:
-            ret = 1
+            ret = 0
         elif client_type == ClientType.Bronze:
-            ret = 0.95
+            ret = 0.05
         elif client_type == ClientType.Silver:
-            ret = 0.9
+            ret = 0.1
         elif client_type == ClientType.Gold:
-            ret = 0.85
+            ret = 0.15
         return ret
 
 
