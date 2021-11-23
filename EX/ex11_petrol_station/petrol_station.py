@@ -162,9 +162,9 @@ class Fuel(OrderItem):
         if client_type == ClientType.Basic:
             ret = 0
         elif client_type == ClientType.Bronze:
-            ret = 0.975
+            ret = 0.025
         elif client_type == ClientType.Silver:
-            ret = 0.95
+            ret = 0.05
         elif client_type == ClientType.Gold:
             ret = 0.1
         return ret
@@ -337,7 +337,8 @@ class PetrolStation:
         :param fuel_stock: fuel tank
         :param shop_item_stock: products warehouse
         """
-
+        self.__fuel_stock = fuel_stock
+        self.__shop_item_stock = shop_item_stock
         self.__fuel_stock_2 = copy.deepcopy(fuel_stock)
         self.__shop_item_stock_2 = copy.deepcopy(shop_item_stock)
         self.__items = self.__fuel_stock_2.copy()
