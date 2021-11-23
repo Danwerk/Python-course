@@ -448,6 +448,7 @@ class PetrolStation:
 if __name__ == '__main__':
     item1 = ShopItem('Mars', 2.12)
     item2 = ShopItem('Twix', 2.20)
+    item6 = ShopItem('Snickers', 2.30)
     item3 = Fuel('LPG', 1.59)
     item4 = Fuel('98', 1.59)
     item5 = Fuel('95', 1.59)
