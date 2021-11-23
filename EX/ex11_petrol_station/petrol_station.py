@@ -395,7 +395,9 @@ class PetrolStation:
         :param item:
         :param quantity:
         """
-        if quantity > self.__shop_item_stock_2[item]:
+        if item not in self.__shop_item_stock:
+            raise RuntimeError()
+        if quantity > self.__shop_item_stock[item]:
             raise RuntimeError("Not enough!")
         else:
             self.__shop_item_stock[item] -= quantity
