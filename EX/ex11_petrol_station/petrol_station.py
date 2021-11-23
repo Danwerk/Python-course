@@ -384,7 +384,7 @@ class PetrolStation:
         if quantity > self.__fuel_stock_2[fuel]:
             raise RuntimeError("Not enough!")
         else:
-            self.__fuel_stock_2[fuel] -= quantity
+            self.__fuel_stock[fuel] -= quantity
 
     def remove_items(self, item: ShopItem, quantity: float):
         """
