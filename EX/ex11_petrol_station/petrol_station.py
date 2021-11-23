@@ -166,7 +166,7 @@ class Fuel(OrderItem):
         elif client_type == ClientType.Silver:
             ret = 0.95
         elif client_type == ClientType.Gold:
-            ret = 0.90
+            ret = 0.1
         return ret
 
 
@@ -332,12 +332,16 @@ class PetrolStation:
         Constructor (NB! Variables must be private).
 
         Used the deepcopy.
-        So that changes made with the dictionary in the class do not affect the dictionary object that does not belong to the class.
+        So that changes made with the dictionary in the class do not affect the dictionary object that does not belong
+        to the class.
         :param fuel_stock: fuel tank
         :param shop_item_stock: products warehouse
         """
-        self.__fuel_stock = fuel_stock
-        self.__shop_item_stock = shop_item_stock
+
+        self.__fuel_stock_2 = copy.deepcopy(fuel_stock)
+        self.__shop_item_stock_2 = copy.deepcopy(shop_item_stock)
+        self.__items = self.__fuel_stock_2.copy()
+        self.sell_history = {}
 
     def add_fuel(self, fuel: Fuel, quantity: float):
         """
@@ -346,6 +350,7 @@ class PetrolStation:
         :param fuel:
         :param quantity:
         """
+
         if fuel in self.__fuel_stock:
             self.__fuel_stock[fuel] += quantity
         else:
