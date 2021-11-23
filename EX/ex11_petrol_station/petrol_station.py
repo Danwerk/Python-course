@@ -381,10 +381,10 @@ class PetrolStation:
         :param fuel:
         :param quantity:
         """
-        if quantity <= self.__fuel_stock_2[fuel]:
-            self.__fuel_stock_2[fuel] -= quantity
-        else:
+        if quantity > self.__fuel_stock_2[fuel]:
             raise RuntimeError("Not enough!")
+        else:
+            self.__fuel_stock_2[fuel] -= quantity
 
     def remove_items(self, item: ShopItem, quantity: float):
         """
@@ -397,9 +397,9 @@ class PetrolStation:
         """
         if quantity > self.__shop_item_stock_2[item]:
             raise RuntimeError("Not enough!")
-            self.__shop_item_stock[item] -= quantity
         else:
-            raise RuntimeError("Not enough!")
+            self.__shop_item_stock[item] -= quantity
+
 
     def get_fuel_dict(self) -> dict[Fuel, float]:
         """Return dict with Fuel objects as keys and quantities as values."""
