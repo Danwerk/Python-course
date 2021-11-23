@@ -352,10 +352,10 @@ class PetrolStation:
         :param quantity:
         """
 
-        if fuel in self.__fuel_stock_2:
-            self.__fuel_stock_2[fuel] += quantity
+        if fuel in self.__fuel_stock:
+            self.__fuel_stock[fuel] += quantity
         else:
-            self.__fuel_stock_2[fuel] = quantity
+            self.__fuel_stock[fuel] = quantity
 
     def add_shop_item(self, item: ShopItem, quantity: float):
         """
