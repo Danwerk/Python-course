@@ -76,12 +76,7 @@ class OrderItem(ABC):
         :param quantity: quantity of a product
         :return: float: total price
         """
-        ret = quantity
-        if isinstance(self, Fuel):
-            ret = quantity * self.get_discount(client_type)
-        elif isinstance(self, ShopItem):
-            ret = quantity * self.get_discount(client_type)
-        return ret
+        return quantity * (self.get_price() - self.get_discount(client_type))
 
     @abstractmethod
     def get_discount(self, client_type: ClientType) -> float:
@@ -286,7 +281,7 @@ class Client:
 
     def clear_history(self):
         """Clear the purchase history."""
-        self.__order_history.clear()
+        self.__order_history = []
 
     def get_member_balance(self) -> float:
         """
@@ -430,6 +425,13 @@ class PetrolStation:
 
 
 if __name__ == '__main__':
-    item1 = ShopItem('beer', 2.12)
-    item2 = ShopItem('snickers', 2.20)
-    item3 = Fuel('95', 1.59)
+    item1 = ShopItem('Mars', 2.12)
+    item2 = ShopItem('Twix', 2.20)
+    item3 = Fuel('LPG', 1.59)
+    item4 = Fuel('98', 1.59)
+    item5 = Fuel('95', 1.59)
+
+
+    client1 = Client('Mikk', 550.0, ClientType.Basic)
+    order = Order({item1:12.0}, date.today(), ClientType.Basic)
+    print(Client.get_history(client1))
