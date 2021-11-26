@@ -4,6 +4,10 @@ import os.path
 from googleapiclient.discovery import build
 from google.oauth2.credentials import Credentials
 
+import os
+import googleapiclient.discovery
+import googleapiclient.errors
+
 # If modifying these scopes, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 
@@ -38,3 +42,42 @@ def get_links_from_spreadsheet(id: str, token: str) -> list:
     flat_list = [item for sublist in values for item in sublist]
 
     return flat_list
+
+
+def get_links_from_playlist(link: str, developer_key: str) -> list:
+    """
+    Return a list of links to songs in the Youtube playlist with the given address.
+
+    Example input
+        get_links_from_playlist('https://www.youtube.com/playlist?list=PLFt_AvWsXl0ehjAfLFsp1PGaatzAwo0uK',
+                                'ThisIsNotARealKey_____ThisIsNotARealKey')
+
+    Returns
+        ['https://youtube.com/watch?v=r_It_X7v-1E', 'https://youtube.com/watch?v=U4ogK0MIzqk', ... and so on]
+    """
+    ret = []
+    os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+
+    api_service_name = "youtube"
+    api_version = "v3"
+
+    youtube = googleapiclient.discovery.build(
+        api_service_name, api_version, developerKey=developer_key)
+
+    request = youtube.playlistItems().list(
+        part="snippet",
+        playlistId=link.split('list=')[1]
+    )
+    response = request.execute()
+    for i in response['items']:
+        vid_id = (i['snippet']['resourceId']['videoId'])
+        yt_id = 'https://youtube.com/watch?v='
+        yt_link = yt_id + vid_id
+        ret.append(yt_link)
+
+    return ret
+
+
+if __name__ == "__main__":
+    print(get_links_from_playlist('https://www.youtube.com/playlist?list=PLFt_AvWsXl0ehjAfLFsp1PGaatzAwo0uK',
+                                  'AIzaSyBdc2t-D1tAMWsMTRq4QbdR3pOiL4uHvpU'))
