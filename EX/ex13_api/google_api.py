@@ -1,8 +1,7 @@
+"""API."""
 from __future__ import print_function
 import os.path
 from googleapiclient.discovery import build
-from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 
 # If modifying these scopes, delete the file token.json.
@@ -12,6 +11,7 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 def get_links_from_spreadsheet(id: str, token: str) -> list:
     """
     Return a list of strings from the first column of a Google Spreadsheet with the given ID.
+
     Example input with https://docs.google.com/spreadsheets/d/1WrCzu4p5lFwPljqZ6tMQEJb2vSJQSGjyMsqcYt-yS4M
         get_links_from_spreadsheet('1WrCzu4p5lFwPljqZ6tMQEJb2vSJQSGjyMsqcYt-yS4M', 'token.json')
 
