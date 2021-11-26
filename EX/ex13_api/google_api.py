@@ -66,7 +66,8 @@ def get_links_from_playlist(link: str, developer_key: str) -> list:
 
     request = youtube.playlistItems().list(
         part="snippet",
-        playlistId=link.split('list=')[1]
+        playlistId=link.split('list=')[1],
+        maxResults=50
     )
     response = request.execute()
     for i in response['items']:
@@ -79,5 +80,5 @@ def get_links_from_playlist(link: str, developer_key: str) -> list:
 
 
 if __name__ == "__main__":
-    print(get_links_from_playlist('https://www.youtube.com/playlist?list=PLFt_AvWsXl0ehjAfLFsp1PGaatzAwo0uK',
+    print(get_links_from_playlist('https://www.youtube.com/watch?v=0C-dNgypA5M&list=PLdVkHRu3zRbJhoHZa8WEEeginurhA5_xp',
                                   'AIzaSyBdc2t-D1tAMWsMTRq4QbdR3pOiL4uHvpU'))
