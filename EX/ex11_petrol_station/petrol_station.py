@@ -377,7 +377,7 @@ class PetrolStation:
         if fuel not in self.__fuel_stock_copy:
             raise RuntimeError()
         if quantity > self.__fuel_stock_copy[fuel]:
-            raise RuntimeError("Not enough!")
+            raise RuntimeError()
         else:
             self.__fuel_stock_copy[fuel] -= quantity
 
