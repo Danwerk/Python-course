@@ -191,7 +191,6 @@ class Order:
             if value < 0:
                 raise RuntimeError('not okay!')
 
-
     def get_date(self) -> date:
         """
         Return the date of purchase.
@@ -400,15 +399,9 @@ class PetrolStation:
         else:
             self.__shop_item_stock[item] -= quantity
 
-
     def get_fuel_dict(self) -> dict[Fuel, float]:
         """Return dict with Fuel objects as keys and quantities as values."""
-        ret = {}
-        for key, value in self.__items.items():
-            if isinstance(key, Fuel):
-                ret[key] = value
-        return ret
-       # return {key:value for key,value in self.__items.items() if isinstance(key,Fuel)}
+        return {key: value for key, value in self.__items.items() if isinstance(key, Fuel)}
 
     def get_shop_item_dict(self) -> dict[ShopItem, float]:
         """Return dict with ShopItem objects as keys and quantities as values."""
@@ -459,7 +452,6 @@ if __name__ == '__main__':
     item4 = Fuel('98', 1.59)
     item5 = Fuel('95', 1.59)
 
-
     client1 = Client('Mikk', 550.0, ClientType.Basic)
-    order = Order({item1:12.0}, date.today(), ClientType.Basic)
+    order = Order({item1: 12.0}, date.today(), ClientType.Basic)
     print(Client.get_history(client1))
