@@ -374,10 +374,10 @@ class PetrolStation:
         :param fuel:
         :param quantity:
         """
-        if quantity > self.__fuel_stock_2[fuel]:
+        if quantity > self.__fuel_stock_copy[fuel]:
             raise RuntimeError("Not enough!")
         else:
-            self.__fuel_stock[fuel] -= quantity
+            self.__fuel_stock_copy[fuel] -= quantity
 
     def remove_items(self, item: ShopItem, quantity: float):
         """
@@ -388,20 +388,21 @@ class PetrolStation:
         :param item:
         :param quantity:
         """
-        if item not in self.__shop_item_stock:
+        if item not in self.__shop_item_stock_copy:
             raise RuntimeError()
-        if quantity > self.__shop_item_stock[item]:
+        if quantity > self.__shop_item_stock_copy[item]:
             raise RuntimeError("Not enough!")
         else:
-            self.__shop_item_stock[item] -= quantity
+            self.__shop_item_stock_copy[item] -= quantity
 
     def get_fuel_dict(self) -> dict[Fuel, float]:
         """Return dict with Fuel objects as keys and quantities as values."""
-        return {key: value for key, value in self.__items.items() if isinstance(key, Fuel)}
+        return {key: value for key, value in self.__fuel_stock_copy.items() if isinstance(key, Fuel)}
 
     def get_shop_item_dict(self) -> dict[ShopItem, float]:
         """Return dict with ShopItem objects as keys and quantities as values."""
-        return self.__shop_item_stock
+        pass
+        #return self.__shop_item_stock
 
     def get_sell_history(self) -> dict[Client, list[Order]]:
         """Return sell history dict where key is Client, value is a list of Orders."""
