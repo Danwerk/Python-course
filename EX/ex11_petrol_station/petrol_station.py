@@ -167,7 +167,7 @@ class Fuel(OrderItem):
             ret = 0.05
         elif client_type == ClientType.Gold:
             ret = 0.1
-        return self.get_price() * ret
+        return ret
 
 
 class Order:
