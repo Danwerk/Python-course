@@ -401,8 +401,7 @@ class PetrolStation:
 
     def get_shop_item_dict(self) -> dict[ShopItem, float]:
         """Return dict with ShopItem objects as keys and quantities as values."""
-        pass
-        #return self.__shop_item_stock
+        return {key: value for key, value in self.__shop_item_stock_copy.items() if isinstance(key, ShopItem)}
 
     def get_sell_history(self) -> dict[Client, list[Order]]:
         """Return sell history dict where key is Client, value is a list of Orders."""
