@@ -32,7 +32,7 @@ class Statistics:
     def get_player_names(self) -> list:
         """List of players' names."""
         ret = []
-        for player in self.players:
+        for player in self.read_from_file('ex13_input.txt')[1]:
             ret.append(player)
         return ret
 
@@ -74,7 +74,7 @@ class Player:
 
 if __name__ == '__main__':
     statistics = Statistics('ex13_input.txt')
-    # print(statistics.get('/players'))
+    print(statistics.get('/players'))
     # print(statistics.get('/player/ago/won'))
     # print(statistics.get('/games'))
     print(statistics.read_from_file('ex13_input.txt'))
