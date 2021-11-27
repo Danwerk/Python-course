@@ -403,9 +403,11 @@ class PetrolStation:
 
     def get_fuel_dict(self) -> dict[Fuel, float]:
         """Return dict with Fuel objects as keys and quantities as values."""
+        ret = {}
         for key, value in self.__items.items():
             if isinstance(key, Fuel):
-                return {key:value}
+                ret[key] = value
+        return ret
        # return {key:value for key,value in self.__items.items() if isinstance(key,Fuel)}
 
     def get_shop_item_dict(self) -> dict[ShopItem, float]:
