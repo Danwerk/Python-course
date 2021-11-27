@@ -1,0 +1,73 @@
+class Statistics:
+    """Game statistics."""
+    def __init__(self, filename: str):
+        self.filename = filename
+        self.players = {}
+        self.games = {}
+
+    def read_from_file(self, filename='ex13_input.txt'):
+        ret = []
+        with open(filename, 'r') as f:
+            f = f.readlines()
+            for line in f:
+                elements = line.split(';')
+                game_obj = Game(elements[0])
+                game_str = elements[0]
+                if game_str not in self.games:
+                    self.games[game_str] = game_obj
+
+                people = elements[1].split(',')
+                for player in people:
+                    player_obj = Player(player)
+                    if player not in self.players:
+                       self.players[player] = player_obj
+
+        ret.append(self.players)
+        ret.append(self.games)
+        return ret
+
+    def return_players_names(self) -> list:
+        ret = []
+        for player in self.players:
+            ret.append(player)
+        return ret
+
+    def return_games_names(self) -> list:
+        ret = []
+        for game in self.games:
+            ret.append(game)
+        return ret
+
+    def total_played_games(self) -> int:
+        return len(self.return_games_names())
+
+    def get(self, path: str):
+        tokens = path[1:].split('/')
+        if path == '/players':
+            return self.players
+        if path == '/games':
+            return self.games
+
+
+class Game:
+    def __init__(self, name):
+        self.name = name
+
+
+class Player:
+    def __init__(self, name):
+        self.name = name
+
+    def __repr__(self):
+        return self.name
+
+
+if __name__ == '__main__':
+    statistics = Statistics('ex13_input.txt')
+    #print(statistics.get('/players'))
+    #print(statistics.get('/player/ago/won'))
+    #print(statistics.get('/games'))
+    print(statistics.read_from_file('ex13_input.txt'))
+    print(statistics.return_players_names())
+    print(statistics.return_games_names())
+    print(statistics.total_played_games())
