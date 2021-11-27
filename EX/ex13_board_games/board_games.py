@@ -51,9 +51,9 @@ class Statistics:
         """Basic getter."""
         tokens = path[1:].split('/')
         if path == '/players':
-            return self.players
+            return self.get_player_names()
         if path == '/games':
-            return self.games
+            return self.get_game_names()
 
 
 class Game:
