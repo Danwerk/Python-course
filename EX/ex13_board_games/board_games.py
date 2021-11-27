@@ -29,14 +29,14 @@ class Statistics:
         ret.append(self.games)
         return ret
 
-    def return_players_names(self) -> list:
+    def get_players_names(self) -> list:
         """List of players' names."""
         ret = []
         for player in self.players:
             ret.append(player)
         return ret
 
-    def return_games_names(self) -> list:
+    def get_games_names(self) -> list:
         """List of games' names."""
         ret = []
         for game in self.games:
@@ -45,7 +45,7 @@ class Statistics:
 
     def total_played_games(self) -> int:
         """Total amount of played games."""
-        return len(self.return_games_names())
+        return len(self.get_games_names())
 
     def get(self, path: str):
         """Basic getter."""
@@ -78,6 +78,6 @@ if __name__ == '__main__':
     # print(statistics.get('/player/ago/won'))
     # print(statistics.get('/games'))
     print(statistics.read_from_file('ex13_input.txt'))
-    print(statistics.return_players_names())
-    print(statistics.return_games_names())
+    print(statistics.get_players_names())
+    print(statistics.get_games_names())
     print(statistics.total_played_games())
