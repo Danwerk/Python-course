@@ -135,7 +135,7 @@ class ShopItem(OrderItem):
             ret = 0.1
         elif client_type == ClientType.Gold:
             ret = 0.15
-        return self.get_total_price(client_type, quantity=ret)
+        return ret
 
 
 class Fuel(OrderItem):
