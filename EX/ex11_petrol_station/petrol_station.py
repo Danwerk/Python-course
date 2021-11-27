@@ -334,11 +334,8 @@ class PetrolStation:
         :param fuel_stock: fuel tank
         :param shop_item_stock: products warehouse
         """
-        self.__shop_item_stock = shop_item_stock
-        self.__fuel_stock = fuel_stock
-        self.__fuel_stock_2 = copy.deepcopy(fuel_stock)
-        self.__shop_item_stock_2 = copy.deepcopy(shop_item_stock)
-        self.__items = self.__fuel_stock_2.copy()
+        self.__fuel_stock_copy = copy.deepcopy(fuel_stock)
+        self.__shop_item_stock_copy = copy.deepcopy(shop_item_stock)
         self.__sell_history = {}
 
     def add_fuel(self, fuel: Fuel, quantity: float):
@@ -348,11 +345,10 @@ class PetrolStation:
         :param fuel:
         :param quantity:
         """
-
-        if fuel in self.__fuel_stock:
-            self.__fuel_stock[fuel] += quantity
+        if fuel in self.__fuel_stock_copy:
+            self.__fuel_stock_copy[fuel] += quantity
         else:
-            self.__fuel_stock[fuel] = quantity
+            self.__fuel_stock_copy[fuel] = quantity
 
     def add_shop_item(self, item: ShopItem, quantity: float):
         """
@@ -361,10 +357,10 @@ class PetrolStation:
         :param item:
         :param quantity:
         """
-        if item in self.__shop_item_stock:
-            self.__shop_item_stock[item] += quantity
+        if item in self.__shop_item_stock_copy:
+            self.__shop_item_stock_copy[item] += quantity
         else:
-            self.__shop_item_stock[item] = quantity
+            self.__shop_item_stock_copy[item] = quantity
 
     def remove_fuel(self, fuel: Fuel, quantity: float):
         """
