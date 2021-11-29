@@ -5,6 +5,9 @@ class Statistics:
         """Constructor for Statistics class."""
         self.players = {}
         self.games = {}
+        self.game_has_points = set()
+        self.game_has_places = set()
+        self.game_has_winner = set()
         self.all_games = []
         self.all_players = []
         self.games_played_count = sum(1 for line in open(filename))
@@ -31,11 +34,18 @@ class Statistics:
                 elements = line.split(';')
                 game_obj = Game(elements[0])
                 game_str = elements[0]
-
+                #  add games into dictionary where the key is the name of a game and the value is a game object
                 if game_str not in self.games:
                     self.games[game_str] = game_obj
-
+                #  devide games into groups of different types of games.
                 people = elements[1].split(',')
+                if elements[2] == 'points':
+                    self.game_has_points.add(elements[0])
+                elif elements[2] == 'places':
+                    self.game_has_places.add(elements[0])
+                elif elements[2] == 'winner':
+                    self.game_has_winner.add(elements[0])
+
                 for player in people:
                     player_obj = Player(player)
                     if player not in self.players:
@@ -54,6 +64,9 @@ class Statistics:
             return self.get_game_names()
         if path == '/total':
             return self.get_games_played_amount()
+        if path == '/total/points' or path == '/total/places' or path == '/total/winner':
+            return self.get_games_played_type(path)
+
 
     def get_player_names(self) -> list:
         """List of players' names."""
@@ -69,12 +82,17 @@ class Statistics:
             ret.append(game)
         return ret
 
-    def get_games_played_amount(self):
+    def get_games_played_amount(self) -> int:
+        """Total amount of played games."""
         return self.games_played_count
 
-    def total_played_games(self) -> int:
-        """Total amount of played games."""
-        return len(self.get_game_names())
+    def get_games_played_type(self, path) -> int:
+        if path == '/total/points':
+            return len(self.game_has_points)
+        elif path == '/total/places':
+            return len(self.game_has_places)
+        elif path == '/total/winner':
+            return len(self.game_has_winner)
 
 
 class Game:
@@ -103,3 +121,4 @@ if __name__ == '__main__':
     # print(statistics.get_player_names())
     # print(statistics.get_game_names())
     # print(statistics.total_played_games())
+    print(statistics.get_games_played_type('/total/places'))
