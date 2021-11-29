@@ -20,6 +20,7 @@ def get_links_from_spreadsheet(id: str, token: str) -> list:
         get_links_from_spreadsheet('1WrCzu4p5lFwPljqZ6tMQEJb2vSJQSGjyMsqcYt-yS4M', 'token.json')
 
     Returns
+
         ['https://www.youtube.com/playlist?list=PLPszdKAlKCXUhU3r25SOFgBxwCEr-JHVS', ... and so on]
     """
     sample_spreadsheet_id = id
@@ -70,6 +71,22 @@ def get_links_from_playlist(link: str, developer_key: str) -> list:
         maxResults=50
     )
     response = request.execute()
+
+    nextPageToken = response.get('nextPageToken')
+    while ('nextPageToken' in response):
+        nextPage = youtube.playlistItems().list(
+            part="snippet",
+            playlistId=link.split('list=')[1],
+            maxResults="50",
+            pageToken=nextPageToken
+        ).execute()
+        response['items'] = response['items'] + nextPage['items']
+
+        if 'nextPageToken' not in nextPage:
+            response.pop('nextPageToken', None)
+        else:
+            nextPageToken = nextPage['nextPageToken']
+
     for i in response['items']:
         vid_id = (i['snippet']['resourceId']['videoId'])
         yt_id = 'https://youtube.com/watch?v='
