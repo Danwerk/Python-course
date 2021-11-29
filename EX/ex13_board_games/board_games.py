@@ -32,10 +32,10 @@ class Statistics:
             for line in f:
                 elements = line.split(';')
                 game_str = elements[0]
+                game_obj = Game(elements[0])
 
                 #  add games into dictionary where the key is the name of a game and the value is a game object
                 if game_str not in self.games:
-                    game_obj = Game(elements[0])
                     self.games[game_str] = game_obj
                 #  devide games into groups of different types of games.
                 people = elements[1].split(',')
