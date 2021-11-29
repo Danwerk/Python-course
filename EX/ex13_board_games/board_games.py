@@ -23,7 +23,7 @@ class Statistics:
         """Games dict getter."""
         return self.games
 
-    def read_from_file(self, filename='ex13_input.txt'):
+    def read_from_file(self, filename):
         """Read data from file into dicts."""
         ret = []
         with open(filename, 'r') as f:
@@ -42,24 +42,26 @@ class Statistics:
                 if elements[2] == 'points':
                     self.game_has_points.append(game_str)
                 elif elements[2] == 'places':
-                    self.game_has_places.append(elements[0])
+                    self.game_has_places.append(game_str)
                 elif elements[2] == 'winner':
-                    self.game_has_winner.append(elements[0])
-
+                    self.game_has_winner.append(game_str)
 
                 for player in people:
-                    player_obj = Player(player)
                     if player not in self.players:
+                        player_obj = Player(player)
                         self.players[player] = player_obj
+                    self.players[player].append_played_games(game_obj)
+
 
         ret.append(self.players)
         ret.append(self.games)
-        print(self.game_has_points)
         return ret
 
     def get(self, path: str):
         """Basic getter."""
         tokens = path[1:].split('/')
+        if tokens[0] == 'player':
+            return self.functionality_get_player(path)
         if path == '/players':
             return self.get_player_names()
         if path == '/games':
@@ -69,6 +71,12 @@ class Statistics:
         if path == '/total/points' or path == '/total/places' or path == '/total/winner':
             return self.get_games_played_type(path)
 
+    def functionality_get_player(self, path):
+        tokens = path[1:].split('/')
+        player_name = tokens[1]
+        player = self.players[player_name]
+        if tokens[2] == 'amount':
+            return player.get_games_played_of_name_count()
 
     def get_player_names(self) -> list:
         """List of players' names."""
@@ -89,6 +97,7 @@ class Statistics:
         return self.games_played_count
 
     def get_games_played_type(self, path) -> int:
+        """Calculate for each game type, how many times this game was played."""
         if path == '/total/points':
             return len(self.game_has_points)
         elif path == '/total/places':
@@ -98,31 +107,43 @@ class Statistics:
 
 
 class Game:
+    """Game class."""
+
     def __init__(self, name):
         """Constructor for Game class."""
         self.name = name
 
 
 class Player:
+    """Game player."""
+
     def __init__(self, name):
         """Constructor for Player class."""
         self.name = name
+        self.plays = []
 
     def __repr__(self):
         """Player representation."""
         return self.name
 
+    def append_played_games(self, game: Game):
+        self.plays.append(game)
+
+    def get_games_played_of_name_count(self):
+        return len(self.plays)
+
 
 if __name__ == '__main__':
     statistics = Statistics('ex13_input.txt')
     # player = Player('Ago')
-    #print(statistics.get('/players'))
-    #print(statistics.get('/total'))
-    #print(statistics.get('/games'))
-    #print(statistics.read_from_file('ex13_input.txt'))
+    # print(statistics.get('/players'))
+    # print(statistics.get('/total'))
+    # print(statistics.get('/games'))
+    # print(statistics.read_from_file('ex13_input.txt'))
     # print(statistics.get_player_names())
     # print(statistics.get_game_names())
     # print(statistics.total_played_games())
-    print(statistics.get_games_played_type('/total/points'))
-    print(statistics.get_games_played_type('/total/winner'))
-    print(statistics.get_games_played_type('/total/places'))
+    #print(statistics.get_games_played_type('/total/points'))
+    #print(statistics.get_games_played_type('/total/winner'))
+    #print(statistics.get_games_played_type('/total/places'))
+    print(statistics.get('/player/kristjan/amount'))
