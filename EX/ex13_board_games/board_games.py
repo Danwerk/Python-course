@@ -18,7 +18,6 @@ class Statistics:
     def get_games(self):
         return self.games
 
-
     def read_from_file(self, filename='ex13_input.txt'):
         """Read data from file into dicts."""
         ret = []
@@ -30,6 +29,7 @@ class Statistics:
                 game_str = elements[0]
                 if game_str not in self.games:
                     self.games[game_str] = game_obj
+
 
                 people = elements[1].split(',')
                 for player in people:
@@ -63,10 +63,12 @@ class Statistics:
             ret.append(game)
         return ret
 
+    def get_games_played_amount(self, filename):
+        return sum(1 for line in open(filename))
+
     def total_played_games(self) -> int:
         """Total amount of played games."""
         return len(self.get_game_names())
-
 
 
 class Game:
@@ -87,11 +89,12 @@ class Player:
 
 if __name__ == '__main__':
     statistics = Statistics('ex13_input.txt')
-    #player = Player('Ago')
+    # player = Player('Ago')
     print(statistics.get('/players'))
     # print(statistics.get('/player/ago/won'))
     print(statistics.get('/games'))
-    #print(statistics.read_from_file('ex13_input.txt'))
+    print(statistics.read_from_file('ex13_input.txt'))
     # print(statistics.get_player_names())
     # print(statistics.get_game_names())
     # print(statistics.total_played_games())
+    print(statistics.get_games_played_amount('ex13_input.txt'))
