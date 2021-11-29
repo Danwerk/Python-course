@@ -1,3 +1,4 @@
+from collections import Counter
 class Statistics:
     """Game statistics."""
 
@@ -30,11 +31,11 @@ class Statistics:
             f = f.readlines()
             for line in f:
                 elements = line.split(';')
-                game_obj = Game(elements[0])
                 game_str = elements[0]
 
                 #  add games into dictionary where the key is the name of a game and the value is a game object
                 if game_str not in self.games:
+                    game_obj = Game(elements[0])
                     self.games[game_str] = game_obj
                 #  devide games into groups of different types of games.
                 people = elements[1].split(',')
@@ -51,7 +52,6 @@ class Statistics:
                         player_obj = Player(player)
                         self.players[player] = player_obj
                     self.players[player].append_played_games(game_obj)
-
 
         ret.append(self.players)
         ret.append(self.games)
@@ -76,7 +76,9 @@ class Statistics:
         player_name = tokens[1]
         player = self.players[player_name]
         if tokens[2] == 'amount':
-            return player.get_games_played_of_name_count()
+            return player.get_games_played_count()
+        elif tokens[2] == 'favourite':
+            return player.get_games_played_most_by_player()
 
     def get_player_names(self) -> list:
         """List of players' names."""
@@ -127,10 +129,17 @@ class Player:
         return self.name
 
     def append_played_games(self, game: Game):
+        """Add games person had played."""
         self.plays.append(game)
 
-    def get_games_played_of_name_count(self):
+    def get_games_played_count(self):
+        """Return amount of played games."""
         return len(self.plays)
+
+    def get_games_played_most_by_player(self):
+        c = Counter(self.plays)
+        return c.most_common(1)[0][0]
+
 
 
 if __name__ == '__main__':
@@ -143,7 +152,8 @@ if __name__ == '__main__':
     # print(statistics.get_player_names())
     # print(statistics.get_game_names())
     # print(statistics.total_played_games())
-    #print(statistics.get_games_played_type('/total/points'))
-    #print(statistics.get_games_played_type('/total/winner'))
-    #print(statistics.get_games_played_type('/total/places'))
+    # print(statistics.get_games_played_type('/total/points'))
+    # print(statistics.get_games_played_type('/total/winner'))
+    # print(statistics.get_games_played_type('/total/places'))
     print(statistics.get('/player/kristjan/amount'))
+    print(statistics.get('/player/kristjan/favourite'))
