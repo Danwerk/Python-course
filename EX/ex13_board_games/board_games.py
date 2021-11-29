@@ -32,10 +32,10 @@ class Statistics:
             for line in f:
                 elements = line.split(';')
                 game_str = elements[0]
-                game_obj = Game(elements[0])
 
                 #  add games into dictionary where the key is the name of a game and the value is a game object
                 if game_str not in self.games:
+                    game_obj = Game(elements[0])
                     self.games[game_str] = game_obj
                 #  devide games into groups of different types of games.
                 people = elements[1].split(',')
@@ -136,10 +136,15 @@ class Player:
         """Return amount of played games."""
         return len(self.plays)
 
-    def get_games_played_most_by_player(self):
-        c = Counter(self.plays)
-        return c.most_common(1)[0][0]
+    def get_games_played_most_by_player(self) -> str:
+        ret = []
 
+        d = Counter(self.plays)
+        most_elem = d[list(d.keys())[0]]
+        for key, value in d.items():
+            if value == most_elem:
+                ret.append(key)
+        return ret
 
 
 if __name__ == '__main__':
@@ -155,5 +160,5 @@ if __name__ == '__main__':
     # print(statistics.get_games_played_type('/total/points'))
     # print(statistics.get_games_played_type('/total/winner'))
     # print(statistics.get_games_played_type('/total/places'))
-    print(statistics.get('/player/kristjan/amount'))
-    print(statistics.get('/player/kristjan/favourite'))
+    print(statistics.get('/player/joosep/amount'))
+    print(statistics.get('/player/joosep/favourite'))
