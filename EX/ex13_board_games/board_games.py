@@ -3,9 +3,21 @@ class Statistics:
 
     def __init__(self, filename: str):
         """Constructor for Statistics class."""
-        self.filename = filename
         self.players = {}
         self.games = {}
+        self.all_games = []
+        self.all_players = []
+        self.filename = self.read_from_file(filename)
+
+    def get_file_data(self):
+        return self.filename
+
+    def get_players(self):
+        return self.players
+
+    def get_games(self):
+        return self.games
+
 
     def read_from_file(self, filename='ex13_input.txt'):
         """Read data from file into dicts."""
@@ -29,10 +41,18 @@ class Statistics:
         ret.append(self.games)
         return ret
 
+    def get(self, path: str):
+        """Basic getter."""
+        tokens = path[1:].split('/')
+        if path == '/players':
+            return self.get_player_names()
+        if path == '/games':
+            return self.get_game_names()
+
     def get_player_names(self) -> list:
         """List of players' names."""
         ret = []
-        for player in self.read_from_file('ex13_input.txt')[1]:
+        for player in self.players:
             ret.append(player)
         return ret
 
@@ -47,13 +67,6 @@ class Statistics:
         """Total amount of played games."""
         return len(self.get_game_names())
 
-    def get(self, path: str):
-        """Basic getter."""
-        tokens = path[1:].split('/')
-        if path == '/players':
-            return self.get_player_names()
-        if path == '/games':
-            return self.get_game_names()
 
 
 class Game:
@@ -74,10 +87,11 @@ class Player:
 
 if __name__ == '__main__':
     statistics = Statistics('ex13_input.txt')
+    #player = Player('Ago')
     print(statistics.get('/players'))
     # print(statistics.get('/player/ago/won'))
-    # print(statistics.get('/games'))
-    print(statistics.read_from_file('ex13_input.txt'))
-    print(statistics.get_player_names())
-    print(statistics.get_game_names())
-    print(statistics.total_played_games())
+    print(statistics.get('/games'))
+    #print(statistics.read_from_file('ex13_input.txt'))
+    # print(statistics.get_player_names())
+    # print(statistics.get_game_names())
+    # print(statistics.total_played_games())
