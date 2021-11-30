@@ -52,10 +52,8 @@ class Statistics:
 
                 if elements[2] == 'points':
                     self.game_has_points.append(game_str)
-
                 elif elements[2] == 'places':
                     self.game_has_places.append(game_str)
-
                 elif elements[2] == 'winner':
                     self.game_has_winner.append(game_str)
 
@@ -125,17 +123,20 @@ class Game:
         self.name = name
 
     def __repr__(self):
+        """Representation for Game."""
         return self.name
 
 
 class GamePlay:
     def __init__(self, gameplays: list, players, games):
+        """GamePlay constructor."""
         self.gameplays = gameplays
         self.players = players
         self.games = games
         self.winner = []
 
     def get_winner(self):
+        """Get winner of gameplay."""
         d = {}
         people = self.gameplays[1].split(',')
         if self.gameplays[2] == 'points':
@@ -156,8 +157,7 @@ class GamePlay:
             game_player = self.gameplays[3].split(',')
             game_player[0] = game_player[0].strip()
             return self.players[game_player[0]]
-                #d[self.players[people[i]]] = (points[i])
-           # winner = max(d, key=d.get)
+
 
 class Player:
     """Game player."""
@@ -206,6 +206,7 @@ if len(str_ret) > 0:
 '''
 
     def get_games_won(self) -> int:
+        """Amount of won games by person."""
         for gameplay in self.gameplays:
             if GamePlay.get_winner(gameplay) == self.names[self.name]:
                 self.games_won.append(gameplay)
