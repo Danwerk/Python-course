@@ -115,6 +115,9 @@ class Game:
         """Constructor for Game class."""
         self.name = name
 
+    def __repr__(self):
+        return self.name
+
 
 class Player:
     """Game player."""
@@ -160,4 +163,4 @@ if __name__ == '__main__':
     # print(statistics.get_games_played_type('/total/winner'))
     # print(statistics.get_games_played_type('/total/places'))
     print(statistics.get('/player/joosep/amount'))
-    print(statistics.get('/player/kristjan/favourite'))
+    print(statistics.get('/player/joosep/favourite'))
