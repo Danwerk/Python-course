@@ -161,7 +161,7 @@ class Player:
             str_ret.extend([key for (key, value) in self.games.items() if value == i])
 
         if len(str_ret) > 1:
-            joined_string = ",".join(str_ret)
+            joined_string = ", ".join(str_ret)
             return f'[{joined_string}]'
         else:
             list_to_str = ' '
