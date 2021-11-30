@@ -1,4 +1,6 @@
 from collections import Counter
+
+
 class Statistics:
     """Game statistics."""
 
@@ -49,7 +51,7 @@ class Statistics:
 
                 for player in people:
                     if player not in self.players:
-                        player_obj = Player(player)
+                        player_obj = Player(player, self.games)
                         self.players[player] = player_obj
                     self.players[player].append_played_games(self.games[game_str])
 
@@ -122,10 +124,11 @@ class Game:
 class Player:
     """Game player."""
 
-    def __init__(self, name):
+    def __init__(self, name, games: dict):
         """Constructor for Player class."""
         self.name = name
         self.plays = []
+        self.games = games
 
     def __repr__(self):
         """Player representation."""
@@ -139,14 +142,16 @@ class Player:
         """Return amount of played games."""
         return len(self.plays)
 
-    def get_games_played_most_by_player(self) -> str:
+    def get_games_played_most_by_player(self):
         ret = []
         d = Counter(self.plays)
         most_elem = d[list(d.keys())[-1]]
         for key, value in d.items():
             if value == most_elem:
                 ret.append(key)
-        return ret
+
+        for i in ret:
+            return [key for (key, value) in self.games.items() if value == i]
 
 
 if __name__ == '__main__':
