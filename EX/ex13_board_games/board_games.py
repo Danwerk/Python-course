@@ -160,12 +160,10 @@ class Player:
         for i in object_ret:
             str_ret.extend([key for (key, value) in self.games.items() if value == i])
 
-        if len(str_ret) > 1:
+        if len(str_ret) > 0:
             joined_string = ", ".join(str_ret)
             return f'[{joined_string}]'
-        else:
-            list_to_str = ' '
-            return list_to_str.join(str_ret)
+
 
     def get_games_won_by_player(self):
         pass
@@ -183,4 +181,4 @@ if __name__ == '__main__':
     # print(statistics.get_games_played_type('/total/winner'))
     # print(statistics.get_games_played_type('/total/places'))
     print(statistics.get('/player/joosep/amount'))
-    print(statistics.get('/player/kristjan/favourite'))
+    print(statistics.get('/player/ago/favourite'))
