@@ -159,7 +159,8 @@ class Player:
         # object string representation
         for i in object_ret:
             str_ret.extend([key for (key, value) in self.games.items() if value == i])
-        return str(str_ret)
+        list_to_str = ' '
+        return list_to_str.join(str_ret)
 
     def get_games_won_by_player(self):
         pass
