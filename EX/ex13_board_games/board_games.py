@@ -44,13 +44,6 @@ class Statistics:
                 #  devide games into groups of different types of games.
                 people = elements[1].split(',')
 
-                if elements[2] == 'points':
-                    self.game_has_points.append(game_str)
-                elif elements[2] == 'places':
-                    self.game_has_places.append(game_str)
-                elif elements[2] == 'winner':
-                    self.game_has_winner.append(game_str)
-
                 for player in people:
                     if player not in self.players:
                         player_obj = Player(player, self.games, self.players)
@@ -58,6 +51,7 @@ class Statistics:
                     self.players[player].append_played_games(self.games[game_str])
 
                 if elements[2] == 'points':
+                    self.game_has_points.append(game_str)
                     points = elements[3].split(',')
                     points[-1] = points[-1].strip()
                     for i in range(len(points)):
@@ -68,6 +62,7 @@ class Statistics:
                         self.players_and_points[game_str] = [d]
 
                 elif elements[2] == 'places':
+                    self.game_has_places.append(game_str)
                     for i in range(len(people)):
                         d[self.players[people[i]]] = i + 1
                     if game_str in self.players_and_points:
@@ -76,6 +71,7 @@ class Statistics:
                         self.players_and_points[game_str] = [d]
 
                 elif elements[2] == 'winner':
+                    self.game_has_winner.append(game_str)
                     elements[3] = elements[3].strip()
                     d[self.players[elements[3]]] = 'winner'
                     if game_str in self.players_and_points:
@@ -223,4 +219,4 @@ if __name__ == '__main__':
     # print(statistics.get('/player/joosep/amount'))
     print(statistics.get('/player/kristjan/favourite'))
     print(statistics.get('/player/ago/won'))
-    print(statistics.get_player_name_and_place())
+    print(statistics.get_players_and_points_dict())
