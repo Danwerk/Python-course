@@ -67,6 +67,8 @@ class Statistics:
         tokens = path[1:].split('/')
         if tokens[0] == 'player':
             return self.functionality_get_player(path)
+        if tokens[0] == 'game':
+            return self.functionality_get_game(path)
         if path == '/players':
             return self.get_player_names()
         if path == '/games':
@@ -87,6 +89,15 @@ class Statistics:
             return player.get_games_played_most_by_player()
         elif tokens[2] == 'won':
             return player.get_games_won()
+
+    def functionality_get_game(self, path):
+        tokens = path[1:].split('/')
+        game_name = tokens[1]
+        game = self.games[game_name]
+        if tokens[2] == 'amount':
+            pass
+        elif tokens[2] == 'player-amount':
+            pass
 
     def get_player_names(self) -> list:
         """List of players' names."""
@@ -130,6 +141,7 @@ class Game:
 
 class GamePlay:
     """GamePlay class."""
+
     def __init__(self, gameplays: list, players, games):
         """GamePlay constructor."""
         self.gameplays = gameplays
@@ -199,7 +211,7 @@ class Player:
         # object string representation
         for i in object_ret:
             str_ret.extend([key for (key, value) in self.games.items() if value == i])
-        return str_ret[0]
+        return str_ret
 
     '''
 if len(str_ret) > 0:
@@ -232,3 +244,5 @@ if __name__ == '__main__':
     print(statistics.get('/player/kristjan/favourite'))
     print(statistics.get('/player/ago/won'))
     # print(statistics.get_players_and_points_dict())
+    print(statistics.get('/game/chess/amount'))
+
