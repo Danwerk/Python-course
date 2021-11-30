@@ -150,9 +150,9 @@ class Player:
             if value == most_elem:
                 ret.append(key)
 
-        for i in ret:
-            return [key for (key, value) in self.games.items() if value == i]
-
+        #for i in ret:
+           # return [key for (key, value) in self.games.items() if value == i]
+        return ret
 
 if __name__ == '__main__':
     statistics = Statistics('ex13_input.txt')
