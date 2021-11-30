@@ -83,7 +83,7 @@ class Statistics:
         elif tokens[2] == 'favourite':
             return player.get_games_played_most_by_player()
         elif tokens[2] == 'won':
-            pass
+            return player.get_games_won_by_player()
 
     def get_player_names(self) -> list:
         """List of players' names."""
@@ -160,13 +160,14 @@ class Player:
         for i in object_ret:
             str_ret.extend([key for (key, value) in self.games.items() if value == i])
 
-        if len(str_ret) > 0:
-            joined_string = ", ".join(str_ret)
-            return f'{joined_string}'
+        return str_ret[0]
 
+    def get_games_won_by_player(self) -> int:
+        """Count won games."""
+        won_games_count = 0
 
-    def get_games_won_by_player(self):
-        pass
+        return won_games_count
+
 
 
 if __name__ == '__main__':
@@ -182,5 +183,6 @@ if __name__ == '__main__':
     # print(statistics.get_games_played_type('/total/points'))
     # print(statistics.get_games_played_type('/total/winner'))
     # print(statistics.get_games_played_type('/total/places'))
-    print(statistics.get('/player/joosep/amount'))
-    print(statistics.get('/player/ago/favourite'))
+    # print(statistics.get('/player/joosep/amount'))
+    print(statistics.get('/player/kristjan/favourite'))
+    print(statistics.get('/player/ago/won'))
