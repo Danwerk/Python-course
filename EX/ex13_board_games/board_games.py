@@ -40,7 +40,7 @@ class Statistics:
                 #  add games into dictionary where the key is the name of a game and the value is a game object
                 game_str = elements[0]
                 if game_str not in self.games:
-                    game_obj = Game(elements[0])
+                    game_obj = Game(elements[0], self.games, self.players)
                     self.games[game_str] = game_obj
 
                 #  devide games into groups of different types of games.
@@ -91,11 +91,12 @@ class Statistics:
             return player.get_games_won()
 
     def functionality_get_game(self, path):
+        """Basic getter 3."""
         tokens = path[1:].split('/')
         game_name = tokens[1]
         game = self.games[game_name]
         if tokens[2] == 'amount':
-            pass
+            return game.get_amount_of_played_games()
         elif tokens[2] == 'player-amount':
             pass
 
@@ -130,13 +131,24 @@ class Statistics:
 class Game:
     """Game class."""
 
-    def __init__(self, name):
+    def __init__(self, game_name, games: dict, names: dict):
         """Constructor for Game class."""
-        self.name = name
+        self.game_name = game_name
+        self.games = games
+        self.names = names
+        self.game_play_amount = []
 
     def __repr__(self):
         """Representation for Game."""
-        return self.name
+        return self.game_name
+
+    def get_games(self):
+        pass
+
+
+    def get_amount_of_played_games(self) -> int:
+        return len(self.game_play_amount)
+
 
 
 class GamePlay:
@@ -203,7 +215,7 @@ class Player:
         str_ret = []
         # make dict and find most played game by player.
         d = Counter(self.plays)
-        most_elem = d[list(d.keys())[-1]]
+        most_elem = d[list(d.keys())[0]]
         for key, value in d.items():
             if value == most_elem:
                 object_ret.append(key)
@@ -211,7 +223,7 @@ class Player:
         # object string representation
         for i in object_ret:
             str_ret.extend([key for (key, value) in self.games.items() if value == i])
-        return str_ret
+        return str_ret[0]
 
     '''
 if len(str_ret) > 0:
@@ -241,8 +253,7 @@ if __name__ == '__main__':
     # print(statistics.get_games_played_type('/total/winner'))
     # print(statistics.get_games_played_type('/total/places'))
     print(statistics.get('/player/joosep/amount'))
-    print(statistics.get('/player/kristjan/favourite'))
+    print(statistics.get('/player/ago/favourite'))
     print(statistics.get('/player/ago/won'))
     # print(statistics.get_players_and_points_dict())
     print(statistics.get('/game/chess/amount'))
-
