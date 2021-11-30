@@ -159,8 +159,10 @@ class Player:
         # object string representation
         for i in object_ret:
             str_ret.extend([key for (key, value) in self.games.items() if value == i])
-
-        return str_ret[0]
+        return str_ret[-1]
+        #if len(str_ret) > 0:
+            #joined_string = ", ".join(str_ret)
+            #return f'{joined_string}'
 
     def get_games_won_by_player(self) -> int:
         """Count won games."""
