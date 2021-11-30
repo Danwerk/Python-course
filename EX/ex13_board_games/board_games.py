@@ -161,7 +161,8 @@ class Player:
             str_ret.extend([key for (key, value) in self.games.items() if value == i])
 
         if len(str_ret) > 1:
-            return str_ret
+            joined_string = ",".join(str_ret)
+            return f'[{joined_string}]'
         else:
             list_to_str = ' '
             return list_to_str.join(str_ret)
@@ -182,4 +183,4 @@ if __name__ == '__main__':
     # print(statistics.get_games_played_type('/total/winner'))
     # print(statistics.get_games_played_type('/total/places'))
     print(statistics.get('/player/joosep/amount'))
-    print(statistics.get('/player/ago/favourite'))
+    print(statistics.get('/player/kristjan/favourite'))
