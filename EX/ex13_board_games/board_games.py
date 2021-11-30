@@ -162,11 +162,13 @@ class Player:
 
         if len(str_ret) > 0:
             joined_string = ", ".join(str_ret)
-            return f'[{joined_string}]'
+            return f'{joined_string}'
 
 
     def get_games_won_by_player(self):
         pass
+
+
 if __name__ == '__main__':
     statistics = Statistics('ex13_input.txt')
     # player = Player('Ago')
