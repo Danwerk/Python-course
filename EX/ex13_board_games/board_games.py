@@ -74,6 +74,7 @@ class Statistics:
             return self.get_games_played_type(path)
 
     def functionality_get_player(self, path):
+        """Basic getter 2."""
         tokens = path[1:].split('/')
         player_name = tokens[1]
         player = self.players[player_name]
@@ -81,6 +82,8 @@ class Statistics:
             return player.get_games_played_count()
         elif tokens[2] == 'favourite':
             return player.get_games_played_most_by_player()
+        elif tokens[2] == 'won':
+            pass
 
     def get_player_names(self) -> list:
         """List of players' names."""
@@ -142,7 +145,8 @@ class Player:
         """Return amount of played games."""
         return len(self.plays)
 
-    def get_games_played_most_by_player(self):
+    def get_games_played_most_by_player(self) -> str:
+        """Return most played games by player."""
         object_ret = []
         str_ret = []
         # make dict and find most played game by player.
@@ -155,9 +159,10 @@ class Player:
         # object string representation
         for i in object_ret:
             str_ret.extend([key for (key, value) in self.games.items() if value == i])
-        return str_ret
+        return str(str_ret)
 
-
+    def get_games_won_by_player(self):
+        pass
 if __name__ == '__main__':
     statistics = Statistics('ex13_input.txt')
     # player = Player('Ago')
