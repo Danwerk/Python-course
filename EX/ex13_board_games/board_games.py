@@ -51,7 +51,7 @@ class Statistics:
                     if player not in self.players:
                         player_obj = Player(player)
                         self.players[player] = player_obj
-                    self.players[player].append_played_games(game_obj)
+                    self.players[player].append_played_games(self.games[game_str])
 
         ret.append(self.players)
         ret.append(self.games)
@@ -138,9 +138,8 @@ class Player:
 
     def get_games_played_most_by_player(self) -> str:
         ret = []
-
         d = Counter(self.plays)
-        most_elem = d[list(d.keys())[0]]
+        most_elem = d[list(d.keys())[-1]]
         for key, value in d.items():
             if value == most_elem:
                 ret.append(key)
@@ -161,4 +160,4 @@ if __name__ == '__main__':
     # print(statistics.get_games_played_type('/total/winner'))
     # print(statistics.get_games_played_type('/total/places'))
     print(statistics.get('/player/joosep/amount'))
-    print(statistics.get('/player/joosep/favourite'))
+    print(statistics.get('/player/kristjan/favourite'))
