@@ -1,3 +1,4 @@
+"""Board game."""
 from collections import Counter
 
 
@@ -24,7 +25,7 @@ class Statistics:
         return self.players
 
     def get_games(self):
-        """Games dict getter."""
+        """Games' dict getter."""
         return self.games
 
     def read_from_file(self, filename):
@@ -128,6 +129,7 @@ class Game:
 
 
 class GamePlay:
+    """GamePlay class."""
     def __init__(self, gameplays: list, players, games):
         """GamePlay constructor."""
         self.gameplays = gameplays
