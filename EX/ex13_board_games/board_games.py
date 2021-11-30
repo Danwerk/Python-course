@@ -143,16 +143,20 @@ class Player:
         return len(self.plays)
 
     def get_games_played_most_by_player(self):
-        ret = []
+        object_ret = []
+        str_ret = []
+        # make dict and find most played game by player.
         d = Counter(self.plays)
         most_elem = d[list(d.keys())[-1]]
         for key, value in d.items():
             if value == most_elem:
-                ret.append(key)
+                object_ret.append(key)
 
-        #for i in ret:
-           # return [key for (key, value) in self.games.items() if value == i]
-        return ret
+        # object string representation
+        for i in object_ret:
+            str_ret.extend([key for (key, value) in self.games.items() if value == i])
+        return str_ret
+
 
 if __name__ == '__main__':
     statistics = Statistics('ex13_input.txt')
@@ -168,4 +172,4 @@ if __name__ == '__main__':
     # print(statistics.get_games_played_type('/total/winner'))
     # print(statistics.get_games_played_type('/total/places'))
     print(statistics.get('/player/joosep/amount'))
-    print(statistics.get('/player/joosep/favourite'))
+    print(statistics.get('/player/kristjan/favourite'))
