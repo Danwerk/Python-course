@@ -60,14 +60,14 @@ def follow_the_line(robot: FollowerBot):
             robot.sleep(0.1)
 
         elif robot.get_third_line_sensor_from_left() == 1024 and robot.get_third_line_sensor_from_right() == 0:
-            robot.set_left_wheel_speed(15)
-            robot.set_right_wheel_speed(73)
+            robot.set_left_wheel_speed(16)
+            robot.set_right_wheel_speed(55)
             robot.sleep(0.1)
             robot.set_wheels_speed(0)
 
         elif robot.get_third_line_sensor_from_right() == 1024 and robot.get_third_line_sensor_from_left() == 0:
-            robot.set_left_wheel_speed(73)
-            robot.set_right_wheel_speed(15)
+            robot.set_left_wheel_speed(55)
+            robot.set_right_wheel_speed(16)
             robot.sleep(0.1)
         else:
             robot.set_wheels_speed(45)
