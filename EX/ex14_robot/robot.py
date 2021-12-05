@@ -52,12 +52,17 @@ def follow_the_line(robot: FollowerBot):
     while robot.get_right_line_sensors()[0] == 1024:
         robot.set_wheels_speed(100)
         robot.sleep(0.1)
+        print(robot.get_line_sensors())
     while sum(robot.get_line_sensors()) != 6144:
-        if sum(robot.get_left_line_sensors()) >= 1024 and robot.get_right_line_sensors() >= [0, 0, 0]:
+        robot.set_wheels_speed(40)
+        robot.sleep(0.1)
+        if sum(robot.get_left_line_sensors()) >= 1024 and sum(robot.get_right_line_sensors()) < 1024:
+            print(robot.get_line_sensors())
             robot.set_left_wheel_speed(70)
             robot.set_right_wheel_speed(58)
             robot.sleep(0.1)
         else:
+            #print(robot.get_line_sensors())
             robot.set_wheels_speed(40)
             robot.sleep(0.1)
     robot.done()
