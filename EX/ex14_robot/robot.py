@@ -52,24 +52,25 @@ def follow_the_line(robot: FollowerBot):
     while robot.get_right_line_sensors()[2] == 1024:
         robot.set_wheels_speed(10)
         robot.sleep(0.1)
-        if robot.get_left_line_sensors()[2] == 0:
-            while robot.get_left_line_sensors()[2] == 0:
-                robot.set_wheels_speed(10)
-                robot.sleep(0.1)
-                if robot.get_left_line_sensors()[2] > 512:
-                    while sum(robot.get_line_sensors()) != 0:
-                        if sum(robot.get_left_line_sensors()) > 1500 and sum(robot.get_right_line_sensors()) != 0:
-                            robot.set_right_wheel_speed(85)
-                            robot.sleep(0.1)
-                        elif sum(robot.get_right_line_sensors()) > 1500 and sum(robot.get_left_line_sensors()) != 0:
-                            robot.set_left_wheel_speed(85)
-                            robot.sleep(0.1)
-                        elif robot.get_right_line_sensors()[2] == 0 and robot.get_left_line_sensors()[2] == 0:
-                            robot.set_wheels_speed(50)
-                            robot.sleep(0.2)
-                        else:
-                            robot.set_wheels_speed(40)
-                            robot.sleep(0.1)
+    if robot.get_left_line_sensors()[2] == 0 and robot.get_right_line_sensors()[2] == 0:
+        while robot.get_left_line_sensors()[2] == 0:
+            robot.set_wheels_speed(40)
+            robot.sleep(0.15)
+
+    while sum(robot.get_line_sensors()) != 0:
+        if sum(robot.get_left_line_sensors()) >= 1024 and sum(robot.get_right_line_sensors()) != 0:
+            robot.set_right_wheel_speed(85)
+            robot.sleep(0.1)
+        elif sum(robot.get_right_line_sensors()) > 1500 and sum(robot.get_left_line_sensors()) != 0:
+            robot.set_left_wheel_speed(85)
+            robot.sleep(0.1)
+        elif robot.get_right_line_sensors()[2] == 0 and robot.get_left_line_sensors()[2] == 0:
+            robot.set_wheels_speed(50)
+            robot.sleep(0.2)
+        else:
+            robot.set_wheels_speed(20)
+            robot.sleep(0.1)
+    robot.done()
     '''while sum(robot.get_line_sensors()) != 0:
         if robot.get_left_line_sensors()[2] == 1024:
             robot.set_right_wheel_speed(95)
