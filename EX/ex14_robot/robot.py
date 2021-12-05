@@ -59,11 +59,6 @@ def follow_the_line(robot: FollowerBot):
             robot.set_wheels_speed(20)
             robot.sleep(0.1)
 
-        elif robot.get_left_line_sensor() == 1024 and robot.get_right_line_sensor() == 1024:
-            robot.set_left_wheel_speed(2)
-            robot.set_right_wheel_speed(20)
-            robot.sleep(0.1)
-
         elif robot.get_third_line_sensor_from_left() == 1024 and robot.get_third_line_sensor_from_right() == 0:
             robot.set_left_wheel_speed(16)
             robot.set_right_wheel_speed(55)
