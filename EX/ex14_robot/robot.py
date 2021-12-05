@@ -59,8 +59,8 @@ def follow_the_line(robot: FollowerBot):
                 if robot.get_left_line_sensors()[2] > 512:
                     robot.set_right_wheel_speed(90)
                     robot.sleep(0.1)
-
-
+                elif robot.get_right_line_sensors()[2] > 512:
+                    robot.set_left_wheel_speed(90)
     robot.done()
 
 
