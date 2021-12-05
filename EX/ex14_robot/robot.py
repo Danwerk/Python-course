@@ -57,11 +57,16 @@ def follow_the_line(robot: FollowerBot):
         if robot.get_left_line_sensor() + robot.get_right_line_sensor() + robot.get_second_line_sensor_from_right() + robot.get_second_line_sensor_from_left() == 0:
             robot.set_wheels_speed(100)
             robot.sleep(0.1)
+
         elif robot.get_third_line_sensor_from_left() == 1024 and robot.get_third_line_sensor_from_right() == 0:
             robot.set_left_wheel_speed(55)
             robot.set_right_wheel_speed(65)
             robot.sleep(0.1)
-
+        else:
+            robot.set_wheels_speed(40)
+            robot.sleep(0.1)
+    robot.done()
+'''
         elif robot.get_third_line_sensor_from_right() == 1024 and robot.get_third_line_sensor_from_left() == 0:
             robot.set_right_wheel_speed(55)
             robot.set_left_wheel_speed(65)
@@ -75,26 +80,6 @@ def follow_the_line(robot: FollowerBot):
         elif robot.get_third_line_sensor_from_right() == 1024 and robot.get_second_line_sensor_from_right() == 1024:
             robot.set_right_wheel_speed(40)
             robot.set_left_wheel_speed(75)
-            robot.sleep(0.1)
-        else:
-            robot.set_wheels_speed(40)
-            robot.sleep(0.1)
-
-
-    robot.done()
-    '''
-    while sum(robot.get_line_sensors()) != 6144:
-        if sum(robot.get_left_line_sensors()) >= 1024 and 0 <= sum(robot.get_right_line_sensors()) < 1024:
-            robot.set_right_wheel_speed(50)
-            robot.sleep(0.1)
-        elif sum(robot.get_right_line_sensors()) > 1500 and sum(robot.get_left_line_sensors()) != 0:
-            robot.set_left_wheel_speed(85)
-            robot.sleep(0.1)
-        elif robot.get_right_line_sensors()[2] == 0 and robot.get_left_line_sensors()[2] == 0:
-            robot.set_wheels_speed(50)
-            robot.sleep(0.2)
-        else:
-            robot.set_wheels_speed(20)
             robot.sleep(0.1)
     '''
 
