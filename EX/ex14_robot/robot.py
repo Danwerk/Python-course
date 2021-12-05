@@ -50,24 +50,23 @@ def follow_the_line(robot: FollowerBot):
     :param FollowerBot robot: instance of the robot that you need to make move
     """
     while robot.get_right_line_sensors()[0] == 1024 and robot.get_left_line_sensors()[2] == 1024:
-        robot.set_wheels_speed(20)
-        robot.sleep(0.09)
+        robot.set_wheels_speed(100)
+        robot.sleep(0.1)
 
     while sum(robot.get_line_sensors()) != 6144:
         print(robot.get_line_sensors())
         if robot.get_left_line_sensor() + robot.get_right_line_sensor() + robot.get_second_line_sensor_from_right() + robot.get_second_line_sensor_from_left() == 0:
-            robot.set_wheels_speed(100)
+            robot.set_wheels_speed(20)
             robot.sleep(0.1)
 
         elif robot.get_third_line_sensor_from_left() == 1024 and robot.get_third_line_sensor_from_right() == 0:
-            robot.set_wheels_speed(0)
-            robot.set_left_wheel_speed(75)
-            robot.set_right_wheel_speed(100)
+            robot.set_left_wheel_speed(20)
+            robot.set_right_wheel_speed(55)
             robot.sleep(0.1)
 
         elif robot.get_third_line_sensor_from_right() == 1024 and robot.get_third_line_sensor_from_left() == 0:
-            robot.set_left_wheel_speed(100)
-            robot.set_right_wheel_speed(75)
+            robot.set_left_wheel_speed(55)
+            robot.set_right_wheel_speed(20)
             robot.sleep(0.1)
         else:
             robot.set_wheels_speed(40)
