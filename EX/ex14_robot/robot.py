@@ -57,9 +57,9 @@ def follow_the_line(robot: FollowerBot):
             robot.set_left_wheel_speed(70)
             robot.set_right_wheel_speed(58)
             robot.sleep(0.1)
-
-        robot.set_wheels_speed(40)
-        robot.sleep(0.1)
+        else:
+            robot.set_wheels_speed(40)
+            robot.sleep(0.1)
     robot.done()
     '''
     while sum(robot.get_line_sensors()) != 6144:
