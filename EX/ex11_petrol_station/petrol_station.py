@@ -483,4 +483,6 @@ if __name__ == '__main__':
 
     client1 = Client('Mikk', 550.0, ClientType.Basic)
     order = Order({item1: 12.0}, date.today(), ClientType.Basic)
+    p_station = PetrolStation({item3: 12345.0}, {item1: 123.0})
+    print(p_station.sell([(item3, 12)], client1))
     print(Client.get_history(client1))
