@@ -68,7 +68,7 @@ def follow_the_line(robot: FollowerBot):
         elif robot.get_third_line_sensor_from_right() == 1024 and robot.get_third_line_sensor_from_left() == 0:
             robot.set_left_wheel_speed(20)
             robot.set_right_wheel_speed(-10)
-            robot.sleep(0.01)
+            robot.sleep(0.001)
 
         else:
             robot.set_wheels_speed(45)
@@ -122,4 +122,5 @@ def the_true_follower(robot: FollowerBot):
 if __name__ == '__main__':
     # print(test_run(FollowerBot()))
     # print(drive_to_line(FollowerBot()))
-    print(follow_the_line(FollowerBot()))
+    # print(follow_the_line(FollowerBot()))
+    print(the_true_follower(FollowerBot()))
