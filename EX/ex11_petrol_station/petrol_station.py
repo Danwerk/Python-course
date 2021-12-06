@@ -445,6 +445,9 @@ class PetrolStation:
                     raise RuntimeError('woops')
                 else:
                     order = Order(i[0], date.today(), client.get_client_type())
+                    if client not in self.__sell_history:
+                        self.__sell_history[client] = []
+                    self.__sell_history[client].append(order)
             elif isinstance(i[0], ShopItem):
                 if self.__shop_item_stock_copy[i[0]] < i[1]:
                     raise RuntimeError('woops')
@@ -463,9 +466,7 @@ class PetrolStation:
         elif client.get_member_balance() > 6000:
             client.set_client_type(ClientType.Gold)
 
-        if client not in self.__sell_history:
-            self.__sell_history[client] = []
-        self.__sell_history[client].append(order)
+
 
 
 if __name__ == '__main__':
