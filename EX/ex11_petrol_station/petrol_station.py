@@ -452,6 +452,7 @@ class PetrolStation:
                     raise RuntimeError('woops')
                 else:
                     order = Order({i[0]: i[1]}, date.today(), client.get_client_type())
+                    client.buy(order)
             elif isinstance(i[0], ShopItem):
                 if self.__shop_item_stock_copy[i[0]] < i[1]:
                     raise RuntimeError('woops')
