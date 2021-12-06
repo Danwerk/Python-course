@@ -455,6 +455,8 @@ class PetrolStation:
                     if client not in self.__sell_history:
                         self.__sell_history[client] = []
                         self.__sell_history[client].append(order)
+                    else:
+                        self.__sell_history[client].append(order)
 
             elif isinstance(i[0], ShopItem):
                 if self.__shop_item_stock_copy[i[0]] < i[1]:
