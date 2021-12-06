@@ -453,20 +453,22 @@ class PetrolStation:
                 else:
                     order = Order({i[0]: i[1]}, date.today(), client.get_client_type())
                     client.buy(order)
+
             elif isinstance(i[0], ShopItem):
                 if self.__shop_item_stock_copy[i[0]] < i[1]:
                     raise RuntimeError('woops')
 
-        '''
+
         else:
             if len(client.get_history()) > 0:
                 max_range_date = max(d.get_date() for d in client.get_history())
+                # calculate number of days between two given dates
                 if (date.today() - max_range_date).days > 60:
                     downgrade = True
-        '''
-        if client.get_member_balance() > 1000:
+
+        if client.get_member_balance() >= 1000:
             client.set_client_type(ClientType.Silver)
-        elif client.get_member_balance() > 6000:
+        elif client.get_member_balance() >= 6000:
             client.set_client_type(ClientType.Gold)
 
 
