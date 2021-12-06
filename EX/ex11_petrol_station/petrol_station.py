@@ -445,19 +445,22 @@ class PetrolStation:
                     raise RuntimeError('woops')
 
             elif isinstance(i[0], ShopItem):
-                if self.__shop_item_stock_copy[i[0]] < i[1] or i[0] not in self.__shop_item_stock_copy:
+                if self.__shop_item_stock_copy[i[0]] < i[1]:
                     raise RuntimeError('woops')
 
         if not client:
             client = Client('', 100000, ClientType.Basic)
-
-
 
         else:
             if len(client.get_history()) > 0:
                 max_range_date = max(d.get_date() for d in client.get_history())
                 if (date.today() - max_range_date).days > 60:
                     downgrade = True
+
+        if client.get_member_balance() > 1000:
+            client.set_client_type(ClientType.Silver)
+        elif client.get_member_balance() > 6000:
+            client.set_client_type(ClientType.Gold)
 
 
 if __name__ == '__main__':
