@@ -439,8 +439,22 @@ class PetrolStation:
         :param client: is a customer, but the customer can be specified as None,
         in which case a new customer must be created with `Basic` status and a sufficient amount of money to purchase
         """
-        pass
 
+        for i in items_to_sell:
+            if isinstance(i[0], Fuel):
+                if self.__fuel_stock_copy[i[0]] < i[1]:
+                    raise RuntimeError()
+
+        if not client:
+            client = Client('', 100000, ClientType.Basic)
+
+
+
+        else:
+            if len(client.get_history()) > 0:
+                max_range_date = max(d.get_date() for d in client.get_history())
+                if (date.today() - max_range_date).days > 60:
+                    downgrade = True
 
 if __name__ == '__main__':
     item1 = ShopItem('Mars', 2.12)
