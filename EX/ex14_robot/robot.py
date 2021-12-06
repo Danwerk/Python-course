@@ -151,7 +151,6 @@ def the_true_follower(robot: FollowerBot):
             robot.sleep(0.01)
             print(robot.get_line_sensors())
     robot.done()
-
 '''
 if __name__ == '__main__':
     # print(test_run(FollowerBot()))
