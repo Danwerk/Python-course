@@ -445,6 +445,10 @@ class PetrolStation:
                 if self.__fuel_stock_copy[i[0]] < i[1]:
                     raise RuntimeError()
 
+            elif isinstance(i[0], ShopItem):
+                if self.__shop_item_stock_copy[i[0]] < i[0]:
+                    raise RuntimeError()
+
         if not client:
             client = Client('', 100000, ClientType.Basic)
 
