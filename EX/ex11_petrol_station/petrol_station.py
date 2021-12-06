@@ -439,6 +439,13 @@ class PetrolStation:
         :param client: is a customer, but the customer can be specified as None,
         in which case a new customer must be created with `Basic` status and a sufficient amount of money to purchase
         """
+        total = 0
+        for item in items_to_sell:
+            total += item[1]
+
+        if not client:
+            client = Client('Incognito', total, ClientType.Basic)
+
         for i in items_to_sell:
             if isinstance(i[0], Fuel):
                 if self.__fuel_stock_copy[i[0]] < i[1]:
@@ -447,26 +454,27 @@ class PetrolStation:
                     order = Order(i[0], date.today(), client.get_client_type())
                     if client not in self.__sell_history:
                         self.__sell_history[client] = []
-                    self.__sell_history[client].append(order)
+                        self.__sell_history[client].append(order)
+
             elif isinstance(i[0], ShopItem):
                 if self.__shop_item_stock_copy[i[0]] < i[1]:
                     raise RuntimeError('woops')
 
-        if not client:
-            client = Client('', 100000, ClientType.Basic)
-
+        '''
         else:
             if len(client.get_history()) > 0:
                 max_range_date = max(d.get_date() for d in client.get_history())
                 if (date.today() - max_range_date).days > 60:
                     downgrade = True
-
+        '''
         if client.get_member_balance() > 1000:
             client.set_client_type(ClientType.Silver)
         elif client.get_member_balance() > 6000:
             client.set_client_type(ClientType.Gold)
 
-
+        if client not in self.__sell_history:
+            self.__sell_history[client] = []
+        self.__sell_history[client].append(order)
 
 
 if __name__ == '__main__':
