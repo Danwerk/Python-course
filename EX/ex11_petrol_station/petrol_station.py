@@ -477,9 +477,9 @@ class PetrolStation:
         else:
             self.__sell_history[client].append(order)
 
-        if client.get_member_balance() >= 1000:
+        if client.get_member_balance() > 1000:
             client.set_client_type(ClientType.Silver)
-        elif client.get_member_balance() >= 6000:
+        elif client.get_member_balance() > 6000:
             client.set_client_type(ClientType.Gold)
 
 
