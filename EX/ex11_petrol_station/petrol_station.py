@@ -465,11 +465,7 @@ class PetrolStation:
         ret = {}
         for i in items_to_sell:
             self.raise_exception_if_need(i)
-            # add elements to dict
-            if i[0] not in ret:
-                ret[i[0]] = i[1]
-            else:
-                ret[i[0]] += i[1]
+
 
         total = 0
         for i in items_to_sell:
@@ -488,7 +484,7 @@ class PetrolStation:
             else:
                 client_downgrade = True
 
-            if client_downgrade:
+            if client_downgrade is True:
                 client.set_client_type(ClientType.Bronze)
                 client.clear_history()
 
