@@ -419,10 +419,18 @@ class PetrolStation:
                 raise RuntimeError('woops not enough items or no such type of item')
 
     def update_client_status(self, client):
+        """Update client status if it is needed or possible."""
         if client.get_member_balance() > 1000:
             client.set_client_type(ClientType.Silver)
         if client.get_member_balance() > 6000:
             client.set_client_type(ClientType.Gold)
+
+    def client_purchase_history(self, client, order):
+        """Add client purchase info in history dict."""
+        if client not in self.__sell_history:
+            self.__sell_history[client] = [order]
+        else:
+            self.__sell_history[client].append(order)
 
     def sell(self, items_to_sell: list[tuple[OrderItem, float]], client: Client = None):
         """
@@ -486,13 +494,9 @@ class PetrolStation:
 
         order = Order({i[0]: i[1] for i in items_to_sell}, date.today(), client.get_client_type())
 
-        if client not in self.__sell_history:
-            self.__sell_history[client] = [order]
-        else:
-            self.__sell_history[client].append(order)
-
-        client.buy(order)
-        self.update_client_status(client)
+        self.client_purchase_history(client, order)  # add client's purchase history in dictionary
+        client.buy(order)  # make a purchase
+        self.update_client_status(client)  # check whether client status is needed to update to silver or gold
 
         for item, quantity in ret.items():
             if type(item) == Fuel:
