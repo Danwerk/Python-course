@@ -446,7 +446,7 @@ class PetrolStation:
                     raise RuntimeError('woops, not enough petrol or no such type of petrol')
 
             elif isinstance(i[0], ShopItem):
-                if self.__shop_item_stock_copy[i[0]] < i[1]:
+                if self.__shop_item_stock_copy[i[0]] < i[1] or i[0] not in self.__shop_item_stock_copy:
                     raise RuntimeError('woops not enough items or no such type of item')
 
         total = 0
