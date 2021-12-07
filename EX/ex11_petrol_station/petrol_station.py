@@ -439,7 +439,7 @@ class PetrolStation:
         :param client: is a customer, but the customer can be specified as None,
         in which case a new customer must be created with `Basic` status and a sufficient amount of money to purchase
         """
-
+        ret = {}
         for i in items_to_sell:
             if type(i[0]) is Fuel:
                 if self.__fuel_stock_copy[i[0]] < i[1] or i[0] not in self.__fuel_stock_copy:
@@ -448,6 +448,11 @@ class PetrolStation:
             elif isinstance(i[0], ShopItem):
                 if self.__shop_item_stock_copy[i[0]] < i[1] or i[0] not in self.__shop_item_stock_copy:
                     raise RuntimeError('woops not enough items or no such type of item')
+            # add elements to dict
+            if i[0] not in ret:
+                ret[i[0]] = i[1]
+            else:
+                ret[i[0]] += i[1]
 
         total = 0
         for i in items_to_sell:
@@ -464,10 +469,12 @@ class PetrolStation:
                 date_interval = (date.today() - max_range_date).days
                 if date_interval > 60:
                     client_downgrade = True
+            else:
+                client_downgrade = True
 
-                if client_downgrade == True:
-                    client.set_client_type(ClientType.Bronze)
-                    client.clear_history()
+            if client_downgrade is True:
+                client.set_client_type(ClientType.Bronze)
+                client.clear_history()
 
         order = Order({i[0]: i[1] for i in items_to_sell}, date.today(), client.get_client_type())
         client.buy(order)
@@ -477,10 +484,18 @@ class PetrolStation:
         else:
             self.__sell_history[client].append(order)
 
+        for item, quantity in ret.items():
+            if type(item) == Fuel:
+                self.remove_fuel(item, quantity)
+            elif type(item) == ShopItem:
+                self.remove_items(item, quantity)
+
+
         if client.get_member_balance() > 1000:
             client.set_client_type(ClientType.Silver)
         elif client.get_member_balance() > 6000:
             client.set_client_type(ClientType.Gold)
+
 
 
 if __name__ == '__main__':
@@ -495,4 +510,4 @@ if __name__ == '__main__':
     order = Order({item1: 12.0}, date.today(), ClientType.Basic)
     p_station = PetrolStation({item3: 12345.0}, {item1: 123.0})
     print(p_station.sell([(item3, 12)], client1))
-    print(Client.get_history(client1))
+    #print(Client.get_history(client1))
