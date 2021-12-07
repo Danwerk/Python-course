@@ -110,8 +110,6 @@ def the_true_follower(robot: FollowerBot):
             print(robot.get_line_sensors())
     robot.done()
 
-
-
     '''
     while robot.get_right_line_sensors()[0] == 1024 and robot.get_left_line_sensors()[2] == 1024:
         robot.set_wheels_speed(100)
