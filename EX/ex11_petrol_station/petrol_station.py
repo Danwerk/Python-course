@@ -483,16 +483,17 @@ class PetrolStation:
             self.__sell_history[client].append(order)
         client.buy(order)
 
+        if client.get_member_balance() > 1000:
+            client.set_client_type(ClientType.Silver)
+        if client.get_member_balance() > 6000:
+            client.set_client_type(ClientType.Gold)
+
         for item, quantity in ret.items():
             if type(item) == Fuel:
                 self.remove_fuel(item, quantity)
             elif type(item) == ShopItem:
                 self.remove_items(item, quantity)
-        print(client.get_member_balance())
-        if client.get_member_balance() > 1000:
-            client.set_client_type(ClientType.Silver)
-        if client.get_member_balance() > 6000:
-            client.set_client_type(ClientType.Gold)
+
 
 
 if __name__ == '__main__':
