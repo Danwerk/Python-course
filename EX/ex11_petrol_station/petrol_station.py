@@ -477,13 +477,11 @@ class PetrolStation:
 
         order = Order({i[0]: i[1] for i in items_to_sell}, date.today(), client.get_client_type())
 
+        if client not in self.__sell_history:
+            self.__sell_history[client] = [order]
+        else:
+            self.__sell_history[client].append(order)
         client.buy(order)
-
-
-        if client.get_member_balance() > 1000:
-            client.set_client_type(ClientType.Silver)
-        elif client.get_member_balance() > 6000:
-            client.set_client_type(ClientType.Gold)
 
         for item, quantity in ret.items():
             if type(item) == Fuel:
@@ -491,15 +489,16 @@ class PetrolStation:
             elif type(item) == ShopItem:
                 self.remove_items(item, quantity)
 
+        if client.get_member_balance() > 1000:
+            client.set_client_type(ClientType.Silver)
+        elif client.get_member_balance() > 6000:
+            client.set_client_type(ClientType.Gold)
 
-        if client not in self.__sell_history:
-            self.__sell_history[client] = [order]
-        else:
-            self.__sell_history[client].append(order)
+
 
 if __name__ == '__main__':
 
-    my_client = Client("keegi", 15.15, ClientType.Bronze)
+    my_client = Client("keegi", 15.15, ClientType.Basic)
 
     my_petrol_station = PetrolStation({}, {})
     my_petrol_station.add_fuel(Fuel("fuelka", 5.5), 10.12)
