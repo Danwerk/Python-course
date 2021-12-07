@@ -488,26 +488,25 @@ class PetrolStation:
                 self.remove_fuel(item, quantity)
             elif type(item) == ShopItem:
                 self.remove_items(item, quantity)
-
+        print(client.get_member_balance())
         if client.get_member_balance() > 1000:
             client.set_client_type(ClientType.Silver)
-        elif client.get_member_balance() > 6000:
+        if client.get_member_balance() > 6000:
             client.set_client_type(ClientType.Gold)
-
 
 
 if __name__ == '__main__':
 
-    my_client = Client("keegi", 15.15, ClientType.Basic)
+    my_client = Client("keegi", 15666.15, ClientType.Bronze)
 
     my_petrol_station = PetrolStation({}, {})
     my_petrol_station.add_fuel(Fuel("fuelka", 5.5), 10.12)
-    my_petrol_station.add_fuel(Fuel("fuelka", 5.5), 93.21412)
+    my_petrol_station.add_fuel(Fuel("fuelkaa", 5.5), 9000.21412)
     print(my_petrol_station.get_fuel_dict())
     my_petrol_station.add_shop_item(ShopItem("item", 4.123), 154.24)
     my_petrol_station.add_shop_item(ShopItem("item", 4.123), 32.5451)
     print(my_petrol_station.get_shop_item_dict())
-    my_petrol_station.sell([(Fuel("fuelka", 5.5), 2.1), (Fuel("fuelka", 5.5), 2.1)], my_client)
+    my_petrol_station.sell([(Fuel("fuelkaa", 5.5), 1900.1), (Fuel("fuelka", 5.5), 2.1)], my_client)
     my_petrol_station.sell([(ShopItem("item", 4.123), 43.24)], my_client)
     print(my_petrol_station.get_fuel_dict(), my_petrol_station.get_shop_item_dict(), my_petrol_station.get_sell_history())
 
