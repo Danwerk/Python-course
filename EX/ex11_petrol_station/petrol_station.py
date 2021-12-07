@@ -282,7 +282,6 @@ class Client:
         Use deepcopy.So that changes made with the dictionary in the class do not affect the dictionary object that does not belong to the class.
         :return: list['Order']
         """
-
         return copy.deepcopy(self.__order_history)
 
     def clear_history(self):
@@ -409,6 +408,16 @@ class PetrolStation:
         """Return sell history dict where key is Client, value is a list of Orders."""
         return self.__sell_history
 
+    def raise_if_need(self, i):
+        """Raise exeption if needed."""
+        if isinstance(i[0], Fuel):
+            if i[0] not in self.__fuel_stock_copy or self.__fuel_stock_copy[i[0]] < i[1]:
+                raise RuntimeError('woops, not enough petrol or no such type of petrol')
+
+        elif isinstance(i[0], ShopItem):
+            if i[0] not in self.__shop_item_stock_copy or self.__shop_item_stock_copy[i[0]] < i[1]:
+                raise RuntimeError('woops not enough items or no such type of item')
+
     def sell(self, items_to_sell: list[tuple[OrderItem, float]], client: Client = None):
         """
         Sell item.
@@ -441,13 +450,7 @@ class PetrolStation:
         """
         ret = {}
         for i in items_to_sell:
-            if isinstance(i[0], Fuel):
-                if i[0] not in self.__fuel_stock_copy or self.__fuel_stock_copy[i[0]] < i[1]:
-                    raise RuntimeError('woops, not enough petrol or no such type of petrol')
-
-            elif isinstance(i[0], ShopItem):
-                if i[0] not in self.__shop_item_stock_copy or self.__shop_item_stock_copy[i[0]] < i[1]:
-                    raise RuntimeError('woops not enough items or no such type of item')
+            self.raise_if_need(i)
             # add elements to dict
             if i[0] not in ret:
                 ret[i[0]] = i[1]
@@ -481,6 +484,7 @@ class PetrolStation:
             self.__sell_history[client] = [order]
         else:
             self.__sell_history[client].append(order)
+
         client.buy(order)
 
         if client.get_member_balance() > 1000:
@@ -495,9 +499,7 @@ class PetrolStation:
                 self.remove_items(item, quantity)
 
 
-
 if __name__ == '__main__':
-
     my_client = Client("keegi", 15666.15, ClientType.Bronze)
 
     my_petrol_station = PetrolStation({}, {})
@@ -509,7 +511,8 @@ if __name__ == '__main__':
     print(my_petrol_station.get_shop_item_dict())
     my_petrol_station.sell([(Fuel("fuelkaa", 5.5), 1900.1), (Fuel("fuelka", 5.5), 2.1)], my_client)
     my_petrol_station.sell([(ShopItem("item", 4.123), 43.24)], my_client)
-    print(my_petrol_station.get_fuel_dict(), my_petrol_station.get_shop_item_dict(), my_petrol_station.get_sell_history())
+    print(my_petrol_station.get_fuel_dict(), my_petrol_station.get_shop_item_dict(),
+          my_petrol_station.get_sell_history())
 
     print(my_petrol_station.get_sell_history())
     print(my_client.get_history())
