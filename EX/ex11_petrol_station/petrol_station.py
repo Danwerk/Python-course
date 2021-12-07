@@ -490,12 +490,10 @@ class PetrolStation:
             elif type(item) == ShopItem:
                 self.remove_items(item, quantity)
 
-
         if client.get_member_balance() > 1000:
             client.set_client_type(ClientType.Silver)
-        elif client.get_member_balance() > 6000:
+        elif client.get_member_balance() > 6000 and client.get_client_type() != ClientType.Basic:
             client.set_client_type(ClientType.Gold)
-
 
 
 if __name__ == '__main__':
@@ -510,4 +508,4 @@ if __name__ == '__main__':
     order = Order({item1: 12.0}, date.today(), ClientType.Basic)
     p_station = PetrolStation({item3: 12345.0}, {item1: 123.0})
     print(p_station.sell([(item3, 12)], client1))
-    #print(Client.get_history(client1))
+    # print(Client.get_history(client1))
