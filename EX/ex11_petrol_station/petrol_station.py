@@ -103,7 +103,7 @@ class OrderItem(ABC):
 
     def __repr__(self):
         """String representation for OrderItem."""
-        return "Fill this as you wish"
+        return f'{self.__name}'
 
 
 class ShopItem(OrderItem):
@@ -497,15 +497,15 @@ class PetrolStation:
 
 
 if __name__ == '__main__':
-    item1 = ShopItem('Mars', 2.12)
-    item2 = ShopItem('Twix', 2.20)
-    item6 = ShopItem('Snickers', 2.30)
-    item3 = Fuel('LPG', 1.59)
-    item4 = Fuel('98', 1.59)
-    item5 = Fuel('95', 1.59)
 
-    client1 = Client('Mikk', 550.0, ClientType.Basic)
-    order = Order({item1: 12.0}, date.today(), ClientType.Basic)
-    p_station = PetrolStation({item3: 12345.0}, {item1: 123.0})
-    print(p_station.sell([(item3, 12)], client1))
-    # print(Client.get_history(client1))
+    my_client = Client("keegi", 12415.15, ClientType.Silver)
+    my_petrol_station = PetrolStation({}, {})
+    my_petrol_station.add_fuel(Fuel("fuelka", 5.5), 10.12)
+    my_petrol_station.add_fuel(Fuel("fuelka", 5.5), 93.21412)
+    print(my_petrol_station.get_fuel_dict())
+    my_petrol_station.add_shop_item(ShopItem("item", 4.123), 154.24)
+    my_petrol_station.add_shop_item(ShopItem("item", 4.123), 32.5451)
+    print(my_petrol_station.get_shop_item_dict())
+    my_petrol_station.sell([(Fuel("fuelka", 5.5), 2.1), (Fuel("fuelka", 5.5), 2.1)], my_client)
+    my_petrol_station.sell([(ShopItem("item", 4.123), 43.24)], my_client)
+    print(my_petrol_station.get_fuel_dict(), my_petrol_station.get_shop_item_dict(), my_petrol_station.get_sell_history())
