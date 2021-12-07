@@ -469,9 +469,9 @@ class PetrolStation:
                     client.set_client_type(ClientType.Bronze)
                     client.clear_history()
 
-
-                    #order = Order({i[0]: i[1]}, date.today(), client.get_client_type())
-                    #client.buy(order)
+        for i in items_to_sell:
+            order = Order({i[0]: i[1]}, date.today(), client.get_client_type())
+            client.buy(order)
 
         if client.get_member_balance() >= 1000:
             client.set_client_type(ClientType.Silver)
