@@ -439,32 +439,39 @@ class PetrolStation:
         :param client: is a customer, but the customer can be specified as None,
         in which case a new customer must be created with `Basic` status and a sufficient amount of money to purchase
         """
-        total = 0
-        for item in items_to_sell:
-            total += item[1]
 
-        if not client:
-            client = Client('Incognito', total, ClientType.Basic)
-        downgrade = False
         for i in items_to_sell:
             if isinstance(i[0], Fuel):
-                if self.__fuel_stock_copy[i[0]] < i[1]:
-                    raise RuntimeError('woops')
-                else:
-                    if len(client.get_history()) > 0:
-                        max_range_date = max(d.get_date() for d in client.get_history())
-                        # calculate number of days between two given dates
-                        if (date.today() - max_range_date).days > 60:
-                            downgrade = True
-                    if downgrade:
-                        client.set_client_type(ClientType.Bronze)
-                        client.clear_history()
-                    order = Order({i[0]: i[1]}, date.today(), client.get_client_type())
-                    client.buy(order)
+                if self.__fuel_stock_copy[i[0]] < i[1] or i[0] not in self.__fuel_stock_copy:
+                    raise RuntimeError('woops, not enough petrol or no such type of petrol')
 
             elif isinstance(i[0], ShopItem):
                 if self.__shop_item_stock_copy[i[0]] < i[1]:
-                    raise RuntimeError('woops')
+                    raise RuntimeError('woops not enough items or no such type of item')
+
+        total = 0
+        for i in items_to_sell:
+            total += i[1]
+        client_downgrade = False
+
+        if not client:
+            client = Client('Incognito', total, ClientType.Basic)
+
+        else:
+            if len(client.get_history()) > 0:
+                max_range_date = max(d.get_date() for d in client.get_history())
+                # calculate number of days between two given dates
+                date_interval = (date.today() - max_range_date).days
+                if date_interval > 60:
+                    client_downgrade = True
+
+                if client_downgrade == True:
+                    client.set_client_type(ClientType.Bronze)
+                    client.clear_history()
+
+
+                    #order = Order({i[0]: i[1]}, date.today(), client.get_client_type())
+                    #client.buy(order)
 
         if client.get_member_balance() >= 1000:
             client.set_client_type(ClientType.Silver)
