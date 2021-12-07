@@ -432,6 +432,12 @@ class PetrolStation:
         else:
             self.__sell_history[client].append(order)
 
+    def add_items_to_dict(self, i, ret):
+        if i[0] not in ret:
+            ret[i[0]] = i[1]
+        else:
+            ret[i[0]] += i[1]
+
     def sell(self, items_to_sell: list[tuple[OrderItem, float]], client: Client = None):
         """
         Sell item.
@@ -466,6 +472,8 @@ class PetrolStation:
         for i in items_to_sell:
             self.raise_exception_if_need(i)
 
+            # add elements to dict
+            self.add_items_to_dict(i, ret)
 
         total = 0
         for i in items_to_sell:
