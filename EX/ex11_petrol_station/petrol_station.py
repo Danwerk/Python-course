@@ -441,7 +441,7 @@ class PetrolStation:
         """
 
         for i in items_to_sell:
-            if isinstance(i[0], Fuel):
+            if type(i[0]) is Fuel:
                 if self.__fuel_stock_copy[i[0]] < i[1] or i[0] not in self.__fuel_stock_copy:
                     raise RuntimeError('woops, not enough petrol or no such type of petrol')
 
