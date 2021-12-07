@@ -408,7 +408,7 @@ class PetrolStation:
         """Return sell history dict where key is Client, value is a list of Orders."""
         return self.__sell_history
 
-    def raise_if_need(self, i):
+    def raise_exception_if_need(self, i):
         """Raise exeption if needed."""
         if isinstance(i[0], Fuel):
             if i[0] not in self.__fuel_stock_copy or self.__fuel_stock_copy[i[0]] < i[1]:
@@ -417,6 +417,12 @@ class PetrolStation:
         elif isinstance(i[0], ShopItem):
             if i[0] not in self.__shop_item_stock_copy or self.__shop_item_stock_copy[i[0]] < i[1]:
                 raise RuntimeError('woops not enough items or no such type of item')
+
+    def update_client_status(self, client):
+        if client.get_member_balance() > 1000:
+            client.set_client_type(ClientType.Silver)
+        if client.get_member_balance() > 6000:
+            client.set_client_type(ClientType.Gold)
 
     def sell(self, items_to_sell: list[tuple[OrderItem, float]], client: Client = None):
         """
@@ -450,7 +456,7 @@ class PetrolStation:
         """
         ret = {}
         for i in items_to_sell:
-            self.raise_if_need(i)
+            self.raise_exception_if_need(i)
             # add elements to dict
             if i[0] not in ret:
                 ret[i[0]] = i[1]
@@ -486,11 +492,7 @@ class PetrolStation:
             self.__sell_history[client].append(order)
 
         client.buy(order)
-
-        if client.get_member_balance() > 1000:
-            client.set_client_type(ClientType.Silver)
-        if client.get_member_balance() > 6000:
-            client.set_client_type(ClientType.Gold)
+        self.update_client_status(client)
 
         for item, quantity in ret.items():
             if type(item) == Fuel:
