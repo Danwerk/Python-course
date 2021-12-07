@@ -469,7 +469,7 @@ class PetrolStation:
                 if date_interval > 60:
                     client_downgrade = True
             else:
-                client_downgrade = False
+                client_downgrade = True
 
             if client_downgrade:
                 client.set_client_type(ClientType.Bronze)
