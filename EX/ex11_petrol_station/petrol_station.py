@@ -244,7 +244,7 @@ class Client:
         self.__balance = balance
         self.__client_type = client_type
 
-        self.__order_history: list['Order'] = []  # Kliendi ostu ajalugu
+        self.__order_history = []
 
     def get_name(self):
         """Return client name."""
@@ -461,7 +461,6 @@ class PetrolStation:
 
         if not client:
             client = Client('Incognito', total, ClientType.Basic)
-
         else:
             if len(client.get_history()) > 0:
                 max_range_date = max(d.get_date() for d in client.get_history())
@@ -470,19 +469,21 @@ class PetrolStation:
                 if date_interval > 60:
                     client_downgrade = True
             else:
-                client_downgrade = True
+                client_downgrade = False
 
-            if client_downgrade is True:
+            if client_downgrade:
                 client.set_client_type(ClientType.Bronze)
                 client.clear_history()
 
         order = Order({i[0]: i[1] for i in items_to_sell}, date.today(), client.get_client_type())
 
-        if client not in self.__sell_history:
-            self.__sell_history[client] = [order]
-        else:
-            self.__sell_history[client].append(order)
         client.buy(order)
+
+
+        if client.get_member_balance() > 1000:
+            client.set_client_type(ClientType.Silver)
+        elif client.get_member_balance() > 6000:
+            client.set_client_type(ClientType.Gold)
 
         for item, quantity in ret.items():
             if type(item) == Fuel:
@@ -490,16 +491,16 @@ class PetrolStation:
             elif type(item) == ShopItem:
                 self.remove_items(item, quantity)
 
-        if client.get_member_balance() > 1000:
-            client.set_client_type(ClientType.Silver)
-        elif client.get_member_balance() > 6000:
-            client.set_client_type(ClientType.Gold)
 
-
+        if client not in self.__sell_history:
+            self.__sell_history[client] = [order]
+        else:
+            self.__sell_history[client].append(order)
 
 if __name__ == '__main__':
 
-    my_client = Client("keegi", 12415.15, ClientType.Silver)
+    my_client = Client("keegi", 15.15, ClientType.Bronze)
+
     my_petrol_station = PetrolStation({}, {})
     my_petrol_station.add_fuel(Fuel("fuelka", 5.5), 10.12)
     my_petrol_station.add_fuel(Fuel("fuelka", 5.5), 93.21412)
@@ -512,3 +513,4 @@ if __name__ == '__main__':
     print(my_petrol_station.get_fuel_dict(), my_petrol_station.get_shop_item_dict(), my_petrol_station.get_sell_history())
 
     print(my_petrol_station.get_sell_history())
+    print(my_client.get_history())
