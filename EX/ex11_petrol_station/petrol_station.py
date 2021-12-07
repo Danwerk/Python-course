@@ -433,6 +433,7 @@ class PetrolStation:
             self.__sell_history[client].append(order)
 
     def add_items_to_dict(self, i, ret):
+        """Add elements to dict, where the key is a name of element and value is quantity."""
         if i[0] not in ret:
             ret[i[0]] = i[1]
         else:
@@ -471,9 +472,7 @@ class PetrolStation:
         ret = {}
         for i in items_to_sell:
             self.raise_exception_if_need(i)
-
-            # add elements to dict
-            self.add_items_to_dict(i, ret)
+            self.add_items_to_dict(i, ret)  # add elements to dict
 
         total = 0
         for i in items_to_sell:
