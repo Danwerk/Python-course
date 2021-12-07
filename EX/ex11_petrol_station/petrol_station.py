@@ -477,12 +477,12 @@ class PetrolStation:
                 client.clear_history()
 
         order = Order({i[0]: i[1] for i in items_to_sell}, date.today(), client.get_client_type())
-        client.buy(order)
 
         if client not in self.__sell_history:
             self.__sell_history[client] = [order]
         else:
             self.__sell_history[client].append(order)
+        client.buy(order)
 
         for item, quantity in ret.items():
             if type(item) == Fuel:
@@ -492,8 +492,9 @@ class PetrolStation:
 
         if client.get_member_balance() > 1000:
             client.set_client_type(ClientType.Silver)
-        elif client.get_member_balance() > 6000 and client.get_client_type() != ClientType.Basic:
+        elif client.get_member_balance() > 6000:
             client.set_client_type(ClientType.Gold)
+
 
 
 if __name__ == '__main__':
@@ -506,6 +507,8 @@ if __name__ == '__main__':
     my_petrol_station.add_shop_item(ShopItem("item", 4.123), 154.24)
     my_petrol_station.add_shop_item(ShopItem("item", 4.123), 32.5451)
     print(my_petrol_station.get_shop_item_dict())
-    my_petrol_station.sell([(Fuel("fuelkka", 5.5), 2.1), (Fuel("fuelka", 5.5), 2.1)], my_client)
+    my_petrol_station.sell([(Fuel("fuelka", 5.5), 2.1), (Fuel("fuelka", 5.5), 2.1)], my_client)
     my_petrol_station.sell([(ShopItem("item", 4.123), 43.24)], my_client)
     print(my_petrol_station.get_fuel_dict(), my_petrol_station.get_shop_item_dict(), my_petrol_station.get_sell_history())
+
+    print(my_petrol_station.get_sell_history())
