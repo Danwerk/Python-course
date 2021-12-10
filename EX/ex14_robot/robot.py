@@ -125,7 +125,6 @@ def the_true_follower(robot: FollowerBot):
 '''
     
     
-    while i != 12:
         if sum(robot.get_line_sensors()) == 6144:
             i += 1
             while sum(robot.get_line_sensors()) != 0:
