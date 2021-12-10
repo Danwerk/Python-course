@@ -87,7 +87,7 @@ def the_true_follower(robot: FollowerBot):
         robot.set_wheels_speed(100)
         robot.sleep(0.001)
     while True:
-        if robot.get_position() == (265, 372):
+        if robot.get_position() == (265, 362):
             break
         else:
             if sum(robot.get_line_sensors()) == 6144:
