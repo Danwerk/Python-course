@@ -113,12 +113,14 @@ def the_true_follower(robot: FollowerBot):
                 robot.set_left_wheel_speed(100)
                 robot.set_right_wheel_speed(-75)
                 robot.sleep(0.001)
+                print(robot.get_line_sensors())
 
             else:
                 robot.set_wheels_speed(100)
                 robot.sleep(0.01)
                 #print(robot.get_line_sensors())
                 print(robot.get_position())
+                print(robot.get_line_sensors())
     robot.done()
 
 
