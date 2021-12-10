@@ -86,14 +86,13 @@ def the_true_follower(robot: FollowerBot):
     while robot.get_right_line_sensors()[0] == 1024 and robot.get_left_line_sensors()[2] == 1024:
         robot.set_wheels_speed(100)
         robot.sleep(0.001)
-        print(robot.get_position())
     while True:
         if robot.get_position() == (251, 301):
             break
         else:
             if sum(robot.get_line_sensors()) == 6144:
                 robot.set_wheels_speed(100)
-                robot.sleep(0.001)
+                robot.sleep(0.0001)
 
             elif sum(robot.get_line_sensors()) == 3852:
                 robot.set_left_wheel_speed(100)
@@ -113,14 +112,12 @@ def the_true_follower(robot: FollowerBot):
                 robot.set_left_wheel_speed(100)
                 robot.set_right_wheel_speed(-70)
                 robot.sleep(0.001)
-                print(robot.get_line_sensors())
 
             else:
                 robot.set_wheels_speed(100)
                 robot.sleep(0.01)
                 #print(robot.get_line_sensors())
-                print(robot.get_position())
-                print(robot.get_line_sensors())
+        print(robot.get_position())
     robot.done()
 
 
