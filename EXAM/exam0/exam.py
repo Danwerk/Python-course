@@ -109,12 +109,21 @@ def tic_tac_toe(game: list) -> int:
     :param game
     :return: winning player id
     """
-    for row in game:
-        el = row[0]
-        if el == row[1] and el == row[2]:
-            return el
 
+
+    res = True
+    for i in game:
+        elem = i[0]
+        for j in i:
+            if j != elem:
+                res = False
+                break
+    if res is True:
+        return 0
+
+    """
     if game[0][0] == game[1][0] and game[0][0] == game[2][0]:
+        
         return game[0][0]
 
     elif game[0][1] == game[1][1] and game[0][1] == game[2][1]:
@@ -131,10 +140,11 @@ def tic_tac_toe(game: list) -> int:
 
     else:
         return 0
-
-print(tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]]))  # 1
-print(tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]]))  # 0
-print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]]))  # 2
+"""
+#print(tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]]))  # 1
+#print(tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]]))  # 0
+#print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]]))  # 2
+#print(tic_tac_toe([[2, 2, 2], [0, 0, 0], [1, 1, 1]]))  # 2
 
 
 def rainbows(field: str, lower=False) -> int:
@@ -167,17 +177,16 @@ def longest_substring(text: str) -> str:
     If multiple substrings have same length, choose first one.
 
     """
-    ret = ''
     if text == '':
         return ''
-    for i in range(len(text) - 1):
-        if text[i] != text[i + 1]:
+    ret = text[0]
+    for i in range(1, len(text)):
+        if text[i-1] != text[i]:
             ret += text[i]
-        elif text[i] == text[i + 1]:
-            ret += text[0:i + 1]
+        else:
             break
-    return ret
 
+    return ret
 
 # print(longest_substring('aaa'))  # a
 # print(longest_substring('abc'))  # abc
@@ -222,23 +231,20 @@ def get_top_student_with_credit_points(students: list, min_credit_points: int):
     If there are no students with enough credit points, return None.
     If several students have the same average score, return the first.
     """
-
     avg_score = [student.average_grade for student in students if student.credit_points >= min_credit_points]
     if len(avg_score) == 0:
         return None
     else:
-        max_grade = max([student.average_grade for student in students])
-        ret = []
+        enough_credit_p = []
         for student in students:
             if student.credit_points >= min_credit_points:
-                if student.average_grade == max_grade:
-                    if len(ret) == 1:
-                        break
-                    ret.append(student)
-    if ret == []:
-        return None
+                enough_credit_p.append(student)
 
-    return ret[0]
+    sorted_enough_credit_p = sorted(enough_credit_p, key=lambda p: p.average_grade, reverse=True)
+    return sorted_enough_credit_p[0]
+
+
+
 
 
 def add_result_to_student(student: Student, grades_count: int, new_grade: int, credit_points) -> Student:
@@ -418,11 +424,11 @@ if __name__ == '__main__':
     }
     assert hotel.get_most_profitable_feature() == 'tv'
 '''
-student1 = Student('ago', 4.3, 0)
-student2 = Student('mari', 4.1, 14)
-student3 = Student('kati', 4.2, 15)
+student1 = Student('ago', 4.3, 1)
+student2 = Student('mari', 4.1, 1)
+student3 = Student('kati', 4.2, 1)
 students = [student1, student2, student3]
 print(get_top_student_with_credit_points(students, 14))
-print(get_ordered_students(students))
+#print(get_ordered_students(students))
 # kati, mari, ago
 #
