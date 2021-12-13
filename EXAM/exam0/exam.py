@@ -23,9 +23,9 @@ def find_capital_letters(s: str) -> str:
     return new_s
 
 
-print(find_capital_letters("ABC"))  # "ABC"
-print(find_capital_letters("abc"))  # ""
-print(find_capital_letters("aAbBc"))  # "AB"
+#print(find_capital_letters("ABC"))  # "ABC"
+#print(find_capital_letters("abc"))  # ""
+#print(find_capital_letters("aAbBc"))  # "AB"
 
 
 def close_far(a: int, b: int, c: int) -> bool:
@@ -65,13 +65,23 @@ def get_names_from_results(results_string: str, min_result: int) -> list:
     Return only the names which have the score higher or equal than min_result.
     The order of the result should be the same as in input string.
 
-    get_names_from_results("ago 123,peeter 11", 0) => ["ago", "peeter"]
-    get_names_from_results("ago 123,peeter 11,33", 10) => ["ago", "peeter"]  # 33 does not have the name
-    get_names_from_results("ago 123,peeter 11", 100) => ["ago"]
-    get_names_from_results("ago 123,peeter 11,kitty11!! 33", 11) => ["ago", "peeter",  "kitty11!!"]
-    get_names_from_results("ago 123,peeter 11,kusti riin 14", 12) => ["ago", "kusti riin"]
     """
-    pass
+    res = []
+    some_list = results_string.split(',')
+    for i in some_list:
+        score = i.split(' ')[-1]
+        if len(i.split()) >= 2:
+            if int(score) >= min_result:
+                res.append(i.replace(f' {score}', ''))
+
+        #print(a)
+    return res
+
+print(get_names_from_results("ago 123,peeter 11", 0)) # ["ago", "peeter"]
+print(get_names_from_results("ago 123,peeter 11,33", 10)) # ["ago", "peeter"]  # 33 does not have the name
+print(get_names_from_results("ago 123,peeter 11", 100)) # ["ago"]
+print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 11)) # ["ago", "peeter",  "kitty11!!"]
+print(get_names_from_results("ago 123,peeter 11,kusti riin 14", 12)) # ["ago", "kusti riin"]
 
 
 def tic_tac_toe(game: list) -> int:
