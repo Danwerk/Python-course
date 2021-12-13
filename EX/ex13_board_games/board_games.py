@@ -8,10 +8,10 @@ class Statistics:
 
     def __init__(self, filename: str):
         """Constructor for Statistics class."""
+        self.filename = filename
         self.players = {}
         self.games = {}
         self.gameplays = []
-        self.filename = filename
         self.read_file(filename)
 
     def read_file(self, filename):
@@ -26,8 +26,9 @@ class Statistics:
                     game = self.games[game_name]
                 else:
                     game = Game(game_name)
-                    self.games[game_name] = game_name
-                #self.gameplays.append(GamePlay(name))
+                    self.games[game_name] = game
+                gp = game.new_gameplay()
+                self.gameplays.append(gp)
 
                 players = elements[1].split(',')
                 for name in players:
@@ -56,8 +57,8 @@ class Statistics:
             return self.get_player_names()
         if path == '/games':
             return self.get_game_names()
-    #     if path == '/total':
-    #         return self.get_games_played_amount()
+        if path == '/total':
+            return len(self.gameplays)
     #     if path == '/total/points' or path == '/total/places' or path == '/total/winner':
     #         return self.get_games_played_type(path)
     #
@@ -116,21 +117,13 @@ class Game:
         """Representation for Game."""
         return self.name
 
+
     def get_amount_of_played_games(self) -> int:
         pass
 
-
-class GamePlay:
-    """GamePlay class."""
-
-    def __init__(self, game: Game):
-        """GamePlay constructor."""
-        self.game = game
-        self.game_play_players = []
-        self.result_type = None
-
     def new_gameplay(self):
-        game_play = GamePlay(self)
+        game_play = GamePlay(self, 'points')
+        self.gameplays.append(game_play)
         return game_play
 
 
@@ -153,6 +146,20 @@ class Player:
     def get_games_played_count(self):
         """Return amount of played games."""
         return len(self.gameplays)
+
+
+class GamePlay:
+    """GamePlay class."""
+
+    def __init__(self, game: Game, game_type: str):
+        """GamePlay constructor."""
+        self.game = game
+        self.game_play_players = []
+        self.result_type = GamePlayResultType(game_type)
+
+    def add_player(self, player: Player):
+        pass
+
 
     # def get_games_played_most_by_player(self) -> str:
     #     """Return most played games by player."""
@@ -178,7 +185,8 @@ if __name__ == '__main__':
     statistics = Statistics('ex13_input.txt')
     print(statistics.get('/players'))
     print(statistics.get('/games'))
-    # print(statistics.get('/total'))
+    print(statistics.get('/total'))
+
     #print(statistics.read_from_file('ex13_input.txt'))
     # print(statistics.get_player_names())
     # print(statistics.get_game_names())
