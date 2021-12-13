@@ -167,6 +167,9 @@ class Student:
         self.average_grade = average_grade
         self.name = name
 
+    def __repr__(self):
+        return f'{self.name} {self.average_grade} {self.credit_points}'
+
 
 def create_student(name: str, grades: list, credit_points: int) -> Student:
     """
@@ -236,7 +239,7 @@ def get_ordered_students(students: list) -> list:
     """
     pass
 
-
+'''
 class Room:
     """Room."""
 
@@ -365,4 +368,5 @@ if __name__ == '__main__':
         'sauna': 200
     }
     assert hotel.get_most_profitable_feature() == 'tv'
-
+'''
+print(create_student('ago', [3,3,3], 12))
