@@ -41,14 +41,18 @@ def close_far(a: int, b: int, c: int) -> bool:
     if abs(b - a) <= 1:
         if abs(c - a) >= 2 and abs(c - b) >= 2:
             return True
+        elif abs(c - a) <= 1 and abs(c - b) <= 1:
+            return False
     if abs(c - a) <= 1:
         if abs(c - b) >= 2 and abs(b - a) >= 2:
+            return True
+        elif abs(c - b) <= 1 and abs(b - a) <= 1:
             return True
     if (abs(b - a) >= 1 and abs(c - b) >= 1) or (abs(c - a) >= 1 and abs(c - b) >= 1):
         return False
 
 
-print(close_far(1, 2, 10))  # True
+print(close_far(1, 1, 1))  # True
 print(close_far(1, 2, 3))  # False
 print(close_far(4, 1, 3))  # True
 
@@ -150,12 +154,12 @@ def longest_substring(text: str) -> str:
     return ret
 
 
-print(longest_substring('aaa'))  # a
-print(longest_substring('abc'))  # abc
-print(longest_substring('abccba'))  # abc
-print(longest_substring('babcdEFghij'))  # abcdEFghij
-print(longest_substring('abBcd'))  # Bcd
-print(longest_substring(''))  # ''
+#print(longest_substring('aaa'))  # a
+#print(longest_substring('abc'))  # abc
+#print(longest_substring('abccba'))  # abc
+#print(longest_substring('babcdEFghij'))  # abcdEFghij
+#print(longest_substring('abBcd'))  # Bcd
+#print(longest_substring(''))  # ''
 
 
 class Student:
