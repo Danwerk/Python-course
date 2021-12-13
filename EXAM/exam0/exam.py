@@ -250,7 +250,10 @@ def get_ordered_students(students: list) -> list:
 
     credit points (higher first), average_grade (higher first), name (a to z).
     """
-    pass
+    list1 = sorted(students, key=lambda p: p.name)
+    list2 = sorted(list1, key=lambda p: p.average_grade)
+    list3 = sorted(list2, key=lambda p: p.credit_points)
+    return list3
 
 '''
 class Room:
@@ -382,8 +385,11 @@ if __name__ == '__main__':
     }
     assert hotel.get_most_profitable_feature() == 'tv'
 '''
-student1 = Student('ago', 4.2, 0)
+student1 = Student('ago', 4.3, 0)
 student2 = Student('mari', 4.1, 14)
-student3 = Student('kati', 4.2, 14)
+student3 = Student('kati', 4.2, 15)
 students = [student1, student2, student3]
 print(get_top_student_with_credit_points(students, 14))
+print(get_ordered_students(students))
+#kati, mari, ago
+#
