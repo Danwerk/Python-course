@@ -50,6 +50,7 @@ print(close_far(1, 2, 10))  # True
 print(close_far(1, 2, 3))  # False
 print(close_far(4, 1, 3))  # True
 print(close_far(-1, -3, -5))
+print(close_far(1,1,1))
 
 
 def get_names_from_results(results_string: str, min_result: int) -> list:
