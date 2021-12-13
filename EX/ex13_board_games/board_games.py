@@ -7,26 +7,14 @@ class Statistics:
 
     def __init__(self, filename: str):
         """Constructor for Statistics class."""
-        self.players = {}
-        self.games = {}
+        self.players = []
+        self.games = []
+        self.games_player_had_played = {}
+        self.players_objects = {}
+        self.games_objects = {}
         self.gameplays = []
-        self.game_has_points = []
-        self.game_has_places = []
-        self.game_has_winner = []
-        self.games_played_count = sum(1 for line in open(filename))
         self.filename = self.read_from_file(filename)
 
-    def get_file_data(self):
-        """Getter for read from file func."""
-        return self.filename
-
-    def get_players(self):
-        """Players' dict getter."""
-        return self.players
-
-    def get_games(self):
-        """Games' dict getter."""
-        return self.games
 
     def read_from_file(self, filename):
         """Read data from file into dicts."""
@@ -37,26 +25,18 @@ class Statistics:
                 elements = line.split(';')
                 self.gameplays.append(GamePlay(elements, self.players, self.games))
 
-                #  add games into dictionary where the key is the name of a game and the value is a game object
-                game_str = elements[0]
-                if game_str not in self.games:
-                    game_obj = Game(elements[0], self.games, self.players)
-                    self.games[game_str] = game_obj
-
-                #  devide games into groups of different types of games.
                 people = elements[1].split(',')
-                for player in people:
-                    if player not in self.players:
-                        player_obj = Player(player, self.games, self.players, self.gameplays)
-                        self.players[player] = player_obj
-                    self.players[player].append_played_games(self.games[game_str])
-
-                if elements[2] == 'points':
-                    self.game_has_points.append(game_str)
-                elif elements[2] == 'places':
-                    self.game_has_places.append(game_str)
-                elif elements[2] == 'winner':
-                    self.game_has_winner.append(game_str)
+                for name in people:
+                    if name not in self.players_objects:
+                        player_obj = Player(name)
+                        self.players_objects[name] = player_obj
+                        self.players.append(name)
+                # if elements[2] == 'points':
+                #     self.game_has_points.append(game_str)
+                # elif elements[2] == 'places':
+                #     self.game_has_places.append(game_str)
+                # elif elements[2] == 'winner':
+                #     self.game_has_winner.append(game_str)
 
         ret.append(self.players)
         ret.append(self.games)
@@ -71,25 +51,25 @@ class Statistics:
             return self.functionality_get_game(path)
         if path == '/players':
             return self.get_player_names()
-        if path == '/games':
-            return self.get_game_names()
-        if path == '/total':
-            return self.get_games_played_amount()
-        if path == '/total/points' or path == '/total/places' or path == '/total/winner':
-            return self.get_games_played_type(path)
-
+    #     if path == '/games':
+    #         return self.get_game_names()
+    #     if path == '/total':
+    #         return self.get_games_played_amount()
+    #     if path == '/total/points' or path == '/total/places' or path == '/total/winner':
+    #         return self.get_games_played_type(path)
+    #
     def functionality_get_player(self, path):
         """Basic getter 2."""
         tokens = path[1:].split('/')
         player_name = tokens[1]
         player = self.players[player_name]
-        if tokens[2] == 'amount':
-            return player.get_games_played_count()
-        elif tokens[2] == 'favourite':
-            return player.get_games_played_most_by_player()
-        elif tokens[2] == 'won':
-            return player.get_games_won()
-
+    #     if tokens[2] == 'amount':
+    #         return player.get_games_played_count()
+    #     elif tokens[2] == 'favourite':
+    #         return player.get_games_played_most_by_player()
+    #     elif tokens[2] == 'won':
+    #         return player.get_games_won()
+    #
     def functionality_get_game(self, path):
         """Basic getter 3."""
         tokens = path[1:].split('/')
@@ -97,11 +77,11 @@ class Statistics:
         game = self.games[game_name]
         if tokens[2] == 'amount':
             return game.get_amount_of_played_games()
-        elif tokens[2] == 'player-amount':
-            pass
+    #     elif tokens[2] == 'player-amount':
+    #         pass
 
     def get_player_names(self) -> list:
-        """List of players' names."""
+        """Return list of players' names."""
         ret = []
         for player in self.players:
             ret.append(player)
@@ -131,23 +111,16 @@ class Statistics:
 class Game:
     """Game class."""
 
-    def __init__(self, game_name, games: dict, names: dict):
+    def __init__(self, game_name, games: dict, names: dict, gameplays):
         """Constructor for Game class."""
         self.game_name = game_name
-        self.games = games
-        self.names = names
-        self.game_play_amount = []
 
     def __repr__(self):
         """Representation for Game."""
         return self.game_name
 
-    def get_games(self):
-        pass
-
-
     def get_amount_of_played_games(self) -> int:
-        return len(self.game_play_amount)
+        pass
 
 
 
@@ -160,6 +133,9 @@ class GamePlay:
         self.players = players
         self.games = games
         self.winner = []
+
+    def get_gameplays(self):
+        return self.gameplays
 
     def get_winner(self):
         """Get winner of gameplay."""
@@ -188,14 +164,10 @@ class GamePlay:
 class Player:
     """Game player."""
 
-    def __init__(self, name, games: dict, names: dict, gameplays: list):
+    def __init__(self, name):
         """Constructor for Player class."""
         self.name = name
         self.plays = []
-        self.games = games
-        self.names = names
-        self.games_won = []
-        self.gameplays = gameplays
 
     def __repr__(self):
         """Player representation."""
@@ -209,21 +181,21 @@ class Player:
         """Return amount of played games."""
         return len(self.plays)
 
-    def get_games_played_most_by_player(self) -> str:
-        """Return most played games by player."""
-        object_ret = []
-        str_ret = []
-        # make dict and find most played game by player.
-        d = Counter(self.plays)
-        most_elem = d[list(d.keys())[0]]
-        for key, value in d.items():
-            if value == most_elem:
-                object_ret.append(key)
-
-        # object string representation
-        for i in object_ret:
-            str_ret.extend([key for (key, value) in self.games.items() if value == i])
-        return str_ret[0]
+    # def get_games_played_most_by_player(self) -> str:
+    #     """Return most played games by player."""
+    #     object_ret = []
+    #     str_ret = []
+    #     # make dict and find most played game by player.
+    #     d = Counter(self.plays)
+    #     most_elem = d[list(d.keys())[0]]
+    #     for key, value in d.items():
+    #         if value == most_elem:
+    #             object_ret.append(key)
+    #
+    #     # object string representation
+    #     for i in object_ret:
+    #         str_ret.extend([key for (key, value) in self.games.items() if value == i])
+    #     return str_ret[0]
 
     '''
 if len(str_ret) > 0:
@@ -231,29 +203,23 @@ if len(str_ret) > 0:
         return f'{joined_string}'
 '''
 
-    def get_games_won(self) -> int:
-        """Amount of won games by person."""
-        for gameplay in self.gameplays:
-            if GamePlay.get_winner(gameplay) == self.names[self.name]:
-                self.games_won.append(gameplay)
-        return len(self.games_won)
 
 
 if __name__ == '__main__':
     statistics = Statistics('ex13_input.txt')
     # player = Player('Ago')
-    # print(statistics.get('/players'))
+    print(statistics.get('/players'))
     # print(statistics.get('/total'))
     # print(statistics.get('/games'))
-    # print(statistics.read_from_file('ex13_input.txt'))
+    #print(statistics.read_from_file('ex13_input.txt'))
     # print(statistics.get_player_names())
     # print(statistics.get_game_names())
     # print(statistics.total_played_games())
     # print(statistics.get_games_played_type('/total/points'))
     # print(statistics.get_games_played_type('/total/winner'))
     # print(statistics.get_games_played_type('/total/places'))
-    print(statistics.get('/player/joosep/amount'))
-    print(statistics.get('/player/ago/favourite'))
-    print(statistics.get('/player/ago/won'))
+    # print(statistics.get('/player/joosep/amount'))
+    # print(statistics.get('/player/ago/favourite'))
+    # print(statistics.get('/player/ago/won'))
     # print(statistics.get_players_and_points_dict())
-    print(statistics.get('/game/chess/amount'))
+    # print(statistics.get('/game/chess/amount'))
