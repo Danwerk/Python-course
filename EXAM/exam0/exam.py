@@ -55,11 +55,9 @@ def close_far(a: int, b: int, c: int) -> bool:
         return False
 
 
-
-
-print(close_far(1, 22, 22))  # True
-print(close_far(1, 2, 3))  # False
-print(close_far(4, 1, 3))  # True
+# print(close_far(1, 22, 22))  # True
+# print(close_far(1, 2, 3))  # False
+# print(close_far(4, 1, 3))  # True
 
 
 def get_names_from_results(results_string: str, min_result: int) -> list:
@@ -107,14 +105,36 @@ def tic_tac_toe(game: list) -> int:
     There is only one winner or draw. You don't have to validate whether the game is in correct (possible) state.
     I.e the game could have four 1s and one 0 etc.
 
-    tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]]) => 1
-    tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]]) => 0
-    tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]]) => 2
 
     :param game
     :return: winning player id
     """
-    pass
+    for row in game:
+        el = row[0]
+        if el == row[1] and el == row[2]:
+            return el
+
+    if game[0][0] == game[1][0] and game[0][0] == game[2][0]:
+        return game[0][0]
+
+    elif game[0][1] == game[1][1] and game[0][1] == game[2][1]:
+        return game[0][1]
+
+    elif game[0][2] == game[1][2] and game[0][2] == game[2][2]:
+        return game[0][2]
+
+    elif game[0][0] == game[1][1] and game[0][0] == game[2][2]:
+        return game[0][0]
+
+    elif game[0][2] == game[1][2] and game[0][2] == game[2][0]:
+        return game[0][2]
+
+    else:
+        return 0
+
+print(tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]]))  # 1
+print(tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]]))  # 0
+print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]]))  # 2
 
 
 def rainbows(field: str, lower=False) -> int:
@@ -154,17 +174,17 @@ def longest_substring(text: str) -> str:
         if text[i] != text[i + 1]:
             ret += text[i]
         elif text[i] == text[i + 1]:
-            ret += text[0:i+1]
+            ret += text[0:i + 1]
             break
     return ret
 
 
-#print(longest_substring('aaa'))  # a
-#print(longest_substring('abc'))  # abc
-#print(longest_substring('abccba'))  # abc
-#print(longest_substring('babcdEFghij'))  # abcdEFghij
-#print(longest_substring('abBcd'))  # Bcd
-#print(longest_substring(''))  # ''
+# print(longest_substring('aaa'))  # a
+# print(longest_substring('abc'))  # abc
+# print(longest_substring('abccba'))  # abc
+# print(longest_substring('babcdEFghij'))  # abcdEFghij
+# print(longest_substring('abBcd'))  # Bcd
+# print(longest_substring(''))  # ''
 
 
 class Student:
@@ -266,6 +286,7 @@ def get_ordered_students(students: list) -> list:
     list2 = sorted(list1, key=lambda p: p.average_grade)
     list3 = sorted(list2, key=lambda p: p.credit_points)
     return list3
+
 
 '''
 class Room:
@@ -403,5 +424,5 @@ student3 = Student('kati', 4.2, 15)
 students = [student1, student2, student3]
 print(get_top_student_with_credit_points(students, 14))
 print(get_ordered_students(students))
-#kati, mari, ago
+# kati, mari, ago
 #
