@@ -300,7 +300,7 @@ def get_ordered_students(students: list) -> list:
     list1 = sorted(students, key=lambda p: p.credit_points,reverse=True)
     list2 = sorted(list1, key=lambda p: p.average_grade, reverse=True)
     list3 = sorted(list2, key=lambda p: p.name)
-    return list2
+    return list3
 
 
 '''
