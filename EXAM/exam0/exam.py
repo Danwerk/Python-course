@@ -23,9 +23,9 @@ def find_capital_letters(s: str) -> str:
     return new_s
 
 
-#print(find_capital_letters("ABC"))  # "ABC"
-#print(find_capital_letters("abc"))  # ""
-#print(find_capital_letters("aAbBc"))  # "AB"
+# print(find_capital_letters("ABC"))  # "ABC"
+# print(find_capital_letters("abc"))  # ""
+# print(find_capital_letters("aAbBc"))  # "AB"
 
 
 def close_far(a: int, b: int, c: int) -> bool:
@@ -53,7 +53,6 @@ print(close_far(1, 2, 3))  # False
 print(close_far(4, 1, 3))  # True
 
 
-
 def get_names_from_results(results_string: str, min_result: int) -> list:
     """
     Given a string of names and scores, return a list of names where the score is higher than or equal to min_result.
@@ -75,14 +74,15 @@ def get_names_from_results(results_string: str, min_result: int) -> list:
             if int(score) >= min_result:
                 res.append(i.replace(f' {score}', ''))
 
-        #print(a)
+        # print(a)
     return res
 
-#print(get_names_from_results("ago 123,peeter 11", 0)) # ["ago", "peeter"]
-#print(get_names_from_results("ago 123,peeter 11,33", 10)) # ["ago", "peeter"]  # 33 does not have the name
-#print(get_names_from_results("ago 123,peeter 11", 100)) # ["ago"]
-#print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 11)) # ["ago", "peeter",  "kitty11!!"]
-#print(get_names_from_results("ago 123,peeter 11,kusti riin 14", 12)) # ["ago", "kusti riin"]
+
+# print(get_names_from_results("ago 123,peeter 11", 0)) # ["ago", "peeter"]
+# print(get_names_from_results("ago 123,peeter 11,33", 10)) # ["ago", "peeter"]  # 33 does not have the name
+# print(get_names_from_results("ago 123,peeter 11", 100)) # ["ago"]
+# print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 11)) # ["ago", "peeter",  "kitty11!!"]
+# print(get_names_from_results("ago 123,peeter 11,kusti riin 14", 12)) # ["ago", "kusti riin"]
 
 
 def tic_tac_toe(game: list) -> int:
@@ -137,17 +137,27 @@ def longest_substring(text: str) -> str:
     In output, the case (whether lower- or uppercase) should remain.
     If multiple substrings have same length, choose first one.
 
-    aaa -> a
-    abc -> abc
-    abccba -> abc
-    babcdEFghij -> abcdEFghij
-    abBcd => Bcd
-    '' -> ''
     """
-    pass
+    ret = ''
+    if text == '':
+        return ''
+    for i in range(len(text) - 1):
+        if text[i] != text[i + 1]:
+            ret += text[i]
+        elif text[i] == text[i + 1]:
+            ret += text[0:i+1]
+            break
+    return ret
 
 
-'''
+print(longest_substring('aaa'))  # a
+print(longest_substring('abc'))  # abc
+print(longest_substring('abccba'))  # abc
+print(longest_substring('babcdEFghij'))  # abcdEFghij
+print(longest_substring('abBcd'))  # Bcd
+print(longest_substring(''))  # ''
+
+
 class Student:
     """Student class."""
 
@@ -165,7 +175,12 @@ def create_student(name: str, grades: list, credit_points: int) -> Student:
     Round the average grade up to three decimal places.
     If the list of grades is empty, the average grade will be 0.
     """
-    pass
+    if len(grades) == 0:
+        avg = 0
+    else:
+        avg = round(sum(grades) / len(grades), 3)
+    student = Student(name, avg, credit_points)
+    return student
 
 
 def get_top_student_with_credit_points(students: list, min_credit_points: int):
@@ -350,4 +365,4 @@ if __name__ == '__main__':
         'sauna': 200
     }
     assert hotel.get_most_profitable_feature() == 'tv'
-'''
+
