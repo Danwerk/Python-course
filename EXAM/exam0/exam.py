@@ -38,19 +38,20 @@ def close_far(a: int, b: int, c: int) -> bool:
     while the other is "far", differing from both other values by 2 or more.
 
     """
-    if abs(b - a) == 1 and abs(c - b) > 1:
-        return True
-    elif abs(c - a) == 1 and abs(c - b) > 1:
-        return True
-    elif (abs(b - a) >= 1 and abs(c - b)) >= 1 or (abs(c - a) >= 1 and abs(c - b) >= 1):
+    if abs(b - a) <= 1:
+        if abs(c - a) >= 2 and abs(c - b) >= 2:
+            return True
+    if abs(c - a) <= 1:
+        if abs(c - b) >= 2 and abs(b - a) >= 2:
+            return True
+    if (abs(b - a) >= 1 and abs(c - b) >= 1) or (abs(c - a) >= 1 and abs(c - b) >= 1):
         return False
 
 
 print(close_far(1, 2, 10))  # True
 print(close_far(1, 2, 3))  # False
 print(close_far(4, 1, 3))  # True
-print(close_far(-1, -3, -5))
-print(close_far(1,1,1))
+
 
 
 def get_names_from_results(results_string: str, min_result: int) -> list:
@@ -77,11 +78,11 @@ def get_names_from_results(results_string: str, min_result: int) -> list:
         #print(a)
     return res
 
-print(get_names_from_results("ago 123,peeter 11", 0)) # ["ago", "peeter"]
-print(get_names_from_results("ago 123,peeter 11,33", 10)) # ["ago", "peeter"]  # 33 does not have the name
-print(get_names_from_results("ago 123,peeter 11", 100)) # ["ago"]
-print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 11)) # ["ago", "peeter",  "kitty11!!"]
-print(get_names_from_results("ago 123,peeter 11,kusti riin 14", 12)) # ["ago", "kusti riin"]
+#print(get_names_from_results("ago 123,peeter 11", 0)) # ["ago", "peeter"]
+#print(get_names_from_results("ago 123,peeter 11,33", 10)) # ["ago", "peeter"]  # 33 does not have the name
+#print(get_names_from_results("ago 123,peeter 11", 100)) # ["ago"]
+#print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 11)) # ["ago", "peeter",  "kitty11!!"]
+#print(get_names_from_results("ago 123,peeter 11,kusti riin 14", 12)) # ["ago", "kusti riin"]
 
 
 def tic_tac_toe(game: list) -> int:
