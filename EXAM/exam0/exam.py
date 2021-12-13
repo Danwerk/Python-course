@@ -51,8 +51,13 @@ def close_far(a: int, b: int, c: int) -> bool:
     if (abs(b - a) >= 1 and abs(c - b) >= 1) or (abs(c - a) >= 1 and abs(c - b) >= 1):
         return False
 
+    if abs(b - a) > 1 and abs(c - a) > 1:
+        return False
 
-print(close_far(1, 1, 1))  # True
+
+
+
+print(close_far(1, 22, 22))  # True
 print(close_far(1, 2, 3))  # False
 print(close_far(4, 1, 3))  # True
 
