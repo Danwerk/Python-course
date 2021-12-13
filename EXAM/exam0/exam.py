@@ -168,7 +168,7 @@ class Student:
         self.name = name
 
     def __repr__(self):
-        return f'{self.name} {self.average_grade} {self.credit_points}'
+        return self.name
 
 
 def create_student(name: str, grades: list, credit_points: int) -> Student:
@@ -193,7 +193,16 @@ def get_top_student_with_credit_points(students: list, min_credit_points: int):
     If there are no students with enough credit points, return None.
     If several students have the same average score, return the first.
     """
-    pass
+
+    max_grade = max([student.average_grade for student in students])
+    ret = []
+    for student in students:
+        if student.credit_points >= min_credit_points:
+            if student.average_grade == max_grade:
+                if len(ret) == 1:
+                    break
+                ret.append(student)
+    return ret[0]
 
 
 def add_result_to_student(student: Student, grades_count: int, new_grade: int, credit_points) -> Student:
@@ -369,4 +378,8 @@ if __name__ == '__main__':
     }
     assert hotel.get_most_profitable_feature() == 'tv'
 '''
-print(create_student('ago', [3,3,3], 12))
+student1 = Student('ago', 4.2, 13)
+student2 = Student('mari', 4.1, 14)
+student3 = Student('kati', 4.2, 14)
+students = [student1, student2, student3]
+print(get_top_student_with_credit_points(students, 10))
