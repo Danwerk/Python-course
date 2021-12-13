@@ -293,13 +293,12 @@ def get_ordered_students(students: list) -> list:
 
     credit points (higher first), average_grade (higher first), name (a to z).
     """
-    # list1 = sorted(students, key=lambda p: p.name)
-    # list2 = sorted(list1, key=lambda p: p.average_grade)
-    # list3 = sorted(list2, key=lambda p: p.credit_points)
-    return sorted(students, key=lambda p: (-p.credit_points, -p.average_grade, p.name))
-    # list1 = sorted(students, key=lambda p: p.credit_points,reverse=True)
-    # list2 = sorted(list1, key=lambda p: p.average_grade, reverse=True)
-    # list3 = sorted(list2, key=lambda p: p.name)
+    list1 = sorted(students, key=lambda p: p.name)
+    list2 = sorted(list1, key=lambda p: p.average_grade, reverse=True)
+    list3 = sorted(list2, key=lambda p: p.credit_points, reverse=True)
+    return list3
+    #return sorted(students, key=lambda p: (-p.credit_points, -p.average_grade, p.name))
+
 
 
 
