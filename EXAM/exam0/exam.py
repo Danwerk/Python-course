@@ -206,7 +206,7 @@ class Student:
         self.name = name
 
     def __repr__(self):
-        return self.name
+        return f'{self.name}, {self.average_grade}, {self.credit_points}'
 
 
 def create_student(name: str, grades: list, credit_points: int) -> Student:
@@ -244,9 +244,6 @@ def get_top_student_with_credit_points(students: list, min_credit_points: int):
     return sorted_enough_credit_p[0]
 
 
-
-
-
 def add_result_to_student(student: Student, grades_count: int, new_grade: int, credit_points) -> Student:
     """
     Update student average grade and credit points by adding a new grade (result).
@@ -280,7 +277,11 @@ def add_result_to_student(student: Student, grades_count: int, new_grade: int, c
     Return the modified student object.
     """
     pass
+# (hinnete kogus * praegune keskmine hinne + uus hinne) / uus hinnete kogus
+    student.credit_points = credit_points
+    student.average_grade = round((grades_count * student.average_grade + new_grade) / (grades_count + 1), 3)
 
+    return student
 
 def get_ordered_students(students: list) -> list:
     """
@@ -428,7 +429,8 @@ student1 = Student('ago', 4.3, 1)
 student2 = Student('mari', 4.1, 1)
 student3 = Student('kati', 4.2, 1)
 students = [student1, student2, student3]
-print(get_top_student_with_credit_points(students, 14))
+#print(get_top_student_with_credit_points(students, 14))
+print(add_result_to_student(student1, 4, 5, 22))
 #print(get_ordered_students(students))
 # kati, mari, ago
 #
