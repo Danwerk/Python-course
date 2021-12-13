@@ -195,13 +195,17 @@ def get_top_student_with_credit_points(students: list, min_credit_points: int):
     """
 
     max_grade = max([student.average_grade for student in students])
-    ret = []
-    for student in students:
-        if student.credit_points >= min_credit_points:
-            if student.average_grade == max_grade:
-                if len(ret) == 1:
-                    break
-                ret.append(student)
+    avg_score = [student.average_grade for student in students if student.credit_points >= min_credit_points]
+    if len(avg_score) == 0:
+        return None
+    else:
+        ret = []
+        for student in students:
+            if student.credit_points >= min_credit_points:
+                if student.average_grade == max_grade:
+                    if len(ret) == 1:
+                        break
+                    ret.append(student)
     return ret[0]
 
 
@@ -378,8 +382,8 @@ if __name__ == '__main__':
     }
     assert hotel.get_most_profitable_feature() == 'tv'
 '''
-student1 = Student('ago', 4.2, 13)
+student1 = Student('ago', 4.2, 0)
 student2 = Student('mari', 4.1, 14)
 student3 = Student('kati', 4.2, 14)
 students = [student1, student2, student3]
-print(get_top_student_with_credit_points(students, 10))
+print(get_top_student_with_credit_points(students, 14))
