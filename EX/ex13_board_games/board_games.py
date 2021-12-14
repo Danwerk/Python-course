@@ -3,6 +3,12 @@ from collections import Counter
 from enum import Enum
 
 
+class GamePlayResultType(Enum):
+    POINTS = 'points'
+    WINNER = 'winner'
+    PLACES = 'places'
+
+
 class Statistics:
     """Game statistics."""
 
@@ -13,6 +19,9 @@ class Statistics:
         self.games = {}
         self.gameplays = []
         self.read_file(filename)
+
+    def __repr__(self):
+        return f'{self.gameplays}'
 
     def read_file(self, filename):
         """Read data from file into dicts."""
@@ -27,7 +36,13 @@ class Statistics:
                 else:
                     game = Game(game_name)
                     self.games[game_name] = game
-                gp = game.new_gameplay()
+                if elements[2] == 'points':
+                    gp = game.new_gameplay('points')
+                if elements[2] == 'winner':
+                    gp = game.new_gameplay('winner')
+                if elements[2] == 'places':
+                    gp = game.new_gameplay('places')
+
                 self.gameplays.append(gp)
 
                 players = elements[1].split(',')
@@ -59,14 +74,20 @@ class Statistics:
             return self.get_game_names()
         if path == '/total':
             return len(self.gameplays)
-    #     if path == '/total/points' or path == '/total/places' or path == '/total/winner':
-    #         return self.get_games_played_type(path)
-    #
+        if path == '/total/points':
+            return self.get_games_played_type_count('points')
+        if path == '/total/places':
+            return self.get_games_played_type_count('places')
+        if path == '/total/winner':
+            return self.get_games_played_type_count('winner')
+
+
     def functionality_get_player(self, path):
         """Basic getter 2."""
         tokens = path[1:].split('/')
         player_name = tokens[1]
         player = self.players[player_name]
+
     #     if tokens[2] == 'amount':
     #         return player.get_games_played_count()
     #     elif tokens[2] == 'favourite':
@@ -81,6 +102,7 @@ class Statistics:
         game = self.games[game_name]
         if tokens[2] == 'amount':
             return game.get_amount_of_played_games()
+
     #     elif tokens[2] == 'player-amount':
     #         pass
 
@@ -98,11 +120,13 @@ class Statistics:
             ret.append(game)
         return ret
 
-
-class GamePlayResultType(Enum):
-    POINTS = 'points'
-    WINNER = 'winner'
-    PLACES = 'places'
+    def get_games_played_type_count(self, game_type: str):
+        """Returns count of specific type of game has been played."""
+        count = 0
+        for i in self.gameplays:
+            if i.get_gameplay_type() == GamePlayResultType(game_type):
+                count += 1
+        return count
 
 
 class Game:
@@ -117,12 +141,11 @@ class Game:
         """Representation for Game."""
         return self.name
 
-
     def get_amount_of_played_games(self) -> int:
         pass
 
-    def new_gameplay(self):
-        game_play = GamePlay(self, 'points')
+    def new_gameplay(self, game_type: str):
+        game_play = GamePlay(self, game_type)
         self.gameplays.append(game_play)
         return game_play
 
@@ -156,10 +179,28 @@ class GamePlay:
         self.game = game
         self.game_play_players = []
         self.result_type = GamePlayResultType(game_type)
+        self.points = None
+        self.place = None
+        self.winner = None
 
-    def add_player(self, player: Player):
-        pass
+    def __repr__(self):
+        return f'{self.result_type}'
 
+    def add_player(self, player: Player, points=None, place=None, winner=None):
+        if points is not None:
+            self.points = points
+
+        self.game_play_players.append(player)
+
+    def get_gameplay_winner(self):
+        if self.result_type == GamePlayResultType.POINTS:
+            pass
+
+    def get_players(self):
+        return self.game_play_players
+
+    def get_gameplay_type(self):
+        return self.result_type
 
     # def get_games_played_most_by_player(self) -> str:
     #     """Return most played games by player."""
@@ -178,16 +219,19 @@ class GamePlay:
     #     return str_ret[0]
 
 
-
-
-
 if __name__ == '__main__':
     statistics = Statistics('ex13_input.txt')
     print(statistics.get('/players'))
     print(statistics.get('/games'))
     print(statistics.get('/total'))
+    print(statistics.get_games_played_type_count('places'))
 
-    #print(statistics.read_from_file('ex13_input.txt'))
+
+    # gp = GamePlay(Game('chess'), 'points')
+    # gp.add_player(Player('ago'))
+    # print(gp.get_players())
+
+    # print(statistics.read_from_file('ex13_input.txt'))
     # print(statistics.get_player_names())
     # print(statistics.get_game_names())
     # print(statistics.total_played_games())
