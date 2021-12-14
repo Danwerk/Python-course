@@ -61,6 +61,8 @@ class Statistics:
                         self.players[player_name] = player
                     gp.add_player(player, 20)
 
+
+
                 # if elements[2] == 'points':
                 #     self.game_has_points.append(game_str)
                 # elif elements[2] == 'places':
@@ -112,9 +114,8 @@ class Statistics:
         game = self.games[game_name]
         if tokens[2] == 'amount':
             return game.get_amount_of_played_games()
-
-    #     elif tokens[2] == 'player-amount':
-    #         pass
+        if tokens[2] == 'player-amount':
+            return game.get_game_player_amount()
 
     def get_player_names(self) -> list:
         """Return list of players' names."""
@@ -138,6 +139,9 @@ class Statistics:
                 count += 1
         return count
 
+    def get_points_winner_places(self):
+        pass
+
 
 class Game:
     """Game class."""
@@ -159,6 +163,10 @@ class Game:
         game_play = GamePlay(self, game_type)
         self.gameplays.append(game_play)
         return game_play
+
+    def get_game_player_amount(self) -> int:
+
+        return len(max(game.game_play_players for game in self.gameplays))
 
 
 class Player:
@@ -275,7 +283,7 @@ class GamePlay:
 
 if __name__ == '__main__':
     statistics = Statistics('ex13_input.txt')
-    print(statistics.read_file('ex13_input.txt'))
+    # print(statistics.read_file('ex13_input.txt'))
     # print(statistics.get('/players'))
     # print(statistics.get('/games'))
     # print(statistics.get('/total'))
@@ -285,10 +293,11 @@ if __name__ == '__main__':
     # print(statistics.get('/player/kristjan/amount'))
     # print(statistics.get('/player/kristjan/favourite'))
     #print(statistics.get('/player/kristjan/won'))
+    #print(statistics.get('/game/7 wonders/amount'))
+    print(statistics.get('/game/7 wonders/player-amount'))
 
     # gp = GamePlay(Game('chess'), 'points')
     # gp.add_player(Player('ago'))
     # print(gp.get_players())
 
     # print(statistics.get_players_and_points_dict())
-    # print(statistics.get('/game/chess/amount'))
