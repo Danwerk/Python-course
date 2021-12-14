@@ -31,7 +31,10 @@ class Statistics:
         with open(filename, 'r') as f:
             f = f.readlines()
             for line in f:
+
                 elements = line.split(';')
+
+
                 game_name = elements[0]
                 if game_name in self.games:
                     game = self.games[game_name]
@@ -46,14 +49,18 @@ class Statistics:
                     gp = game.new_gameplay('places')
                 self.gameplays.append(gp)
 
+                points = elements[3].split(',')
+                points[-1] = points[-1].strip()
                 players = elements[1].split(',')
+
                 for player_name in players:
                     if player_name in self.players:
                         player = self.players[player_name]
                     else:
                         player = Player(player_name)
                         self.players[player_name] = player
-                    gp.add_player(player)
+                    gp.add_player(player, 20)
+
                 # if elements[2] == 'points':
                 #     self.game_has_points.append(game_str)
                 # elif elements[2] == 'places':
@@ -95,9 +102,9 @@ class Statistics:
             return player.get_games_played_count()
         if tokens[2] == 'favourite':
             return player.get_favourite_game()
-    #     elif tokens[2] == 'won':
-    #         return player.get_games_won()
-    #
+        if tokens[2] == 'won':
+            return player.get_games_won()
+
     def functionality_get_game(self, path):
         """Basic getter 3."""
         tokens = path[1:].split('/')
@@ -145,7 +152,7 @@ class Game:
         return self.name
 
     def get_amount_of_played_games(self) -> int:
-        pass
+        return len(self.gameplays)
 
     def new_gameplay(self, game_type: str):
         """Create and add new GamePlay object into list."""
@@ -175,7 +182,7 @@ class Player:
         return len(self.gameplays)
 
     def get_favourite_game(self) -> str:
-        d = []
+        """Return favourite game."""
         ret = {}
         count = 1
         for game in self.gameplays:
@@ -189,11 +196,12 @@ class Player:
         for g in max_elem:
             return g.name
 
-
-
-
-        #most_common_item = max(ret, key=ret.count)
-        #return most_common_item
+    def get_games_won(self):
+        ret = []
+        for game in self.gameplays:
+            wins = game.get_gameplay_points_places_winner(self)
+            ret.append(wins)
+        return ret
 
 
 class GamePlay:
@@ -207,23 +215,38 @@ class GamePlay:
         self.points = None
         self.place = None
         self.winner = None
+        self.score = {}
 
     def __repr__(self):
         """Representation for GamePlay class."""
-        return f'{self.result_type}'
+        return f'{self.result_type} result:({self.points})'
 
     def add_player(self, player: Player, points=None, place=None, winner=None):
         """..."""
         player.add_played_games(self)
         if points is not None:
             self.points = points
+        if place is not None:
+            self.place = place
+        if winner is not None:
+            self.winner = winner
 
         self.game_play_players.append(player)
+
+    def get_gameplay_points_places_winner(self, player: Player):
+        if self.result_type == GamePlayResultType.POINTS:
+            self.score[player] = self.points
+        if self.result_type == GamePlayResultType.PLACES:
+            self.score[player] = self.place
+        if self.result_type == GamePlayResultType.WINNER:
+            self.score[player] = self.winner
+        return self.score
 
     def get_gameplay_winner(self):
         """..."""
         if self.result_type == GamePlayResultType.POINTS:
-            pass
+            print(self.game_play_players)
+            return max(v for k, v in self.score.items())
 
     def get_players(self):
         """Getter for gameplay players."""
@@ -252,22 +275,20 @@ class GamePlay:
 
 if __name__ == '__main__':
     statistics = Statistics('ex13_input.txt')
-    #print(statistics.read_file('ex13_input.txt'))
-    #print(statistics.get('/players'))
+    print(statistics.read_file('ex13_input.txt'))
+    # print(statistics.get('/players'))
     # print(statistics.get('/games'))
     # print(statistics.get('/total'))
     # print(statistics.get('/total/points'))
     # print(statistics.get('/total/winner'))
     # print(statistics.get('/total/places'))
-    #print(statistics.get('/player/kristjan/amount'))
-    print(statistics.get('/player/kristjan/favourite'))
-
-
+    # print(statistics.get('/player/kristjan/amount'))
+    # print(statistics.get('/player/kristjan/favourite'))
+    #print(statistics.get('/player/kristjan/won'))
 
     # gp = GamePlay(Game('chess'), 'points')
     # gp.add_player(Player('ago'))
     # print(gp.get_players())
 
-    # print(statistics.get('/player/ago/won'))
     # print(statistics.get_players_and_points_dict())
     # print(statistics.get('/game/chess/amount'))
