@@ -165,8 +165,10 @@ class Game:
         return game_play
 
     def get_game_player_amount(self) -> int:
-
-        return len(max(game.game_play_players for game in self.gameplays))
+        ret = []
+        for g in self.gameplays:
+            ret.append(g.game_play_players)
+        return max(len(elem) for elem in ret)
 
 
 class Player:
@@ -294,7 +296,7 @@ if __name__ == '__main__':
     # print(statistics.get('/player/kristjan/favourite'))
     #print(statistics.get('/player/kristjan/won'))
     #print(statistics.get('/game/7 wonders/amount'))
-    print(statistics.get('/game/7 wonders/player-amount'))
+    print(statistics.get('/game/terraforming mars/player-amount'))
 
     # gp = GamePlay(Game('chess'), 'points')
     # gp.add_player(Player('ago'))
