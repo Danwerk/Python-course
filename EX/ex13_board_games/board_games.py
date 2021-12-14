@@ -85,7 +85,6 @@ class Statistics:
         if path == '/total/winner':
             return self.get_games_played_type_count('winner')
 
-
     def functionality_get_player(self, path):
         """Basic getter 2."""
         tokens = path[1:].split('/')
@@ -94,8 +93,8 @@ class Statistics:
 
         if tokens[2] == 'amount':
             return player.get_games_played_count()
-    #     elif tokens[2] == 'favourite':
-    #         return player.get_games_played_most_by_player()
+        if tokens[2] == 'favourite':
+            return player.get_favourite_game()
     #     elif tokens[2] == 'won':
     #         return player.get_games_won()
     #
@@ -175,6 +174,27 @@ class Player:
         """Return amount of played games."""
         return len(self.gameplays)
 
+    def get_favourite_game(self) -> str:
+        d = []
+        ret = {}
+        count = 1
+        for game in self.gameplays:
+            if game.game not in ret:
+                ret[game.game] = count
+            else:
+                ret[game.game] = count + 1
+        max_value = max([v for k, v in ret.items()])
+        max_elem = [k for k, v in ret.items() if v == max_value]
+
+        for g in max_elem:
+            return g.name
+
+
+
+
+        #most_common_item = max(ret, key=ret.count)
+        #return most_common_item
+
 
 class GamePlay:
     """GamePlay class."""
@@ -239,14 +259,15 @@ if __name__ == '__main__':
     # print(statistics.get('/total/points'))
     # print(statistics.get('/total/winner'))
     # print(statistics.get('/total/places'))
-    print(statistics.get('/player/kristjan/amount'))
+    #print(statistics.get('/player/kristjan/amount'))
+    print(statistics.get('/player/kristjan/favourite'))
+
 
 
     # gp = GamePlay(Game('chess'), 'points')
     # gp.add_player(Player('ago'))
     # print(gp.get_players())
 
-    # print(statistics.get('/player/ago/favourite'))
     # print(statistics.get('/player/ago/won'))
     # print(statistics.get_players_and_points_dict())
     # print(statistics.get('/game/chess/amount'))
