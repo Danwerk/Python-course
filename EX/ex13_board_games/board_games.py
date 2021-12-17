@@ -207,7 +207,7 @@ class Game:
             gp_result = gp.get_score()
             for k, v in gp_result.items():
                 if v == record:
-                    return k
+                    return k.name
 
 
 
@@ -352,7 +352,7 @@ if __name__ == '__main__':
     # print(statistics.get('/game/7 wonders/amount'))
     # print(statistics.get('/game/terraforming mars/player-amount'))
     #print(statistics.get('/game/terraforming mars/most-wins'))
-    print(statistics.get('/game/terraforming mars/record-holder'))
+    print(statistics.get('/game/7 wonders/record-holder'))
 
     # gp = GamePlay(Game('chess'), 'points')
     # gp.add_player(Player('ago'))
