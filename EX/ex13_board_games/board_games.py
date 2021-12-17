@@ -206,7 +206,7 @@ class Game:
             if v == max_value:
                 ret.append(k.name)
 
-        return ret
+        return ret[0]
 
     def get_game_record_holder(self) -> str:
         """Return the best player of some type of game."""
@@ -357,7 +357,7 @@ if __name__ == '__main__':
     # print(statistics.get('/player/kristjan/won'))
     # print(statistics.get('/game/7 wonders/amount'))
     # print(statistics.get('/game/terraforming mars/player-amount'))
-    print(statistics.get('/game/chess/most-wins'))
+    print(statistics.get('/game/game of thrones/most-wins'))
     #print(statistics.get('/game/7 wonders/record-holder'))
 
     # gp = GamePlay(Game('chess'), 'points')
