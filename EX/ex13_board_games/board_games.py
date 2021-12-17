@@ -205,7 +205,7 @@ class Game:
             if v == max_value:
                 ret.append(k.name)
 
-        return ret
+        return ret[0]
 
     def get_game_record_holder(self) -> str:
         """Return the best player of some type of game."""
