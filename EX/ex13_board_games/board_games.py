@@ -31,44 +31,59 @@ class Statistics:
         with open(filename, 'r') as f:
             f = f.readlines()
             for line in f:
-
                 elements = line.split(';')
-
-
                 game_name = elements[0]
+                players = elements[1].split(',')
+
                 if game_name in self.games:
                     game = self.games[game_name]
                 else:
                     game = Game(game_name)
                     self.games[game_name] = game
+
                 if elements[2] == 'points':
+                    points = elements[3].split(',')
+                    points[-1] = points[-1].strip()
                     gp = game.new_gameplay('points')
-                if elements[2] == 'winner':
-                    gp = game.new_gameplay('winner')
+                    for p in range(len(players)):
+                        if players[p] in self.players:
+                            player = self.players[players[p]]
+                        else:
+                            player = Player(players[p])
+                            self.players[players[p]] = player
+                        gp.add_player(player, int(points[p]))
+                        gp.get_gameplay_points_places_winner(player)
+
                 if elements[2] == 'places':
                     gp = game.new_gameplay('places')
+                    places = elements[3].split(',')
+                    places[-1] = places[-1].strip()
+                    for p in range(len(players)):
+                        if players[p] in self.players:
+                            player = self.players[players[p]]
+                        else:
+                            player = Player(players[p])
+                            self.players[players[p]] = player
+                        gp.add_player(player, place=f'{p + 1}.place')
+                        gp.get_gameplay_points_places_winner(player)
+
+                if elements[2] == 'winner':
+                    gp = game.new_gameplay('winner')
+                    winner = elements[3].strip()
+                    for p in range(len(players)):
+                        if players[p] in self.players:
+                            player = self.players[players[p]]
+                        else:
+                            player = Player(players[p])
+                            self.players[players[p]] = player
+                        if players[p] != winner:
+                            gp.add_player(player, winner='loser')
+                            gp.get_gameplay_points_places_winner(player)
+                        else:
+                            gp.add_player(player, winner='winner')
+                            gp.get_gameplay_points_places_winner(self.players[winner])
+
                 self.gameplays.append(gp)
-
-                points = elements[3].split(',')
-                points[-1] = points[-1].strip()
-                players = elements[1].split(',')
-
-                for player_name in players:
-                    if player_name in self.players:
-                        player = self.players[player_name]
-                    else:
-                        player = Player(player_name)
-                        self.players[player_name] = player
-                    gp.add_player(player, 20)
-
-
-
-                # if elements[2] == 'points':
-                #     self.game_has_points.append(game_str)
-                # elif elements[2] == 'places':
-                #     self.game_has_places.append(game_str)
-                # elif elements[2] == 'winner':
-                #     self.game_has_winner.append(game_str)
 
         ret.append(self.players)
         ret.append(self.games)
@@ -116,6 +131,8 @@ class Statistics:
             return game.get_amount_of_played_games()
         if tokens[2] == 'player-amount':
             return game.get_game_player_amount()
+        if tokens[2] == 'most-wins':
+            return game.get_game_most_wins()
 
     def get_player_names(self) -> list:
         """Return list of players' names."""
@@ -165,10 +182,15 @@ class Game:
         return game_play
 
     def get_game_player_amount(self) -> int:
+        """Return amount of players that played most often the game."""
         ret = []
         for g in self.gameplays:
             ret.append(g.game_play_players)
         return max(len(elem) for elem in ret)
+
+    def get_game_most_wins(self):
+        for game in self.gameplays:
+            game.get_gameplay_winner()
 
 
 class Player:
@@ -181,7 +203,7 @@ class Player:
 
     def __repr__(self):
         """Player representation."""
-        return self.name
+        return f'{self.name}'
 
     def add_played_games(self, gameplay: 'GamePlay'):
         """Add games person had played/gameplay(s) in which a player has taken part."""
@@ -229,7 +251,7 @@ class GamePlay:
 
     def __repr__(self):
         """Representation for GamePlay class."""
-        return f'{self.result_type} result:({self.points})'
+        return f'{self.result_type} result:{self.score}///'
 
     def add_player(self, player: Player, points=None, place=None, winner=None):
         """..."""
@@ -294,9 +316,10 @@ if __name__ == '__main__':
     # print(statistics.get('/total/places'))
     # print(statistics.get('/player/kristjan/amount'))
     # print(statistics.get('/player/kristjan/favourite'))
-    #print(statistics.get('/player/kristjan/won'))
-    #print(statistics.get('/game/7 wonders/amount'))
-    print(statistics.get('/game/terraforming mars/player-amount'))
+    # print(statistics.get('/player/kristjan/won'))
+    # print(statistics.get('/game/7 wonders/amount'))
+    # print(statistics.get('/game/terraforming mars/player-amount'))
+    print(statistics.get('/game/terraforming mars/most-wins'))
 
     # gp = GamePlay(Game('chess'), 'points')
     # gp.add_player(Player('ago'))
