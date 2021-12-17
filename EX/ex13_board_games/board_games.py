@@ -133,6 +133,8 @@ class Statistics:
             return game.get_game_player_amount()
         if tokens[2] == 'most-wins':
             return game.get_game_most_wins()
+        if tokens[2] == 'record-holder':
+            return game.get_game_record_holder()
 
     def get_player_names(self) -> list:
         """Return list of players' names."""
@@ -190,7 +192,25 @@ class Game:
 
     def get_game_most_wins(self):
         for game in self.gameplays:
-            game.get_gameplay_winner()
+            game_winner = game.get_gameplay_winner()
+
+
+    def get_game_record_holder(self):
+        record = 0
+        for game in self.gameplays:
+            game_winner_points = game.get_gameplay_winner_points()
+            if game_winner_points > record:
+                record = game_winner_points
+            else:
+                continue
+        for gp in self.gameplays:
+            gp_result = gp.get_score()
+            for k, v in gp_result.items():
+                if v == record:
+                    return k
+
+
+
 
 
 class Player:
@@ -253,6 +273,9 @@ class GamePlay:
         """Representation for GamePlay class."""
         return f'{self.result_type} result:{self.score}///'
 
+    def get_score(self):
+        return self.score
+
     def add_player(self, player: Player, points=None, place=None, winner=None):
         """..."""
         player.add_played_games(self)
@@ -277,8 +300,17 @@ class GamePlay:
     def get_gameplay_winner(self):
         """..."""
         if self.result_type == GamePlayResultType.POINTS:
-            print(self.game_play_players)
-            return max(v for k, v in self.score.items())
+            #print(self.game_play_players)
+            max_result = max(v for k, v in self.score.items())
+            gp_winner = [k for k, v in self.score.items() if v == max_result]
+            return gp_winner[0]
+
+    def get_gameplay_winner_points(self):
+        """Return gameplay winner points only if game type is 'points'."""
+        winner = self.get_gameplay_winner()
+        winner_points = self.score[winner]
+        return winner_points
+
 
     def get_players(self):
         """Getter for gameplay players."""
@@ -310,16 +342,17 @@ if __name__ == '__main__':
     # print(statistics.read_file('ex13_input.txt'))
     # print(statistics.get('/players'))
     # print(statistics.get('/games'))
-    # print(statistics.get('/total'))
-    # print(statistics.get('/total/points'))
-    # print(statistics.get('/total/winner'))
-    # print(statistics.get('/total/places'))
-    # print(statistics.get('/player/kristjan/amount'))
+    # print(statistics.get('/total'))  # 5
+    # print(statistics.get('/total/points'))  # 3
+    # print(statistics.get('/total/winner'))  # 1
+    # print(statistics.get('/total/places'))  # 1
+    # print(statistics.get('/player/kristjan/amount'))  # 3
     # print(statistics.get('/player/kristjan/favourite'))
     # print(statistics.get('/player/kristjan/won'))
     # print(statistics.get('/game/7 wonders/amount'))
     # print(statistics.get('/game/terraforming mars/player-amount'))
-    print(statistics.get('/game/terraforming mars/most-wins'))
+    #print(statistics.get('/game/terraforming mars/most-wins'))
+    print(statistics.get('/game/terraforming mars/record-holder'))
 
     # gp = GamePlay(Game('chess'), 'points')
     # gp.add_player(Player('ago'))
