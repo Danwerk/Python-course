@@ -323,10 +323,10 @@ class GamePlay:
             return gp_winner
         if self.result_type == GamePlayResultType.PLACES:
             gp_winner = [k for k, v in self.score.items() if v == '1.place']
-            return gp_winner[0]
+            return gp_winner
         if self.result_type == GamePlayResultType.WINNER:
             gp_winner = [k for k, v in self.score.items() if v == 'winner']
-            return gp_winner[0]
+            return gp_winner
 
     def get_gameplay_winner_points(self):
         """Return gameplay winner points only if game type is 'points'."""
@@ -357,7 +357,7 @@ if __name__ == '__main__':
     # print(statistics.get('/player/kristjan/won'))
     # print(statistics.get('/game/7 wonders/amount'))
     # print(statistics.get('/game/terraforming mars/player-amount'))
-    print(statistics.get('/game/terraforming mars/most-wins'))
+    print(statistics.get('/game/chess/most-wins'))
     #print(statistics.get('/game/7 wonders/record-holder'))
 
     # gp = GamePlay(Game('chess'), 'points')
