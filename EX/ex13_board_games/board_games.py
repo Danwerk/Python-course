@@ -195,17 +195,18 @@ class Game:
         win_amnt = 1
         for gp in self.gameplays:
             game_winner = gp.get_gameplay_winner()
-            if game_winner not in most_wins:
-                most_wins[game_winner] = win_amnt
-            else:
-                most_wins[game_winner] = win_amnt + 1
+            for i in range(len(game_winner)):
+                if game_winner[i] not in most_wins:
+                    most_wins[game_winner[i]] = win_amnt
+                else:
+                    most_wins[game_winner[i]] = win_amnt + 1
         max_value = max(v for k, v in most_wins.items())
 
         for k, v in most_wins.items():
             if v == max_value:
                 ret.append(k.name)
 
-        return ret[-1]
+        return ret
 
     def get_game_record_holder(self) -> str:
         """Return the best player of some type of game."""
@@ -319,7 +320,7 @@ class GamePlay:
             # print(self.game_play_players)
             max_result = max(v for k, v in self.score.items())
             gp_winner = [k for k, v in self.score.items() if v == max_result]
-            return gp_winner[0]
+            return gp_winner
         if self.result_type == GamePlayResultType.PLACES:
             gp_winner = [k for k, v in self.score.items() if v == '1.place']
             return gp_winner[0]
