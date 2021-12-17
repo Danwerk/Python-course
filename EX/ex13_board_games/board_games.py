@@ -1,5 +1,4 @@
 """Board game."""
-from collections import Counter
 from enum import Enum
 
 
@@ -190,12 +189,24 @@ class Game:
             ret.append(g.game_play_players)
         return max(len(elem) for elem in ret)
 
-    def get_game_most_wins(self):
-        for game in self.gameplays:
-            game_winner = game.get_gameplay_winner()
+    def get_game_most_wins(self) -> str:
+        most_wins = {}
+        for gp in self.gameplays:
+            win_amnt = 1
+            gp_result = gp.get_score()
+            game_winner = gp.get_gameplay_winner()
+            if game_winner not in most_wins:
+                most_wins[game_winner] = win_amnt
+            else:
+                most_wins[game_winner] = win_amnt + 1
+        max_value = max(v for k, v in most_wins.items())
+        for k, v in most_wins.items():
+            if v == max_value:
+                return k.name
 
-
-    def get_game_record_holder(self):
+    def get_game_record_holder(self) -> str:
+        """Return the best player of some type of game."""
+        # the highest score must be determined first.
         record = 0
         for game in self.gameplays:
             game_winner_points = game.get_gameplay_winner_points()
@@ -203,14 +214,12 @@ class Game:
                 record = game_winner_points
             else:
                 continue
+        # when we got the highest result then find the person who is the record holder.
         for gp in self.gameplays:
             gp_result = gp.get_score()
             for k, v in gp_result.items():
                 if v == record:
                     return k.name
-
-
-
 
 
 class Player:
@@ -274,6 +283,7 @@ class GamePlay:
         return f'{self.result_type} result:{self.score}///'
 
     def get_score(self):
+        """Getter for score dictionary."""
         return self.score
 
     def add_player(self, player: Player, points=None, place=None, winner=None):
@@ -289,6 +299,8 @@ class GamePlay:
         self.game_play_players.append(player)
 
     def get_gameplay_points_places_winner(self, player: Player):
+        """Here we make a dictionary for each gameplay, where the key is the player and as a value is
+        points/place/winner."""
         if self.result_type == GamePlayResultType.POINTS:
             self.score[player] = self.points
         if self.result_type == GamePlayResultType.PLACES:
@@ -300,7 +312,7 @@ class GamePlay:
     def get_gameplay_winner(self):
         """..."""
         if self.result_type == GamePlayResultType.POINTS:
-            #print(self.game_play_players)
+            # print(self.game_play_players)
             max_result = max(v for k, v in self.score.items())
             gp_winner = [k for k, v in self.score.items() if v == max_result]
             return gp_winner[0]
@@ -311,7 +323,6 @@ class GamePlay:
         winner_points = self.score[winner]
         return winner_points
 
-
     def get_players(self):
         """Getter for gameplay players."""
         return self.game_play_players
@@ -319,22 +330,6 @@ class GamePlay:
     def get_gameplay_type(self):
         """Get gameplay type(e.g POINTS, WINNER, PLACES)."""
         return self.result_type
-
-    # def get_games_played_most_by_player(self) -> str:
-    #     """Return most played games by player."""
-    #     object_ret = []
-    #     str_ret = []
-    #     # make dict and find most played game by player.
-    #     d = Counter(self.plays)
-    #     most_elem = d[list(d.keys())[0]]
-    #     for key, value in d.items():
-    #         if value == most_elem:
-    #             object_ret.append(key)
-    #
-    #     # object string representation
-    #     for i in object_ret:
-    #         str_ret.extend([key for (key, value) in self.games.items() if value == i])
-    #     return str_ret[0]
 
 
 if __name__ == '__main__':
@@ -351,8 +346,8 @@ if __name__ == '__main__':
     # print(statistics.get('/player/kristjan/won'))
     # print(statistics.get('/game/7 wonders/amount'))
     # print(statistics.get('/game/terraforming mars/player-amount'))
-    #print(statistics.get('/game/terraforming mars/most-wins'))
-    print(statistics.get('/game/7 wonders/record-holder'))
+    print(statistics.get('/game/terraforming mars/most-wins'))
+    #print(statistics.get('/game/7 wonders/record-holder'))
 
     # gp = GamePlay(Game('chess'), 'points')
     # gp.add_player(Player('ago'))
