@@ -191,8 +191,8 @@ class Game:
 
     def get_game_most_wins(self) -> str:
         most_wins = {}
+        win_amnt = 1
         for gp in self.gameplays:
-            win_amnt = 1
             game_winner = gp.get_gameplay_winner()
             if game_winner not in most_wins:
                 most_wins[game_winner] = win_amnt
@@ -353,7 +353,7 @@ if __name__ == '__main__':
     # print(statistics.get('/player/kristjan/won'))
     # print(statistics.get('/game/7 wonders/amount'))
     # print(statistics.get('/game/terraforming mars/player-amount'))
-    print(statistics.get('/game/game of thrones/most-wins'))
+    print(statistics.get('/game/terraforming mars/most-wins'))
     #print(statistics.get('/game/7 wonders/record-holder'))
 
     # gp = GamePlay(Game('chess'), 'points')
