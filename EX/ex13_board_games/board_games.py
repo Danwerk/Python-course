@@ -134,6 +134,8 @@ class Statistics:
             return game.get_game_most_wins()
         if tokens[2] == 'record-holder':
             return game.get_game_record_holder()
+        if tokens[2] == 'most-losses':
+            return game.get_game_most_loser()
 
     def get_player_names(self) -> list:
         """Return list of players' names."""
@@ -174,6 +176,7 @@ class Game:
         return self.name
 
     def get_amount_of_played_games(self) -> int:
+        """Return how many games were played at all."""
         return len(self.gameplays)
 
     def new_gameplay(self, game_type: str):
@@ -190,6 +193,7 @@ class Game:
         return max(len(elem) for elem in ret)
 
     def get_game_most_wins(self) -> str:
+        """Return player who won mostly."""
         ret = []
         most_wins = {}
         win_amnt = 1
@@ -200,10 +204,10 @@ class Game:
                     most_wins[game_winner[i]] = win_amnt
                 else:
                     most_wins[game_winner[i]] = win_amnt + 1
-        max_value = max(v for k, v in most_wins.items())
+        max_winner_value = max(v for k, v in most_wins.items())
 
         for k, v in most_wins.items():
-            if v == max_value:
+            if v == max_winner_value:
                 ret.append(k.name)
 
         return ret[0]
@@ -224,6 +228,25 @@ class Game:
             for k, v in gp_result.items():
                 if v == record:
                     return k.name
+
+    def get_game_most_loser(self):
+        ret = []
+        most_losses = {}
+        lose_amnt = 1
+        for game in self.gameplays:
+            game_loser = game.get_gameplay_loser()
+            for i in range(len(game_loser)):
+                if game_loser[i] not in most_losses:
+                    most_losses[game_loser[i]] = lose_amnt
+                else:
+                    most_losses[game_loser[i]] = lose_amnt + 1
+        max_loser_value = max(v for k, v in most_losses.items())
+
+        for k, v in most_losses.items():
+            if v == max_loser_value:
+                ret.append(k.name)
+
+        return ret[0]
 
 
 class Player:
@@ -334,6 +357,17 @@ class GamePlay:
         winner_points = self.score[winner[0]]
         return winner_points
 
+    def get_gameplay_loser(self):
+        """..."""
+        if self.result_type == GamePlayResultType.POINTS:
+            # print(self.game_play_players)
+            min_result = min(v for k, v in self.score.items())
+            gp_loser = [k for k, v in self.score.items() if v == min_result]
+            return gp_loser
+        if self.result_type == GamePlayResultType.PLACES:
+            gp_loser = [k for k, v in self.score.items() if v == f'{len(self.score)}.place']
+            return gp_loser
+
     def get_players(self):
         """Getter for gameplay players."""
         return self.game_play_players
@@ -357,8 +391,10 @@ if __name__ == '__main__':
     # print(statistics.get('/player/kristjan/won'))
     # print(statistics.get('/game/7 wonders/amount'))
     # print(statistics.get('/game/terraforming mars/player-amount'))
-    print(statistics.get('/game/chess/most-wins'))
+    # print(statistics.get('/game/chess/most-wins'))
     # print(statistics.get('/game/7 wonders/record-holder'))
+    print(statistics.get('/game/chess/most-losses'))
+
 
     # gp = GamePlay(Game('chess'), 'points')
     # gp.add_player(Player('ago'))
