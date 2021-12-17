@@ -190,6 +190,7 @@ class Game:
         return max(len(elem) for elem in ret)
 
     def get_game_most_wins(self) -> str:
+        ret = []
         most_wins = {}
         win_amnt = 1
         for gp in self.gameplays:
@@ -202,8 +203,9 @@ class Game:
 
         for k, v in most_wins.items():
             if v == max_value:
+                ret.append(k.name)
 
-                return k.name
+        return ret
 
     def get_game_record_holder(self) -> str:
         """Return the best player of some type of game."""
@@ -252,6 +254,7 @@ class Player:
                 ret[game.game] = count
             else:
                 ret[game.game] = count + 1
+
         max_value = max([v for k, v in ret.items()])
         max_elem = [k for k, v in ret.items() if v == max_value]
 
