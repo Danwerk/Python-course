@@ -67,14 +67,14 @@ class Statistics:
                         gp.get_gameplay_points_places_winner(player)
 
                 if elements[2] == 'winner':
-                    self.read_file_2(game, elements, players)
+                    gp = game.new_gameplay('winner')
+                    winner = elements[3].strip()
+                    self.read_file_2(players, winner, gp)
                 self.gameplays.append(gp)
 
         return self.gameplays
 
-    def read_file_2(self, game, elements, players):
-        gp = game.new_gameplay('winner')
-        winner = elements[3].strip()
+    def read_file_2(self, players, winner, gp):
         for p in range(len(players)):
             if players[p] in self.players:
                 player = self.players[players[p]]
@@ -407,13 +407,13 @@ class GamePlay:
 
 if __name__ == '__main__':
     statistics = Statistics('ex13_input.txt')
-    print(statistics.read_file('ex13_input.txt'))
+    # print(statistics.read_file('ex13_input.txt'))
     # print(statistics.get('/players'))
     # print(statistics.get('/games'))
     # print(statistics.get('/total'))  # 5
-    # print(statistics.get('/total/points'))  # 3
-    # print(statistics.get('/total/winner'))  # 1
-    # print(statistics.get('/total/places'))  # 1
+    print(statistics.get('/total/points'))  # 3
+    print(statistics.get('/total/winner'))  # 1
+    print(statistics.get('/total/places'))  # 1
     # print(statistics.get('/player/kristjan/amount'))  # 3
     # print(statistics.get('/player/kristjan/favourite'))  # 7 wonders
     # print(statistics.get('/player/joosep/won'))
