@@ -307,10 +307,15 @@ class Player:
 
     def get_games_won(self):
         ret = []
+        count = 0
         for game in self.gameplays:
-            wins = game.get_gameplay_points_places_winner(self)
+            wins = game.get_gameplay_winner()
+            if self.name == wins[0].name:
+                count += 1
+            else:
+                continue
             ret.append(wins)
-        return ret
+        return count
 
 
 class GamePlay:
@@ -407,18 +412,12 @@ if __name__ == '__main__':
     # print(statistics.get('/total/winner'))  # 1
     # print(statistics.get('/total/places'))  # 1
     # print(statistics.get('/player/kristjan/amount'))  # 3
-    # print(statistics.get('/player/kristjan/favourite'))
-    # print(statistics.get('/player/kristjan/won'))
-    print(statistics.get('/game/terraforming mars/amount'))  # 2
+    # print(statistics.get('/player/kristjan/favourite'))  # 7 wonders
+    print(statistics.get('/player/joosep/won'))
+    # print(statistics.get('/game/terraforming mars/amount'))  # 2
     # print(statistics.get('/game/terraforming mars/player-amount'))
     # print(statistics.get('/game/terraforming mars/most-wins'))
     # print(statistics.get('/game/7 wonders/record-holder'))
     # print(statistics.get('/game/chess/most-losses'))
     # print(statistics.get('/game/terraforming mars/most-frequent-loser'))
     # print(statistics.get('/game/terraforming mars/most-frequent-winner'))
-
-    # gp = GamePlay(Game('chess'), 'points')
-    # gp.add_player(Player('ago'))
-    # print(gp.get_players())
-
-    # print(statistics.get_players_and_points_dict())
