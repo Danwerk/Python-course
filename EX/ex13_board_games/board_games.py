@@ -163,9 +163,6 @@ class Statistics:
                 count += 1
         return count
 
-    def get_points_winner_places(self):
-        pass
-
 
 class Game:
     """Game class."""
@@ -235,6 +232,7 @@ class Game:
                     return k.name
 
     def get_game_most_loser(self) -> str:
+        """Return player(string) with the most losses in the game."""
         ret = []
         lose_amnt = 1
         for game in self.gameplays:
@@ -253,6 +251,7 @@ class Game:
         return ret[0]
 
     def get_most_frequent_winner(self) -> str:
+        """Return the player's string with the highest percentage of wins."""
         frequency = {}
         self.get_game_most_wins()
         for k, v in self.most_wins.items():
@@ -261,6 +260,7 @@ class Game:
         return frequent_winner
 
     def get_most_frequent_loser(self) -> str:
+        """Return the player's string with the highest percentage of losses."""
         frequency = {}
         self.get_game_most_loser()
         for k, v in self.most_losses.items():
@@ -290,7 +290,7 @@ class Player:
         return len(self.gameplays)
 
     def get_favourite_game(self) -> str:
-        """Return favourite game."""
+        """Return player's favourite game that he/she played mostly."""
         ret = {}
         count = 1
         for game in self.gameplays:
@@ -306,6 +306,7 @@ class Player:
             return g.name
 
     def get_games_won(self):
+        """Return games player won."""
         ret = []
         count = 0
         for game in self.gameplays:
@@ -339,8 +340,16 @@ class GamePlay:
         """Getter for score dictionary."""
         return self.score
 
+    def get_players(self):
+        """Getter for gameplay players."""
+        return self.game_play_players
+
+    def get_gameplay_type(self):
+        """Get gameplay type(e.g POINTS, WINNER, PLACES)."""
+        return self.result_type
+
     def add_player(self, player: Player, points=None, place=None, winner=None):
-        """..."""
+        """Add player into gameplay."""
         player.add_played_games(self)
         if points is not None:
             self.points = points
@@ -363,9 +372,8 @@ class GamePlay:
         return self.score
 
     def get_gameplay_winner(self):
-        """..."""
+        """Return a player who won the gameplay."""
         if self.result_type == GamePlayResultType.POINTS:
-            # print(self.game_play_players)
             max_result = max(v for k, v in self.score.items())
             gp_winner = [k for k, v in self.score.items() if v == max_result]
             return gp_winner
@@ -383,9 +391,8 @@ class GamePlay:
         return winner_points
 
     def get_gameplay_loser(self):
-        """..."""
+        """Return a player who lost the gameplay."""
         if self.result_type == GamePlayResultType.POINTS:
-            # print(self.game_play_players)
             min_result = min(v for k, v in self.score.items())
             gp_loser = [k for k, v in self.score.items() if v == min_result]
             return gp_loser
@@ -393,13 +400,6 @@ class GamePlay:
             gp_loser = [k for k, v in self.score.items() if v == f'{len(self.score)}.place']
             return gp_loser
 
-    def get_players(self):
-        """Getter for gameplay players."""
-        return self.game_play_players
-
-    def get_gameplay_type(self):
-        """Get gameplay type(e.g POINTS, WINNER, PLACES)."""
-        return self.result_type
 
 
 if __name__ == '__main__':
