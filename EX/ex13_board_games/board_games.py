@@ -44,24 +44,24 @@ class Statistics:
                     points = elements[3].split(',')
                     points[-1] = points[-1].strip()
                     gp = game.new_gameplay('points')
-                    self.read_file_2(players, points, gp)
+                    self.read_game_type_points(players, points, gp)
 
                 if elements[2] == 'places':
                     gp = game.new_gameplay('places')
                     places = elements[3].split(',')
                     places[-1] = places[-1].strip()
-                    self.read_file_3(players, places,gp)
+                    self.read_game_type_places(players, places, gp)
 
                 if elements[2] == 'winner':
                     gp = game.new_gameplay('winner')
                     winner = elements[3].strip()
-                    self.read_file_4(players, winner, gp)
+                    self.read_game_type_winner(players, winner, gp)
                 self.gameplays.append(gp)
 
         return self.gameplays
 
-
-    def read_file_2(self, players, points, gp):
+    def read_game_type_points(self, players, points, gp):
+        """Read file and fill all necessary information for type points. This is submethod for read_file."""
         for p in range(len(players)):
             if players[p] in self.players:
                 player = self.players[players[p]]
@@ -72,7 +72,8 @@ class Statistics:
             gp.get_gameplay_points_places_winner(player)
         return gp
 
-    def read_file_3(self, players, places, gp):
+    def read_game_type_places(self, players, places, gp):
+        """Read file and fill all necessary information for type places. This is submethod for read_file."""
         for p in range(len(players)):
             if places[p] in self.players:
                 player = self.players[places[p]]
@@ -83,7 +84,8 @@ class Statistics:
             gp.get_gameplay_points_places_winner(player)
         return gp
 
-    def read_file_4(self, players, winner, gp):
+    def read_game_type_winner(self, players, winner, gp):
+        """Read file and fill all necessary information for type winner. This is submethod for read_file."""
         for p in range(len(players)):
             if players[p] in self.players:
                 player = self.players[players[p]]
