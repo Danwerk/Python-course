@@ -136,6 +136,10 @@ class Statistics:
             return game.get_game_record_holder()
         if tokens[2] == 'most-losses':
             return game.get_game_most_loser()
+        if tokens[2] == 'most-frequent-loser':
+            pass
+        if tokens[2] == 'most-frequent-winner':
+            return game.get_most_frequent_winner()
 
     def get_player_names(self) -> list:
         """Return list of players' names."""
@@ -170,6 +174,7 @@ class Game:
         """Constructor for Game class."""
         self.name = name
         self.gameplays = []
+        self.most_wins = {}
 
     def __repr__(self):
         """Representation for Game."""
@@ -195,18 +200,17 @@ class Game:
     def get_game_most_wins(self) -> str:
         """Return player who won mostly."""
         ret = []
-        most_wins = {}
         win_amnt = 1
         for gp in self.gameplays:
             game_winner = gp.get_gameplay_winner()
             for i in range(len(game_winner)):
-                if game_winner[i] not in most_wins:
-                    most_wins[game_winner[i]] = win_amnt
+                if game_winner[i] not in self.most_wins:
+                    self.most_wins[game_winner[i]] = win_amnt
                 else:
-                    most_wins[game_winner[i]] = win_amnt + 1
-        max_winner_value = max(v for k, v in most_wins.items())
+                    self.most_wins[game_winner[i]] = win_amnt + 1
+        max_winner_value = max(v for k, v in self.most_wins.items())
 
-        for k, v in most_wins.items():
+        for k, v in self.most_wins.items():
             if v == max_winner_value:
                 ret.append(k.name)
 
@@ -229,7 +233,7 @@ class Game:
                 if v == record:
                     return k.name
 
-    def get_game_most_loser(self):
+    def get_game_most_loser(self) -> str:
         ret = []
         most_losses = {}
         lose_amnt = 1
@@ -247,6 +251,19 @@ class Game:
                 ret.append(k.name)
 
         return ret[0]
+
+    def get_most_frequent_winner(self) -> str:
+        frequency = {}
+        most_wins_method = self.get_game_most_wins()
+        for k, v in self.most_wins.items():
+            frequency[k.name] = v/len(self.gameplays)
+        frequent_winner = min(k for k, v in frequency.items())
+        return frequent_winner
+
+
+
+
+
 
 
 class Player:
@@ -389,11 +406,13 @@ if __name__ == '__main__':
     # print(statistics.get('/player/kristjan/amount'))  # 3
     # print(statistics.get('/player/kristjan/favourite'))
     # print(statistics.get('/player/kristjan/won'))
-    # print(statistics.get('/game/7 wonders/amount'))
+    # print(statistics.get('/game/terraforming mars/amount'))  # 2
     # print(statistics.get('/game/terraforming mars/player-amount'))
-    # print(statistics.get('/game/chess/most-wins'))
+    # print(statistics.get('/game/terraforming mars/most-wins'))
     # print(statistics.get('/game/7 wonders/record-holder'))
-    print(statistics.get('/game/chess/most-losses'))
+    # print(statistics.get('/game/chess/most-losses'))
+    # print(statistics.get('/game/chess/most-frequent-loser'))
+    print(statistics.get('/game/terraforming mars/most-frequent-winner'))
 
 
     # gp = GamePlay(Game('chess'), 'points')
