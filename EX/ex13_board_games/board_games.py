@@ -137,7 +137,7 @@ class Statistics:
         if tokens[2] == 'most-losses':
             return game.get_game_most_loser()
         if tokens[2] == 'most-frequent-loser':
-            pass
+            return game.get_most_frequent_loser()
         if tokens[2] == 'most-frequent-winner':
             return game.get_most_frequent_winner()
 
@@ -175,6 +175,7 @@ class Game:
         self.name = name
         self.gameplays = []
         self.most_wins = {}
+        self.most_losses = {}
 
     def __repr__(self):
         """Representation for Game."""
@@ -235,18 +236,17 @@ class Game:
 
     def get_game_most_loser(self) -> str:
         ret = []
-        most_losses = {}
         lose_amnt = 1
         for game in self.gameplays:
             game_loser = game.get_gameplay_loser()
             for i in range(len(game_loser)):
-                if game_loser[i] not in most_losses:
-                    most_losses[game_loser[i]] = lose_amnt
+                if game_loser[i] not in self.most_losses:
+                    self.most_losses[game_loser[i]] = lose_amnt
                 else:
-                    most_losses[game_loser[i]] = lose_amnt + 1
-        max_loser_value = max(v for k, v in most_losses.items())
+                    self.most_losses[game_loser[i]] = lose_amnt + 1
+        max_loser_value = max(v for k, v in self.most_losses.items())
 
-        for k, v in most_losses.items():
+        for k, v in self.most_losses.items():
             if v == max_loser_value:
                 ret.append(k.name)
 
@@ -259,6 +259,15 @@ class Game:
             frequency[k.name] = v/len(self.gameplays)
         frequent_winner = min(k for k, v in frequency.items())
         return frequent_winner
+
+    def get_most_frequent_loser(self) -> str:
+        frequency = {}
+        most_losses_method = self.get_game_most_loser()
+        for k, v in self.most_losses.items():
+            frequency[k.name] = v / len(self.gameplays)
+        frequent_loser = min(k for k, v in frequency.items())
+        return frequent_loser
+
 
 
 
@@ -411,8 +420,8 @@ if __name__ == '__main__':
     # print(statistics.get('/game/terraforming mars/most-wins'))
     # print(statistics.get('/game/7 wonders/record-holder'))
     # print(statistics.get('/game/chess/most-losses'))
-    # print(statistics.get('/game/chess/most-frequent-loser'))
-    print(statistics.get('/game/terraforming mars/most-frequent-winner'))
+    print(statistics.get('/game/terraforming mars/most-frequent-loser'))
+    # print(statistics.get('/game/terraforming mars/most-frequent-winner'))
 
 
     # gp = GamePlay(Game('chess'), 'points')
