@@ -44,37 +44,46 @@ class Statistics:
                     points = elements[3].split(',')
                     points[-1] = points[-1].strip()
                     gp = game.new_gameplay('points')
-                    for p in range(len(players)):
-                        if players[p] in self.players:
-                            player = self.players[players[p]]
-                        else:
-                            player = Player(players[p])
-                            self.players[players[p]] = player
-                        gp.add_player(player, int(points[p]))
-                        gp.get_gameplay_points_places_winner(player)
+                    self.read_file_2(players, points, gp)
 
                 if elements[2] == 'places':
                     gp = game.new_gameplay('places')
                     places = elements[3].split(',')
                     places[-1] = places[-1].strip()
-                    for p in range(len(players)):
-                        if places[p] in self.players:
-                            player = self.players[places[p]]
-                        else:
-                            player = Player(places[p])
-                            self.players[places[p]] = player
-                        gp.add_player(player, place=f'{p + 1}.place')
-                        gp.get_gameplay_points_places_winner(player)
+                    self.read_file_3(players, places,gp)
 
                 if elements[2] == 'winner':
                     gp = game.new_gameplay('winner')
                     winner = elements[3].strip()
-                    self.read_file_2(players, winner, gp)
+                    self.read_file_4(players, winner, gp)
                 self.gameplays.append(gp)
 
         return self.gameplays
 
-    def read_file_2(self, players, winner, gp):
+
+    def read_file_2(self, players, points, gp):
+        for p in range(len(players)):
+            if players[p] in self.players:
+                player = self.players[players[p]]
+            else:
+                player = Player(players[p])
+                self.players[players[p]] = player
+            gp.add_player(player, int(points[p]))
+            gp.get_gameplay_points_places_winner(player)
+        return gp
+
+    def read_file_3(self, players, places, gp):
+        for p in range(len(players)):
+            if places[p] in self.players:
+                player = self.players[places[p]]
+            else:
+                player = Player(places[p])
+                self.players[places[p]] = player
+            gp.add_player(player, place=f'{p + 1}.place')
+            gp.get_gameplay_points_places_winner(player)
+        return gp
+
+    def read_file_4(self, players, winner, gp):
         for p in range(len(players)):
             if players[p] in self.players:
                 player = self.players[players[p]]
