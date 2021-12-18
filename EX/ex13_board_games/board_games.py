@@ -254,25 +254,19 @@ class Game:
 
     def get_most_frequent_winner(self) -> str:
         frequency = {}
-        most_wins_method = self.get_game_most_wins()
+        self.get_game_most_wins()
         for k, v in self.most_wins.items():
-            frequency[k.name] = v/len(self.gameplays)
+            frequency[k.name] = v / len(self.gameplays)
         frequent_winner = min(k for k, v in frequency.items())
         return frequent_winner
 
     def get_most_frequent_loser(self) -> str:
         frequency = {}
-        most_losses_method = self.get_game_most_loser()
+        self.get_game_most_loser()
         for k, v in self.most_losses.items():
             frequency[k.name] = v / len(self.gameplays)
         frequent_loser = min(k for k, v in frequency.items())
         return frequent_loser
-
-
-
-
-
-
 
 
 class Player:
@@ -405,7 +399,7 @@ class GamePlay:
 
 if __name__ == '__main__':
     statistics = Statistics('ex13_input.txt')
-    #print(statistics.read_file('ex13_input.txt'))
+    # print(statistics.read_file('ex13_input.txt'))
     # print(statistics.get('/players'))
     # print(statistics.get('/games'))
     # print(statistics.get('/total'))  # 5
@@ -415,14 +409,13 @@ if __name__ == '__main__':
     # print(statistics.get('/player/kristjan/amount'))  # 3
     # print(statistics.get('/player/kristjan/favourite'))
     # print(statistics.get('/player/kristjan/won'))
-    # print(statistics.get('/game/terraforming mars/amount'))  # 2
+    print(statistics.get('/game/terraforming mars/amount'))  # 2
     # print(statistics.get('/game/terraforming mars/player-amount'))
     # print(statistics.get('/game/terraforming mars/most-wins'))
     # print(statistics.get('/game/7 wonders/record-holder'))
     # print(statistics.get('/game/chess/most-losses'))
-    print(statistics.get('/game/terraforming mars/most-frequent-loser'))
+    # print(statistics.get('/game/terraforming mars/most-frequent-loser'))
     # print(statistics.get('/game/terraforming mars/most-frequent-winner'))
-
 
     # gp = GamePlay(Game('chess'), 'points')
     # gp.add_player(Player('ago'))
