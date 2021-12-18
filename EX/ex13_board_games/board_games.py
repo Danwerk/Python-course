@@ -4,6 +4,7 @@ from enum import Enum
 
 class GamePlayResultType(Enum):
     """GamePlayResultType class."""
+
     POINTS = 'points'
     WINNER = 'winner'
     PLACES = 'places'
@@ -349,7 +350,7 @@ class GamePlay:
         return self.result_type
 
     def add_player(self, player: Player, points=None, place=None, winner=None):
-        """Add player into gameplay."""
+        """Add player into new gameplay."""
         player.add_played_games(self)
         if points is not None:
             self.points = points
@@ -361,8 +362,11 @@ class GamePlay:
         self.game_play_players.append(player)
 
     def get_gameplay_points_places_winner(self, player: Player):
-        """Here we make a dictionary for each gameplay, where the key is the player and as a value is
-        points/place/winner."""
+        """Points/places/winner.
+
+        Here we make a dictionary for each gameplay, where the key is the player and as a value is
+        points/place/winner.
+        """
         if self.result_type == GamePlayResultType.POINTS:
             self.score[player] = self.points
         if self.result_type == GamePlayResultType.PLACES:
@@ -399,7 +403,6 @@ class GamePlay:
         if self.result_type == GamePlayResultType.PLACES:
             gp_loser = [k for k, v in self.score.items() if v == f'{len(self.score)}.place']
             return gp_loser
-
 
 
 if __name__ == '__main__':
