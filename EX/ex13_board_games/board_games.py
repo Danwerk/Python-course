@@ -27,7 +27,6 @@ class Statistics:
 
     def read_file(self, filename):
         """Read data from file into dicts."""
-        ret = []
         with open(filename, 'r') as f:
             f = f.readlines()
             for line in f:
@@ -68,26 +67,27 @@ class Statistics:
                         gp.get_gameplay_points_places_winner(player)
 
                 if elements[2] == 'winner':
-                    gp = game.new_gameplay('winner')
-                    winner = elements[3].strip()
-                    for p in range(len(players)):
-                        if players[p] in self.players:
-                            player = self.players[players[p]]
-                        else:
-                            player = Player(players[p])
-                            self.players[players[p]] = player
-                        if players[p] != winner:
-                            gp.add_player(player, winner='loser')
-                            gp.get_gameplay_points_places_winner(player)
-                        else:
-                            gp.add_player(player, winner='winner')
-                            gp.get_gameplay_points_places_winner(self.players[winner])
-
+                    self.read_file_2(game, elements, players)
                 self.gameplays.append(gp)
 
-        ret.append(self.players)
-        ret.append(self.games)
         return self.gameplays
+
+    def read_file_2(self, game, elements, players):
+        gp = game.new_gameplay('winner')
+        winner = elements[3].strip()
+        for p in range(len(players)):
+            if players[p] in self.players:
+                player = self.players[players[p]]
+            else:
+                player = Player(players[p])
+                self.players[players[p]] = player
+            if players[p] != winner:
+                gp.add_player(player, winner='loser')
+                gp.get_gameplay_points_places_winner(player)
+            else:
+                gp.add_player(player, winner='winner')
+                gp.get_gameplay_points_places_winner(self.players[winner])
+        return gp
 
     def get(self, path: str):
         """Basic getter."""
@@ -407,7 +407,7 @@ class GamePlay:
 
 if __name__ == '__main__':
     statistics = Statistics('ex13_input.txt')
-    # print(statistics.read_file('ex13_input.txt'))
+    print(statistics.read_file('ex13_input.txt'))
     # print(statistics.get('/players'))
     # print(statistics.get('/games'))
     # print(statistics.get('/total'))  # 5
@@ -416,7 +416,7 @@ if __name__ == '__main__':
     # print(statistics.get('/total/places'))  # 1
     # print(statistics.get('/player/kristjan/amount'))  # 3
     # print(statistics.get('/player/kristjan/favourite'))  # 7 wonders
-    print(statistics.get('/player/joosep/won'))
+    # print(statistics.get('/player/joosep/won'))
     # print(statistics.get('/game/terraforming mars/amount'))  # 2
     # print(statistics.get('/game/terraforming mars/player-amount'))
     # print(statistics.get('/game/terraforming mars/most-wins'))
