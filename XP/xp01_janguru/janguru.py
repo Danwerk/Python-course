@@ -16,7 +16,7 @@ def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2) -> int:
 
 def meet_me(pos1, jump_distance1, sleep1, pos2, jump_distance2, sleep2) -> int:
     """Calculate the meeting position of 2 jangurus."""
-    if pos1 and pos2 >=1000000:
+    if pos1 and pos2 >= 1000000:
         for time in range(1000000, 1000000000):
             if time % sleep1 == 0:
                 pos1 += jump_distance1
