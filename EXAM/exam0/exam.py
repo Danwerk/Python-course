@@ -429,7 +429,14 @@ class Hotel:
         'd': 200
         }
         """
-        pass
+        ret = {}
+        for room in self.get_booked_rooms():
+            for f in room.get_features():
+                if f in ret:
+                    ret[f] += room.get_price()
+                else:
+                    ret[f] = room.get_price()
+        return ret
 
     def get_most_profitable_feature(self) -> Optional[str]:
         """
@@ -440,7 +447,16 @@ class Hotel:
         If there are several with the same max value, return the feature which is alphabetically lower (a < z)
         If there are no features booked, return None.
         """
-        pass
+        ret = []
+        sorted_dict = sorted(self.get_feature_profits().items())
+        profit = max([k[1] for k in sorted_dict])
+        if len(sorted_dict) > 0:
+            for el in sorted_dict:
+                if el[1] == profit:
+                    ret.append(el[0])
+            return ret[0]
+        else:
+            return None
 
 
 if __name__ == '__main__':
@@ -454,7 +470,6 @@ if __name__ == '__main__':
     hotel.add_room(room1)
     hotel.add_room(room2)
     #print(hotel.get_rooms())
-
     # TODO: try to add room with existing number, try to add existing feature to room
     assert hotel.get_rooms() == [room1, room2]
     assert hotel.get_booked_rooms() == []
@@ -462,16 +477,19 @@ if __name__ == '__main__':
     assert hotel.book_room(["tv", "president"]) == room1
     assert hotel.get_available_rooms() == [room2]
     assert hotel.get_booked_rooms() == [room1]
+    hotel.book_room(['tv', 'sauna'])
+    print(hotel.get_feature_profits())
+    print(hotel.get_most_profitable_feature())
     #
     #assert hotel.book_room([]) == room2
-    assert hotel.get_available_rooms() == []
+   # assert hotel.get_available_rooms() == []
     #
-    # assert hotel.get_feature_profits() == {
-    #     'tv': 300,
-    #     'bed': 100,
-    #     'sauna': 200
-    # }
-    # assert hotel.get_most_profitable_feature() == 'tv'
+    assert hotel.get_feature_profits() == {
+        'tv': 300,
+        'bed': 100,
+        'sauna': 200
+    }
+    assert hotel.get_most_profitable_feature() == 'tv'
 '''
 student1 = Student('ago', 4.3, 1)
 student2 = Student('mari', 4.1, 12)
