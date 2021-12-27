@@ -604,3 +604,58 @@ def read_people_data(directory: str) -> dict:
             else:
                 dict[line['id']].update(line)
     return dict
+
+
+def generate_people_report(person_data_directory: str, report_filename: str) -> None:
+    """
+    Generate report about people data.
+
+    Data should be read using read_people_data().
+
+    The input files contain fields "birth" and "death" which are dates. Those can be in different files. There are no duplicate headers in the files (except for the "id").
+
+    The report is a CSV file where all the fields are written to
+    (along with the headers).
+    In addition, there should be two fields:
+    - "status" this is either "dead" or "alive" depending on whether
+    there is a death date
+    - "age" - current age or the age when dying.
+    The age is calculated as full years.
+    Birth 01.01.1940, death 01.01.2020 - age: 80
+    Birth 02.01.1940, death 01.01.2020 - age: 79
+
+    If there is no birth date, then the age is -1.
+
+    When calculating age, dates can be compared.
+
+    The lines in the files should be ordered:
+    - first by the age ascending (younger before older);
+      if the age cannot be calculated, then those lines will come last
+    - if the age is the same, then those lines should be ordered
+      by birthdate descending (newer birth before older birth)
+    - if both the age and birth date are the same,
+      then by name ascending (a before b). If name is not available, use "" (people with missing name should be before people with  name)
+    - if the names are the same or name field is missing,
+      order by id ascending.
+
+    Dates in the report should in the format: dd.mm.yyyy
+    (2-digit day, 2-digit month, 4-digit year).
+
+    :param person_data_directory: Directory of input data.
+    :param report_filename: Output file.
+    :return: None
+    """
+    # header = ['id','birth','death','name','status','age']
+    # ret = []
+    # for i in read_people_data('data').values():
+    #     if i['death'] is None:
+    #         print()
+    #     if i['birth'] is None:
+    #         print()
+
+
+
+if __name__ == '__main__':
+    print(read_csv_file_into_list_of_dicts('csv_town.txt'))
+    print(read_people_data('data'))
+    print(generate_people_report('data', 'example_report.csv'))
