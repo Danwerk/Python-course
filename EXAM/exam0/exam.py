@@ -359,8 +359,9 @@ class Hotel:
         If a room with the given number already exists, do not add a room and return False.
         Otherwise add the room to hotel and return True.
         """
-        if room in self.rooms:
-            return False
+        for some_room in self.rooms:
+            if some_room.get_number() == room.get_number():
+                return False
         else:
             self.rooms.append(room)
             return True
