@@ -349,6 +349,9 @@ class Hotel:
         self.booked_rooms = []
         self.available_rooms = []
 
+    def __repr__(self):
+        return f'{self.booked_rooms}'
+
     def add_room(self, room: Room) -> bool:
         """
         Add room to hotel.
@@ -393,6 +396,9 @@ class Hotel:
 
     def get_available_rooms(self) -> list:
         """Return a list of available (not booked) rooms."""
+        for room in self.rooms:
+            if room not in self.booked_rooms:
+                self.available_rooms.append(room)
         return self.available_rooms
 
     def get_rooms(self) -> list:
@@ -446,17 +452,17 @@ if __name__ == '__main__':
     hotel.add_room(room1)
     hotel.add_room(room2)
     #print(hotel.get_rooms())
-    print(hotel.book_room(['tv', 'bed', 'sauna']))
+
     # TODO: try to add room with existing number, try to add existing feature to room
     assert hotel.get_rooms() == [room1, room2]
     assert hotel.get_booked_rooms() == []
     #
     assert hotel.book_room(["tv", "president"]) == room1
     assert hotel.get_available_rooms() == [room2]
-    # assert hotel.get_booked_rooms() == [room1]
+    assert hotel.get_booked_rooms() == [room1]
     #
-    # assert hotel.book_room([]) == room2
-    # assert hotel.get_available_rooms() == []
+    #assert hotel.book_room([]) == room2
+    assert hotel.get_available_rooms() == []
     #
     # assert hotel.get_feature_profits() == {
     #     'tv': 300,
