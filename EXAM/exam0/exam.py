@@ -380,7 +380,11 @@ class Hotel:
         If there are several with the same amount of matching features, return the one with the smallest room number.
         If there is no available rooms, return None
         """
-
+        for r in self.rooms:
+            if r in self.available_rooms:
+                continue
+            if r not in self.booked_rooms:
+                self.available_rooms.append(r)
         ret = []
         available_list = []
         for room in self.get_available_rooms():
