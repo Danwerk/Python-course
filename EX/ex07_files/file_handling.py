@@ -652,7 +652,7 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
     operate_with_dicts = []
 
     ret.append(header)
-    for i in read_people_data('data').values():
+    for i in read_people_data(person_data_directory).values():
         if 'birth' not in i and 'death' not in i:
             i['age'] = -1
         else:
@@ -685,9 +685,7 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
         for j in header_to_loop:
             ret_to_operate_with_elements.append(i[j])
         ret.append(ret_to_operate_with_elements)
-    print(ret)
-    return write_csv_file('test.txt', ret)
-    print(ret)
+    return write_csv_file(report_filename, ret)
 
 
 if __name__ == '__main__':
