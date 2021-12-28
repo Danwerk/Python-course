@@ -4,12 +4,12 @@ import csv
 
 class SantaWorkshop:
     """Santa workshop class."""
+
     def __init__(self):
         self.children = {}
         self.nice = []
         self.naughty = []
         self.wishes = {}
-
 
     def read_wishes_from_file(self, filename):
         """Read children wishes from csv file into dict, where the key is the child and the value is list of wishes.
@@ -63,6 +63,7 @@ class SantaWorkshop:
 
 class Child:
     """Child class."""
+
     def __init__(self, name: str, country: str, wishlist: list):
         self.name = name
         self.country = country
@@ -81,8 +82,10 @@ class Product:
     """Product class."""
     pass
 
+
 class ChildList:
     pass
+
 
 '''
 
@@ -217,12 +220,11 @@ if __name__ == '__main__':
     santa.read_wishes_from_file('ex15_wish_list.csv')
     santa.read_nice_children_from_file('ex15_nice_list.csv')
     santa.read_naughty_children_from_file('ex15_naughty_list.csv')
-    child = Child('Stacy', 'United Kingdom', ['Polyhedral dice set', 'Wall-mount diamond pickaxe', '500 TikTok followers'])
+    child = Child('Stacy', 'United Kingdom',
+                  ['Polyhedral dice set', 'Wall-mount diamond pickaxe', '500 TikTok followers'])
     print(child.get_wishes())
-
 
     print(santa.get_nice_children())
     print(santa.get_naughty_children())
     print(santa.get_children())
     print(santa.get_wishes())
-
