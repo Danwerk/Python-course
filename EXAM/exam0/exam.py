@@ -109,7 +109,24 @@ def tic_tac_toe(game: list) -> int:
     :param game
     :return: winning player id
     """
+    ret = 0
+    for i in game:
+        print(i)
 
+    if game[0][0] == game[1][1] == game[2][2] == 1 or game[0][2] == game[1][1] == game[2][0] == 1:
+        return 1
+    elif game[0][0] == game[1][1] == game[2][2] == 2 or game[0][2] == game[1][1] == game[2][0] == 2:
+        return 2
+
+    for i in game:
+        if i.count(1) == 3:
+            return 1
+        elif i.count(2) == 3:
+            return 2
+    return ret
+
+
+    '''
     res = True
     for i in game:
         elem = i[0]
@@ -119,7 +136,7 @@ def tic_tac_toe(game: list) -> int:
                 break
     if res is True:
         return 0
-
+    '''
     """
     if game[0][0] == game[1][0] and game[0][0] == game[2][0]:
         
@@ -142,10 +159,11 @@ def tic_tac_toe(game: list) -> int:
 """
 
 
-# print(tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]]))  # 1
-# print(tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]]))  # 0
-# print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]]))  # 2
-# print(tic_tac_toe([[2, 2, 2], [0, 0, 0], [1, 1, 1]]))  # 2
+print(tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]]))  # 1
+print(tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]]))  # 0
+print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]]))  # 2
+
+
 
 
 def rainbows(field: str, lower=False) -> int:
@@ -170,7 +188,6 @@ def rainbows(field: str, lower=False) -> int:
     elif field.lower().__contains__('wobniar'):
         return 1 + rainbows(field.lower().replace('wobniar', '', 1))
 
-print(rainbows("ThisIsJustSomeNoiseasd;lfkjwobniarwowobowobniar1324546rainbow"))
 
 def longest_substring(text: str) -> str:
     """
@@ -509,7 +526,6 @@ students = [student1, student2, student3]
 #print(add_result_to_student(student1, 4, 5, 22))
 print(get_ordered_students(students))
 '''
-
 
 assert rainbows("rainbowThisIsJustSomeNoise") == 1  # Lisaks vikerkaarele on veel sümboleid
 assert rainbows("WoBniar") == 1  # Vikerkaar on tagurpidi ja sisaldab suuri tähti
