@@ -385,6 +385,9 @@ class Hotel:
                 continue
             if r not in self.booked_rooms:
                 self.available_rooms.append(r)
+
+        if self.get_available_rooms() is []:
+            return None
         ret = []
         available_list = []
         for room in self.get_available_rooms():
@@ -477,6 +480,7 @@ if __name__ == '__main__':
     room2.add_feature("sauna")
     hotel.add_room(room1)
     hotel.add_room(room2)
+
     # TODO: try to add room with existing number, try to add existing feature to room
     assert hotel.get_rooms() == [room1, room2]
     assert hotel.get_booked_rooms() == []
