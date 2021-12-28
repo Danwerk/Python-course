@@ -110,13 +110,24 @@ def tic_tac_toe(game: list) -> int:
     :return: winning player id
     """
     ret = 0
-    for i in game:
-        print(i)
+    col = [[], [], []]
 
     if game[0][0] == game[1][1] == game[2][2] == 1 or game[0][2] == game[1][1] == game[2][0] == 1:
         return 1
     elif game[0][0] == game[1][1] == game[2][2] == 2 or game[0][2] == game[1][1] == game[2][0] == 2:
         return 2
+
+    for r in game:
+        col[0].append(r[0])
+        col[1].append(r[1])
+        col[2].append(r[2])
+
+    for i in col:
+        if i.count(1) == 3:
+            return 1
+        elif i.count(2) == 3:
+            return 2
+
 
     for i in game:
         if i.count(1) == 3:
@@ -126,44 +137,9 @@ def tic_tac_toe(game: list) -> int:
     return ret
 
 
-    '''
-    res = True
-    for i in game:
-        elem = i[0]
-        for j in i:
-            if j != elem:
-                res = False
-                break
-    if res is True:
-        return 0
-    '''
-    """
-    if game[0][0] == game[1][0] and game[0][0] == game[2][0]:
-        
-        return game[0][0]
-
-    elif game[0][1] == game[1][1] and game[0][1] == game[2][1]:
-        return game[0][1]
-
-    elif game[0][2] == game[1][2] and game[0][2] == game[2][2]:
-        return game[0][2]
-
-    elif game[0][0] == game[1][1] and game[0][0] == game[2][2]:
-        return game[0][0]
-
-    elif game[0][2] == game[1][2] and game[0][2] == game[2][0]:
-        return game[0][2]
-
-    else:
-        return 0
-"""
-
-
 print(tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]]))  # 1
 print(tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]]))  # 0
 print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]]))  # 2
-
-
 
 
 def rainbows(field: str, lower=False) -> int:
