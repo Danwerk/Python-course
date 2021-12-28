@@ -10,6 +10,7 @@ class SantaWorkshop:
         self.naughty = []
         self.wishes = {}
 
+
     def read_wishes_from_file(self, filename):
         """Read children wishes from csv file into dict, where the key is the child and the value is list of wishes.
 
