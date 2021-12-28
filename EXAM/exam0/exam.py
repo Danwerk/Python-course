@@ -163,8 +163,14 @@ def rainbows(field: str, lower=False) -> int:
     :param field: string to search rainbows from
     :return: number of rainbows in the string
     """
-    pass
+    if not field.lower().__contains__('rainbow') and not field.lower().__contains__('wobniar'):
+        return 0
+    elif field.lower().__contains__('rainbow'):
+        return 1 + rainbows(field.lower().replace('rainbow', '', 1))
+    elif field.lower().__contains__('wobniar'):
+        return 1 + rainbows(field.lower().replace('wobniar', '', 1))
 
+print(rainbows("ThisIsJustSomeNoiseasd;lfkjwobniarwowobowobniar1324546rainbow"))
 
 def longest_substring(text: str) -> str:
     """
@@ -474,14 +480,14 @@ if __name__ == '__main__':
     assert hotel.get_rooms() == [room1, room2]
     assert hotel.get_booked_rooms() == []
     #
-    assert hotel.book_room(["tv", "president"]) == room1
+    # assert hotel.book_room(["tv", "president"]) == room1
     # assert hotel.get_available_rooms() == [room2]
-    assert hotel.get_booked_rooms() == [room1]
-    hotel.book_room(['tv', 'sauna'])
-    print(hotel.get_feature_profits())
-    print(hotel.get_most_profitable_feature())
-    #
-    print(hotel.book_room([]))
+    # assert hotel.get_booked_rooms() == [room1]
+    # hotel.book_room(['tv', 'sauna'])
+    # print(hotel.get_feature_profits())
+    # print(hotel.get_most_profitable_feature())
+
+    # print(hotel.book_room([]))
     # assert hotel.book_room([]) == room2
     # assert hotel.get_available_rooms() == []
     #
@@ -490,7 +496,7 @@ if __name__ == '__main__':
     #     'bed': 100,
     #     'sauna': 200
     # }
-    assert hotel.get_most_profitable_feature() == 'tv'
+    # assert hotel.get_most_profitable_feature() == 'tv'
 '''
 student1 = Student('ago', 4.3, 1)
 student2 = Student('mari', 4.1, 12)
@@ -500,3 +506,8 @@ students = [student1, student2, student3]
 #print(add_result_to_student(student1, 4, 5, 22))
 print(get_ordered_students(students))
 '''
+
+
+assert rainbows("rainbowThisIsJustSomeNoise") == 1  # Lisaks vikerkaarele on veel sümboleid
+assert rainbows("WoBniar") == 1  # Vikerkaar on tagurpidi ja sisaldab suuri tähti
+assert rainbows("rainbowobniar") == 1  # Kaks vikerkaart jagavad tähte seega üks neist ei ole valiidne
