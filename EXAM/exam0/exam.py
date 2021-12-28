@@ -455,8 +455,8 @@ class Hotel:
         """
         ret = []
         sorted_dict = sorted(self.get_feature_profits().items())
-        profit = max([k[1] for k in sorted_dict])
         if len(sorted_dict) > 0:
+            profit = max([k[1] for k in sorted_dict])
             for el in sorted_dict:
                 if el[1] == profit:
                     ret.append(el[0])
