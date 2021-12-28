@@ -2,6 +2,7 @@
 import glob
 import csv
 from datetime import datetime
+from datetime import date
 
 
 def no_data(header, types_dict, i):
@@ -645,17 +646,51 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
     :param report_filename: Output file.
     :return: None
     """
-    # header = ['id','birth','death','name','status','age']
-    # ret = []
-    # for i in read_people_data('data').values():
-    #     if i['death'] is None:
-    #         print()
-    #     if i['birth'] is None:
-    #         print()
+    header_to_loop = ['id', 'birth', 'death', 'name', 'status', 'age']
+    header = ['id', 'birth', 'death', 'name', 'status', 'age']
+    ret = []
+    operate_with_dicts = []
 
+    ret.append(header)
+    for i in read_people_data('data').values():
+        if 'birth' not in i and 'death' not in i:
+            i['age'] = -1
+        else:
+            if i['birth'] is not None and 'birth' in i and i['death'] is not None and 'death' in i:
+                time_difference = i['death'] - i['birth']
+                age = time_difference.days // 365
+                i['age'] = age
+                i['birth'] = i['birth'].strftime("%d.%m.%Y")
+                i['death'] = i['death'].strftime("%d.%m.%Y")
+            elif i['birth'] is not None and 'birth' in i and i['death'] is None or 'death' not in i:
+                today = date.today()
+                time_difference = today - i['birth']
+                age = time_difference.days // 365
+                i['age'] = age
+                i['birth'] = i['birth'].strftime("%d.%m.%Y")
+
+        if 'death' in i and i['death'] is not None:
+            i['status'] = 'dead'
+        else:
+            i['status'] = 'alive'
+        if 'death' not in i or i['death'] is None:
+            i['death'] = '-'
+        if 'birth' not in i or i['birth'] is None:
+            i['birth'] = '-'
+
+        operate_with_dicts.append(i)
+
+    for i in operate_with_dicts:
+        ret_to_operate_with_elements = []
+        for j in header_to_loop:
+            ret_to_operate_with_elements.append(i[j])
+        ret.append(ret_to_operate_with_elements)
+    print(ret)
+    return write_csv_file('test.txt', ret)
+    print(ret)
 
 
 if __name__ == '__main__':
-    print(read_csv_file_into_list_of_dicts('csv_town.txt'))
+    # print(read_csv_file_into_list_of_dicts('csv_town.txt'))
     print(read_people_data('data'))
     print(generate_people_report('data', 'example_report.csv'))
