@@ -117,10 +117,14 @@ def tic_tac_toe(game: list) -> int:
     elif game[0][0] == game[1][1] == game[2][2] == 2 or game[0][2] == game[1][1] == game[2][0] == 2:
         return 2
 
-    for r in game:
-        col[0].append(r[0])
-        col[1].append(r[1])
-        col[2].append(r[2])
+    for i in game:
+        col[0].append(i[0])
+        col[1].append(i[1])
+        col[2].append(i[2])
+        if i.count(1) == 3:
+            return 1
+        elif i.count(2) == 3:
+            return 2
 
     for i in col:
         if i.count(1) == 3:
@@ -128,18 +132,12 @@ def tic_tac_toe(game: list) -> int:
         elif i.count(2) == 3:
             return 2
 
-
-    for i in game:
-        if i.count(1) == 3:
-            return 1
-        elif i.count(2) == 3:
-            return 2
     return ret
 
 
 print(tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]]))  # 1
 print(tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]]))  # 0
-print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]]))  # 2
+print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [1, 1, 1]]))  # 2
 
 
 def rainbows(field: str, lower=False) -> int:
