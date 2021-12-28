@@ -297,7 +297,7 @@ def get_ordered_students(students: list) -> list:
     list2 = sorted(list1, key=lambda p: p.average_grade, reverse=True)
     list3 = sorted(list2, key=lambda p: p.credit_points, reverse=True)
     return list3
-    #return sorted(students, key=lambda p: (-p.credit_points, -p.average_grade, p.name))
+    # return sorted(students, key=lambda p: (-p.credit_points, -p.average_grade, p.name))
 
 
 class Room:
@@ -377,10 +377,10 @@ class Hotel:
 
         ret = []
         some_list = []
-        for room in self.rooms:
+        for room in self.get_available_rooms():
             count = 0
             for i in required_features:
-                if i in room.features:
+                if i in room.get_features:
                     count += 1
             some_list.append((room, count))
 
@@ -469,26 +469,27 @@ if __name__ == '__main__':
     room2.add_feature("sauna")
     hotel.add_room(room1)
     hotel.add_room(room2)
-    #print(hotel.get_rooms())
+    # print(hotel.get_rooms())
     # TODO: try to add room with existing number, try to add existing feature to room
     assert hotel.get_rooms() == [room1, room2]
     assert hotel.get_booked_rooms() == []
     #
     assert hotel.book_room(["tv", "president"]) == room1
-    assert hotel.get_available_rooms() == [room2]
+    # assert hotel.get_available_rooms() == [room2]
     assert hotel.get_booked_rooms() == [room1]
     hotel.book_room(['tv', 'sauna'])
     print(hotel.get_feature_profits())
     print(hotel.get_most_profitable_feature())
     #
-    #assert hotel.book_room([]) == room2
-   # assert hotel.get_available_rooms() == []
+    print(hotel.book_room([]))
+    # assert hotel.book_room([]) == room2
+    # assert hotel.get_available_rooms() == []
     #
-    assert hotel.get_feature_profits() == {
-        'tv': 300,
-        'bed': 100,
-        'sauna': 200
-    }
+    # assert hotel.get_feature_profits() == {
+    #     'tv': 300,
+    #     'bed': 100,
+    #     'sauna': 200
+    # }
     assert hotel.get_most_profitable_feature() == 'tv'
 '''
 student1 = Student('ago', 4.3, 1)
