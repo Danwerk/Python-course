@@ -690,11 +690,12 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
         operate_with_dicts.append(ret)
 
     newlist = sorted(operate_with_dicts, key=lambda d: d['id'])
-    newlist2 = sorted(newlist, key=lambda d: d['age'])
-    newlist3 = sorted(newlist2, key=lambda x: x['age'] == -1)
-    print(newlist3)
+    newlist2 = sorted(newlist, key=lambda d: d['name'])
+    newlist3 = sorted(newlist2, key=lambda d: d['age'])
+    newlist4 = sorted(newlist3, key=lambda x: x['age'] == -1)
+    print(newlist4)
 
-    return write_list_of_dicts_to_csv_file(report_filename, newlist3)
+    return write_list_of_dicts_to_csv_file(report_filename, newlist4)
     '''
         if 'birth' not in i and 'death' not in i:
             i['age'] = -1
