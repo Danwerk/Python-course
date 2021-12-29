@@ -674,13 +674,11 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
             print(i[el])
 
         if 'birth' in i and i['birth'] is not None and 'death' in i and i['death'] is not None:
-            time_difference = i['death'] - i['birth']
-            age = time_difference.days // 365
+            age = i['death'].year - i['birth'].year - ((i['death'].month, i['death'].day) < (i['birth'].month, i['birth'].day))
             ret['age'] = age
         if 'birth' in i and i['birth'] is not None and 'death' in i and i['death'] is None:
             today = date.today()
-            time_difference = today - i['birth']
-            age = time_difference.days // 365 - 1
+            age = today.year - i['birth'].year - ((today.month, today.day) < (i['birth'].month, i['birth'].day))
             ret['age'] = age
             i['birth'] = i['birth'].strftime("%d.%m.%Y")
 
