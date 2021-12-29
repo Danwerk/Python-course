@@ -648,7 +648,6 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
     :return: None
     """
     header_to_loop = []
-    header = ['id', 'birth', 'death', 'name', 'status', 'age']
     operate_with_dicts = []
 
     people_data = read_people_data(person_data_directory)
@@ -661,7 +660,6 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
     #print(header_to_loop)
 
     for i in people_data.values():
-        print(i)
         ret = {}
         for el in i:
             ret[el] = i[el]
@@ -671,7 +669,6 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
 
             if type(i[el]) is date:
                 ret[el] = ret[el].strftime('%d.%m.%Y')
-            print(i[el])
 
         if 'birth' in i and i['birth'] is not None and 'death' in i and i['death'] is not None:
             age = i['death'].year - i['birth'].year - ((i['death'].month, i['death'].day) < (i['birth'].month, i['birth'].day))
@@ -681,7 +678,6 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
             age = today.year - i['birth'].year - ((today.month, today.day) < (i['birth'].month, i['birth'].day))
             ret['age'] = age
             i['birth'] = i['birth'].strftime("%d.%m.%Y")
-
 
         if ret['birth'] == '-':
             ret['age'] = -1
@@ -695,8 +691,10 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
 
     newlist = sorted(operate_with_dicts, key=lambda d: d['id'])
     newlist2 = sorted(newlist, key=lambda d: d['age'])
+    newlist3 = sorted(newlist2, key=lambda x: x['age'] == -1)
+    print(newlist3)
 
-    return write_list_of_dicts_to_csv_file(report_filename, newlist2)
+    return write_list_of_dicts_to_csv_file(report_filename, newlist3)
     '''
         if 'birth' not in i and 'death' not in i:
             i['age'] = -1
