@@ -665,11 +665,9 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
         ret = {}
         for el in i:
             ret[el] = i[el]
-            print(type(i[el]))
 
             if i[el] is None:
                 ret[el] = '-'
-
 
             if type(i[el]) is date:
                 ret[el] = ret[el].strftime('%d.%m.%Y')
@@ -679,6 +677,16 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
             time_difference = i['death'] - i['birth']
             age = time_difference.days // 365
             ret['age'] = age
+        if 'birth' in i and i['birth'] is not None and 'death' in i and i['death'] is None:
+            today = date.today()
+            time_difference = today - i['birth']
+            age = time_difference.days // 365 - 1
+            ret['age'] = age
+            i['birth'] = i['birth'].strftime("%d.%m.%Y")
+
+
+        if ret['birth'] == '-':
+            ret['age'] = -1
 
         if ret['death'] != '-':
             ret['status'] = 'dead'
@@ -687,7 +695,10 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
 
         operate_with_dicts.append(ret)
 
-    return write_list_of_dicts_to_csv_file(report_filename, operate_with_dicts)
+    newlist = sorted(operate_with_dicts, key=lambda d: d['id'])
+    newlist2 = sorted(newlist, key=lambda d: d['age'])
+
+    return write_list_of_dicts_to_csv_file('test.txt', newlist2)
     '''
         if 'birth' not in i and 'death' not in i:
             i['age'] = -1
@@ -729,4 +740,4 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
 if __name__ == '__main__':
     # print(read_csv_file_into_list_of_dicts('csv_town.txt'))
     #print(read_people_data('data'))
-    print(generate_people_report('data', 'example_report.csv'))
+    print(generate_people_report('data2', 'example_report.csv'))
