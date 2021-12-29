@@ -1,6 +1,7 @@
 """Files."""
 import glob
 import csv
+import datetime
 from datetime import datetime
 from datetime import date
 
@@ -646,13 +647,48 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
     :param report_filename: Output file.
     :return: None
     """
-    header_to_loop = ['id', 'birth', 'death', 'name', 'status', 'age']
+    header_to_loop = []
     header = ['id', 'birth', 'death', 'name', 'status', 'age']
-    ret = []
     operate_with_dicts = []
 
-    ret.append(header)
-    for i in read_people_data(person_data_directory).values():
+    people_data = read_people_data(person_data_directory)
+    for d in people_data.values():
+        for k in d:
+            if k not in header_to_loop:
+                header_to_loop.append(k)
+            else:
+                continue
+    #print(header_to_loop)
+
+    for i in people_data.values():
+        print(i)
+        ret = {}
+        for el in i:
+            ret[el] = i[el]
+            print(type(i[el]))
+
+            if i[el] is None:
+                ret[el] = '-'
+
+
+            if type(i[el]) is date:
+                ret[el] = ret[el].strftime('%d.%m.%Y')
+            print(i[el])
+
+        if 'birth' in i and i['birth'] is not None and 'death' in i and i['death'] is not None:
+            time_difference = i['death'] - i['birth']
+            age = time_difference.days // 365
+            ret['age'] = age
+
+        if ret['death'] != '-':
+            ret['status'] = 'dead'
+        else:
+            ret['status'] = 'alive'
+
+        operate_with_dicts.append(ret)
+
+    return write_list_of_dicts_to_csv_file(report_filename, operate_with_dicts)
+    '''
         if 'birth' not in i and 'death' not in i:
             i['age'] = -1
         else:
@@ -662,12 +698,14 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
                 i['age'] = age
                 i['birth'] = i['birth'].strftime("%d.%m.%Y")
                 i['death'] = i['death'].strftime("%d.%m.%Y")
-            elif i['birth'] is not None and 'birth' in i and i['death'] is None or 'death' not in i:
+            elif i['birth'] is not None and 'birth' in i and (i['death'] is None or 'death' not in i):
                 today = date.today()
                 time_difference = today - i['birth']
                 age = time_difference.days // 365
                 i['age'] = age
                 i['birth'] = i['birth'].strftime("%d.%m.%Y")
+
+
 
         if 'death' in i and i['death'] is not None:
             i['status'] = 'dead'
@@ -687,8 +725,8 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
         ret.append(ret_to_operate_with_elements)
     return write_csv_file(report_filename, ret)
 
-
+'''
 if __name__ == '__main__':
     # print(read_csv_file_into_list_of_dicts('csv_town.txt'))
-    print(read_people_data('data'))
+    #print(read_people_data('data'))
     print(generate_people_report('data', 'example_report.csv'))
