@@ -73,9 +73,10 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
     if len(pyramid_a) == len(pyramid_b):
         for i in range(len(pyramid_a)):
             pyramid_a[i].extend(pyramid_b[i])
+        pyramid_a.reverse()
         return pyramid_a
 
-    if len(pyramid_b) > len(pyramid_a):
+    elif len(pyramid_b) > len(pyramid_a):
         for i in range(len(pyramid_b)):
             if i > len(pyramid_a) - 1:
                 whitespaces = list(' ' * pyramid_a_base_len)
@@ -87,7 +88,7 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
         pyramid_a.reverse()
         return pyramid_a
 
-    if len(pyramid_a) > len(pyramid_b):
+    elif len(pyramid_a) > len(pyramid_b):
         for i in range(len(pyramid_a)):
             if i > len(pyramid_b) - 1:
                 whitespaces = list(' ' * pyramid_b_base_len)
@@ -100,7 +101,7 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
         return pyramid_b
 
 
-#print(join_pyramids([[' ', 'A', ' '], ['A', 'A', 'A']], [[' ', ' ', 'a', 'a', ' ', ' '], [' ', 'a', 'a', 'a', 'a', ' '], ['a', 'a', 'a', 'a', 'a', 'a']]))
+print(join_pyramids([[' ', ' ', 'a', 'a', ' ', ' '], [' ', 'a', 'a', 'a', 'a', ' '], ['a', 'a', 'a', 'a', 'a', 'a']], [[' ', 'A', ' '], ['A', 'A', 'A']]))
 print(join_pyramids([[' ', 'A', ' '], ['A', 'A', 'A']], [[' ', 'a', ' '], ['a', 'a', 'a']]))
 
 
