@@ -1,7 +1,6 @@
 """Files."""
 import glob
 import csv
-import datetime
 from datetime import datetime
 from datetime import date
 
@@ -88,110 +87,6 @@ def final(csv_list, types_dict, header):
                 final_dict[header[i]] = datetime.strptime(value, "%d.%m.%Y").date()
         final_list.append(final_dict)
     return final_list
-
-
-'''
-def get_types(csv_list):
-    """Get data types."""
-    types_dict = {}
-    header = csv_list[0]
-    # print(header)
-    for row in csv_list[1:]:
-        for i, value in enumerate(row):
-            if value == '-':
-                if header[i] not in types_dict:
-                    types_dict[header[i]] = ['-']
-                else:
-                    types_dict[header[i]].append('-')
-                continue
-            if is_date(value):
-                if header[i] not in types_dict:
-                    types_dict[header[i]] = ['date']
-                    continue
-                else:
-                    types_dict[header[i]].append('date')
-                    continue
-
-            if not is_date(value) and not is_int(value):
-                if header[i] not in types_dict:
-                    types_dict[header[i]] = ['str']
-                    continue
-                else:
-                    types_dict[header[i]].append('str')
-                    continue
-
-            if is_int(value):
-                if header[i] not in types_dict:
-                    types_dict[header[i]] = ['int']
-                else:
-                    types_dict[header[i]].append('int')
-                continue
-            else:
-                if header[i] not in types_dict:
-                    types_dict[header[i]] = ['str']
-                else:
-                    types_dict[header[i]].append('str')
-    return types_dict
-
-
-csv_list = []
-
-with open('csv_town.txt') as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=',')
-    for row in csv_reader:
-        csv_list.append(row)
-if len(csv_list) == 0:
-    print(list({}))
-else:
-    header = csv_list[0]
-    b = get_types(csv_list)
-
-    #print(types_dict)
-
-    # get final right type and write into dictionary
-    for key in b:
-        val = b[key]
-        if 'str' in val:
-            b[key] = 'str'
-            continue
-        if 'int' in val and 'date' in val:
-            b[key] = 'str'
-            continue
-        if 'int' in val and 'str' not in val and 'date' not in val:
-            b[key] = 'int'
-            continue
-        if 'date' in val and 'str' not in val and 'int' not in val:
-            b[key] = 'date'
-            continue
-        if '-' in val and 'str' not in val and 'int' not in val and 'date' not in val:
-            b[key] = '-'
-            continue
-        if '-' in val:
-            continue
-    #print(types_dict)
-
-
-
-
-    final_list = []
-    for row in csv_list[1:]:
-        final_dict = {}
-        for i, value in enumerate(row):
-            if value == '-':
-                final_dict[header[i]] = None
-                continue
-            if b[header[i]] == 'str':
-                final_dict[header[i]] = str(value)
-                continue
-            if b[header[i]] == 'int':
-                final_dict[header[i]] = int(value)
-                continue
-            if b[header[i]] == 'date':
-                final_dict[header[i]] = datetime.strptime(value, '%d.%m.%Y').date()
-        final_list.append(final_dict)
-
-    print(final_list)
-'''
 
 
 def read_file_contents(filename: str) -> str:
@@ -652,13 +547,10 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
 
     for i in people_data.values():
         ret = {}
-
         for el in i:
             ret[el] = i[el]
-
             if i[el] is None:
                 ret[el] = '-'
-
             if type(i[el]) is date:
                 ret[el] = ret[el].strftime('%d.%m.%Y')
 
