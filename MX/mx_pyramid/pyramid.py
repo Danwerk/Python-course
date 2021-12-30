@@ -122,11 +122,12 @@ def to_string(pyramid: list) -> str:
     :param pyramid: list
     :return: str
     """
-    a = ''
+    p = ''
 
     for i in pyramid:
-        a += ''.join(i) + '\n'
-    return a
+        p += ''.join(i) + '\n'
+    pyramid_str = p.rstrip()
+    return pyramid_str
 
 
 
