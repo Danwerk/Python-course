@@ -664,7 +664,7 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
 
         if 'birth' in i and i['birth'] is not None and 'death' in i and i['death'] is not None:
             age = i['death'].year - i['birth'].year - (
-                        (i['death'].month, i['death'].day) < (i['birth'].month, i['birth'].day))
+                    (i['death'].month, i['death'].day) < (i['birth'].month, i['birth'].day))
             ret['age'] = age
         if 'birth' in i and i['birth'] is not None and 'death' in i and i['death'] is None:
             today = date.today()
@@ -683,11 +683,12 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
         operate_with_dicts.append(ret)
 
     sorted_list = sorted(operate_with_dicts, key=lambda i: (i['age'] if i['age'] > -1 else 10000,
-                                                        -date_to_int(i['birth']) if i['birth'] != '-' else i['birth'],
-                                                        i['name'] if 'name' in i else '',
-                                                        i['id']))
+                                                            -date_to_int(i['birth']) if i['birth'] != '-' else i[
+                                                                'birth'],
+                                                            i['name'] if 'name' in i else '',
+                                                            i['id']))
 
-    return write_list_of_dicts_to_csv_file('test.txt', sorted_list)
+    return write_list_of_dicts_to_csv_file(report_filename, sorted_list)
 
 
 def date_to_int(date) -> int:
@@ -696,47 +697,6 @@ def date_to_int(date) -> int:
     d.reverse()
     joined_string = ''.join(d)
     return int(joined_string)
-
-
-
-    '''
-        if 'birth' not in i and 'death' not in i:
-            i['age'] = -1
-        else:
-            if i['birth'] is not None and 'birth' in i and i['death'] is not None and 'death' in i:
-                time_difference = i['death'] - i['birth']
-                age = time_difference.days // 365
-                i['age'] = age
-                i['birth'] = i['birth'].strftime("%d.%m.%Y")
-                i['death'] = i['death'].strftime("%d.%m.%Y")
-            elif i['birth'] is not None and 'birth' in i and (i['death'] is None or 'death' not in i):
-                today = date.today()
-                time_difference = today - i['birth']
-                age = time_difference.days // 365
-                i['age'] = age
-                i['birth'] = i['birth'].strftime("%d.%m.%Y")
-
-
-
-        if 'death' in i and i['death'] is not None:
-            i['status'] = 'dead'
-        else:
-            i['status'] = 'alive'
-        if 'death' not in i or i['death'] is None:
-            i['death'] = '-'
-        if 'birth' not in i or i['birth'] is None:
-            i['birth'] = '-'
-
-        operate_with_dicts.append(i)
-
-    for i in operate_with_dicts:
-        ret_to_operate_with_elements = []
-        for j in header_to_loop:
-            ret_to_operate_with_elements.append(i[j])
-        ret.append(ret_to_operate_with_elements)
-    return write_csv_file(report_filename, ret)
-
-'''
 
 
 if __name__ == '__main__':
