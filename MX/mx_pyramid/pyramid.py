@@ -65,7 +65,6 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
     :param pyramid_b: list
     :return: list
     """
-    ret = []
     pyramid_a_base_len = len(pyramid_a[0])
     pyramid_b_base_len = len(pyramid_b[0])
     pyramid_a.reverse()
@@ -86,7 +85,9 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
             else:
                 pyramid_a[i].extend(pyramid_b[i])
         pyramid_a.reverse()
-        return pyramid_a
+        for i in pyramid_a:
+            print(i)
+        #return pyramid_a
 
     elif len(pyramid_a) > len(pyramid_b):
         for i in range(len(pyramid_a)):
@@ -98,11 +99,14 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
             else:
                 pyramid_b[i].extend(pyramid_a[i])
         pyramid_b.reverse()
-        return pyramid_b
+        for i in pyramid_b:
+            print(i)
+        #return pyramid_b
 
 
-print(join_pyramids([[' ', ' ', 'a', 'a', ' ', ' '], [' ', 'a', 'a', 'a', 'a', ' '], ['a', 'a', 'a', 'a', 'a', 'a']], [[' ', 'A', ' '], ['A', 'A', 'A']]))
-print(join_pyramids([[' ', 'A', ' '], ['A', 'A', 'A']], [[' ', 'a', ' '], ['a', 'a', 'a']]))
+# print(join_pyramids([[' ', ' ', 'a', 'a', ' ', ' '], [' ', 'a', 'a', 'a', 'a', ' '], ['a', 'a', 'a', 'a', 'a', 'a']], [[' ', 'A', ' '], ['A', 'A', 'A']]))
+# print(join_pyramids([[' ', 'A', ' '], ['A', 'A', 'A']], [[' ', 'a', ' '], ['a', 'a', 'a']]))
+print(join_pyramids(make_pyramid(10, "A"),make_pyramid(20, "B")))
 
 
 def to_string(pyramid: list) -> str:
@@ -119,9 +123,10 @@ def to_string(pyramid: list) -> str:
     :param pyramid: list
     :return: str
     """
-    pass
+    # for i in pyramid:
+    #     print(i)
 
-
+print(to_string([[' ', 'A', ' '], ['A', 'A', 'A']]))
 if __name__ == '__main__':
     '''
     pyramid_a = make_pyramid(3, "A")
@@ -146,7 +151,7 @@ if __name__ == '__main__':
     joined = join_pyramids([[' ', 'A', ' '], ['A', 'A', 'A']],
                            [[' ', ' ', 'a', 'a', ' ', ' '], [' ', 'a', 'a', 'a', 'a', ' '],
                             ['a', 'a', 'a', 'a', 'a', 'a']])
-    print(joined)  # ->
+    #print(joined)  # ->
     """
     [
         [' ', ' ', ' ', ' ', ' ', 'a', 'a', ' ', ' '],
