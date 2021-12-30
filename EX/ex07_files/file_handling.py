@@ -698,7 +698,7 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
 
     newlist = sorted(operate_with_dicts, key=lambda i: (i['age'] if i['age'] > -1 else 10000,
                                                         -date_compare(i['birth']) if i['birth'] != '-' else i['birth'],
-                                                        i['name'] if i['name'] != '' else i['name'],
+                                                        i['name'] if 'name' in i else '',
                                                         i['id']))
     # print(date_compare('07.09.1990'))
     # print(newlist)
@@ -708,7 +708,7 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
     # newlist4 = sorted(newlist3, key=lambda x: x['age'] == -1)
     # print(newlist4)
 
-    return write_list_of_dicts_to_csv_file(report_filename, newlist)
+    return write_list_of_dicts_to_csv_file('test.txt', newlist)
     '''
         if 'birth' not in i and 'death' not in i:
             i['age'] = -1
@@ -752,4 +752,4 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
 if __name__ == '__main__':
     # print(read_csv_file_into_list_of_dicts('csv_town.txt'))
     # print(read_people_data('data'))
-    print(generate_people_report('data2', 'example_report.csv'))
+    print(generate_people_report('data', 'example_report.csv'))
