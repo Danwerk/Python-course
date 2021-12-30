@@ -135,9 +135,9 @@ def tic_tac_toe(game: list) -> int:
     return ret
 
 
-print(tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]]))  # 1
-print(tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]]))  # 0
-print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [1, 1, 1]]))  # 2
+# print(tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]]))  # 1
+# print(tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]]))  # 0
+# print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [1, 1, 1]]))  # 2
 
 
 def rainbows(field: str, lower=False) -> int:
@@ -177,22 +177,23 @@ def longest_substring(text: str) -> str:
     """
     if text == '':
         return ''
-    ret = text[0]
-    for i in range(1, len(text)):
-        if text[i - 1] != text[i]:
-            ret += text[i]
-        else:
-            break
+    substring = ''
+    maxLen = 1
+    for i in text:
+        if i not in substring:  # If given character is not in substring we are generating, we add it to the substring
+            substring = substring + i
+            maxLen = max(maxLen, len(substring))  # We update the maxlength if our substring is longer than the current max.
+        else:  # Else, if the character is already part of the substring, we need to break the flow
+            substring = substring.split(i)[1] + i  # And create a new substring from that point onwards and this new substring is build from the next character. Process repeats till the loop ends.
+    return substring
 
-    return ret
 
-
-# print(longest_substring('aaa'))  # a
-# print(longest_substring('abc'))  # abc
-# print(longest_substring('abccba'))  # abc
-# print(longest_substring('babcdEFghij'))  # abcdEFghij
-# print(longest_substring('abBcd'))  # Bcd
-# print(longest_substring(''))  # ''
+print(longest_substring('aaa'))  # a
+print(longest_substring('abc'))  # abc
+print(longest_substring('abccba'))  # abc
+print(longest_substring('babcdEFghij'))  # abcdEFghij
+print(longest_substring('abBcd'))  # Bcd
+print(longest_substring(''))  # ''
 
 
 class Student:
