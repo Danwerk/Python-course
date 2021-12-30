@@ -85,8 +85,8 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
             else:
                 pyramid_a[i].extend(pyramid_b[i])
         pyramid_a.reverse()
-
         return pyramid_a
+
 
     elif len(pyramid_a) > len(pyramid_b):
         for i in range(len(pyramid_a)):
@@ -97,6 +97,7 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
 
             else:
                 pyramid_b[i].extend(pyramid_a[i])
+
         pyramid_b.reverse()
 
         return pyramid_b
@@ -104,7 +105,7 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
 
 # print(join_pyramids([[' ', ' ', 'a', 'a', ' ', ' '], [' ', 'a', 'a', 'a', 'a', ' '], ['a', 'a', 'a', 'a', 'a', 'a']], [[' ', 'A', ' '], ['A', 'A', 'A']]))
 # print(join_pyramids([[' ', 'A', ' '], ['A', 'A', 'A']], [[' ', 'a', ' '], ['a', 'a', 'a']]))
-print(join_pyramids(make_pyramid(10, "A"),make_pyramid(20, "B")))
+print(join_pyramids(make_pyramid(1, "A"),make_pyramid(10, "B")))
 
 
 def to_string(pyramid: list) -> str:
@@ -121,10 +122,21 @@ def to_string(pyramid: list) -> str:
     :param pyramid: list
     :return: str
     """
-    # for i in pyramid:
-    #     print(i)
+    a = ''
 
-print(to_string([[' ', 'A', ' '], ['A', 'A', 'A']]))
+    for i in pyramid:
+        a += ''.join(i) + '\n'
+    return a
+
+
+
+print(to_string([
+        [' ', ' ', ' ', ' ', ' ', 'a', 'a', ' ', ' '],
+        [' ', 'A', ' ', ' ', 'a', 'a', 'a', 'a', ' '],
+        ['A', 'A', 'A', 'a', 'a', 'a', 'a', 'a', 'a']
+    ]))
+
+
 if __name__ == '__main__':
     '''
     pyramid_a = make_pyramid(3, "A")
@@ -158,8 +170,8 @@ if __name__ == '__main__':
     ]
     """
 
-    pyramid_string = to_string(joined)
-    print(pyramid_string)  # ->
+    # pyramid_string = to_string(joined)
+    # print(pyramid_string)  # ->
     """
          aa  
      A  aaaa 
