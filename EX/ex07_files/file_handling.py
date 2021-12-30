@@ -698,7 +698,7 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
 
     newlist = sorted(operate_with_dicts, key=lambda i: (i['age'] if i['age'] > -1 else 10000,
                                                         -date_compare(i['birth']) if i['birth'] != '-' else i['birth'],
-                                                        i['name'],
+                                                        i['name'] if i['name'] != '' else i['name'],
                                                         i['id']))
     # print(date_compare('07.09.1990'))
     # print(newlist)
