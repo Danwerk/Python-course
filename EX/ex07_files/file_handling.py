@@ -647,20 +647,12 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
     :param report_filename: Output file.
     :return: None
     """
-    header_to_loop = []
     operate_with_dicts = []
-
     people_data = read_people_data(person_data_directory)
-    for d in people_data.values():
-        for k in d:
-            if k not in header_to_loop:
-                header_to_loop.append(k)
-            else:
-                continue
-    # print(header_to_loop)
 
     for i in people_data.values():
         ret = {}
+
         for el in i:
             ret[el] = i[el]
 
@@ -690,25 +682,23 @@ def generate_people_report(person_data_directory: str, report_filename: str) -> 
 
         operate_with_dicts.append(ret)
 
-    def date_compare(date) -> int:
-        d = date.split('.')
-        d.reverse()
-        joined_string = ''.join(d)
-        return int(joined_string)
-
-    newlist = sorted(operate_with_dicts, key=lambda i: (i['age'] if i['age'] > -1 else 10000,
-                                                        -date_compare(i['birth']) if i['birth'] != '-' else i['birth'],
+    sorted_list = sorted(operate_with_dicts, key=lambda i: (i['age'] if i['age'] > -1 else 10000,
+                                                        -date_to_int(i['birth']) if i['birth'] != '-' else i['birth'],
                                                         i['name'] if 'name' in i else '',
                                                         i['id']))
-    # print(date_compare('07.09.1990'))
-    # print(newlist)
-    # newlist = sorted(operate_with_dicts, key=lambda d: d['id'])
-    # newlist2 = sorted(newlist, key=lambda d: d['name'])
-    # newlist3 = sorted(newlist2, key=lambda d: d['age'])
-    # newlist4 = sorted(newlist3, key=lambda x: x['age'] == -1)
-    # print(newlist4)
 
-    return write_list_of_dicts_to_csv_file(report_filename, newlist)
+    return write_list_of_dicts_to_csv_file('test.txt', sorted_list)
+
+
+def date_to_int(date) -> int:
+    """Convert date to int type number."""
+    d = date.split('.')
+    d.reverse()
+    joined_string = ''.join(d)
+    return int(joined_string)
+
+
+
     '''
         if 'birth' not in i and 'death' not in i:
             i['age'] = -1
