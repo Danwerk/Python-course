@@ -85,9 +85,8 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
             else:
                 pyramid_a[i].extend(pyramid_b[i])
         pyramid_a.reverse()
-        for i in pyramid_a:
-            print(i)
-        #return pyramid_a
+
+        return pyramid_a
 
     elif len(pyramid_a) > len(pyramid_b):
         for i in range(len(pyramid_a)):
@@ -99,9 +98,8 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
             else:
                 pyramid_b[i].extend(pyramid_a[i])
         pyramid_b.reverse()
-        for i in pyramid_b:
-            print(i)
-        #return pyramid_b
+
+        return pyramid_b
 
 
 # print(join_pyramids([[' ', ' ', 'a', 'a', ' ', ' '], [' ', 'a', 'a', 'a', 'a', ' '], ['a', 'a', 'a', 'a', 'a', 'a']], [[' ', 'A', ' '], ['A', 'A', 'A']]))
