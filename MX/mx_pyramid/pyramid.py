@@ -87,7 +87,6 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
         pyramid_a.reverse()
         return pyramid_a
 
-
     elif len(pyramid_a) > len(pyramid_b):
         for i in range(len(pyramid_a)):
             if i > len(pyramid_b) - 1:
@@ -105,7 +104,9 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
 
 # print(join_pyramids([[' ', ' ', 'a', 'a', ' ', ' '], [' ', 'a', 'a', 'a', 'a', ' '], ['a', 'a', 'a', 'a', 'a', 'a']], [[' ', 'A', ' '], ['A', 'A', 'A']]))
 # print(join_pyramids([[' ', 'A', ' '], ['A', 'A', 'A']], [[' ', 'a', ' '], ['a', 'a', 'a']]))
-print(join_pyramids(make_pyramid(1, "A"),make_pyramid(10, "B")))
+a = join_pyramids(make_pyramid(9, "A"), make_pyramid(5, "B"))
+for i in a:
+    print(i)
 
 
 def to_string(pyramid: list) -> str:
@@ -130,13 +131,11 @@ def to_string(pyramid: list) -> str:
     return pyramid_str
 
 
-
 print(to_string([
-        [' ', ' ', ' ', ' ', ' ', 'a', 'a', ' ', ' '],
-        [' ', 'A', ' ', ' ', 'a', 'a', 'a', 'a', ' '],
-        ['A', 'A', 'A', 'a', 'a', 'a', 'a', 'a', 'a']
-    ]))
-
+    [' ', ' ', ' ', ' ', ' ', 'a', 'a', ' ', ' '],
+    [' ', 'A', ' ', ' ', 'a', 'a', 'a', 'a', ' '],
+    ['A', 'A', 'A', 'a', 'a', 'a', 'a', 'a', 'a']
+]))
 
 if __name__ == '__main__':
     '''
@@ -162,7 +161,7 @@ if __name__ == '__main__':
     joined = join_pyramids([[' ', 'A', ' '], ['A', 'A', 'A']],
                            [[' ', ' ', 'a', 'a', ' ', ' '], [' ', 'a', 'a', 'a', 'a', ' '],
                             ['a', 'a', 'a', 'a', 'a', 'a']])
-    #print(joined)  # ->
+    # print(joined)  # ->
     """
     [
         [' ', ' ', ' ', ' ', ' ', 'a', 'a', ' ', ' '],
