@@ -102,7 +102,6 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
         return pyramid_b
 
 
-# print(join_pyramids([[' ', ' ', 'a', 'a', ' ', ' '], [' ', 'a', 'a', 'a', 'a', ' '], ['a', 'a', 'a', 'a', 'a', 'a']], [[' ', 'A', ' '], ['A', 'A', 'A']]))
 a = join_pyramids(make_pyramid(9, "A"), make_pyramid(5, "B"))
 for i in a:
     print(i)
