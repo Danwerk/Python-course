@@ -31,10 +31,10 @@ def get_date_string(date: list) -> str:
         return f'The date is -> {date[0]}/{date[1]}/{date[2]}'
 
 
-print(get_date_string([3, 3, 2000]))  # "The date is -> 3/3/2000"
-print(get_date_string([20, 12, 5677]))  # "The date is -> 20/12/5677"
-print(get_date_string([2, 2, 3, 200]))  # "The date is unknown!"
-print(get_date_string([]))  # "The date is unknown!"
+# print(get_date_string([3, 3, 2000]))  # "The date is -> 3/3/2000"
+# print(get_date_string([20, 12, 5677]))  # "The date is -> 20/12/5677"
+# print(get_date_string([2, 2, 3, 200]))  # "The date is unknown!"
+# print(get_date_string([]))  # "The date is unknown!"
 
 
 def odd_sums_of_consecutive_elements(nums: list) -> list:
@@ -51,7 +51,21 @@ def odd_sums_of_consecutive_elements(nums: list) -> list:
     :param nums:
     :return:
     """
-    pass
+    ret = []
+
+    for i in range(len(nums) - 1):
+        sum = nums[i] + nums[i + 1]
+        if sum % 2 != 0:
+            ret.append(sum)
+        else:
+            continue
+    return ret
+
+
+print(odd_sums_of_consecutive_elements([1, 2, 3, 5]))  # [3, 5]
+print(odd_sums_of_consecutive_elements([8, 10]))  # []
+print(odd_sums_of_consecutive_elements([9]))  # []
+print(odd_sums_of_consecutive_elements([11, 8]))  # [19]
 
 
 def g_happy(s: str) -> bool:
