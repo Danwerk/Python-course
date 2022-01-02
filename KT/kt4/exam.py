@@ -53,7 +53,20 @@ def max_block(s: str) -> int:
     max_block("abbCCCddBBBxx") => 3
     max_block("") => 0
     """
-    pass
+    chars = set()
+    ret = {}
+    if s == '':
+        return 0
+
+    for i in s:
+        chars.add(i)
+
+    return max(s.count(c) for c in chars)
+
+
+print(max_block("hoopla"))  # 2
+print(max_block("abbCCCddBBBxx"))  # 3
+print(max_block(""))  # 0
 
 
 def create_dictionary_from_directed_string_pairs(pairs: list) -> dict:
