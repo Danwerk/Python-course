@@ -79,23 +79,22 @@ def g_happy(s: str) -> bool:
     g_happy("xxggyygxx") => False
     """
     ret = set()
-    for i in range(1,len(s) - 1):
-        if s[i] == s[i + 1] == 'g' or s[i] == s[i-1] == 'g':
+    for i in range(1, len(s) - 1):
+        if s[i] == s[i + 1] == 'g' or s[i] == s[i - 1] == 'g':
             ret.add('happy')
         elif s[0] == 'g' and s[1] != 'g':
             ret.add('unhappy')
         elif s[-1] == 'g' and s[-2] != 'g':
             ret.add('unhappy')
-        elif s[i] == 'g' and s[i+1] != 'g':
+        elif s[i] == 'g' and s[i + 1] != 'g':
             ret.add('unhappy')
-        elif s[i] == 'g' and s[i-1] != 'g':
+        elif s[i] == 'g' and s[i - 1] != 'g':
             ret.add('unhappy')
 
     if 'unhappy' not in ret:
         return True
     else:
         return False
-
 
 
 print(g_happy("xxggxx"))  # True
@@ -152,14 +151,13 @@ def merge_dictionary_paths(houses: dict, families: dict) -> dict:
     """
     ret = {}
     for k, v in houses.items():
-            for i in houses[k]:
-                if i in families:
-                    if k not in ret:
-                        ret[k] = families[i]
-                    else:
-                        ret[k].extend(families[i])
+        for i in houses[k]:
+            if i in families:
+                if k not in ret:
+                    ret[k] = families[i]
+                else:
+                    ret[k].extend(families[i])
     return ret
-
 
 # print(merge_dictionary_paths({"h1": ["a", "b"], "h2": ["b", "c"]}, {"a": ["m", "n"], "b": ["k"], "c": ["x", "y"]}))
 # print(merge_dictionary_paths({
