@@ -79,6 +79,8 @@ def g_happy(s: str) -> bool:
     g_happy("xxggyygxx") => False
     """
     ret = set()
+    if s == 'g' or s == '':
+        ret.add('unhappy')
     for i in range(1, len(s) - 1):
         if s[i] == s[i + 1] == 'g' or s[i] == s[i - 1] == 'g':
             ret.add('happy')
@@ -91,6 +93,7 @@ def g_happy(s: str) -> bool:
         elif s[i] == 'g' and s[i - 1] != 'g':
             ret.add('unhappy')
 
+
     if 'unhappy' not in ret:
         return True
     else:
@@ -100,7 +103,7 @@ def g_happy(s: str) -> bool:
 print(g_happy("xxggxx"))  # True
 print(g_happy("xxgxx"))  # False
 print(g_happy("xxggyygxx"))  # False
-print(g_happy("ggxggxgggyggyggxxgg"))  # False
+print(g_happy(""))  # False
 
 
 def merge_dictionary_paths(houses: dict, families: dict) -> dict:
