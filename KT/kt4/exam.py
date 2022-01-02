@@ -104,8 +104,8 @@ def create_dictionary_from_directed_string_pairs(pairs: list) -> dict:
 
     for i in pairs:
         if '>' in i:
-            k = i[0]
-            v = i[-1]
+            k = i.split('>')[0]
+            v = i.split('>')[-1]
             if k not in ret:
                 ret[k] = [v]
             else:
@@ -114,8 +114,8 @@ def create_dictionary_from_directed_string_pairs(pairs: list) -> dict:
                 else:
                     ret[k].append(v)
         elif '<' in i:
-            k = i[-1]
-            v = i[0]
+            k = i.split('<')[-1]
+            v = i.split('<')[0]
             if k not in ret:
                 ret[k] = [v]
             else:
@@ -126,7 +126,7 @@ def create_dictionary_from_directed_string_pairs(pairs: list) -> dict:
 
     return ret
 
-# print(create_dictionary_from_directed_string_pairs([]))  # {}
-print(create_dictionary_from_directed_string_pairs(["a>b", "a>c"]))  # {"a": ["b", "c"]}
+print(create_dictionary_from_directed_string_pairs([]))  # {}
+print(create_dictionary_from_directed_string_pairs(["aasdfa>basdfb", "aa>cc"]))  # {"a": ["b", "c"]}
 print(create_dictionary_from_directed_string_pairs(["a>b", "a<b"]))  # {"a": ["b"], "b": ["a"]}
 print(create_dictionary_from_directed_string_pairs(["1>1", "1>2", "1>1"]))  # {"1": ["1", "2"]}
