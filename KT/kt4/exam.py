@@ -17,8 +17,8 @@ def two_digits_into_list(nr: int) -> list:
     return ret
 
 
-print(two_digits_into_list(11))  # [1, 1]
-print(two_digits_into_list(71))  # [7, 1]
+# print(two_digits_into_list(11))  # [1, 1]
+# print(two_digits_into_list(71))  # [7, 1]
 
 
 def sum_elements_around_last_three(nums: list) -> int:
@@ -64,9 +64,9 @@ def max_block(s: str) -> int:
     return max(s.count(c) for c in chars)
 
 
-print(max_block("hoopla"))  # 2
-print(max_block("abbCCCddBBBxx"))  # 3
-print(max_block(""))  # 0
+# print(max_block("hoopla"))  # 2
+# print(max_block("abbCCCddBBBxx"))  # 3
+# print(max_block(""))  # 0
 
 
 def create_dictionary_from_directed_string_pairs(pairs: list) -> dict:
@@ -98,4 +98,35 @@ def create_dictionary_from_directed_string_pairs(pairs: list) -> dict:
     create_dictionary_from_directed_string_pairs(["1>1", "1>2", "1>1"]) =>
     {"1": ["1", "2"]}
     """
-    pass
+    ret = {}
+    if pairs == []:
+        return ret
+
+    for i in pairs:
+        if '>' in i:
+            k = i[0]
+            v = i[-1]
+            if k not in ret:
+                ret[k] = [v]
+            else:
+                if v in ret[k]:
+                    continue
+                else:
+                    ret[k].append(v)
+        elif '<' in i:
+            k = i[-1]
+            v = i[0]
+            if k not in ret:
+                ret[k] = [v]
+            else:
+                if v in ret[k]:
+                    continue
+                else:
+                    ret[k].append(v)
+
+    return ret
+
+# print(create_dictionary_from_directed_string_pairs([]))  # {}
+print(create_dictionary_from_directed_string_pairs(["a>b", "a>c"]))  # {"a": ["b", "c"]}
+print(create_dictionary_from_directed_string_pairs(["a>b", "a<b"]))  # {"a": ["b"], "b": ["a"]}
+print(create_dictionary_from_directed_string_pairs(["1>1", "1>2", "1>1"]))  # {"1": ["1", "2"]}
