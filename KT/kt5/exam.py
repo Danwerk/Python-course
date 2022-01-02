@@ -62,10 +62,10 @@ def odd_sums_of_consecutive_elements(nums: list) -> list:
     return ret
 
 
-print(odd_sums_of_consecutive_elements([1, 2, 3, 5]))  # [3, 5]
-print(odd_sums_of_consecutive_elements([8, 10]))  # []
-print(odd_sums_of_consecutive_elements([9]))  # []
-print(odd_sums_of_consecutive_elements([11, 8]))  # [19]
+# print(odd_sums_of_consecutive_elements([1, 2, 3, 5]))  # [3, 5]
+# print(odd_sums_of_consecutive_elements([8, 10]))  # []
+# print(odd_sums_of_consecutive_elements([9]))  # []
+# print(odd_sums_of_consecutive_elements([11, 8]))  # [19]
 
 
 def g_happy(s: str) -> bool:
@@ -78,7 +78,27 @@ def g_happy(s: str) -> bool:
     g_happy("xxgxx") => False
     g_happy("xxggyygxx") => False
     """
-    pass
+    ret = set()
+    for i in range(1,len(s) - 1):
+        if s[i] == s[i + 1] == 'g' or s[i] == s[i-1] == 'g':
+            ret.add('happy')
+        elif s[0] == 'g' and s[1] != 'g':
+            ret.add('unhappy')
+        elif s[i] == 'g' and s[i+1] != 'g':
+            ret.add('unhappy')
+        elif s[i] == 'g' and s[i-1] != 'g':
+            ret.add('unhappy')
+
+    if 'unhappy' not in ret:
+        return True
+    else:
+        return False
+
+
+
+print(g_happy("xxggxx"))  # True
+print(g_happy("xxgxx"))  # False
+print(g_happy("xxggyygxx"))  # False
 
 
 def merge_dictionary_paths(houses: dict, families: dict) -> dict:
