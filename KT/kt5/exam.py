@@ -84,6 +84,8 @@ def g_happy(s: str) -> bool:
             ret.add('happy')
         elif s[0] == 'g' and s[1] != 'g':
             ret.add('unhappy')
+        elif s[-1] == 'g' and s[-2] != 'g':
+            ret.add('unhappy')
         elif s[i] == 'g' and s[i+1] != 'g':
             ret.add('unhappy')
         elif s[i] == 'g' and s[i-1] != 'g':
@@ -96,9 +98,10 @@ def g_happy(s: str) -> bool:
 
 
 
-# print(g_happy("xxggxx"))  # True
-# print(g_happy("xxgxx"))  # False
-# print(g_happy("xxggyygxx"))  # False
+print(g_happy("xxggxx"))  # True
+print(g_happy("xxgxx"))  # False
+print(g_happy("xxggyygxx"))  # False
+print(g_happy("ggxggxgggyggyggxxgg"))  # False
 
 
 def merge_dictionary_paths(houses: dict, families: dict) -> dict:
@@ -158,15 +161,15 @@ def merge_dictionary_paths(houses: dict, families: dict) -> dict:
     return ret
 
 
-print(merge_dictionary_paths({"h1": ["a", "b"], "h2": ["b", "c"]}, {"a": ["m", "n"], "b": ["k"], "c": ["x", "y"]}))
-print(merge_dictionary_paths({
-    "Stark": ["Stark", "Tully"],
-    "Lannisters": ["Lannister"],
-    "Ago": ["Luberg"]
-    },
-    {
-    "Stark": ["Eddard", "Robb"],
-    "Tully": ["Catelyn"],
-    "Lannister": ["Tywin"]
-    }
-))
+# print(merge_dictionary_paths({"h1": ["a", "b"], "h2": ["b", "c"]}, {"a": ["m", "n"], "b": ["k"], "c": ["x", "y"]}))
+# print(merge_dictionary_paths({
+#     "Stark": ["Stark", "Tully"],
+#     "Lannisters": ["Lannister"],
+#     "Ago": ["Luberg"]
+#     },
+#     {
+#     "Stark": ["Eddard", "Robb"],
+#     "Tully": ["Catelyn"],
+#     "Lannister": ["Tywin"]
+#     }
+# ))
