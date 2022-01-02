@@ -81,18 +81,18 @@ def g_happy(s: str) -> bool:
     ret = set()
     if s == 'g' or s == '':
         ret.add('unhappy')
-    for i in range(1, len(s) - 1):
-        if s[i] == s[i + 1] == 'g' or s[i] == s[i - 1] == 'g':
-            ret.add('happy')
-        elif s[0] == 'g' and s[1] != 'g':
-            ret.add('unhappy')
-        elif s[-1] == 'g' and s[-2] != 'g':
-            ret.add('unhappy')
-        elif s[i] == 'g' and s[i + 1] != 'g':
-            ret.add('unhappy')
-        elif s[i] == 'g' and s[i - 1] != 'g':
-            ret.add('unhappy')
-
+    else:
+        for i in range(1, len(s) - 1):
+            if s[i] == s[i + 1] == 'g' or s[i] == s[i - 1] == 'g':
+                ret.add('happy')
+            elif s[0] == 'g' and s[1] != 'g':
+                ret.add('unhappy')
+            elif s[-1] == 'g' and s[-2] != 'g':
+                ret.add('unhappy')
+            elif s[i] == 'g' and s[i + 1] != 'g':
+                ret.add('unhappy')
+            elif s[i] == 'g' and s[i - 1] != 'g':
+                ret.add('unhappy')
 
     if 'unhappy' not in ret:
         return True
