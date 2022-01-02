@@ -96,9 +96,9 @@ def g_happy(s: str) -> bool:
 
 
 
-print(g_happy("xxggxx"))  # True
-print(g_happy("xxgxx"))  # False
-print(g_happy("xxggyygxx"))  # False
+# print(g_happy("xxggxx"))  # True
+# print(g_happy("xxgxx"))  # False
+# print(g_happy("xxggyygxx"))  # False
 
 
 def merge_dictionary_paths(houses: dict, families: dict) -> dict:
@@ -147,4 +147,26 @@ def merge_dictionary_paths(houses: dict, families: dict) -> dict:
     "h1": ["m", "n", "k"], "h2": ["k", "x", "y"]
     }
     """
-    pass
+    ret = {}
+    for k, v in houses.items():
+            for i in houses[k]:
+                if i in families:
+                    if k not in ret:
+                        ret[k] = families[i]
+                    else:
+                        ret[k].extend(families[i])
+    return ret
+
+
+print(merge_dictionary_paths({"h1": ["a", "b"], "h2": ["b", "c"]}, {"a": ["m", "n"], "b": ["k"], "c": ["x", "y"]}))
+print(merge_dictionary_paths({
+    "Stark": ["Stark", "Tully"],
+    "Lannisters": ["Lannister"],
+    "Ago": ["Luberg"]
+    },
+    {
+    "Stark": ["Eddard", "Robb"],
+    "Tully": ["Catelyn"],
+    "Lannister": ["Tywin"]
+    }
+))
