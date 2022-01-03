@@ -160,16 +160,16 @@ def merge_dictionary_paths(houses: dict, families: dict) -> dict:
     "h1": ["m", "n", "k"], "h2": ["k", "x", "y"]
     }
     """
-    # ret = {}
-    # for k, v in houses.items():
-    #     for i in houses[k]:
-    #         if i in families:
-    #             if k not in ret:
-    #                 ret[k] = families[i]
-    #             else:
-    #                 ret[k].extend(families[i])
-    # return ret
-    i = 0
+    ret = {}
+    for k, v in houses.items():
+        for i in houses[k]:
+            if i in families:
+                if k not in ret:
+                    ret[k] = families[i]
+                else:
+                    ret[k].extend(families[i])
+    return ret
+
 
 print(merge_dictionary_paths({"h1": ["a", "b"], "h2": ["b", "c"]}, {"a": ["m", "n"], "b": ["k"], "c": ["x", "y"]}))
 # print(merge_dictionary_paths({
