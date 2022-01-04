@@ -20,10 +20,10 @@ def split_string_into_ints(numbers: str) -> list:
         return ret
 
 
-print(split_string_into_ints("1,2"))  # [1, 2]
-print(split_string_into_ints(""))  # []
-print(split_string_into_ints("0"))  # [0]
-print(split_string_into_ints("-1,-2,3"))  # [-1, -2, 3]
+# print(split_string_into_ints("1,2"))  # [1, 2]
+# print(split_string_into_ints(""))  # []
+# print(split_string_into_ints("0"))  # [0]
+# print(split_string_into_ints("-1,-2,3"))  # [-1, -2, 3]
 
 
 def sum_of_multiples(limit: int, multiplier: int) -> int:
@@ -50,9 +50,9 @@ def sum_of_multiples(limit: int, multiplier: int) -> int:
     return ret
 
 
-print(sum_of_multiples(20, 5))  # 30
-print(sum_of_multiples(10, 1))  # 45
-print(sum_of_multiples(5, 5))  # 0
+# print(sum_of_multiples(20, 5))  # 30
+# print(sum_of_multiples(10, 1))  # 45
+# print(sum_of_multiples(5, 5))  # 0
 
 
 def mix_string(s1: str, s2: str) -> str:
@@ -84,10 +84,10 @@ def mix_string(s1: str, s2: str) -> str:
     return ''.join(ret)
 
 
-print(mix_string("AAA", "bbb"))  # "AbAbAb"
-print(mix_string("AA", ""))  # "AA"
-print(mix_string("mxdsrn", "ie tig"))  # "mixed string"
-print(mix_string("mxdsrfffffffffffffff", "ie tilsgggg"))  # "mixed string"
+# print(mix_string("AAA", "bbb"))  # "AbAbAb"
+# print(mix_string("AA", ""))  # "AA"
+# print(mix_string("mxdsrn", "ie tig"))  # "mixed string"
+# print(mix_string("mxdsrfffffffffffffff", "ie tilsgggg"))  # "mixed string"
 
 
 def bingo(matrix: list, numbers: list) -> tuple:
@@ -174,13 +174,17 @@ class Candy:
         self.name = name
         self.filling = filling
 
+    def __repr__(self):
+        """Representation for Candy."""
+        return self.name
+
 
 class CandyShop:
     """Candy shop."""
 
     def __init__(self):
         """CandyShop class constructor."""
-        pass
+        self.candies = []
 
     def add_candies(self, candies: list):
         """
@@ -189,7 +193,7 @@ class CandyShop:
         :param candies: list of candies to add
         :return:
         """
-        pass
+        self.candies.extend(candies)
 
     def get_candies(self) -> list:
         """
@@ -197,7 +201,7 @@ class CandyShop:
 
         :return: list of all candies
         """
-        pass
+        return self.candies
 
     def get_candies_by_filling(self, filling: str) -> list:
         """
@@ -205,7 +209,11 @@ class CandyShop:
 
         :return: list
         """
-        pass
+        ret = []
+        for candy in self.candies:
+            if filling == candy.filling:
+                ret.append(candy)
+        return ret
 
     def sort_candies_by_filling(self) -> list:
         """
@@ -396,27 +404,27 @@ if __name__ == '__main__':
     assert mix_string("AA", "") == "AA"
     assert mix_string("mxdsrn", "ie tig") == "mixed string"
 
-    assert bingo([
-        [5, 7, 11, 15, 21],
-        [22, 25, 26, 27, 9],
-        [34, 2, 48, 54, 58],
-        [59, 61, 33, 81, 24],
-        [90, 37, 3, 6, 32],
-    ], [5, 21, 90, 32]) == (True, False, False)
-
-    assert bingo([
-        [5, 7, 11, 15, 21],
-        [22, 25, 26, 27, 9],
-        [34, 2, 48, 54, 58],
-        [59, 61, 33, 81, 24],
-        [90, 37, 3, 6, 32],
-    ], [5, 21, 90, 32, 25, 48, 81, 27, 61, 91]) == (True, True, False)
-
-    assert mirror_ends("abc") == "ac"
-    assert mirror_ends("abca") == "bc"
-    assert mirror_ends("abcba") == ""
-
-    assert prime_factorization(1960) == {2: 3, 5: 1, 7: 2}
+    # assert bingo([
+    #     [5, 7, 11, 15, 21],
+    #     [22, 25, 26, 27, 9],
+    #     [34, 2, 48, 54, 58],
+    #     [59, 61, 33, 81, 24],
+    #     [90, 37, 3, 6, 32],
+    # ], [5, 21, 90, 32]) == (True, False, False)
+    #
+    # assert bingo([
+    #     [5, 7, 11, 15, 21],
+    #     [22, 25, 26, 27, 9],
+    #     [34, 2, 48, 54, 58],
+    #     [59, 61, 33, 81, 24],
+    #     [90, 37, 3, 6, 32],
+    # ], [5, 21, 90, 32, 25, 48, 81, 27, 61, 91]) == (True, True, False)
+    #
+    # assert mirror_ends("abc") == "ac"
+    # assert mirror_ends("abca") == "bc"
+    # assert mirror_ends("abcba") == ""
+    #
+    # assert prime_factorization(1960) == {2: 3, 5: 1, 7: 2}
 
     candy_shop = CandyShop()
     candy1 = Candy('candy1', 'chocolate')
@@ -433,7 +441,7 @@ if __name__ == '__main__':
     candy_shop.add_candies(candies)
 
     # NB! there are candy variable names in comments, not instance name parameter values!!!
-
+    print(candy_shop.get_candies())
     print(candy_shop.get_candies_by_filling('chocolate'))  # [candy1, candy4, candy8]
     print(candy_shop.get_least_popular_candy_name_and_filling())  # {name: candy2, filling: caramel}
     print(candy_shop.get_most_popular_candy_name_and_filling())  # {name: candy1, filling: chocolate}
