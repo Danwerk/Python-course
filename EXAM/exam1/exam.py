@@ -37,7 +37,22 @@ def sum_of_multiples(limit: int, multiplier: int) -> int:
     sum_of_multiples(10, 1) -> 45
     sum_of_multiples(5, 5) -> 0
     """
-    pass
+    ret = 0
+    if limit <= multiplier:
+        return ret
+    else:
+        for i in range(limit):
+            if i * multiplier >= limit:
+                break
+            else:
+                ret += i * multiplier
+
+    return ret
+
+
+print(sum_of_multiples(20, 5))  # 30
+print(sum_of_multiples(10, 1))  # 45
+print(sum_of_multiples(5, 5))  # 0
 
 
 def mix_string(s1: str, s2: str) -> str:
