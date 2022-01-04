@@ -10,7 +10,20 @@ def split_string_into_ints(numbers: str) -> list:
     split_string_into_ints("0") => [0]
     split_string_into_ints("-1,-2,3") => [-1, -2, 3]
     """
-    return numbers
+    ret = []
+    if numbers == '':
+        return []
+    else:
+        numbers = numbers.split(',')
+        for i in numbers:
+            ret.append(int(i))
+        return ret
+
+
+print(split_string_into_ints("1,2"))  # [1, 2]
+print(split_string_into_ints(""))  # []
+print(split_string_into_ints("0"))  # [0]
+print(split_string_into_ints("-1,-2,3"))  # [-1, -2, 3]
 
 
 def sum_of_multiples(limit: int, multiplier: int) -> int:
@@ -420,4 +433,3 @@ if __name__ == '__main__':
     tuuli = Student("Tuuli Karu")
     cl.add_student(tuuli)
     print(len(cl.students))  # 4
-
