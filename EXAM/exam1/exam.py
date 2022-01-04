@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 """Exam1 (2021-03-01)."""
 
 def split_string_into_ints(numbers: str) -> list:
