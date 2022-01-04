@@ -1,5 +1,6 @@
 """Exam1 (2021-03-01)."""
 
+
 def split_string_into_ints(numbers: str) -> list:
     """
     Return list of integers from comma-separated string of integers.
@@ -9,7 +10,7 @@ def split_string_into_ints(numbers: str) -> list:
     split_string_into_ints("0") => [0]
     split_string_into_ints("-1,-2,3") => [-1, -2, 3]
     """
-    pass
+    return numbers
 
 
 def sum_of_multiples(limit: int, multiplier: int) -> int:
