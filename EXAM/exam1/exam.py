@@ -419,6 +419,4 @@ if __name__ == '__main__':
     tuuli = Student("Tuuli Karu")
     cl.add_student(tuuli)
     print(len(cl.students))  # 4
-=======
 
->>>>>>> origin/main
