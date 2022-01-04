@@ -224,8 +224,7 @@ class CandyShop:
 
         :return: sorted list of candies
         """
-        sort_list = sorted(self.candies, key=lambda i: (i.name))
-        return sorted(sort_list, key=lambda i: (i.filling))
+        return sorted(self.candies, key=lambda i: (i.name, i.filling))
 
     def get_most_popular_candy_name_and_filling(self) -> dict:
         """
@@ -431,12 +430,11 @@ if __name__ == '__main__':
     candy1 = Candy('candy1', 'chocolate')
     candy2 = Candy('candy2', 'caramel')
     candy3 = Candy('candy3', 'nut')
-    candy4 = Candy('candy4', 'chocolate')
-    candy5 = Candy('candy5', 'vanilla')
-    candy6 = Candy('candy6', 'vanilla')
-    candy7 = Candy('candy7', 'nut')
-    candy8 = Candy('candy8', 'chocolate')
-
+    candy4 = Candy('candy1', 'chocolate')
+    candy5 = Candy('candy2', 'vanilla')
+    candy6 = Candy('candy2', 'vanilla')
+    candy7 = Candy('candy3', 'nut')
+    candy8 = Candy('candy1', 'chocolate')
     candies = [candy1, candy2, candy3, candy4, candy5, candy6, candy7, candy8]
 
     candy_shop.add_candies(candies)
