@@ -224,7 +224,7 @@ class CandyShop:
 
         :return: sorted list of candies
         """
-        return sorted(self.candies, key=lambda i: (i.name, i.filling))
+        return sorted(self.candies, key=lambda i: (i.filling, i.name))
 
     def get_most_popular_candy_name_and_filling(self) -> dict:
         """
