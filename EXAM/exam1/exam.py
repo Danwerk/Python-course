@@ -63,7 +63,31 @@ def mix_string(s1: str, s2: str) -> str:
     mix_string("AA", "") -> "AA"
     mix_string("mxdsrn", "ie tig") -> "mixed string"
     """
-    pass
+    ret = []
+    ret1 = [el for el in s1]
+    ret2 = [el for el in s2]
+    max_list = max(ret1,ret2,key=len)
+    min_list = min(ret1, ret2, key=len)
+    if len(ret1) == 0:
+        ret = ret2
+    elif len(ret2) == 0:
+        ret = ret1
+    else:
+        #return [sub[item] for item in range(len(ret2)) for sub in [ret1, ret2]]
+        for item in range(len(max_list)):
+            if item >= len(min_list):
+                ret.extend(max_list[item::])
+                break
+            else:
+                for sub in [ret1, ret2]:
+                    ret.append(sub[item])
+    return ''.join(ret)
+
+
+print(mix_string("AAA", "bbb"))  # "AbAbAb"
+print(mix_string("AA", ""))  # "AA"
+print(mix_string("mxdsrn", "ie tig"))  # "mixed string"
+print(mix_string("mxdsrfffffffffffffff", "ie tilsgggg"))  # "mixed string"
 
 
 def bingo(matrix: list, numbers: list) -> tuple:
