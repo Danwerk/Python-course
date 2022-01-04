@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 """Exam1 (2021-03-01)."""
 
 def split_string_into_ints(numbers: str) -> list:
@@ -419,3 +420,6 @@ if __name__ == '__main__':
     tuuli = Student("Tuuli Karu")
     cl.add_student(tuuli)
     print(len(cl.students))  # 4
+=======
+
+>>>>>>> origin/main
