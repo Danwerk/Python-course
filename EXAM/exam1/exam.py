@@ -290,7 +290,14 @@ class CandyShop:
 
         :return: dict of candies divided by filling
         """
-        pass
+        ret = {}
+        for c in self.candies:
+            if c.filling not in ret:
+                ret[c.filling] = [c.name]
+            else:
+                ret[c.filling].append(c.name)
+        return ret
+
 
 
 class Grade:
