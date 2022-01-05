@@ -111,7 +111,55 @@ def bingo(matrix: list, numbers: list) -> tuple:
     :param numbers: list of winning numbers (size always at least 4)
     :return: tuple of booleans (corners, diagonals, full_game)
     """
-    pass
+    ret = tuple()
+    corner_val = []
+    diagonal_val = []
+    whole_matrix_val = []
+
+    corners = [matrix[0][0], matrix[0][4], matrix[4][0], matrix[4][4]]
+    diagonals = [matrix[0][0], matrix[1][1], matrix[2][2], matrix[3][3], matrix[4][4],
+                 matrix[0][4], matrix[1][3], matrix[2][2], matrix[3][1], matrix[4][0]]
+    whole_matrix = [item for sublist in matrix for item in sublist]
+
+    for c in corners:
+        if c in numbers:
+            corner_val.append(True)
+        else:
+            corner_val.append(False)
+    for d in diagonals:
+        if d in numbers:
+            diagonal_val.append(True)
+        else:
+            diagonal_val.append(False)
+    for m in whole_matrix:
+        if m in numbers:
+            whole_matrix_val.append(True)
+        else:
+            whole_matrix_val.append(False)
+
+    if False not in corner_val:
+        ret += (True,)
+    else:
+        ret += (False,)
+    if False not in diagonal_val:
+        ret += (True,)
+    else:
+        ret += (False,)
+    if False not in whole_matrix_val:
+        ret += (True,)
+    else:
+        ret += (False,)
+
+    return ret
+
+
+print(bingo([
+    [5, 7, 11, 15, 21],
+    [22, 25, 26, 27, 9],
+    [34, 2, 48, 54, 58],
+    [59, 61, 33, 81, 24],
+    [90, 37, 3, 6, 32],
+], [5, 21, 90, 32]))  # (True, False, False)
 
 
 def mirror_ends(s: str) -> str:
@@ -441,22 +489,22 @@ if __name__ == '__main__':
     assert mix_string("AA", "") == "AA"
     assert mix_string("mxdsrn", "ie tig") == "mixed string"
 
-    # assert bingo([
-    #     [5, 7, 11, 15, 21],
-    #     [22, 25, 26, 27, 9],
-    #     [34, 2, 48, 54, 58],
-    #     [59, 61, 33, 81, 24],
-    #     [90, 37, 3, 6, 32],
-    # ], [5, 21, 90, 32]) == (True, False, False)
-    #
-    # assert bingo([
-    #     [5, 7, 11, 15, 21],
-    #     [22, 25, 26, 27, 9],
-    #     [34, 2, 48, 54, 58],
-    #     [59, 61, 33, 81, 24],
-    #     [90, 37, 3, 6, 32],
-    # ], [5, 21, 90, 32, 25, 48, 81, 27, 61, 91]) == (True, True, False)
-    #
+    assert bingo([
+        [5, 7, 11, 15, 21],
+        [22, 25, 26, 27, 9],
+        [34, 2, 48, 54, 58],
+        [59, 61, 33, 81, 24],
+        [90, 37, 3, 6, 32],
+    ], [5, 21, 90, 32]) == (True, False, False)
+
+    assert bingo([
+        [5, 7, 11, 15, 21],
+        [22, 25, 26, 27, 9],
+        [34, 2, 48, 54, 58],
+        [59, 61, 33, 81, 24],
+        [90, 37, 3, 6, 32],
+    ], [5, 21, 90, 32, 25, 48, 81, 27, 61, 91]) == (True, True, False)
+
     # assert mirror_ends("abc") == "ac"
     # assert mirror_ends("abca") == "bc"
     # assert mirror_ends("abcba") == ""
@@ -497,7 +545,7 @@ if __name__ == '__main__':
     jyri.grade(gr)
     teele.grade(Grade(4, 3, "KT", "01/09/2020"))
 
-    print(gr.change_grade(3,'02/09/2020'))
+    print(gr.change_grade(3, '02/09/2020'))
 
     print(f"Jyri keskmine hinne on {jyri.calculate_weighted_average()}.")  # 1
 
