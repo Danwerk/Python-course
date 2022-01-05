@@ -265,7 +265,20 @@ class CandyShop:
 
         :return: dict with name and filling of least pop candy
         """
-        pass
+        ret = {}
+        candies_names = []
+        candies_fillings = []
+        for n in self.candies:
+            candies_names.append(n.name)
+            candies_fillings.append(n.filling)
+
+        max_filling = min(candies_fillings, key=candies_fillings.count)
+        max_name = min(candies_names, key=candies_names.count)
+
+        ret['name'] = max_name
+        ret['filling'] = max_filling
+
+        return ret
 
     def collect_candies_by_filling(self) -> dict:
         """
