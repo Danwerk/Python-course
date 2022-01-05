@@ -299,7 +299,6 @@ class CandyShop:
         return ret
 
 
-
 class Grade:
     """Grade."""
 
@@ -318,7 +317,11 @@ class Grade:
         This function should save the previous grade in a dictionary previous_grades, where key is the date and value
         is the value of the grade. Value and date should be updated.
         """
-        pass
+        self.previous_grades[self.date] = self.value
+        self.previous_grades[date] = self.previous_grades.pop(self.date)
+        self.previous_grades[date] = new_grade
+
+        return self.previous_grades
 
 
 class Student:
@@ -473,12 +476,12 @@ if __name__ == '__main__':
     candy_shop.add_candies(candies)
 
     # NB! there are candy variable names in comments, not instance name parameter values!!!
-    print(candy_shop.get_candies())
-    print(candy_shop.get_candies_by_filling('chocolate'))  # [candy1, candy4, candy8]
-    print(candy_shop.get_least_popular_candy_name_and_filling())  # {name: candy2, filling: caramel}
-    print(candy_shop.get_most_popular_candy_name_and_filling())  # {name: candy1, filling: chocolate}
-    print(candy_shop.sort_candies_by_filling())  # [candy2, candy1, candy4, candy8, candy7, candy3, candy6, candy5]
-    print(candy_shop.collect_candies_by_filling())  # {chocolate: [candy1, candy4, candy8],
+    # print(candy_shop.get_candies())
+    # print(candy_shop.get_candies_by_filling('chocolate'))  # [candy1, candy4, candy8]
+    # print(candy_shop.get_least_popular_candy_name_and_filling())  # {name: candy2, filling: caramel}
+    # print(candy_shop.get_most_popular_candy_name_and_filling())  # {name: candy1, filling: chocolate}
+    # print(candy_shop.sort_candies_by_filling())  # [candy2, candy1, candy4, candy8, candy7, candy3, candy6, candy5]
+    # print(candy_shop.collect_candies_by_filling())  # {chocolate: [candy1, candy4, candy8],
     #                                                  caramel: [candy2],
     #                                                  nut: [candy3, candy7],
     #                                                  vanilla: [candy5, candy6]}
@@ -492,6 +495,8 @@ if __name__ == '__main__':
     gr = Grade("!", 3, "KT", "01/09/2020")
     jyri.grade(gr)
     teele.grade(Grade(4, 3, "KT", "01/09/2020"))
+
+    print(gr.change_grade(3,'02/09/2020'))
 
     print(f"Jyri keskmine hinne on {jyri.calculate_weighted_average()}.")  # 1
 
