@@ -422,7 +422,20 @@ class Student:
         Also make sure not to miss out when a grade is noted as "!". If there is no attempt to redo this, then "!"
         should be equivalent to grade "1".
         """
-        pass
+        weights = []
+        ret = 0
+        for grade in self.grades.values():
+            weights.append(grade.weight)
+            if grade.value == '!':
+                grade.value = 1
+            if grade.weight == 1:
+                ret += 1 * grade.value
+            elif grade.weight == 2:
+                ret += 2 * grade.value
+            elif grade.weight == 3:
+                ret += 3 * grade.value
+        return round(ret / sum(weights))
+
 
 
 class Class:
