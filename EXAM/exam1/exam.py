@@ -293,9 +293,9 @@ class CandyShop:
         ret = {}
         for c in self.candies:
             if c.filling not in ret:
-                ret[c.filling] = [c.name]
+                ret[c.filling] = [c]
             else:
-                ret[c.filling].append(c.name)
+                ret[c.filling].append(c)
         return ret
 
 
