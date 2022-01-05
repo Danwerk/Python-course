@@ -66,14 +66,14 @@ def mix_string(s1: str, s2: str) -> str:
     ret = []
     ret1 = [el for el in s1]
     ret2 = [el for el in s2]
-    max_list = max(ret1,ret2,key=len)
+    max_list = max(ret1, ret2, key=len)
     min_list = min(ret1, ret2, key=len)
     if len(ret1) == 0:
         ret = ret2
     elif len(ret2) == 0:
         ret = ret1
     else:
-        #return [sub[item] for item in range(len(ret2)) for sub in [ret1, ret2]]
+        # return [sub[item] for item in range(len(ret2)) for sub in [ret1, ret2]]
         for item in range(len(max_list)):
             if item >= len(min_list):
                 ret.extend(max_list[item::])
@@ -176,7 +176,7 @@ class Candy:
 
     def __repr__(self):
         """Representation for Candy."""
-        return self.name
+        return f'{self.name}[{self.filling}]'
 
 
 class CandyShop:
@@ -238,7 +238,20 @@ class CandyShop:
 
         :return: dict with name and filling of most pop candy
         """
-        pass
+        ret = {}
+        candies_names = []
+        candies_fillings = []
+        for n in self.candies:
+            candies_names.append(n.name)
+            candies_fillings.append(n.filling)
+
+        max_filling = max(candies_fillings, key=candies_fillings.count)
+        max_name = max(candies_names, key=candies_names.count)
+
+        ret['name'] = max_name
+        ret['filling'] = max_filling
+
+        return ret
 
     def get_least_popular_candy_name_and_filling(self) -> dict:
         """
