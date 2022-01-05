@@ -373,8 +373,9 @@ class Grade:
         This function should save the previous grade in a dictionary previous_grades, where key is the date and value
         is the value of the grade. Value and date should be updated.
         """
-        self.previous_grades[date] = self.previous_grades.pop(self.date)
-        self.previous_grades[date] = new_grade
+        ret = {date: new_grade}
+        self.previous_grades.update(ret)
+
 
 
 class Student:
@@ -405,7 +406,9 @@ class Student:
         This function is only used when an assignment has been attempted at least once before. Keep in mind that you
         need to also keep the history of grades, not create a new grade!
         """
-        pass
+        # for grade in self.grades:
+        #     if assignment == grade.assignment:
+        #         a = 'hello'
 
     def calculate_weighted_average(self):
         """
@@ -435,7 +438,6 @@ class Student:
             elif grade.weight == 3:
                 ret += 3 * grade.value
         return round(ret / sum(weights))
-
 
 
 class Class:
@@ -494,9 +496,24 @@ class Class:
         ---------------------------------------
 
         """
-        pass
+        str_name = "Name"
+        str_final_grade = "Final grade"
+        table = []
+        max_name_len = 4
+        name_len = max(len(student.name) for student in self.students)
+        if name_len > max_name_len:
+            max_name_len = name_len
 
+        table_horizontal = ((13 + max_name_len + 5) * '-')
+        table.append(table_horizontal)
+        table.append(f'| {str_name:<{max_name_len}} | {str_final_grade} |')
+        table.append(table_horizontal)
+        for s in self.students:
+            table.append(f'| {s.name:<{max_name_len}} | {s.calculate_weighted_average():^11} |')
+        table.append(table_horizontal)
 
+        for i in table:
+            print(i)
 if __name__ == '__main__':
     assert split_string_into_ints("1,2") == [1, 2]
     assert split_string_into_ints("") == []
@@ -583,6 +600,6 @@ if __name__ == '__main__':
     print(cl.get_grade_sheet())
     print()
 
-    tuuli = Student("Tuuli Karu")
-    cl.add_student(tuuli)
-    print(len(cl.students))  # 4
+    # tuuli = Student("Tuuli Karu")
+    # cl.add_student(tuuli)
+    # print(len(cl.students))  # 4
