@@ -153,15 +153,6 @@ def bingo(matrix: list, numbers: list) -> tuple:
     return ret
 
 
-print(bingo([
-    [5, 7, 11, 15, 21],
-    [22, 25, 26, 27, 9],
-    [34, 2, 48, 54, 58],
-    [59, 61, 33, 81, 24],
-    [90, 37, 3, 6, 32],
-], [5, 21, 90, 32]))  # (True, False, False)
-
-
 def mirror_ends(s: str) -> str:
     """
     Return the first non-matching symbol pair from both ends.
@@ -177,7 +168,21 @@ def mirror_ends(s: str) -> str:
     mirror_ends("abAAca") => "bc"
     mirror_ends("") => ""
     """
-    pass
+    if len(s) == 0:
+        return ''
+    else:
+        if len(s) >= 2:
+            if s[0] == s[-1]:
+                return '' + mirror_ends(s[1:-1])
+        else:
+            return ...
+
+
+#print(mirror_ends("abc"))  # "ac"
+#print(mirror_ends("aba"))  # ""
+#print(mirror_ends("abca"))  # "bc"
+#print(mirror_ends("abAAca"))  # "bc"
+#print(mirror_ends(""))  # ""
 
 
 def prime_factorization(number: int) -> int:
@@ -356,7 +361,10 @@ class Grade:
         self.value = grade
         self.weight = weight
         self.date = date
-        self.previous_grades = {}
+        self.previous_grades = {date: grade}
+
+    def __repr__(self):
+        return f'{self.previous_grades}'
 
     def change_grade(self, new_grade: int, date: str):
         """
@@ -365,7 +373,6 @@ class Grade:
         This function should save the previous grade in a dictionary previous_grades, where key is the date and value
         is the value of the grade. Value and date should be updated.
         """
-        self.previous_grades[self.date] = self.value
         self.previous_grades[date] = self.previous_grades.pop(self.date)
         self.previous_grades[date] = new_grade
 
@@ -379,6 +386,9 @@ class Student:
         """Constructor."""
         self.name = name
         self.grades = {}
+
+    def __repr__(self):
+        return self.name
 
     def grade(self, grade: Grade):
         """
@@ -544,7 +554,6 @@ if __name__ == '__main__':
     gr = Grade("!", 3, "KT", "01/09/2020")
     jyri.grade(gr)
     teele.grade(Grade(4, 3, "KT", "01/09/2020"))
-
     print(gr.change_grade(3, '02/09/2020'))
 
     print(f"Jyri keskmine hinne on {jyri.calculate_weighted_average()}.")  # 1
