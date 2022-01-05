@@ -340,7 +340,7 @@ class Student:
         grades for the same assignment are kept in the Grade object previous grades dictionary).
         Note that this function is only used when a student does an assignment for the first time.
         """
-        pass
+        self.grades[grade.assignment] = grade
 
     def redo_assignment(self, new_grade: int, assignment: str, date: str):
         """
@@ -379,15 +379,16 @@ class Class:
 
     def add_student(self, student: Student):
         """Add student to the class."""
-        pass
+        self.students.append(student)
 
     def add_students(self, students: list):
         """Add several students to the class."""
-        pass
+        for student in students:
+            self.students.append(student)
 
     def remove_student(self, student: Student):
         """Remove student from the class."""
-        pass
+        self.students.remove(student)
 
     def get_grade_sheet(self):
         """
