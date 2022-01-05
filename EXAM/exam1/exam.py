@@ -376,8 +376,6 @@ class Grade:
         self.previous_grades[date] = self.previous_grades.pop(self.date)
         self.previous_grades[date] = new_grade
 
-        return self.previous_grades
-
 
 class Student:
     """Student."""
