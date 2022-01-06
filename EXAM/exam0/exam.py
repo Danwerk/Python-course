@@ -360,9 +360,8 @@ class Hotel:
         for some_room in self.rooms:
             if some_room.get_number() == room.get_number():
                 return False
-        else:
-            self.rooms.append(room)
-            return True
+        self.rooms.append(room)
+        return True
 
     def book_room(self, required_features: list) -> Optional[Room]:
         """
