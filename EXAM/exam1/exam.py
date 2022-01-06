@@ -512,8 +512,14 @@ class Class:
             table.append(f'| {s.name:<{max_name_len}} | {s.calculate_weighted_average():^11} |')
         table.append(table_horizontal)
 
+        string_table = ''
         for i in table:
-            print(i)
+            list_table = ''.join(i) + '\n'
+            string_table += list_table
+
+        return string_table
+
+
 if __name__ == '__main__':
     assert split_string_into_ints("1,2") == [1, 2]
     assert split_string_into_ints("") == []
