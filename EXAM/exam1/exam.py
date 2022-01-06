@@ -174,14 +174,14 @@ def mirror_ends(s: str) -> str:
         return s[0] + s[-1]
     return mirror_ends(s[1:-1])
 
-print(mirror_ends("abc"))  # "ac"
-print(mirror_ends("aba"))  # ""
-print(mirror_ends("abca"))  # "bc"
-print(mirror_ends("abAAca"))  # "bc"
-print(mirror_ends(""))  # ""
+# print(mirror_ends("abc"))  # "ac"
+# print(mirror_ends("aba"))  # ""
+# print(mirror_ends("abca"))  # "bc"
+# print(mirror_ends("abAAca"))  # "bc"
+# print(mirror_ends(""))  # ""
 
 
-def prime_factorization(number: int) -> int:
+def prime_factorization(number: int) -> dict:
     """
     Given a natural number greater than 1, return it's prime factorization.
 
@@ -207,7 +207,32 @@ def prime_factorization(number: int) -> int:
     :param number: a number greater than 1
     :return: dict of prime factors and their counts.
     """
-    pass
+    ret = {}
+    list_of_factors = []
+    list_of_factors_unique = set()
+    i = 2
+    while number > 1:
+        if number % i == 0:
+            list_of_factors.append(i)
+            number = number / i
+            i = i - 1
+        i += 1
+
+    for i in list_of_factors:
+        list_of_factors_unique.add(i)
+
+    for n in list_of_factors_unique:
+        amount_of_n = list_of_factors.count(n)
+        ret[n] = amount_of_n
+    return ret
+
+
+print(prime_factorization(2))
+print(prime_factorization(12))
+print(prime_factorization(1960))
+print(prime_factorization(1024))
+print(prime_factorization(79))
+print(prime_factorization(121))
 
 
 class Candy:
@@ -599,8 +624,8 @@ if __name__ == '__main__':
     teele.grade(Grade(3, 1, "TK", "30/11/2020"))
 
     print(f"Teele keskmine hinne on {teele.calculate_weighted_average()}.")  # 4
-    print(cl.get_grade_sheet())
-    print()
+    # print(cl.get_grade_sheet())
+    # print()
 
     # tuuli = Student("Tuuli Karu")
     # cl.add_student(tuuli)
