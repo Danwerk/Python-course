@@ -168,21 +168,17 @@ def mirror_ends(s: str) -> str:
     mirror_ends("abAAca") => "bc"
     mirror_ends("") => ""
     """
-    if len(s) == 0:
+    if s == '':
         return ''
-    else:
-        if len(s) >= 2:
-            if s[0] == s[-1]:
-                return '' + mirror_ends(s[1:-1])
-        else:
-            return ...
+    if s[0] != s[-1]:
+        return s[0] + s[-1]
+    return mirror_ends(s[1:-1])
 
-
-#print(mirror_ends("abc"))  # "ac"
-#print(mirror_ends("aba"))  # ""
-#print(mirror_ends("abca"))  # "bc"
-#print(mirror_ends("abAAca"))  # "bc"
-#print(mirror_ends(""))  # ""
+print(mirror_ends("abc"))  # "ac"
+print(mirror_ends("aba"))  # ""
+print(mirror_ends("abca"))  # "bc"
+print(mirror_ends("abAAca"))  # "bc"
+print(mirror_ends(""))  # ""
 
 
 def prime_factorization(number: int) -> int:
@@ -375,7 +371,7 @@ class Grade:
         """
         ret = {date: new_grade}
         self.previous_grades.update(ret)
-
+        return self.previous_grades
 
 
 class Student:
