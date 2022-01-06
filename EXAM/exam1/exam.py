@@ -517,7 +517,7 @@ class Class:
             list_table = ''.join(i) + '\n'
             string_table += list_table
 
-        return string_table
+        return string_table.strip()
 
 
 if __name__ == '__main__':
