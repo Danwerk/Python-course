@@ -36,20 +36,36 @@ def take_partial(text: str, leave_count: int, take_count: int) -> str:
     take_partial("abcdef", 0, 1) => "abcdef"
     take_partial("abcdef", 1, 0) => ""
     """
-    new_str = ''
-    while text != '':
-        a = text[:leave_count]
-        text = text.replace(a, '', len(a))
-        b = text[:take_count]
-        if text == '':
-            break
-        else:
-            text = text.replace(b, '', len(b))
-            new_str += b
-    return new_str
+    s = ''
+    text_length = len(text)
+    if leave_count > 0:
+        for i in range(0, text_length, leave_count):
+            if text == '':
+                break
+            else:
+                text = text.replace(text[0:leave_count], '', 1)
+                s += text[:take_count]
+                text = text.replace(text[0:take_count], '', 1)
+    elif leave_count == 0:
+        while text != '':
+            s += text[:take_count]
+            text = text.replace(text[0:take_count], '', 1)
+    return s
+    # new_str = ''
+    # while text != '':
+    #     a = text[:leave_count]
+    #     text = text.replace(a, '', len(a))
+    #     b = text[:take_count]
+    #     if text == '':
+    #         break
+    #     else:
+    #         text = text.replace(b, '', len(b))
+    #         new_str += b
+    # return new_str
 
 
 print(take_partial("a,d", 1, 1))
+print(take_partial("abcdef", 2, 3))  # "cde"
 print(take_partial("abcdef", 0, 1))
 print(take_partial("abcdef", 1, 0))
 
