@@ -51,8 +51,21 @@ def list_move(initial_list: list, amount: int, factor: int) -> list:
     list_move([1, 2, 3], 4, 1) => [[1, 2, 3], [3, 1, 2], [2, 3, 1], [1, 2, 3]]
     list_move([], 3, 4) => [[], [], [], []]
     """
+    ret = []
     if initial_list == []:
-        return [] * amount
+        return [[] for i in range(amount)]
+    else:
+        for i in range(amount):
+            k = (len(initial_list) + factor) % len(initial_list)
+            initial_list = initial_list[k::] + initial_list[:k:]
+            ret.append(initial_list)
+    return ret
+
+print(list_move(["a", "b", "c"], 3, 0))  # [['a', 'b', 'c'], ['a', 'b', 'c'], ['a', 'b', 'c']])
+print(list_move(["a", "b", "c"], 3, 1))  # [['a', 'b', 'c'], ['c', 'a', 'b'], ['b', 'c', 'a']]
+print(list_move([1, 2, 3], 3, 2))  # [[1, 2, 3], [2, 3, 1], [3, 1, 2]]
+print(list_move([1, 2, 3], 4, 1))  # [[1, 2, 3], [3, 1, 2], [2, 3, 1], [1, 2, 3]]
+print(list_move([], 4, 4))  # [[], [], []]
 
 
 def parse_call_log(call_log: str) -> dict:
