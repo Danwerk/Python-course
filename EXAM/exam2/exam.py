@@ -490,8 +490,19 @@ class Witcher:
         """
         if village.get_monsters() is []:
             return False
-        elif village.get_monsters() is not []:
-            pass
+        else:
+            most_expensive = 0
+            for monster in village.get_monsters():
+                if monster.bounty > most_expensive:
+                    most_expensive = monster.bounty
+            if village.money >= most_expensive:
+                self.money += most_expensive
+                village.money -= most_expensive
+                return True
+
+
+
+
 
     def __repr__(self) -> str:
         """
