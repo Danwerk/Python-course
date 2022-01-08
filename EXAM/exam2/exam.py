@@ -324,7 +324,9 @@ class DonutFactory:
         :return: list of donuts with the given flavour.
         """
         ret = []
-
+        for donut in self.donuts:
+            if donut.icing == flavour or donut.filling == flavour:
+                ret.append(donut)
         return ret
 
 
