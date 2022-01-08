@@ -66,7 +66,6 @@ def add_symbols(string: str, symbols: str) -> str:
     """
     count_letters = {}
     ret = ''
-    splitted_string = [symb for symb in string]
     elements = set()
     for s in symbols:
         elements.add(s)
@@ -85,10 +84,10 @@ def add_symbols(string: str, symbols: str) -> str:
     return ret
 
 
-print(add_symbols("ab12", "b12a")) # "aabb111222"
-print(add_symbols("xyz", "xxxxxx")) # "xxyz"
-print(add_symbols("aaaa", "b")) # "aaaa"
-print(add_symbols("aab", "a")) # "aaaab"
+# print(add_symbols("ab12", "b12a"))  # "aabb111222"
+# print(add_symbols("xyz", "xxxxxx"))  # "xxyz"
+# print(add_symbols("aaaa", "b"))  # "aaaa"
+# print(add_symbols("aab", "a"))  # "aaaab"
 
 
 def h_index(articles: list) -> int:
@@ -109,7 +108,26 @@ def h_index(articles: list) -> int:
     [2, 5, 7] => 2
     [5, 4, 7, 3, 6] => 4
     """
-    pass
+    if articles == []:
+        return 0
+    max_h = 0
+    for i in articles:
+        if i > len(articles):
+            continue
+        else:
+            ret = [n for n in articles if n >= i]
+            if len(ret) >= i and max_h < i:
+                max_h = i
+    return max_h
+
+
+print(h_index([4, 2, 4]))  # 2
+print(h_index([1, 2, 2]))  # 2
+print(h_index([]))  # 0
+print(h_index([1, 1, 1, 1]))  # 1
+print(h_index([3, 5, 7]))  # 3
+print(h_index([2, 5, 7]))  # 2
+print(h_index([5, 4, 7, 3, 6]))  # 4
 
 
 def count_pairs(s: str) -> int:
@@ -411,8 +429,8 @@ if __name__ == '__main__':
     assert add_symbols("aab", "a") == "aaaab"
     assert add_symbols("aab1", "a12") == "aaaab111"
 
-    assert h_index([4, 2, 4]) == 2
-    assert h_index([5, 4, 7, 3, 6]) == 4
+    # assert h_index([4, 2, 4]) == 2
+    # assert h_index([5, 4, 7, 3, 6]) == 4
 
     assert valid_parentheses("()") is True
     assert valid_parentheses("[[") is False
