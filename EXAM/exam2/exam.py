@@ -243,7 +243,6 @@ class DonutFactory:
     def __init__(self):
         """DonutFactory class constructor."""
         self.donuts = []
-        self.production = []
 
     def add_donuts(self, donuts: list):
         """
@@ -253,7 +252,6 @@ class DonutFactory:
         :return:
         """
         self.donuts.extend(donuts)
-        self.production.extend(donuts)
 
     def get_donuts(self) -> list:
         """
@@ -261,7 +259,7 @@ class DonutFactory:
 
         :return: list of all donuts
         """
-        return self.production
+        return self.donuts
 
     def pack_donuts_by_filling_and_icing(self) -> dict:
         """
@@ -281,7 +279,7 @@ class DonutFactory:
                 ret[(donut.filling, donut.icing)] = [donut]
             else:
                 ret[(donut.filling, donut.icing)].append(donut)
-            self.production.remove(donut)
+            self.donuts.remove(donut)
 
         return ret
 
@@ -311,7 +309,9 @@ class DonutFactory:
 
         :return: list of donuts with the given flavour.
         """
-        pass
+        ret = []
+
+        return ret
 
 
 class Species(Enum):
