@@ -213,11 +213,11 @@ def valid_parentheses(sequence: str) -> bool:
     return len(stack) == 0
 
 
-print(valid_parentheses('()'))
-print(valid_parentheses('()[]{}'))
-print(valid_parentheses('(]'))
-print(valid_parentheses('([)]'))
-print(valid_parentheses('{[]}'))
+# print(valid_parentheses('()'))
+# print(valid_parentheses('()[]{}'))
+# print(valid_parentheses('(]'))
+# print(valid_parentheses('([)]'))
+# print(valid_parentheses('{[]}'))
 
 
 class Donut:
@@ -233,13 +233,16 @@ class Donut:
         self.filling = filling
         self.icing = icing
 
+    def __repr__(self):
+        return f'{self.filling}'
+
 
 class DonutFactory:
     """DonutFactory class."""
 
     def __init__(self):
         """DonutFactory class constructor."""
-        pass
+        self.donuts = []
 
     def add_donuts(self, donuts: list):
         """
@@ -248,7 +251,7 @@ class DonutFactory:
         :param donuts: list of donuts to add
         :return:
         """
-        pass
+        self.donuts.extend(donuts)
 
     def get_donuts(self) -> list:
         """
@@ -493,7 +496,7 @@ if __name__ == '__main__':
 
     donuts = [donut1, donut2, donut3, donut4, donut5, donut6, donut7, donut8]
 
-    donut_factory.add_donuts(donuts)
+    print(donut_factory.add_donuts(donuts))
 
     print(donut_factory.get_donuts_by_flavour('marshmallow'))  # [donut3, donut7]
     print(donut_factory.get_most_popular_donut())  # {icing: sugar, filling: chocolate}
