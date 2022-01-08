@@ -10,6 +10,26 @@ from urllib import parse
 API_URL = 'http://api.game-scheduler.com:8089/gift?'
 
 
+# class World:
+#     def __init__(self):
+#         self.nice_children = []
+#         self.naughty_children = []
+#         self.normal_children = []
+#         self.wishlist_children = []
+#
+#     def add_nice_children(self, children: list):
+#         self.nice_children.extend(children)
+#
+#     def add_naughty_children(self, children: list):
+#         self.naughty_children.extend(children)
+#
+#     def get_nice_children(self):
+#         return self.nice_children
+#
+#     def get_naughty_children(self):
+#         return self.naughty_children
+
+
 class Product:
     """Product class."""
 
@@ -62,6 +82,7 @@ class ChildrenList:
         self.children_dict = {}
         self.children = []
         self.wishes = {}
+        self.wishlist_children = []
 
     def read_wishes_from_file(self, filename):
         """Read children wishes from csv file into dict, where the key is the child and the value is list of wishes.
@@ -137,3 +158,8 @@ if __name__ == '__main__':
     print(naughty_children.get_children_list())
     naughty_child1 = (naughty_children.get_children_dict()['Tanya'])
     # print(naughty_child1)
+
+    # Nice, Naughty, Normal children together...
+    world = World()
+    world.add_nice_children(nice_children.get_children_list())
+    world.add_naughty_children(naughty_children.get_children_list())
