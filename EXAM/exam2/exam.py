@@ -340,15 +340,16 @@ class Monster:
 
     def __init__(self, species: Species, bounty: int):
         """Constructor."""
-        pass
+        self.species = species
+        self.bounty = bounty
 
     def get_species(self) -> Species:
         """Return the species of the monster."""
-        pass
+        return self.species
 
     def get_bounty(self) -> int:
         """Return the bounty for this monster."""
-        pass
+        return self.bounty
 
     def is_alive(self) -> bool:
         """Whether the monster is alive."""
@@ -369,7 +370,7 @@ class Monster:
 
         "A {species} worth {bounty} coins"
         """
-        pass
+        return f'A {self.get_species()} worth {self.bounty} coins'
 
 
 class Village:
@@ -384,15 +385,19 @@ class Village:
 
     def __init__(self, name: str, initial_population: int):
         """Constructor."""
-        pass
+        self.name = name
+        self.initial_population = initial_population
+        self.monsters = []
+        self.age = 0
+        self.money = 100
 
     def get_name(self) -> str:
         """Return name of the village."""
-        pass
+        return self.name
 
     def get_population(self) -> int:
         """Return population of the village."""
-        pass
+        return self.initial_population
 
     def get_monsters(self) -> list:
         """
@@ -400,15 +405,17 @@ class Village:
 
         If there are no population, no monsters are not bothering the village.
         """
-        pass
+        if self.initial_population == 0:
+            return []
+        return self.monsters
 
     def add_monster(self, monster: Monster) -> None:
         """Add monster to the village."""
-        pass
+        self.monsters.append(monster)
 
     def add_money(self, amount) -> None:
         """Add money to the village."""
-        pass
+        self.money += amount
 
     def advance_day(self) -> None:
         """
@@ -416,7 +423,7 @@ class Village:
 
         The age of the village is increased by one.
         """
-        pass
+        self.age += 1
 
     def pay(self, amount: int) -> bool:
         """
@@ -433,7 +440,7 @@ class Village:
 
         "{name}, population {population}, age {age}"
         """
-        pass
+        return f'{self.name}, population {self.get_population()}, age {self.age}'
 
 
 class Witcher:
@@ -445,15 +452,18 @@ class Witcher:
 
     def __init__(self, name: str, school: str):
         """Constructor."""
-        pass
+        self.name = name
+        self.school = school
+        self.money = 0
+        self.slain = []
 
     def get_money(self) -> int:
         """Return the amount of money the witcher has."""
-        pass
+        return self.money
 
     def get_slain(self) -> list:
         """Return a list of slain monsters in the order they are slain."""
-        pass
+        return self.slain
 
     def get_hunted_species(self) -> list:
         """
@@ -481,7 +491,7 @@ class Witcher:
 
         "{name} of {school} school with {number of monsters} monsters slain"
         """
-        pass
+        return f'{self.name} of {self.school} school with ... monsters slain'
 
 
 if __name__ == '__main__':
@@ -519,52 +529,52 @@ if __name__ == '__main__':
 
     donuts = [donut1, donut2, donut3, donut4, donut5, donut6, donut7, donut8]
 
-    print(donut_factory.add_donuts(donuts))
-
-    print(donut_factory.get_donuts_by_flavour('marshmallow'))  # [donut3, donut7]
-    print(donut_factory.get_most_popular_donut())  # {icing: sugar, filling: chocolate}
-    print(donut_factory.sort_donuts_by_icing_and_filling())  # [donut2, donut5, donut6, donut3, donut7, donut1,
+    # print(donut_factory.add_donuts(donuts))
+    #
+    # print(donut_factory.get_donuts_by_flavour('marshmallow'))  # [donut3, donut7]
+    # print(donut_factory.get_most_popular_donut())  # {icing: sugar, filling: chocolate}
+    # print(donut_factory.sort_donuts_by_icing_and_filling())  # [donut2, donut5, donut6, donut3, donut7, donut1,
     #                                                           donut4, donut8]
-    print(donut_factory.pack_donuts_by_filling_and_icing())  # {(chocolate, sugar): [donut1, donut4, donut8],
+    # print(donut_factory.pack_donuts_by_filling_and_icing())  # {(chocolate, sugar): [donut1, donut4, donut8],
     #                                                               (caramel, chocolate): [donut2],
     #                                                               (cherry, marshmallow): [donut3, donut7],
     #                                                               (vanilla, cream): [donut5, donut6]}
 
     # Witcher
-    # tallinn = Village("Tallinn", 7)
-    # godzilla_species = Species.Beast
-    # godzilla = Monster(godzilla_species, 200)
-    # print(godzilla.get_species() == Species.Beast)  # True
-    # print(str(godzilla.get_species()))  # Species.Beast
-    # modzilla = Monster(Species.Dragon, 200)
-    # dracula = Monster(Species.Vampire, 100)
-    # frankenstein = Monster(Species.Beast, 300)
-    # tallinn.add_monster(godzilla)
-    # tallinn.add_monster(modzilla)
-    # tallinn.add_monster(dracula)
-    # tallinn.add_monster(frankenstein)
-    #
-    # print(tallinn.get_population())  # 7
-    # tallinn.advance_day()
-    # tallinn.add_money(500)
-    # print(tallinn.get_population())  # 3
-    # ago = Witcher("Ago", "TalTech")
-    # print(ago.hunt_most_expensive(tallinn))  # True
-    # print(ago.get_money())  # 300
-    # print(tallinn.get_monsters())  # [A Beast worth 200 coins, A Dragon worth 200 coins, A Vampire worth 100 coins]
-    # print(ago.hunt_most_expensive(tallinn))  # True
-    # print(ago.get_money())  # 500
-    # print(tallinn.get_monsters())  # [A Dragon worth 200 coins, A Vampire worth 100 coins]
-    # print(ago.hunt_most_expensive(tallinn))  # False
-    # print(ago.get_money())  # 500
-    # print(ago.hunt_most_expensive(tallinn))  # True
-    # print(tallinn.get_monsters())  # []
-    #
-    # print(ago.get_hunted_species())  # [<Species.Beast: 3>, <Species.Dragon: 1>, <Species.Vampire: 2>]
-    # print(ago.get_hunted_species()[0] == Species.Beast)  # True
-    #
+    tallinn = Village("Tallinn", 7)
+    godzilla_species = Species.Beast
+    godzilla = Monster(godzilla_species, 200)
+    print(godzilla.get_species() == Species.Beast)  # True
+    print(str(godzilla.get_species()))  # Species.Beast
+    modzilla = Monster(Species.Dragon, 200)
+    dracula = Monster(Species.Vampire, 100)
+    frankenstein = Monster(Species.Beast, 300)
+    tallinn.add_monster(godzilla)
+    tallinn.add_monster(modzilla)
+    tallinn.add_monster(dracula)
+    tallinn.add_monster(frankenstein)
+
+    print(tallinn.get_population())  # 7
+    tallinn.advance_day()
+    tallinn.add_money(500)
+    print(tallinn.get_population())  # 3
+    ago = Witcher("Ago", "TalTech")
+    print(ago.hunt_most_expensive(tallinn))  # True
+    print(ago.get_money())  # 300
+    print(tallinn.get_monsters())  # [A Beast worth 200 coins, A Dragon worth 200 coins, A Vampire worth 100 coins]
+    print(ago.hunt_most_expensive(tallinn))  # True
+    print(ago.get_money())  # 500
+    print(tallinn.get_monsters())  # [A Dragon worth 200 coins, A Vampire worth 100 coins]
+    print(ago.hunt_most_expensive(tallinn))  # False
+    print(ago.get_money())  # 500
+    print(ago.hunt_most_expensive(tallinn))  # True
+    print(tallinn.get_monsters())  # []
+
+    print(ago.get_hunted_species())  # [<Species.Beast: 3>, <Species.Dragon: 1>, <Species.Vampire: 2>]
+    print(ago.get_hunted_species()[0] == Species.Beast)  # True
+
     # enum examples
-    # species_list = [Species.Beast, Species.Vampire, Species.Beast]
-    # print(species_list[0] == species_list[1])  # False
-    # print(species_list[0] == species_list[2])  # True
+    species_list = [Species.Beast, Species.Vampire, Species.Beast]
+    print(species_list[0] == species_list[1])  # False
+    print(species_list[0] == species_list[2])  # True
 #
