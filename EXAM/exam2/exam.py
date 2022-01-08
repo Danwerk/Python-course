@@ -274,7 +274,11 @@ class DonutFactory:
         :return: dict
         """
         ret = {}
-
+        for donut in self.donuts:
+            if (donut.filling, donut.icing) not in ret:
+                ret[(donut.filling, donut.icing)] = [donut]
+            else:
+                ret[(donut.filling, donut.icing)].append(donut)
 
         return ret
 
