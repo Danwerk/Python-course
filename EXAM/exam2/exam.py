@@ -353,7 +353,7 @@ class Monster:
 
     def is_alive(self) -> bool:
         """Whether the monster is alive."""
-        pass
+
 
     def slay(self) -> bool:
         """
@@ -362,7 +362,7 @@ class Monster:
         If monster is already dead, return False.
         Otherwise kill the monster and return True.
         """
-        pass
+
 
     def __repr__(self) -> str:
         """
@@ -475,7 +475,8 @@ class Witcher:
 
         Each value should be in the list once, so there can be max 3 objects in the result.
         """
-        pass
+
+        return sorted(self.slain, key=lambda i: i.get_species())
 
     def hunt_most_expensive(self, village: Village) -> bool:
         """
@@ -488,8 +489,9 @@ class Witcher:
         The monster is slain even if there is no money to pay.
         """
         if village.get_monsters() is []:
+            return False
+        elif village.get_monsters() is not []:
             pass
-
 
     def __repr__(self) -> str:
         """
@@ -497,7 +499,7 @@ class Witcher:
 
         "{name} of {school} school with {number of monsters} monsters slain"
         """
-        return f'{self.name} of {self.school} school with ... monsters slain'
+        return f'{self.name} of {self.school} school with {len(self.slain)} monsters slain'
 
 
 if __name__ == '__main__':
@@ -577,7 +579,7 @@ if __name__ == '__main__':
     print(tallinn.get_monsters())  # []
 
     print(ago.get_hunted_species())  # [<Species.Beast: 3>, <Species.Dragon: 1>, <Species.Vampire: 2>]
-    print(ago.get_hunted_species()[0] == Species.Beast)  # True
+    #print(ago.get_hunted_species()[0] == Species.Beast)  # True
 
     # enum examples
     species_list = [Species.Beast, Species.Vampire, Species.Beast]
