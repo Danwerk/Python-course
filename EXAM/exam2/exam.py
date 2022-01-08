@@ -20,12 +20,10 @@ def sum_of_digits(s: str) -> int:
     return sum(ret)
 
 
-
-
-print(sum_of_digits("123"))  # 6
-print(sum_of_digits("a"))  # 0
-print(sum_of_digits(""))  # 0
-print(sum_of_digits("1-2-3-99"))  # 24
+# print(sum_of_digits("123"))  # 6
+# print(sum_of_digits("a"))  # 0
+# print(sum_of_digits(""))  # 0
+# print(sum_of_digits("1-2-3-99"))  # 24
 
 
 def range_with_count(start: int, stop: int, count: int) -> list:
@@ -44,6 +42,14 @@ def range_with_count(start: int, stop: int, count: int) -> list:
     pass
 
 
+# print(range_with_count(1, 5, 1))  # [1.0]
+# print(range_with_count(1, 5, 2))  # [1.0, 5.0]
+# print(range_with_count(1, 5, 3))  # [1.0, 3.0, 5.0]
+# print(range_with_count(1, 5, 4))  # [1.0, 2.333333333333333, 3.6666666666666665, 5.0]
+# print(range_with_count(1, 5, 5))  # [1.0, 2.0, 3.0, 4.0, 5.0]
+# print(range_with_count(5, 1, 5))  # [5.0, 4.0, 3.0, 2.0, 1.0]
+
+
 def add_symbols(string: str, symbols: str) -> str:
     """
     Return given string with added symbols where needed.
@@ -58,7 +64,31 @@ def add_symbols(string: str, symbols: str) -> str:
     add_symbols("aaaa", "b") -> "aaaa"
     add_symbols("aab", "a") -> "aaaab"
     """
-    pass
+    count_letters = {}
+    ret = ''
+    splitted_string = [symb for symb in string]
+    elements = set()
+    for s in symbols:
+        elements.add(s)
+
+    for i in string:
+        if i in elements:
+            if i.isdigit():
+                count_letters[i] = string.count(i) * 3
+            else:
+                count_letters[i] = string.count(i) * 2
+        else:
+            count_letters[i] = string.count(i)
+
+    for el in count_letters:
+        ret += el * count_letters[el]
+    return ret
+
+
+print(add_symbols("ab12", "b12a")) # "aabb111222"
+print(add_symbols("xyz", "xxxxxx")) # "xxyz"
+print(add_symbols("aaaa", "b")) # "aaaa"
+print(add_symbols("aab", "a")) # "aaaab"
 
 
 def h_index(articles: list) -> int:
@@ -375,8 +405,8 @@ if __name__ == '__main__':
     assert sum_of_digits("123") == 6
     assert sum_of_digits("") == 0
 
-    assert range_with_count(1, 5, 2) == [1.0, 5.0]
-    assert range_with_count(5, 1, 5) == [5.0, 4.0, 3.0, 2.0, 1.0]
+    # assert range_with_count(1, 5, 2) == [1.0, 5.0]
+    # assert range_with_count(5, 1, 5) == [5.0, 4.0, 3.0, 2.0, 1.0]
 
     assert add_symbols("aab", "a") == "aaaab"
     assert add_symbols("aab1", "a12") == "aaaab111"
