@@ -49,7 +49,7 @@ def range_with_count(start: int, stop: int, count: int) -> list:
         d = (stop - start) / (count - 1)
         j = start
         for i in range(count - 1):
-            ret.append(round(j, 7))
+            ret.append(round(j, 3))
             j += d
         ret.append(stop)
 
@@ -63,6 +63,7 @@ print(range_with_count(1, 5, 4))  # [1.0, 2.333333333333333, 3.6666666666666665,
 print(range_with_count(1, 5, 5))  # [1.0, 2.0, 3.0, 4.0, 5.0]
 print(range_with_count(5, 1, 5))  # [5.0, 4.0, 3.0, 2.0, 1.0]
 print(range_with_count(897, -585, 191))  # [5.0, 4.0, 3.0, 2.0, 1.0]
+print(range_with_count(460, -1000, 639))  # [5.0, 4.0, 3.0, 2.0, 1.0]
 
 
 def add_symbols(string: str, symbols: str) -> str:
