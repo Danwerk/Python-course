@@ -56,14 +56,14 @@ def range_with_count(start: int, stop: int, count: int) -> list:
     return ret
 
 
-print(range_with_count(1, 5, 1))  # [1.0]
-print(range_with_count(1, 5, 2))  # [1.0, 5.0]
-print(range_with_count(1, 5, 3))  # [1.0, 3.0, 5.0]
-print(range_with_count(1, 5, 4))  # [1.0, 2.333333333333333, 3.6666666666666665, 5.0]
-print(range_with_count(1, 5, 5))  # [1.0, 2.0, 3.0, 4.0, 5.0]
-print(range_with_count(5, 1, 5))  # [5.0, 4.0, 3.0, 2.0, 1.0]
-print(range_with_count(897, -585, 191))  # [5.0, 4.0, 3.0, 2.0, 1.0]
-print(range_with_count(460, -1000, 639))  # [5.0, 4.0, 3.0, 2.0, 1.0]
+# print(range_with_count(1, 5, 1))  # [1.0]
+# print(range_with_count(1, 5, 2))  # [1.0, 5.0]
+# print(range_with_count(1, 5, 3))  # [1.0, 3.0, 5.0]
+# print(range_with_count(1, 5, 4))  # [1.0, 2.333333333333333, 3.6666666666666665, 5.0]
+# print(range_with_count(1, 5, 5))  # [1.0, 2.0, 3.0, 4.0, 5.0]
+# print(range_with_count(5, 1, 5))  # [5.0, 4.0, 3.0, 2.0, 1.0]
+# print(range_with_count(897, -585, 191))  # [5.0, 4.0, 3.0, 2.0, 1.0]
+# print(range_with_count(460, -1000, 639))  # [5.0, 4.0, 3.0, 2.0, 1.0]
 
 
 def add_symbols(string: str, symbols: str) -> str:
@@ -202,7 +202,22 @@ def valid_parentheses(sequence: str) -> bool:
 
     :return boolean whether sequence is valid or not
     """
-    pass
+    brackets = {'(': ')', '[': ']', '{': '}'}
+    stack = []
+    for c in sequence:
+        if c in brackets:
+            stack.append(brackets[c])
+        elif len(stack) == 0 or c != stack.pop():
+            return False
+
+    return len(stack) == 0
+
+
+print(valid_parentheses('()'))
+print(valid_parentheses('()[]{}'))
+print(valid_parentheses('(]'))
+print(valid_parentheses('([)]'))
+print(valid_parentheses('{[]}'))
 
 
 class Donut:
