@@ -81,10 +81,10 @@ def add_symbols(string: str, symbols: str) -> str:
     return ret
 
 
-print(add_symbols("ab12", "b12a"))  # "aabb111222"
-print(add_symbols("xyz", "xxxxxx"))  # "xxyz"
-print(add_symbols("aaaaba", "b"))  # "aaaabba"
-print(add_symbols("aab", "a"))  # "aaaab"
+# print(add_symbols("ab12", "b12a"))  # "aabb111222"
+# print(add_symbols("xyz", "xxxxxx"))  # "xxyz"
+# print(add_symbols("aaaaba", "b"))  # "aaaabba"
+# print(add_symbols("aab", "a"))  # "aaaab"
 
 
 def h_index(articles: list) -> int:
@@ -118,13 +118,13 @@ def h_index(articles: list) -> int:
     return max_h
 
 
-print(h_index([4, 2, 4]))  # 2
-print(h_index([1, 2, 2]))  # 2
-print(h_index([]))  # 0
-print(h_index([1, 1, 1, 1]))  # 1
-print(h_index([3, 5, 7]))  # 3
-print(h_index([2, 5, 7]))  # 2
-print(h_index([5, 4, 7, 3, 6]))  # 4
+# print(h_index([4, 2, 4]))  # 2
+# print(h_index([1, 2, 2]))  # 2
+# print(h_index([]))  # 0
+# print(h_index([1, 1, 1, 1]))  # 1
+# print(h_index([3, 5, 7]))  # 3
+# print(h_index([2, 5, 7]))  # 2
+# print(h_index([5, 4, 7, 3, 6]))  # 4
 
 
 def count_pairs(s: str) -> int:
@@ -140,7 +140,18 @@ def count_pairs(s: str) -> int:
     count_pairs("axax") => 2
     count_pairs("axbx") => 1
     """
-    pass
+    if len(s) < 3:
+        return 0
+    if s[0] == s[2]:
+        return 1 + count_pairs(s[1:])
+    else:
+        return count_pairs(s[1:])
+
+
+print(count_pairs("axa"))  # 1
+print(count_pairs("aa"))  # 0
+print(count_pairs("axax"))  # 2
+print(count_pairs("axbx"))  # 1
 
 
 def valid_parentheses(sequence: str) -> bool:
