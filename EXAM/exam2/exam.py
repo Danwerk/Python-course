@@ -289,7 +289,7 @@ class DonutFactory:
 
         :return: sorted list of donuts
         """
-        pass
+        return sorted(self.donuts, key=lambda i: (i.icing, i.filling))
 
     def get_most_popular_donut(self) -> dict:
         """
