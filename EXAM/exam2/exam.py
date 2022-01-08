@@ -370,7 +370,7 @@ class Monster:
 
         "A {species} worth {bounty} coins"
         """
-        return f'A {self.get_species()} worth {self.bounty} coins'
+        return f'A {self.get_species().name} worth {self.bounty} coins'
 
 
 class Village:
@@ -432,7 +432,11 @@ class Village:
         If the village does not have enough money, return False.
         Otherwise spend the amount and return True.
         """
-        pass
+        if amount <= self.money:
+            self.money -= amount
+            return True
+        else:
+            return False
 
     def __repr__(self) -> str:
         """
@@ -483,7 +487,9 @@ class Witcher:
         Otherwise return False.
         The monster is slain even if there is no money to pay.
         """
-        pass
+        if village.get_monsters() is []:
+            pass
+
 
     def __repr__(self) -> str:
         """
