@@ -39,15 +39,29 @@ def range_with_count(start: int, stop: int, count: int) -> list:
     range_with_count(1, 5, 5) -> [1.0, 2.0, 3.0, 4.0, 5.0]
     range_with_count(5, 1, 5) -> [5.0, 4.0, 3.0, 2.0, 1.0]
     """
-    pass
+    ret = []
+    if count == 1:
+        ret.append(start)
+    elif count == 2:
+        ret.append(start)
+        ret.append(stop)
+    else:
+        d = (stop - start) / (count - 1)
+        j = start
+        for i in range(count - 1):
+            ret.append(j)
+            j += d
+        ret.append(stop)
+
+    return ret
 
 
-# print(range_with_count(1, 5, 1))  # [1.0]
-# print(range_with_count(1, 5, 2))  # [1.0, 5.0]
-# print(range_with_count(1, 5, 3))  # [1.0, 3.0, 5.0]
-# print(range_with_count(1, 5, 4))  # [1.0, 2.333333333333333, 3.6666666666666665, 5.0]
-# print(range_with_count(1, 5, 5))  # [1.0, 2.0, 3.0, 4.0, 5.0]
-# print(range_with_count(5, 1, 5))  # [5.0, 4.0, 3.0, 2.0, 1.0]
+print(range_with_count(1, 5, 1))  # [1.0]
+print(range_with_count(1, 5, 2))  # [1.0, 5.0]
+print(range_with_count(1, 5, 3))  # [1.0, 3.0, 5.0]
+print(range_with_count(1, 5, 4))  # [1.0, 2.333333333333333, 3.6666666666666665, 5.0]
+print(range_with_count(1, 5, 5))  # [1.0, 2.0, 3.0, 4.0, 5.0]
+print(range_with_count(5, 1, 5))  # [5.0, 4.0, 3.0, 2.0, 1.0]
 
 
 def add_symbols(string: str, symbols: str) -> str:
@@ -148,10 +162,10 @@ def count_pairs(s: str) -> int:
         return count_pairs(s[1:])
 
 
-print(count_pairs("axa"))  # 1
-print(count_pairs("aa"))  # 0
-print(count_pairs("axax"))  # 2
-print(count_pairs("axbx"))  # 1
+# print(count_pairs("axa"))  # 1
+# print(count_pairs("aa"))  # 0
+# print(count_pairs("axax"))  # 2
+# print(count_pairs("axbx"))  # 1
 
 
 def valid_parentheses(sequence: str) -> bool:
