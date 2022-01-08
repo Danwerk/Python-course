@@ -259,7 +259,7 @@ class DonutFactory:
 
         :return: list of all donuts
         """
-        pass
+        return self.donuts
 
     def pack_donuts_by_filling_and_icing(self) -> dict:
         """
@@ -273,7 +273,10 @@ class DonutFactory:
 
         :return: dict
         """
-        pass
+        ret = {}
+
+
+        return ret
 
     def sort_donuts_by_icing_and_filling(self) -> list:
         """
@@ -462,25 +465,25 @@ class Witcher:
 
 
 if __name__ == '__main__':
-    assert sum_of_digits("123") == 6
-    assert sum_of_digits("") == 0
-
-    assert range_with_count(1, 5, 2) == [1.0, 5.0]
-    assert range_with_count(5, 1, 5) == [5.0, 4.0, 3.0, 2.0, 1.0]
-
-    assert add_symbols("aab", "a") == "aaaab"
-    assert add_symbols("aab1", "a12") == "aaaab111"
-
+    # assert sum_of_digits("123") == 6
+    # assert sum_of_digits("") == 0
+    #
+    # assert range_with_count(1, 5, 2) == [1.0, 5.0]
+    # assert range_with_count(5, 1, 5) == [5.0, 4.0, 3.0, 2.0, 1.0]
+    #
+    # assert add_symbols("aab", "a") == "aaaab"
+    # assert add_symbols("aab1", "a12") == "aaaab111"
+    #
     # assert h_index([4, 2, 4]) == 2
     # assert h_index([5, 4, 7, 3, 6]) == 4
-
-    assert valid_parentheses("()") is True
-    assert valid_parentheses("[[") is False
-    assert valid_parentheses("[(])") is False
-
-    assert count_pairs("axa") == 1
-    assert count_pairs("axaxa") == 3
-    assert count_pairs("") == 0
+    #
+    # assert valid_parentheses("()") is True
+    # assert valid_parentheses("[[") is False
+    # assert valid_parentheses("[(])") is False
+    #
+    # assert count_pairs("axa") == 1
+    # assert count_pairs("axaxa") == 3
+    # assert count_pairs("") == 0
 
     # donut examples
 
@@ -508,39 +511,40 @@ if __name__ == '__main__':
     #                                                               (vanilla, cream): [donut5, donut6]}
 
     # Witcher
-    tallinn = Village("Tallinn", 7)
-    godzilla_species = Species.Beast
-    godzilla = Monster(godzilla_species, 200)
-    print(godzilla.get_species() == Species.Beast)  # True
-    print(str(godzilla.get_species()))  # Species.Beast
-    modzilla = Monster(Species.Dragon, 200)
-    dracula = Monster(Species.Vampire, 100)
-    frankenstein = Monster(Species.Beast, 300)
-    tallinn.add_monster(godzilla)
-    tallinn.add_monster(modzilla)
-    tallinn.add_monster(dracula)
-    tallinn.add_monster(frankenstein)
-
-    print(tallinn.get_population())  # 7
-    tallinn.advance_day()
-    tallinn.add_money(500)
-    print(tallinn.get_population())  # 3
-    ago = Witcher("Ago", "TalTech")
-    print(ago.hunt_most_expensive(tallinn))  # True
-    print(ago.get_money())  # 300
-    print(tallinn.get_monsters())  # [A Beast worth 200 coins, A Dragon worth 200 coins, A Vampire worth 100 coins]
-    print(ago.hunt_most_expensive(tallinn))  # True
-    print(ago.get_money())  # 500
-    print(tallinn.get_monsters())  # [A Dragon worth 200 coins, A Vampire worth 100 coins]
-    print(ago.hunt_most_expensive(tallinn))  # False
-    print(ago.get_money())  # 500
-    print(ago.hunt_most_expensive(tallinn))  # True
-    print(tallinn.get_monsters())  # []
-
-    print(ago.get_hunted_species())  # [<Species.Beast: 3>, <Species.Dragon: 1>, <Species.Vampire: 2>]
-    print(ago.get_hunted_species()[0] == Species.Beast)  # True
-
+    # tallinn = Village("Tallinn", 7)
+    # godzilla_species = Species.Beast
+    # godzilla = Monster(godzilla_species, 200)
+    # print(godzilla.get_species() == Species.Beast)  # True
+    # print(str(godzilla.get_species()))  # Species.Beast
+    # modzilla = Monster(Species.Dragon, 200)
+    # dracula = Monster(Species.Vampire, 100)
+    # frankenstein = Monster(Species.Beast, 300)
+    # tallinn.add_monster(godzilla)
+    # tallinn.add_monster(modzilla)
+    # tallinn.add_monster(dracula)
+    # tallinn.add_monster(frankenstein)
+    #
+    # print(tallinn.get_population())  # 7
+    # tallinn.advance_day()
+    # tallinn.add_money(500)
+    # print(tallinn.get_population())  # 3
+    # ago = Witcher("Ago", "TalTech")
+    # print(ago.hunt_most_expensive(tallinn))  # True
+    # print(ago.get_money())  # 300
+    # print(tallinn.get_monsters())  # [A Beast worth 200 coins, A Dragon worth 200 coins, A Vampire worth 100 coins]
+    # print(ago.hunt_most_expensive(tallinn))  # True
+    # print(ago.get_money())  # 500
+    # print(tallinn.get_monsters())  # [A Dragon worth 200 coins, A Vampire worth 100 coins]
+    # print(ago.hunt_most_expensive(tallinn))  # False
+    # print(ago.get_money())  # 500
+    # print(ago.hunt_most_expensive(tallinn))  # True
+    # print(tallinn.get_monsters())  # []
+    #
+    # print(ago.get_hunted_species())  # [<Species.Beast: 3>, <Species.Dragon: 1>, <Species.Vampire: 2>]
+    # print(ago.get_hunted_species()[0] == Species.Beast)  # True
+    #
     # enum examples
-    species_list = [Species.Beast, Species.Vampire, Species.Beast]
-    print(species_list[0] == species_list[1])  # False
-    print(species_list[0] == species_list[2])  # True
+    # species_list = [Species.Beast, Species.Vampire, Species.Beast]
+    # print(species_list[0] == species_list[1])  # False
+    # print(species_list[0] == species_list[2])  # True
+#
