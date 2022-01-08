@@ -70,24 +70,21 @@ def add_symbols(string: str, symbols: str) -> str:
     for s in symbols:
         elements.add(s)
 
-    for i in string:
-        if i in elements:
-            if i.isdigit():
-                count_letters[i] = string.count(i) * 3
+    for j in string:
+        if j in elements:
+            if j.isdigit():
+                ret += j * 3
             else:
-                count_letters[i] = string.count(i) * 2
+                ret += j * 2
         else:
-            count_letters[i] = string.count(i)
-
-    for el in count_letters:
-        ret += el * count_letters[el]
+            ret += j
     return ret
 
 
-# print(add_symbols("ab12", "b12a"))  # "aabb111222"
-# print(add_symbols("xyz", "xxxxxx"))  # "xxyz"
-# print(add_symbols("aaaa", "b"))  # "aaaa"
-# print(add_symbols("aab", "a"))  # "aaaab"
+print(add_symbols("ab12", "b12a"))  # "aabb111222"
+print(add_symbols("xyz", "xxxxxx"))  # "xxyz"
+print(add_symbols("aaaaba", "b"))  # "aaaabba"
+print(add_symbols("aab", "a"))  # "aaaab"
 
 
 def h_index(articles: list) -> int:
