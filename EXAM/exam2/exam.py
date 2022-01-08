@@ -49,7 +49,7 @@ def range_with_count(start: int, stop: int, count: int) -> list:
         d = (stop - start) / (count - 1)
         j = start
         for i in range(count - 1):
-            ret.append(j)
+            ret.append(round(j, 7))
             j += d
         ret.append(stop)
 
@@ -62,6 +62,7 @@ print(range_with_count(1, 5, 3))  # [1.0, 3.0, 5.0]
 print(range_with_count(1, 5, 4))  # [1.0, 2.333333333333333, 3.6666666666666665, 5.0]
 print(range_with_count(1, 5, 5))  # [1.0, 2.0, 3.0, 4.0, 5.0]
 print(range_with_count(5, 1, 5))  # [5.0, 4.0, 3.0, 2.0, 1.0]
+print(range_with_count(897, -585, 191))  # [5.0, 4.0, 3.0, 2.0, 1.0]
 
 
 def add_symbols(string: str, symbols: str) -> str:
@@ -445,8 +446,8 @@ if __name__ == '__main__':
     assert sum_of_digits("123") == 6
     assert sum_of_digits("") == 0
 
-    # assert range_with_count(1, 5, 2) == [1.0, 5.0]
-    # assert range_with_count(5, 1, 5) == [5.0, 4.0, 3.0, 2.0, 1.0]
+    assert range_with_count(1, 5, 2) == [1.0, 5.0]
+    assert range_with_count(5, 1, 5) == [5.0, 4.0, 3.0, 2.0, 1.0]
 
     assert add_symbols("aab", "a") == "aaaab"
     assert add_symbols("aab1", "a12") == "aaaab111"
