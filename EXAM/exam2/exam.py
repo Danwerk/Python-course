@@ -301,7 +301,21 @@ class DonutFactory:
 
         :return: dict with icing and filling of most pop donut
         """
-        pass
+        ret = {}
+        donut_icing = []
+        donut_filling = []
+
+        for d in self.donuts:
+            donut_icing.append(d.icing)
+            donut_filling.append(d.filling)
+
+        max_filling = max(donut_filling, key=donut_filling.count)
+        max_icing = max(donut_icing, key=donut_icing.count)
+
+
+        ret['icing'] = max_icing
+        ret['filling'] = max_filling
+        return ret
 
     def get_donuts_by_flavour(self, flavour: str) -> list:
         """
