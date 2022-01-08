@@ -302,19 +302,16 @@ class DonutFactory:
         :return: dict with icing and filling of most pop donut
         """
         ret = {}
-        donut_icing = []
-        donut_filling = []
+        donut_f_and_i = []
 
         for d in self.donuts:
-            donut_icing.append(d.icing)
-            donut_filling.append(d.filling)
+            donut_f_and_i.append((d.icing, d.filling))
 
-        max_filling = max(donut_filling, key=donut_filling.count)
-        max_icing = max(donut_icing, key=donut_icing.count)
+        max_combination = max(donut_f_and_i, key=donut_f_and_i.count)
+        max_combination = sorted(max_combination, key=lambda d: d[0])
 
-
-        ret['icing'] = max_icing
-        ret['filling'] = max_filling
+        ret['icing'] = max_combination[1]
+        ret['filling'] = max_combination[0]
         return ret
 
     def get_donuts_by_flavour(self, flavour: str) -> list:
