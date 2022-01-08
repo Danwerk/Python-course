@@ -25,7 +25,7 @@ class Product:
 
 class Warehouse:
     def __init__(self):
-        pass
+        self.products = {}
 
     def get_product_from_factory(self, name: str) -> Optional[Product]:
         """Return product object from Warehouse."""
@@ -40,9 +40,19 @@ class Warehouse:
 
                 product = Product(data['gift'], data['material_cost'],
                                   data['production_time'], data['weight_in_grams'])
+
+                if data['gift'] not in self.products:
+                    self.products[data['gift']] = []
+                self.products[data['gift']].append(product)
+
                 return product
         except urllib.error.HTTPError:
             return None
+
+    def get_product(self, name: str) -> Product:
+        """Return product if it exists in products dict."""
+        if name in self.products:
+            return self.products[name]
 
 
 class ChildrenList:
@@ -110,17 +120,20 @@ class Child:
 if __name__ == '__main__':
     warehouse = Warehouse()
     print(warehouse.get_product_from_factory('Swimming flippers'))
+    # print(warehouse.get_product('Swimming flippers'))
 
+    # nice...
     nice_children = ChildrenList()
     nice_children.read_wishes_from_file('ex15_wish_list.csv')
     nice_children.read_children_from_file('ex15_nice_list.csv')
     print(nice_children.get_children_list())
     nice_child1 = (nice_children.get_children_dict()['Libby'])
-    print(nice_child1)
+    # print(nice_child1)
 
+    # naughty...
     naughty_children = ChildrenList()
     naughty_children.read_wishes_from_file('ex15_wish_list.csv')
     naughty_children.read_children_from_file('ex15_naughty_list.csv')
     print(naughty_children.get_children_list())
     naughty_child1 = (naughty_children.get_children_dict()['Tanya'])
-    print(naughty_child1)
+    # print(naughty_child1)
