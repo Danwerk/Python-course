@@ -3,32 +3,38 @@ import requests
 
 
 def test_product_get_name():
+    """Product class test."""
     n = Product('Swimming flippers', 25, 3, 1000)
     assert n.get_name() == 'Swimming flippers'
 
 
 def test_product_get_material_cost():
+    """Product class test."""
     n = Product('Swimming flippers', 25, 3, 1000)
     assert n.get_price() == 25
 
 
 def test_product_get_weight():
+    """Product class test."""
     n = Product('Swimming flippers', 25, 3, 1000)
     assert n.get_weight() == 1000
 
 
 def test_product_get_production_time():
+    """Product class test."""
     n = Product('Swimming flippers', 25, 3, 1000)
     assert n.get_production_time() == 3
 
 
 def test_get_warehouse_api_response_check_status_code_equals_200():
+    """Warehouse class test."""
     """Shecks that the HTTP status code equals 200."""
     response = requests.get("http://api.game-scheduler.com:8089/gift?name=swimming%20flippers")
     assert response.status_code == 200
 
 
 def test_get_warehouse_api_response_check_gift_equals_swimming_flippers():
+    """Warehouse class test."""
     response = requests.get("http://api.game-scheduler.com:8089/gift?name=swimming%20flippers")
     response_body = response.json()
     assert response_body["gift"] == "Swimming flippers"
@@ -59,6 +65,7 @@ def test_get_warehouse_api_response_no_elements_return_none():
 
 
 def test_get_warehouse_api_response_return_elements_return_dict():
+    """Warehouse class test."""
     w = Warehouse()
     p = w.get_product_from_factory("Swimming flippers")
     assert p in w.get_product("Swimming flippers")
@@ -69,11 +76,13 @@ def test_get_warehouse_api_response_return_elements_return_dict():
 
 
 def test_get_product_no_elements_return_none():
+    """Warehouse class test."""
     w = Warehouse()
     assert w.get_product("Swimming flippers2") is None
 
 
 def test_get_children_list_read_children_from_empty_file():
+    """ChildrenList class test."""
     c = ChildrenList()
     c.read_wishes_from_file("ex15_wish_list.csv")
     c.read_children_from_file("test_empty_input.csv")
@@ -81,6 +90,7 @@ def test_get_children_list_read_children_from_empty_file():
 
 
 def test_get_children_list_read_file_one_nice_child():
+    """ChildrenList class test."""
     c = ChildrenList()
     c.read_wishes_from_file("ex15_wish_list.csv")
     c.read_children_from_file("test_one_nice.csv")
@@ -90,6 +100,7 @@ def test_get_children_list_read_file_one_nice_child():
 
 
 def test_get_children_list_read_file_one_naughty_child():
+    """ChildrenList class test."""
     c = ChildrenList()
     c.read_wishes_from_file("ex15_wish_list.csv")
     c.read_children_from_file("test_one_naughty.csv")
@@ -99,6 +110,7 @@ def test_get_children_list_read_file_one_naughty_child():
 
 
 def test_get_children_list_read_file_two_children_have_same_name():
+    """ChildrenList class test."""
     c = ChildrenList()
     c.read_wishes_from_file("ex15_wish_list.csv")
     c.read_children_from_file("test_two_same_name.csv")
@@ -108,6 +120,7 @@ def test_get_children_list_read_file_two_children_have_same_name():
 
 
 def test_get_children_list_read_file_nice_children():
+    """ChildrenList class test."""
     c = ChildrenList()
     c.read_wishes_from_file("ex15_wish_list.csv")
     c.read_children_from_file("ex15_nice_list.csv")
@@ -146,6 +159,7 @@ def test_get_children_list_read_file_nice_children():
 
 
 def test_get_nice_children():
+    """ChildrenList class test."""
     c = ChildrenList()
     ago = Child('Ago', 'Estonia', ['Playstation'])
     mati = Child('Mati', 'Latvia', ['Guitar', 'Bowling table'])
@@ -157,6 +171,7 @@ def test_get_nice_children():
 
 
 def test_get_naughty_children():
+    """ChildrenList class test."""
     c = ChildrenList()
     jaanus = Child('Jaanus', 'Estonia', ['Playstation'])
     mikk = Child('Mikk', 'Estonia', ['Guitar', 'Bowling table'])
@@ -168,12 +183,14 @@ def test_get_naughty_children():
 
 
 def test_get_children_wishes_empty_file():
+    """ChildrenList class test."""
     c = ChildrenList()
     c.read_wishes_from_file("test_empty_input.csv")
     assert len(c.get_wishes()) == 0
 
 
 def test_get_child_has_more_than_five_wishes_take_only_five():
+    """ChildrenList class test."""
     c = ChildrenList()
     c.read_wishes_from_file("test_more_than_five_wishes_per_child.csv")
     assert len(c.get_wishes()['Ago']) == 5
@@ -181,6 +198,7 @@ def test_get_child_has_more_than_five_wishes_take_only_five():
 
 
 def test_get_children_wishes_one_line():
+    """ChildrenList class test."""
     c = ChildrenList()
     c.read_wishes_from_file("test_one_wish.csv")
     assert len(c.get_wishes()) == 1
@@ -190,6 +208,7 @@ def test_get_children_wishes_one_line():
 
 
 def test_get_children_wishes_bigger_one():
+    """ChildrenList class test."""
     c = ChildrenList()
     c.read_wishes_from_file("test_few_wishes.csv")
     assert len(c.get_wishes()) == 8
@@ -210,6 +229,7 @@ def test_get_children_wishes_bigger_one():
 
 
 def test_get_children_dict():
+    """ChildrenList class test."""
     c = ChildrenList()
     c.read_wishes_from_file("ex15_wish_list.csv")
     c.read_children_from_file("test_few_nice.csv")
@@ -222,6 +242,7 @@ def test_get_children_dict():
 
 
 def test_child():
+    """Child class test."""
     c = Child("Ago", "Tallinn", ['Monopoly', 'Puzzle'])
     assert c.name == "Ago"
     assert c.country == "Tallinn"
