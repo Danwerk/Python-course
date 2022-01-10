@@ -5,7 +5,6 @@ import json
 import urllib.request
 import urllib.error
 from typing import Optional
-from urllib import parse
 
 API_URL = 'http://api.game-scheduler.com:8089/gift?'
 
@@ -174,8 +173,8 @@ class Child:
 
 if __name__ == '__main__':
     warehouse = Warehouse()
-    # print(warehouse.get_product_from_factory('Zebra Jumpy'))
-    # print(warehouse.get_product('Swimming flippers'))
+    print(warehouse.get_product_from_factory('Zebra Jumpy'))
+    print(warehouse.get_product('Zebra Jumpy'))
 
     # nice...
     nice_children = ChildrenList()
