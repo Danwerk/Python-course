@@ -1,3 +1,4 @@
+"""Santa workshop tests."""
 from santas_workshop import Product, Warehouse, ChildrenList, Child
 import requests
 
