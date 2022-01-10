@@ -10,41 +10,42 @@ from urllib import parse
 API_URL = 'http://api.game-scheduler.com:8089/gift?'
 
 
-# class World:
-#     def __init__(self):
-#         self.nice_children = []
-#         self.naughty_children = []
-#         self.normal_children = []
-#         self.wishlist_children = []
-#
-#     def add_nice_children(self, children: list):
-#         self.nice_children.extend(children)
-#
-#     def add_naughty_children(self, children: list):
-#         self.naughty_children.extend(children)
-#
-#     def get_nice_children(self):
-#         return self.nice_children
-#
-#     def get_naughty_children(self):
-#         return self.naughty_children
-
-
 class Product:
     """Product class."""
 
-    def __init__(self, name, price, production_time, weight):
+    def __init__(self, name: str, price: int, production_time: int, weight: int):
+        """Product class constructor."""
         self.name = name
         self.price = price
         self.production_time = production_time
         self.weight = weight
 
     def __repr__(self):
-        return f'Product ({self.name}, {self.weight})'
+        """Representation for Product."""
+        return f'Product ({self.name}, {self.price}, {self.production_time}, {self.weight})'
+
+    def get_name(self):
+        """Get name."""
+        return self.name
+
+    def get_price(self):
+        """Get price."""
+        return self.price
+
+    def get_production_time(self):
+        """Get production time."""
+        return self.production_time
+
+    def get_weight(self):
+        """Get weight."""
+        return self.weight
 
 
 class Warehouse:
+    """Warehouse class."""
+
     def __init__(self):
+        """Warehouse class constructor."""
         self.products = {}
 
     def get_product_from_factory(self, name: str) -> Optional[Product]:
@@ -79,10 +80,12 @@ class ChildrenList:
     """ChildrenList class."""
 
     def __init__(self):
+        """Childrenlist class constructor."""
         self.children_dict = {}
         self.children = []
         self.wishes = {}
-        self.wishlist_children = []
+        self.nice = []
+        self.naughty = []
 
     def read_wishes_from_file(self, filename):
         """Read children wishes from csv file into dict, where the key is the child and the value is list of wishes.
@@ -94,9 +97,14 @@ class ChildrenList:
             for row in csv_reader:
                 ret = []
                 name = row[0]
-                for g in row[1:]:
-                    gift = g.strip()
-                    ret.append(gift)
+                if len(row[1:]) > 5:
+                    for g in row[1:6]:
+                        gift = g.strip()
+                        ret.append(gift)
+                else:
+                    for g in row[1:]:
+                        gift = g.strip()
+                        ret.append(gift)
                 self.wishes[name] = ret
 
     def read_children_from_file(self, filename):
@@ -108,8 +116,24 @@ class ChildrenList:
                 self.children.append(child)
                 self.children_dict[row[0]] = child
 
+    def add_nice_children(self, children: list):
+        """Add only nice children in nice_children list."""
+        self.nice.extend(children)
+
+    def add_naughty_children(self, children: list):
+        """Add only naughty children in naughty_children list."""
+        self.naughty.extend(children)
+
+    def get_nice_children(self):
+        """Get nice children list"""
+        return self.nice
+
+    def get_naughty_children(self):
+        """Get naughty children list"""
+        return self.naughty
+
     def get_children_list(self):
-        """Getter for nice children."""
+        """Getter for children."""
         return self.children
 
     def get_children_dict(self):
@@ -120,11 +144,21 @@ class ChildrenList:
         """Getter for wishes dict: {name(str): wishes(list)}."""
         return self.wishes
 
+    def country_of_origin(self, country: str) -> list:
+        """Return list of people originated from same country."""
+        ret = []
+        for c in self.children:
+            if c.country == country:
+                ret.append(c)
+
+        return ret
+
 
 class Child:
     """Child class."""
 
     def __init__(self, name: str, country: str, wishlist: list):
+        """Child class constructor."""
         self.name = name
         self.country = country
         self.wishlist = wishlist
@@ -140,7 +174,7 @@ class Child:
 
 if __name__ == '__main__':
     warehouse = Warehouse()
-    print(warehouse.get_product_from_factory('Swimming flippers'))
+    # print(warehouse.get_product_from_factory('Zebra Jumpy'))
     # print(warehouse.get_product('Swimming flippers'))
 
     # nice...
@@ -148,18 +182,20 @@ if __name__ == '__main__':
     nice_children.read_wishes_from_file('ex15_wish_list.csv')
     nice_children.read_children_from_file('ex15_nice_list.csv')
     print(nice_children.get_children_list())
-    nice_child1 = (nice_children.get_children_dict()['Libby'])
+    nice_children.add_nice_children(nice_children.get_children_list())
+    print(nice_children.get_nice_children())
+
+    c_origin1 = nice_children.country_of_origin('Estonia')
+    nice_child1 = (nice_children.get_children_dict())
     # print(nice_child1)
 
     # naughty...
     naughty_children = ChildrenList()
-    naughty_children.read_wishes_from_file('ex15_wish_list.csv')
-    naughty_children.read_children_from_file('ex15_naughty_list.csv')
-    print(naughty_children.get_children_list())
-    naughty_child1 = (naughty_children.get_children_dict()['Tanya'])
-    # print(naughty_child1)
+    # naughty_children.read_wishes_from_file('ex15_wish_list.csv')
+    # naughty_children.read_children_from_file('ex15_naughty_list.csv')
+    # print(naughty_children.get_children_list())
+    # naughty_children.add_naughty_children(naughty_children.get_children_list())
+    # print(naughty_children.get_naughty_children())
 
-    # Nice, Naughty, Normal children together...
-    world = World()
-    world.add_nice_children(nice_children.get_children_list())
-    world.add_naughty_children(naughty_children.get_children_list())
+    # naughty_child1 = (naughty_children.get_children_dict()['Tanya'])
+    # print(naughty_child1)
