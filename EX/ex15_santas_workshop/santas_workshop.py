@@ -125,11 +125,11 @@ class ChildrenList:
         self.naughty.extend(children)
 
     def get_nice_children(self):
-        """Get nice children list"""
+        """Get nice children list."""
         return self.nice
 
     def get_naughty_children(self):
-        """Get naughty children list"""
+        """Get naughty children list."""
         return self.naughty
 
     def get_children_list(self):
