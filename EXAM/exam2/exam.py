@@ -42,24 +42,21 @@ def range_with_count(start: int, stop: int, count: int) -> list:
     ret = []
     if count == 1:
         ret.append(start)
-    elif count == 2:
-        ret.append(start)
-        ret.append(stop)
+        return ret
+
     else:
         d = (stop - start) / (count - 1)
         j = start
-        for i in range(count - 1):
-            ret.append(round(j, 3))
+        for i in range(count):
+            ret.append(j)
             j += d
-        ret.append(stop)
-
-    return ret
+        return ret
 
 
-# print(range_with_count(1, 5, 1))  # [1.0]
-# print(range_with_count(1, 5, 2))  # [1.0, 5.0]
-# print(range_with_count(1, 5, 3))  # [1.0, 3.0, 5.0]
-# print(range_with_count(1, 5, 4))  # [1.0, 2.333333333333333, 3.6666666666666665, 5.0]
+print(range_with_count(1, 5, 1))  # [1.0]
+print(range_with_count(1, 5, 2))  # [1.0, 5.0]
+print(range_with_count(1, 5, 3))  # [1.0, 3.0, 5.0]
+print(range_with_count(1, 5, 4))  # [1.0, 2.333333333333333, 3.6666666666666665, 5.0]
 # print(range_with_count(1, 5, 5))  # [1.0, 2.0, 3.0, 4.0, 5.0]
 # print(range_with_count(5, 1, 5))  # [5.0, 4.0, 3.0, 2.0, 1.0]
 # print(range_with_count(897, -585, 191))  # [5.0, 4.0, 3.0, 2.0, 1.0]
@@ -342,6 +339,7 @@ class Monster:
         """Constructor."""
         self.species = species
         self.bounty = bounty
+        self.alive = True
 
     def get_species(self) -> Species:
         """Return the species of the monster."""
@@ -353,6 +351,10 @@ class Monster:
 
     def is_alive(self) -> bool:
         """Whether the monster is alive."""
+        if self.alive is True:
+            return True
+        else:
+            return False
 
     def slay(self) -> bool:
         """
@@ -361,6 +363,11 @@ class Monster:
         If monster is already dead, return False.
         Otherwise kill the monster and return True.
         """
+        if self.alive is True:
+            self.alive = False
+            return True
+        elif self.alive is False:
+            return False
 
     def __repr__(self) -> str:
         """
