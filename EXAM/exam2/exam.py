@@ -354,7 +354,6 @@ class Monster:
     def is_alive(self) -> bool:
         """Whether the monster is alive."""
 
-
     def slay(self) -> bool:
         """
         Slay the monster.
@@ -362,7 +361,6 @@ class Monster:
         If monster is already dead, return False.
         Otherwise kill the monster and return True.
         """
-
 
     def __repr__(self) -> str:
         """
@@ -475,8 +473,10 @@ class Witcher:
 
         Each value should be in the list once, so there can be max 3 objects in the result.
         """
-
-        return sorted(self.slain, key=lambda i: i.get_species())
+        # for i in self.slain:
+        #     if i.count() > 1:
+        #         print(i)
+        # return sorted(self.slain, key=lambda i: i.species.name)
 
     def hunt_most_expensive(self, village: Village) -> bool:
         """
@@ -495,14 +495,20 @@ class Witcher:
             for monster in village.get_monsters():
                 if monster.bounty > most_expensive:
                     most_expensive = monster.bounty
+            for monster in village.get_monsters():
+                if monster.bounty == most_expensive:
+                    max_monster = monster
+                    break
             if village.money >= most_expensive:
                 self.money += most_expensive
                 village.money -= most_expensive
+                self.slain.append(monster)
+                village.monsters.remove(max_monster)
                 return True
-
-
-
-
+            else:
+                self.slain.append(monster)
+                village.monsters.remove(max_monster)
+                return False
 
     def __repr__(self) -> str:
         """
@@ -590,7 +596,7 @@ if __name__ == '__main__':
     print(tallinn.get_monsters())  # []
 
     print(ago.get_hunted_species())  # [<Species.Beast: 3>, <Species.Dragon: 1>, <Species.Vampire: 2>]
-    #print(ago.get_hunted_species()[0] == Species.Beast)  # True
+    # print(ago.get_hunted_species()[0] == Species.Beast)  # True
 
     # enum examples
     species_list = [Species.Beast, Species.Vampire, Species.Beast]
