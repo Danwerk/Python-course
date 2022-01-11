@@ -48,6 +48,7 @@ class Warehouse:
         """Warehouse class constructor."""
         self.products = {}
 
+
     def get_product_from_factory(self, name: str) -> Optional[Product]:
         """Return product object from Warehouse."""
         qs = urllib.parse.urlencode({'name': name})
@@ -172,18 +173,11 @@ class Logistics:
         self.carriages = {}
         self.product_objects = {}
         self.total_weight_amount_per_child = {}
-        self.countries = set()
         self.countries_and_children = {}
 
     def get_children(self):
         """Getter for children"""
         return self.children
-
-    def get_countries_to_deliver(self):
-        """All countries where products must be delivered."""
-        for c in self.children:
-            self.countries.add(c.country)
-        return self.countries
 
     def children_from_countries_to_deliver(self):
         for c in self.children:
@@ -199,8 +193,11 @@ class Logistics:
         for c in self.children:
             for i in c.wishlist:
                 w = Warehouse()
-                obj = w.get_product_from_factory(i)
-                self.product_objects[i] = obj
+                if i in self.product_objects:
+                    continue
+                else:
+                    obj = w.get_product_from_factory(i)
+                    self.product_objects[i] = obj
 
     def get_products(self):
         """Return products objects."""
@@ -297,14 +294,16 @@ class Carriage:
     """Class carriage."""
 
     def __init__(self, country: str, products: dict):
+        """Carriage class constructor."""
         self.country = country
         self.products = products
 
     def __repr__(self):
+        """Representation for Carriage."""
         return f'{self.country}'
 
     def delivery_note(self):
-        ret = []
+        """Make the delivery notes ready."""
         santa = ''
         santa += r"""                        DELIVERY ORDER
                                                           _v
@@ -364,7 +363,6 @@ if __name__ == '__main__':
     nice_children.add_nice_children(nice_children.get_children_list())
     # print(nice_children.get_nice_children())
 
-    # print(nice_child1)
 
     # naughty...
     naughty_children = ChildrenList()
@@ -388,11 +386,11 @@ if __name__ == '__main__':
     # l2 = Logistics(nice_children.get_children_list())
     # print(l2.country_of_origin('Estonia'))
 
-    l = Logistics([libby, keira, lexie, amelia])
+    l = Logistics(nice_children.get_nice_children())
     print(l.get_children())
+
     l.import_products_from_warehouse()
 
-    print(l.get_countries_to_deliver())  # Germany
     print(l.country_of_origin("Germany"))  # check where person comes from.
     # print(l.get_products())
     # print(l.get_products_total_volume())
@@ -406,7 +404,7 @@ if __name__ == '__main__':
 
     l.pack_all_carriages_to_countries()
     print(l.get_packed_carriages_to_countries())
-    print(l.delivery_notes_for_carriage_per_country("Tallinn"))
-    print(l.delivery_notes_for_carriage_all())
+    print(l.delivery_notes_for_carriage_per_country("Estonia"))
+    # print(l.delivery_notes_for_carriage_all())
 
 # make a list of countries to deliver
