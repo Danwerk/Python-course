@@ -287,13 +287,22 @@ class Logistics:
 
     def delivery_notes_for_carriage_per_country(self, country: str):
         """Print"""
+        ret = ''
         for i in self.carriages[country]:
-            i.delivery_note()
+            ret += i.delivery_note()
+        self.write_contents_to_file('delivery_note.txt', ret)
 
     def delivery_notes_for_carriage_all(self):
+        ret = ''
         for k in self.carriages:
             for v in self.carriages[k]:
-                v.delivery_note()
+                ret += v.delivery_note()
+        self.write_contents_to_file('delivery_note.txt', ret)
+
+    def write_contents_to_file(self, filename: str, contents: str) -> None:
+        """Write contents to file. Use 'a' instead 'w' if you want all delivery notes in one file."""
+        with open(filename, "w") as f:
+            f.write(contents)
 
 
 class Carriage:
@@ -357,13 +366,12 @@ TO: /{self.country.upper()}/\n\n"""
         s = ''.join(table)
         santa += s
 
-        self.write_contents_to_file('delivery_note.txt', santa)
         return santa
 
-    def write_contents_to_file(self, filename: str, contents: str) -> None:
-        """Write contents to file. Use 'a' instead 'w' if you want all delivery notes in one file."""
-        with open(filename, "w") as f:
-            f.write(contents)
+    # def write_contents_to_file(self, filename: str, contents: str) -> None:
+    #     """Write contents to file. Use 'a' instead 'w' if you want all delivery notes in one file."""
+    #     with open(filename, "w") as f:
+    #         f.write(contents)
 
 
 if __name__ == '__main__':
@@ -401,8 +409,8 @@ if __name__ == '__main__':
     # l2 = Logistics(nice_children.get_children_list())
     # print(l2.country_of_origin('Estonia'))
 
-    # l = Logistics(nice_children.get_nice_children())
-    l = Logistics([libby, keira, lexie, amelia])
+    l = Logistics(nice_children.get_nice_children())
+    # l = Logistics([libby, keira, lexie, amelia])
     l.import_products_from_warehouse()
 
     print(l.country_of_origin("Germany"))  # check where person comes from.
@@ -416,8 +424,8 @@ if __name__ == '__main__':
     print(l.get_children_from_countries_to_deliver())
 
     l.pack_all_carriages_to_countries()
-    print(l.get_packed_carriages_to_countries())
-    # print(l.delivery_notes_for_carriage_per_country("Estonia"))
-    l.delivery_notes_for_carriage_all()
+    # print(l.get_packed_carriages_to_countries())
+    print(l.delivery_notes_for_carriage_per_country("Estonia"))
+    # l.delivery_notes_for_carriage_all()
 
 # make a list of countries to deliver
