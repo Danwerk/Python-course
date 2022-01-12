@@ -48,7 +48,6 @@ class Warehouse:
         """Warehouse class constructor."""
         self.products = {}
 
-
     def get_product_from_factory(self, name: str) -> Optional[Product]:
         """Return product object from Warehouse."""
         qs = urllib.parse.urlencode({'name': name})
@@ -156,7 +155,7 @@ class Child:
         self.wishlist = wishlist
 
     def __repr__(self):
-        """Representation for child."""
+        """Representation for Child."""
         return f'{self.name}'
 
     def get_wishes(self):
@@ -168,7 +167,7 @@ class Logistics:
     """Logistics class"""
 
     def __init__(self, children: list):
-        """Logistics constructor."""
+        """Logistics class constructor."""
         self.children = children
         self.carriages = {}
         self.product_objects = {}
@@ -176,20 +175,26 @@ class Logistics:
         self.countries_and_children = {}
 
     def get_children(self):
-        """Getter for children"""
+        """Return children."""
         return self.children
 
     def children_from_countries_to_deliver(self):
+        """Split children on countries they live. Add them in dict e.g {country1: [child1, child2]}."""
         for c in self.children:
             if c.country not in self.countries_and_children:
                 self.countries_and_children[c.country] = [c]
             else:
                 self.countries_and_children[c.country].append(c)
 
-    def get_children_from_countries_to_deliver(self):
+    def get_children_from_countries_to_deliver(self) -> dict:
+        """Get children splitted on countries."""
         return self.countries_and_children
 
     def import_products_from_warehouse(self):
+        """Import product from warehouse. Here we use api to request products and make Product objects.
+
+        All Product objects are added in 'self.product_objects' dictionary where the key is product name(str),
+        and value is the Product object."""
         for c in self.children:
             for i in c.wishlist:
                 w = Warehouse()
@@ -199,8 +204,8 @@ class Logistics:
                     obj = w.get_product_from_factory(i)
                     self.product_objects[i] = obj
 
-    def get_products(self):
-        """Return products objects."""
+    def get_products(self) -> dict:
+        """Return product objects."""
         return self.product_objects
 
     def country_of_origin(self, country: str) -> list:
@@ -221,23 +226,22 @@ class Logistics:
 
         return total
 
-    def products_total_volume_per_child(self, c: str) -> dict:
-        """Return total amount of products weight per one child."""
-        for country in self.countries_and_children:
+    def products_total_volume_per_child(self, country: str) -> dict:
+        """Return total amount of products weight per one child.
+
+        Get sum of all products weight. e.g {Ago: 1234, Mati: 2345}"""
+        for c in self.countries_and_children:
             ret = {}
-            for p in self.countries_and_children[country]:
+            for p in self.countries_and_children[c]:
                 total = 0
                 for w in p.wishlist:
                     total += self.product_objects[w].weight
                 ret[p] = total
-                self.total_weight_amount_per_child[country] = ret
+                self.total_weight_amount_per_child[c] = ret
 
-        return self.total_weight_amount_per_child[c]
-
-    def get_products_total_volume_per_child_per_country(self, country: str):
         return self.total_weight_amount_per_child[country]
 
-    def amount_of_carriages_needed_to_carry_products_to_country(self, country) -> int:
+    def amount_of_carriages_needed_to_carry_products_to_country(self, country: str) -> int:
         """Calculate the number of sleighs you need to carry all products to country."""
         total = 50000
         ret = math.ceil(sum(self.total_weight_amount_per_child[country].values()) / total)
@@ -247,6 +251,7 @@ class Logistics:
         """Pack carriages to given country according to max carriage load capacity(50000g)."""
         total = 50000
         total_w = self.products_total_volume_per_child(country)
+        total_w_copy = total_w.copy()
         for i in range(self.amount_of_carriages_needed_to_carry_products_to_country(country)):
             ret = [(k, v) for k, v in total_w.items()]
             children_products_to_carry = {}
@@ -258,14 +263,14 @@ class Logistics:
                     children_products_to_carry[ret[c][0]] = ret[c][0].wishlist
                     del total_w[ret[c][0]]
                 elif amount + ret[c][1] >= total:
-                    carriage = Carriage(country, children_products_to_carry)
+                    carriage = Carriage(country, children_products_to_carry, total_w_copy)
 
                     if country not in self.carriages:
                         self.carriages[country] = [carriage]
                     else:
                         self.carriages[country].append(carriage)
 
-        carriage = Carriage(country, children_products_to_carry)
+        carriage = Carriage(country, children_products_to_carry, total_w_copy)
         if country not in self.carriages:
             self.carriages[country] = [carriage]
         else:
@@ -281,28 +286,30 @@ class Logistics:
         return self.carriages
 
     def delivery_notes_for_carriage_per_country(self, country: str):
+        """Print"""
         for i in self.carriages[country]:
-            print(i.delivery_note())
+            i.delivery_note()
 
     def delivery_notes_for_carriage_all(self):
         for k in self.carriages:
             for v in self.carriages[k]:
-                print(v.delivery_note())
+                v.delivery_note()
 
 
 class Carriage:
     """Class carriage."""
 
-    def __init__(self, country: str, products: dict):
+    def __init__(self, country: str, products: dict, total_w):
         """Carriage class constructor."""
         self.country = country
         self.products = products
+        self.total_weights = total_w
 
     def __repr__(self):
         """Representation for Carriage."""
         return f'{self.country}'
 
-    def delivery_note(self):
+    def delivery_note(self) -> str:
         """Make the delivery notes ready."""
         santa = ''
         santa += r"""                        DELIVERY ORDER
@@ -340,14 +347,23 @@ TO: /{self.country.upper()}/\n\n"""
                 max_gift_len + 2) + '[]' + '=' * max_total_weight_len + '=' * 2 + f'[|' + '\n')
 
         for c in self.products:
-            table.append(f'|| {c.name:<{max_name_len}} || {", ".join(self.products[c]):<{max_gift_len}} || ... \n')
+            table.append(
+                f'|| {c.name:<{max_name_len}} || {", ".join(self.products[c]):<{max_gift_len}} || '
+                f'{self.total_weights[c] / 1000:<{max_total_weight_len}} ||\n')
 
         table.append(f'\\\\' + '=' * (max_name_len + 2) + '[]' + '=' * (
                 max_gift_len + 2) + '[]' + '=' * max_total_weight_len + '=' * 2 + f'//' + '\n')
 
         s = ''.join(table)
         santa += s
+
+        self.write_contents_to_file('delivery_note.txt', santa)
         return santa
+
+    def write_contents_to_file(self, filename: str, contents: str) -> None:
+        """Write contents to file. Use 'a' instead 'w' if you want all delivery notes in one file."""
+        with open(filename, "w") as f:
+            f.write(contents)
 
 
 if __name__ == '__main__':
@@ -363,7 +379,6 @@ if __name__ == '__main__':
     nice_children.add_nice_children(nice_children.get_children_list())
     # print(nice_children.get_nice_children())
 
-
     # naughty...
     naughty_children = ChildrenList()
     # naughty_children.read_wishes_from_file('ex15_wish_list.csv')
@@ -377,7 +392,7 @@ if __name__ == '__main__':
 
     libby = Child("Libby", 'Germany', ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
     keira = Child("Keira", 'Germany', ['LED light up sneakers', '7200 Riot Points gift card'])
-    lexie = Child("Lexie", 'Tallinn',
+    lexie = Child("Lexie", 'Estonia',
                   ['Mermaid barbie', 'Pink fluffy pen', 'World of Warcraft: Shadowlands Collectors Edition'])
 
     amelia = Child("Amelia", 'Germany', ['Zebra Jumpy', 'Princess dress', 'Lego death star', 'LED light up sneakers',
@@ -386,9 +401,8 @@ if __name__ == '__main__':
     # l2 = Logistics(nice_children.get_children_list())
     # print(l2.country_of_origin('Estonia'))
 
-    l = Logistics(nice_children.get_nice_children())
-    print(l.get_children())
-
+    # l = Logistics(nice_children.get_nice_children())
+    l = Logistics([libby, keira, lexie, amelia])
     l.import_products_from_warehouse()
 
     print(l.country_of_origin("Germany"))  # check where person comes from.
@@ -400,11 +414,10 @@ if __name__ == '__main__':
 
     l.children_from_countries_to_deliver()
     print(l.get_children_from_countries_to_deliver())
-    print(l.get_packed_carriages_to_countries())
 
     l.pack_all_carriages_to_countries()
     print(l.get_packed_carriages_to_countries())
-    print(l.delivery_notes_for_carriage_per_country("Estonia"))
-    # print(l.delivery_notes_for_carriage_all())
+    # print(l.delivery_notes_for_carriage_per_country("Estonia"))
+    l.delivery_notes_for_carriage_all()
 
 # make a list of countries to deliver
