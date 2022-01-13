@@ -254,7 +254,7 @@ def test_child():
 # Part two (test Logistics)
 
 def test_get_children():
-    """Logistics class test."""
+    """Logistic class test."""
     libby = Child("Libby", "United Kingdom", ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
     keira = Child("Keira", "Germany", ['LED light up sneakers', '7200 Riot Points gift card'])
     lexie = Child("Lexie", "Canada",
