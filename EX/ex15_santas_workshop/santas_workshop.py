@@ -229,21 +229,28 @@ class Logistics:
     def products_total_volume_per_child(self, country: str) -> dict:
         """Return total amount of products weight per one child.
 
-        Get sum of all products weight. e.g {Ago: 1234, Mati: 2345}"""
-        for c in self.countries_and_children:
-            ret = {}
-            for p in self.countries_and_children[c]:
-                total = 0
-                for w in p.wishlist:
-                    total += self.product_objects[w].weight
-                ret[p] = total
-                self.total_weight_amount_per_child[c] = ret
+        Get sum of all products weight. e.g {Ago: 1234, Mati: 2345}. Look for the children from the same country."""
+        if self.countries_and_children == {}:
+            return None
+        else:
+            for c in self.countries_and_children:
+                ret = {}
+                for p in self.countries_and_children[c]:
+                    total = 0
+                    for w in p.wishlist:
+                        total += self.product_objects[w].weight
+                    ret[p] = total
+                    self.total_weight_amount_per_child[c] = ret
 
         return self.total_weight_amount_per_child[country]
 
     def amount_of_carriages_needed_to_carry_products_to_country(self, country: str) -> int:
-        """Calculate the number of sleighs you need to carry all products to country."""
+        """Calculate the number of sleighs you need to carry all products to country.
+
+        If there is no country where to carry products, return 0."""
         total = 50000
+        if self.total_weight_amount_per_child == {} or country not in self.total_weight_amount_per_child:
+            return 0
         ret = math.ceil(sum(self.total_weight_amount_per_child[country].values()) / total)
         return ret
 
@@ -269,7 +276,7 @@ class Logistics:
                         self.carriages[country] = [carriage]
                     else:
                         self.carriages[country].append(carriage)
-
+                    break
         carriage = Carriage(country, children_products_to_carry, total_w_copy)
         if country not in self.carriages:
             self.carriages[country] = [carriage]
@@ -285,19 +292,21 @@ class Logistics:
         """Get all packed carriages."""
         return self.carriages
 
-    def delivery_notes_for_carriage_per_country(self, country: str):
+    def delivery_notes_for_carriage_per_country(self, country: str, filename):
         """Print"""
         ret = ''
+        if country not in self.carriages:
+            return None
         for i in self.carriages[country]:
             ret += i.delivery_note()
-        self.write_contents_to_file('delivery_note.txt', ret)
+        self.write_contents_to_file(filename, ret)
 
-    def delivery_notes_for_carriage_all(self):
+    def delivery_notes_for_carriage_all(self, filename):
         ret = ''
         for k in self.carriages:
             for v in self.carriages[k]:
                 ret += v.delivery_note()
-        self.write_contents_to_file('delivery_note.txt', ret)
+        self.write_contents_to_file(filename, ret)
 
     def write_contents_to_file(self, filename: str, contents: str) -> None:
         """Write contents to file. Use 'a' instead 'w' if you want all delivery notes in one file."""
@@ -308,7 +317,7 @@ class Logistics:
 class Carriage:
     """Class carriage."""
 
-    def __init__(self, country: str, products: dict, total_w):
+    def __init__(self, country: str, products: dict, total_w: dict):
         """Carriage class constructor."""
         self.country = country
         self.products = products
@@ -320,6 +329,8 @@ class Carriage:
 
     def delivery_note(self) -> str:
         """Make the delivery notes ready."""
+        if self.products is {} or self.total_weights == {}:
+            return ''
         santa = ''
         santa += r"""                        DELIVERY ORDER
                                                           _v
@@ -329,12 +340,11 @@ class Carriage:
     o<_\__,  (_ ff ~(_ ff ~(_ ff ~(_ ff~~~~~@ )\/_;-"``     |
       (___)~~//<_\__, <_\__, <_\__, <_\__,    | \__________/|
       // >>     (___)~~(___)~~(___)~~(___)~~~~\\_/_______\_//
-                // >>  // >>  // >>  // >>     `'---------'` """
+                // >>  // >>  // >>  // >>     `'---------'`"""
         santa += '\n'
 
         santa += f"""\nFROM: NORTH POLE CHRISTMAS CHEER INCORPORATED
 TO: /{self.country.upper()}/\n\n"""
-
         str_name = "Name"
         str_gifts = "Gifts"
         str_total_weight = "Total Weight(kg)"
@@ -361,17 +371,12 @@ TO: /{self.country.upper()}/\n\n"""
                 f'{self.total_weights[c] / 1000:<{max_total_weight_len}} ||\n')
 
         table.append(f'\\\\' + '=' * (max_name_len + 2) + '[]' + '=' * (
-                max_gift_len + 2) + '[]' + '=' * max_total_weight_len + '=' * 2 + f'//' + '\n')
+                max_gift_len + 2) + '[]' + '=' * max_total_weight_len + '=' * 2 + f'//')
 
         s = ''.join(table)
         santa += s
 
         return santa
-
-    # def write_contents_to_file(self, filename: str, contents: str) -> None:
-    #     """Write contents to file. Use 'a' instead 'w' if you want all delivery notes in one file."""
-    #     with open(filename, "w") as f:
-    #         f.write(contents)
 
 
 if __name__ == '__main__':
@@ -409,23 +414,23 @@ if __name__ == '__main__':
     # l2 = Logistics(nice_children.get_children_list())
     # print(l2.country_of_origin('Estonia'))
 
-    l = Logistics(nice_children.get_nice_children())
-    # l = Logistics([libby, keira, lexie, amelia])
+    # l = Logistics(nice_children.get_nice_children())
+    l = Logistics([libby, keira])
     l.import_products_from_warehouse()
 
-    print(l.country_of_origin("Germany"))  # check where person comes from.
+    # print(l.country_of_origin("Germany"))  # check where person comes from.
     # print(l.get_products())
     # print(l.get_products_total_volume())
-    # print(l.get_products_total_volume_per_child())
+    # l.children_from_countries_to_deliver()
+    # print(l.products_total_volume_per_child("Germany"))
 
     # print(l.amount_of_carriages_needed_to_carry_products_to_country("Germany"))
+    # print(l.get_children_from_countries_to_deliver())
 
-    l.children_from_countries_to_deliver()
-    print(l.get_children_from_countries_to_deliver())
-
-    l.pack_all_carriages_to_countries()
+    # l.pack_all_carriages_to_countries()
     # print(l.get_packed_carriages_to_countries())
-    print(l.delivery_notes_for_carriage_per_country("Estonia"))
-    # l.delivery_notes_for_carriage_all()
+    # print(l.delivery_notes_for_carriage_per_country("Estonia"))
+    # print(l.delivery_notes_for_carriage_all("delivery_note.txt"))
 
-# make a list of countries to deliver
+    # print(l.pack_carriages_to_country("Germany"))
+    # print(l.delivery_notes_for_carriage_per_country("Germany", "delivery_note.txt"))

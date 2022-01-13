@@ -1,5 +1,5 @@
 """Santa workshop tests."""
-from santas_workshop import Product, Warehouse, ChildrenList, Child
+from santas_workshop import Product, Warehouse, ChildrenList, Child, Logistics, Carriage
 import requests
 
 
@@ -249,3 +249,322 @@ def test_child():
     assert c.country == "Tallinn"
     assert len(c.wishlist) == 2
     assert c.get_wishes() == ['Monopoly', 'Puzzle']
+
+
+# Part two (test Logistics)
+
+def test_get_children():
+    """Logistics class test."""
+    libby = Child("Libby", "United Kingdom", ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
+    keira = Child("Keira", "Germany", ['LED light up sneakers', '7200 Riot Points gift card'])
+    lexie = Child("Lexie", "Canada",
+                  ['Mermaid barbie', 'Pink fluffy pen', 'World of Warcraft: Shadowlands Collectors Edition'])
+    amelia = Child("Amelia", "South Africa",
+                   ['Wall-mount diamond pickaxe', 'Magic: The Gathering Commander Legends booster box'])
+    evelyn = Child("Evelyn", "Puerto Rico", ['Wall-mount diamond pickaxe', '7200 Riot Points gift card', 'Avocado'])
+    c = [libby, keira, lexie, amelia, evelyn]
+    l = Logistics(c)
+
+    assert len(l.get_children()) == 5
+    assert l.get_children() == c
+
+
+def test_children_from_countries_to_deliver():
+    """Logistics class test."""
+    libby = Child("Libby", "United Kingdom", ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
+    keira = Child("Keira", "Germany", ['LED light up sneakers', '7200 Riot Points gift card'])
+    evelyn = Child("Evelyn", "Puerto Rico", ['Wall-mount diamond pickaxe', '7200 Riot Points gift card', 'Avocado'])
+    c = [libby, keira, evelyn]
+    l = Logistics(c)
+
+    l.children_from_countries_to_deliver()
+    ret = l.get_children_from_countries_to_deliver()
+    assert len(ret) == 3
+    assert "United Kingdom" in ret and "Germany" in ret and "Puerto Rico" in ret
+    assert libby in ret["United Kingdom"]
+    assert keira in ret["Germany"]
+    assert evelyn in ret["Puerto Rico"]
+
+
+def test_import_products_from_warehouse():
+    """Logistics class test."""
+    libby = Child("Libby", "United Kingdom", ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
+    keira = Child("Keira", "Germany", ['LED light up sneakers', '7200 Riot Points gift card'])
+
+    c = [libby]
+
+    l = Logistics(c)
+
+    # zebra_jumpy = Product("Zebra Jumpy", 25, 1, 1337)
+    # princess_dress = Product("Princess dress", 17, 5, 278)
+    # lego_death_star = Product("Lego death star", 599, 30, 2000)
+    # expected = {'Zebra Jumpy': zebra_jumpy, 'Princess dress': princess_dress, 'Lego death star': lego_death_star}
+    assert len(l.get_products()) == 0
+    l.import_products_from_warehouse()
+    ret = l.get_products()
+    assert len(ret) == 3
+    assert isinstance(ret["Zebra Jumpy"], Product)
+    assert isinstance(ret["Princess dress"], Product)
+    assert isinstance(ret["Lego death star"], Product)
+
+    assert ret["Zebra Jumpy"].name == "Zebra Jumpy"
+    assert ret["Princess dress"].name == "Princess dress"
+    assert ret["Lego death star"].name == "Lego death star"
+
+    assert ret["Zebra Jumpy"].price == 25
+    assert ret["Princess dress"].price == 17
+    assert ret["Lego death star"].price == 599
+
+    assert ret["Zebra Jumpy"].production_time == 1
+    assert ret["Princess dress"].production_time == 5
+    assert ret["Lego death star"].production_time == 30
+
+    assert ret["Zebra Jumpy"].weight == 1337
+    assert ret["Princess dress"].weight == 278
+    assert ret["Lego death star"].weight == 2000
+
+    c.append(keira)
+    l.import_products_from_warehouse()
+
+    assert len(l.get_products()) == 5
+
+
+def test_country_of_origin():
+    """Logistics class test."""
+    """Test childrens country of origin, if there is a country but no children from such country,then
+    the function must return empty list."""
+    libby = Child("Libby", "United Kingdom", ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
+    keira = Child("Keira", "Germany", ['LED light up sneakers', '7200 Riot Points gift card'])
+    evelyn = Child("Evelyn", "Puerto Rico", ['Wall-mount diamond pickaxe', '7200 Riot Points gift card', 'Avocado'])
+
+    jaden = Child("Jaden", "Germany", ['Dungeons and Dragons 5th Edition Starter Set',
+                                       'New phone', 'Ninja Turtles backpack'])
+    c = [libby, keira, evelyn]
+    l = Logistics(c)
+
+    assert l.country_of_origin("United Kingdom") == [libby]
+    assert l.country_of_origin("Germany") == [keira]
+    assert l.country_of_origin("Puerto Rico") == [evelyn]
+
+    assert l.country_of_origin("Estonia") == []
+
+    c.append(jaden)
+    assert l.country_of_origin("Germany") == [keira, jaden]
+
+
+def test_get_products_total_volume():
+    """Logistics class test."""
+    libby = Child("Libby", "United Kingdom", ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
+    keira = Child("Keira", "Germany", ['LED light up sneakers', '7200 Riot Points gift card'])
+    c = [libby, keira]
+    l = Logistics(c)
+    assert l.get_products_total_volume() == 0
+    result = 1337 + 278 + 2000 + 250 + 10
+    l.import_products_from_warehouse()
+    assert l.get_products_total_volume() == result
+
+
+def test_products_total_volume_per_child():
+    """Logistics class test."""
+    libby = Child("Libby", "United Kingdom", ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
+    keira = Child("Keira", "Germany", ['LED light up sneakers', '7200 Riot Points gift card'])
+    jaden = Child("Jaden", "Germany", ['Dungeons and Dragons 5th Edition Starter Set',
+                                       'New phone', 'Ninja Turtles backpack'])
+    c = [libby, keira, jaden]
+    l = Logistics(c)
+    l.children_from_countries_to_deliver()
+    l.import_products_from_warehouse()
+
+    keira_result = sum([250, 10])
+    jaden_result = sum([1000, 200, 350])
+    libby_result = sum([1337, 278, 2000])
+    assert len(l.products_total_volume_per_child("Germany")) == 2
+    assert l.products_total_volume_per_child("Germany")[keira] == keira_result
+    assert l.products_total_volume_per_child("Germany")[jaden] == jaden_result
+    assert l.products_total_volume_per_child("United Kingdom")[libby] == libby_result
+
+
+def test_products_total_volume_per_child_return_none():
+    """Logistics class test."""
+    libby = Child("Libby", "United Kingdom", ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
+    keira = Child("Keira", "Germany", ['LED light up sneakers', '7200 Riot Points gift card'])
+    c = [libby, keira]
+    l = Logistics(c)
+    assert l.products_total_volume_per_child("Estonia") is None
+
+
+def test_amount_of_carriages_needed_to_carry_products_to_country():
+    """Logistics class test."""
+    libby = Child("Libby", "United Kingdom", ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
+    keira = Child("Keira", "Germany", ['LED light up sneakers', '7200 Riot Points gift card'])
+    c = [libby, keira]
+    l = Logistics(c)
+    l.import_products_from_warehouse()
+    l.children_from_countries_to_deliver()
+    l.products_total_volume_per_child("Germany")
+    assert l.amount_of_carriages_needed_to_carry_products_to_country("Germany") == 1
+
+
+def test_amount_of_carriages_needed_to_carry_products_to_country_returns_zero_if_country_not_exist():
+    """Logistics class test."""
+    libby = Child("Libby", "United Kingdom", ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
+    keira = Child("Keira", "Germany", ['LED light up sneakers', '7200 Riot Points gift card'])
+    c = [libby, keira]
+    l = Logistics(c)
+    l.children_from_countries_to_deliver()
+    assert l.amount_of_carriages_needed_to_carry_products_to_country("Estonia") == 0
+
+
+def test_pack_carriages_to_country():
+    """Logistics class test."""
+    keira = Child("Keira", "Germany", ['LED light up sneakers', '7200 Riot Points gift card'])
+    lexie = Child("Lexie", "Canada",
+                  ['Mermaid barbie', 'Pink fluffy pen', 'World of Warcraft: Shadowlands Collectors Edition'])
+    amelia = Child("Amelia", "South Africa",
+                   ['Wall-mount diamond pickaxe', 'Magic: The Gathering Commander Legends booster box'])
+    evelyn = Child("Evelyn", "Puerto Rico", ['Wall-mount diamond pickaxe', '7200 Riot Points gift card', 'Avocado'])
+    libby = Child("Libby", "United Kingdom", ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
+    c = [keira, lexie, amelia, evelyn, libby]
+    l = Logistics(c)
+    l.import_products_from_warehouse()
+    l.children_from_countries_to_deliver()
+    l.pack_carriages_to_country("Germany")
+    assert len(l.get_packed_carriages_to_countries()) == 1
+    assert len(l.get_packed_carriages_to_countries()["Germany"]) == 1
+    for c in l.get_packed_carriages_to_countries():
+        ret = l.get_packed_carriages_to_countries()[c][0]
+        assert ret.country == "Germany"
+        assert keira in ret.products
+        assert ret.products[keira] == ['LED light up sneakers', '7200 Riot Points gift card']
+
+
+def test_pack_carriages_to_country_more_carriages():
+    """Logistics class test."""
+    keira = Child("Keira", "Germany", ["Carbon fiber road bike", 'Zebra Jumpy', "Lego death star"])
+    lexie = Child("Lexie", "Germany", ["Carbon fiber road bike", 'Zebra Jumpy', "Lego death star"])
+    amelia = Child("Amelia", "Germany", ["Carbon fiber road bike", 'Zebra Jumpy', "Lego death star"])
+    evelyn = Child("Evelyn", "Germany", ["Carbon fiber road bike", 'Zebra Jumpy', "Lego death star"])
+    libby = Child("Libby", "Germany", ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
+    caden = Child("Caden", "Germany", ['New phone', "Lego death star", 'Car carpet'])
+    quinn = Child("Quinn", "Germany",
+                  ["Small watering can", 'Wall-mount diamond pickaxe', "Lego death star", 'Avocado'])
+    lesley = Child("Lesley", "Germany", ["Zebra Jumpy", 'Wall-mount diamond pickaxe', "Lego death star", 'Avocado'])
+    kai = Child("Kai", "Germany", ["Small watering can", 'LED light up sneakers', "Lego death star"])
+    jess = Child("Jess", "Germany", ["Carbon fiber road bike", 'LED light up sneakers', "Lego death star"])
+    ash = Child("Ash", "Germany", ["Carbon fiber road bike", 'Zebra Jumpy', "Lego death star"])
+    skyler = Child("Skyler", "Germany", ["Carbon fiber road bike", 'Zebra Jumpy', "Lego death star"])
+    jordan = Child("Jordan", "Germany", ["Carbon fiber road bike", 'Zebra Jumpy', "Lego death star"])
+    aubrey = Child("Aubrey", "Germany", ["Carbon fiber road bike", 'Zebra Jumpy', "Lego death star"])
+    rico = Child("Rico", "Germany", ["Carbon fiber road bike", 'Zebra Jumpy', "Lego death star"])
+    alexis = Child("Alexis", "Germany", ["Carbon fiber road bike", 'Zebra Jumpy', "Lego death star"])
+    eleanor = Child("Eleanor", "Germany", ["Carbon fiber road bike", 'Zebra Jumpy', "Lego death star"])
+
+    c = [keira, lexie, amelia, evelyn, libby, caden, quinn, lesley, kai, jess, ash, skyler, jordan, aubrey, rico,
+         alexis, eleanor]
+    l = Logistics(c)
+    l.import_products_from_warehouse()
+    l.children_from_countries_to_deliver()
+    l.pack_carriages_to_country("Germany")
+    assert len(l.get_packed_carriages_to_countries()["Germany"]) == 4
+
+
+def test_pack_all_carriages_to_countries():
+    """Logistics class test."""
+    alexis = Child("Alexis", "Germany", ["Carbon fiber road bike", 'Zebra Jumpy', "Lego death star"])
+    eleanor = Child("Eleanor", "Estonia", ["Carbon fiber road bike", 'Zebra Jumpy', "Lego death star"])
+    c = [alexis, eleanor]
+    l = Logistics(c)
+    l.import_products_from_warehouse()
+    l.children_from_countries_to_deliver()
+    l.pack_all_carriages_to_countries()
+
+    assert len(l.get_packed_carriages_to_countries()) == 2
+    assert "Germany" in l.get_packed_carriages_to_countries()
+    assert "Estonia" in l.get_packed_carriages_to_countries()
+    assert l.get_packed_carriages_to_countries()["Germany"][0].country == "Germany"
+    assert l.get_packed_carriages_to_countries()["Estonia"][0].country == "Estonia"
+    assert l.get_packed_carriages_to_countries()["Germany"][0].products[alexis] == ["Carbon fiber road bike",
+                                                                                    'Zebra Jumpy', "Lego death star"]
+    assert l.get_packed_carriages_to_countries()["Estonia"][0].products[eleanor] == ["Carbon fiber road bike",
+                                                                                     'Zebra Jumpy', "Lego death star"]
+
+
+def test_delivery_notes_for_carriage_per_country():
+    """Logistics class test. Write into file."""
+    libby = Child("Libby", 'Germany', ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
+    keira = Child("Keira", 'Germany', ['LED light up sneakers', '7200 Riot Points gift card'])
+    lexie = Child("Lexie", 'Estonia',
+                  ['Mermaid barbie', 'Pink fluffy pen', 'World of Warcraft: Shadowlands Collectors Edition'])
+
+    amelia = Child("Amelia", 'Germany', ['Zebra Jumpy', 'Princess dress', 'Lego death star', 'LED light up sneakers',
+                                         '7200 Riot Points gift card'])
+
+    c = [libby, keira, lexie, amelia]
+    l = Logistics(c)
+    l.import_products_from_warehouse()
+    l.children_from_countries_to_deliver()
+    l.pack_all_carriages_to_countries()
+    l.delivery_notes_for_carriage_per_country("Germany", "result.txt")
+    with open('expected_output_one_country.txt', 'r') as file1, open('result.txt', 'r') as file2:
+        assert file1.read() == file2.read()
+
+
+# def test_write_delivery_notes_for_carriage_all_nice_children():
+#     """Logistics class test. Write into file. Test all nice children."""
+#     c = ChildrenList()
+#     c.read_wishes_from_file("ex15_wish_list.csv")
+#     c.read_children_from_file("ex15_nice_list.csv")
+#     l = Logistics(c.get_children_list())
+#     l.import_products_from_warehouse()
+#     l.children_from_countries_to_deliver()
+#     l.pack_all_carriages_to_countries()
+#     l.delivery_notes_for_carriage_all("result.txt")
+#     with open('expected_output_all_nice_children.txt', 'r') as file1, open('result.txt', 'r') as file2:
+#         assert file1.read() == file2.read()
+#
+
+def test_write_delivery_notes_for_carriage_empty():
+    """Logistics class test. Write into file."""
+    c = []
+    l = Logistics(c)
+    l.import_products_from_warehouse()
+    l.children_from_countries_to_deliver()
+    l.pack_all_carriages_to_countries()
+    l.delivery_notes_for_carriage_all("result.txt")
+    with open('expected_output_empty.txt', 'r') as file1, open('result.txt', 'r') as file2:
+        assert file1.read() == file2.read()
+
+
+def test_carriage_delivery_note_empty():
+    """Carriage class test."""
+    c = Carriage("Germany", {}, {})
+    assert c.delivery_note() == ''
+
+
+def test_carriage_delivery_note_some_input():
+    """Carriage class test."""
+    some1 = Child("some1", "Germany", ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
+    some2 = Child("some2", "Germany", ['LED light up sneakers', '7200 Riot Points gift card'])
+    c = Carriage("Germany", {some1: ['Zebra Jumpy', 'Princess dress', 'Lego death star'],
+                             some2: ['LED light up sneakers', '7200 Riot Points gift card']}, {some1: 3615, some2: 260})
+
+    expected = r"""                        DELIVERY ORDER
+                                                          _v
+                                                     __* (__)
+             ff     ff     ff     ff                {\/ (_(__).-.
+      ff    <_\__, <_\__, <_\__, <_\__,      __,~~.(`>|-(___)/ ,_)
+    o<_\__,  (_ ff ~(_ ff ~(_ ff ~(_ ff~~~~~@ )\/_;-"``     |
+      (___)~~//<_\__, <_\__, <_\__, <_\__,    | \__________/|
+      // >>     (___)~~(___)~~(___)~~(___)~~~~\\_/_______\_//
+                // >>  // >>  // >>  // >>     `'---------'`
+
+FROM: NORTH POLE CHRISTMAS CHEER INCORPORATED
+TO: /GERMANY/
+
+//=======[]===================================================[]==================\\
+|| Name  ||                       Gifts                       || Total Weight(kg) ||
+|]=======[]===================================================[]==================[|
+|| some1 || Zebra Jumpy, Princess dress, Lego death star      || 3.615            ||
+|| some2 || LED light up sneakers, 7200 Riot Points gift card || 0.26             ||
+\\=======[]===================================================[]==================//"""
+    assert c.delivery_note() == expected
