@@ -363,7 +363,8 @@ TO: /{self.country.upper()}/\n\n"""
         if gift_len > max_gift_len:
             max_gift_len = gift_len
 
-        table.append(f"//" + '=' * (max_name_len + 2) + '[]' + '=' * (max_gift_len + 2) + '[]' + '=' * max_total_weight_len + '=' * 2 + f"\\\\" + '\n')
+        backslashes = "\\\\"
+        table.append("//" + '=' * (max_name_len + 2) + '[]' + '=' * (max_gift_len + 2) + '[]' + '=' * max_total_weight_len + '=' * 2 + "\\\\" + '\n')
         table.append(f"|| {str_name:^{max_name_len}} || {str_gifts:^{max_gift_len}} || {str_total_weight:^2} ||\n")
         table.append('|]' + '=' * (max_name_len + 2) + '[]' + '=' * (max_gift_len + 2) + '[]' + '=' * max_total_weight_len + '=' * 2 + f'[|' + '\n')
 
@@ -372,7 +373,7 @@ TO: /{self.country.upper()}/\n\n"""
                 f'|| {c.name:<{max_name_len}} || {", ".join(self.products[c]):<{max_gift_len}} || '
                 f'{self.total_weights[c] / 1000:<{max_total_weight_len}} ||\n')
 
-        table.append(f"\\\\" + '=' * (max_name_len + 2) + '[]' + '=' * (max_gift_len + 2) + '[]' + '=' * max_total_weight_len + '=' * 2 + f"//")
+        table.append("\\\\" + '=' * (max_name_len + 2) + '[]' + '=' * (max_gift_len + 2) + '[]' + '=' * max_total_weight_len + '=' * 2 + f"//")
 
         s = ''.join(table)
         santa += s
