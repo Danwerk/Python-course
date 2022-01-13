@@ -357,11 +357,11 @@ def test_get_products_total_volume():
     libby = Child("Libby", "United Kingdom", ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
     keira = Child("Keira", "Germany", ['LED light up sneakers', '7200 Riot Points gift card'])
     c = [libby, keira]
-    l = Logistics(c)
-    assert l.get_products_total_volume() == 0
+    logistic = Logistics(c)
+    assert logistic.get_products_total_volume() == 0
     result = 1337 + 278 + 2000 + 250 + 10
-    l.import_products_from_warehouse()
-    assert l.get_products_total_volume() == result
+    logistic.import_products_from_warehouse()
+    assert logistic.get_products_total_volume() == result
 
 
 def test_products_total_volume_per_child():
@@ -371,17 +371,17 @@ def test_products_total_volume_per_child():
     jaden = Child("Jaden", "Germany", ['Dungeons and Dragons 5th Edition Starter Set',
                                        'New phone', 'Ninja Turtles backpack'])
     c = [libby, keira, jaden]
-    l = Logistics(c)
-    l.children_from_countries_to_deliver()
-    l.import_products_from_warehouse()
+    logistic = Logistics(c)
+    logistic.children_from_countries_to_deliver()
+    logistic.import_products_from_warehouse()
 
     keira_result = sum([250, 10])
     jaden_result = sum([1000, 200, 350])
     libby_result = sum([1337, 278, 2000])
-    assert len(l.products_total_volume_per_child("Germany")) == 2
-    assert l.products_total_volume_per_child("Germany")[keira] == keira_result
-    assert l.products_total_volume_per_child("Germany")[jaden] == jaden_result
-    assert l.products_total_volume_per_child("United Kingdom")[libby] == libby_result
+    assert len(logistic.products_total_volume_per_child("Germany")) == 2
+    assert logistic.products_total_volume_per_child("Germany")[keira] == keira_result
+    assert logistic.products_total_volume_per_child("Germany")[jaden] == jaden_result
+    assert logistic.products_total_volume_per_child("United Kingdom")[libby] == libby_result
 
 
 def test_products_total_volume_per_child_return_none():
@@ -389,8 +389,8 @@ def test_products_total_volume_per_child_return_none():
     libby = Child("Libby", "United Kingdom", ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
     keira = Child("Keira", "Germany", ['LED light up sneakers', '7200 Riot Points gift card'])
     c = [libby, keira]
-    l = Logistics(c)
-    assert l.products_total_volume_per_child("Estonia") is None
+    logistic = Logistics(c)
+    assert logistic.products_total_volume_per_child("Estonia") is None
 
 
 def test_amount_of_carriages_needed_to_carry_products_to_country():
@@ -398,11 +398,11 @@ def test_amount_of_carriages_needed_to_carry_products_to_country():
     libby = Child("Libby", "United Kingdom", ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
     keira = Child("Keira", "Germany", ['LED light up sneakers', '7200 Riot Points gift card'])
     c = [libby, keira]
-    l = Logistics(c)
-    l.import_products_from_warehouse()
-    l.children_from_countries_to_deliver()
-    l.products_total_volume_per_child("Germany")
-    assert l.amount_of_carriages_needed_to_carry_products_to_country("Germany") == 1
+    logistic = Logistics(c)
+    logistic.import_products_from_warehouse()
+    logistic.children_from_countries_to_deliver()
+    logistic.products_total_volume_per_child("Germany")
+    assert logistic.amount_of_carriages_needed_to_carry_products_to_country("Germany") == 1
 
 
 def test_amount_of_carriages_needed_to_carry_products_to_country_returns_zero_if_country_not_exist():
@@ -410,9 +410,9 @@ def test_amount_of_carriages_needed_to_carry_products_to_country_returns_zero_if
     libby = Child("Libby", "United Kingdom", ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
     keira = Child("Keira", "Germany", ['LED light up sneakers', '7200 Riot Points gift card'])
     c = [libby, keira]
-    l = Logistics(c)
-    l.children_from_countries_to_deliver()
-    assert l.amount_of_carriages_needed_to_carry_products_to_country("Estonia") == 0
+    logistic = Logistics(c)
+    logistic.children_from_countries_to_deliver()
+    assert logistic.amount_of_carriages_needed_to_carry_products_to_country("Estonia") == 0
 
 
 def test_pack_carriages_to_country():
@@ -425,14 +425,14 @@ def test_pack_carriages_to_country():
     evelyn = Child("Evelyn", "Puerto Rico", ['Wall-mount diamond pickaxe', '7200 Riot Points gift card', 'Avocado'])
     libby = Child("Libby", "United Kingdom", ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
     c = [keira, lexie, amelia, evelyn, libby]
-    l = Logistics(c)
-    l.import_products_from_warehouse()
-    l.children_from_countries_to_deliver()
-    l.pack_carriages_to_country("Germany")
-    assert len(l.get_packed_carriages_to_countries()) == 1
-    assert len(l.get_packed_carriages_to_countries()["Germany"]) == 1
-    for c in l.get_packed_carriages_to_countries():
-        ret = l.get_packed_carriages_to_countries()[c][0]
+    logistic = Logistics(c)
+    logistic.import_products_from_warehouse()
+    logistic.children_from_countries_to_deliver()
+    logistic.pack_carriages_to_country("Germany")
+    assert len(logistic.get_packed_carriages_to_countries()) == 1
+    assert len(logistic.get_packed_carriages_to_countries()["Germany"]) == 1
+    for c in logistic.get_packed_carriages_to_countries():
+        ret = logistic.get_packed_carriages_to_countries()[c][0]
         assert ret.country == "Germany"
         assert keira in ret.products
         assert ret.products[keira] == ['LED light up sneakers', '7200 Riot Points gift card']
@@ -461,11 +461,11 @@ def test_pack_carriages_to_country_more_carriages():
 
     c = [keira, lexie, amelia, evelyn, libby, caden, quinn, lesley, kai, jess, ash, skyler, jordan, aubrey, rico,
          alexis, eleanor]
-    l = Logistics(c)
-    l.import_products_from_warehouse()
-    l.children_from_countries_to_deliver()
-    l.pack_carriages_to_country("Germany")
-    assert len(l.get_packed_carriages_to_countries()["Germany"]) == 4
+    logistic = Logistics(c)
+    logistic.import_products_from_warehouse()
+    logistic.children_from_countries_to_deliver()
+    logistic.pack_carriages_to_country("Germany")
+    assert len(logistic.get_packed_carriages_to_countries()["Germany"]) == 4
 
 
 def test_pack_all_carriages_to_countries():
@@ -473,19 +473,19 @@ def test_pack_all_carriages_to_countries():
     alexis = Child("Alexis", "Germany", ["Carbon fiber road bike", 'Zebra Jumpy', "Lego death star"])
     eleanor = Child("Eleanor", "Estonia", ["Carbon fiber road bike", 'Zebra Jumpy', "Lego death star"])
     c = [alexis, eleanor]
-    l = Logistics(c)
-    l.import_products_from_warehouse()
-    l.children_from_countries_to_deliver()
-    l.pack_all_carriages_to_countries()
+    logistic = Logistics(c)
+    logistic.import_products_from_warehouse()
+    logistic.children_from_countries_to_deliver()
+    logistic.pack_all_carriages_to_countries()
 
-    assert len(l.get_packed_carriages_to_countries()) == 2
-    assert "Germany" in l.get_packed_carriages_to_countries()
-    assert "Estonia" in l.get_packed_carriages_to_countries()
-    assert l.get_packed_carriages_to_countries()["Germany"][0].country == "Germany"
-    assert l.get_packed_carriages_to_countries()["Estonia"][0].country == "Estonia"
-    assert l.get_packed_carriages_to_countries()["Germany"][0].products[alexis] == ["Carbon fiber road bike",
+    assert len(logistic.get_packed_carriages_to_countries()) == 2
+    assert "Germany" in logistic.get_packed_carriages_to_countries()
+    assert "Estonia" in logistic.get_packed_carriages_to_countries()
+    assert logistic.get_packed_carriages_to_countries()["Germany"][0].country == "Germany"
+    assert logistic.get_packed_carriages_to_countries()["Estonia"][0].country == "Estonia"
+    assert logistic.get_packed_carriages_to_countries()["Germany"][0].products[alexis] == ["Carbon fiber road bike",
                                                                                     'Zebra Jumpy', "Lego death star"]
-    assert l.get_packed_carriages_to_countries()["Estonia"][0].products[eleanor] == ["Carbon fiber road bike",
+    assert logistic.get_packed_carriages_to_countries()["Estonia"][0].products[eleanor] == ["Carbon fiber road bike",
                                                                                      'Zebra Jumpy', "Lego death star"]
 
 
@@ -500,11 +500,11 @@ def test_delivery_notes_for_carriage_per_country():
                                          '7200 Riot Points gift card'])
 
     c = [libby, keira, lexie, amelia]
-    l = Logistics(c)
-    l.import_products_from_warehouse()
-    l.children_from_countries_to_deliver()
-    l.pack_all_carriages_to_countries()
-    l.delivery_notes_for_carriage_per_country("Germany", "result.txt")
+    logistic = Logistics(c)
+    logistic.import_products_from_warehouse()
+    logistic.children_from_countries_to_deliver()
+    logistic.pack_all_carriages_to_countries()
+    logistic.delivery_notes_for_carriage_per_country("Germany", "result.txt")
     with open('expected_output_one_country.txt', 'r') as file1, open('result.txt', 'r') as file2:
         assert file1.read() == file2.read()
 
