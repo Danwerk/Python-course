@@ -194,7 +194,8 @@ class Logistics:
         """Import product from warehouse. Here we use api to request products and make Product objects.
 
         All Product objects are added in 'self.product_objects' dictionary where the key is product name(str),
-        and value is the Product object."""
+        and value is the Product object.
+        """
         for c in self.children:
             for i in c.wishlist:
                 w = Warehouse()
@@ -229,7 +230,8 @@ class Logistics:
     def products_total_volume_per_child(self, country: str) -> dict:
         """Return total amount of products weight per one child.
 
-        Get sum of all products weight. e.g {Ago: 1234, Mati: 2345}. Look for the children from the same country."""
+        Get sum of all products weight. e.g {Ago: 1234, Mati: 2345}. Look for the children from the same country.
+        """
         if self.countries_and_children == {}:
             return None
         else:
@@ -247,7 +249,8 @@ class Logistics:
     def amount_of_carriages_needed_to_carry_products_to_country(self, country: str) -> int:
         """Calculate the number of sleighs you need to carry all products to country.
 
-        If there is no country where to carry products, return 0."""
+        If there is no country where to carry products, return 0.
+        """
         total = 50000
         if self.total_weight_amount_per_child == {} or country not in self.total_weight_amount_per_child:
             return 0
