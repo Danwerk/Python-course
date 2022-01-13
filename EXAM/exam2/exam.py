@@ -480,10 +480,13 @@ class Witcher:
 
         Each value should be in the list once, so there can be max 3 objects in the result.
         """
-        # for i in self.slain:
-        #     if i.count() > 1:
-        #         print(i)
-        # return sorted(self.slain, key=lambda i: i.species.name)
+        ret = []
+        for i in self.slain:
+            if i.species in ret:
+                continue
+            else:
+                ret.append(i.species)
+        return sorted(ret, key=lambda i: (i.Beast.name))
 
     def hunt_most_expensive(self, village: Village) -> bool:
         """
