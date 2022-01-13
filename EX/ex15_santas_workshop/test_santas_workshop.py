@@ -263,10 +263,10 @@ def test_get_children():
                    ['Wall-mount diamond pickaxe', 'Magic: The Gathering Commander Legends booster box'])
     evelyn = Child("Evelyn", "Puerto Rico", ['Wall-mount diamond pickaxe', '7200 Riot Points gift card', 'Avocado'])
     c = [libby, keira, lexie, amelia, evelyn]
-    l = Logistics(c)
+    logistic = Logistics(c)
 
-    assert len(l.get_children()) == 5
-    assert l.get_children() == c
+    assert len(logistic.get_children()) == 5
+    assert logistic.get_children() == c
 
 
 def test_children_from_countries_to_deliver():
@@ -275,10 +275,10 @@ def test_children_from_countries_to_deliver():
     keira = Child("Keira", "Germany", ['LED light up sneakers', '7200 Riot Points gift card'])
     evelyn = Child("Evelyn", "Puerto Rico", ['Wall-mount diamond pickaxe', '7200 Riot Points gift card', 'Avocado'])
     c = [libby, keira, evelyn]
-    l = Logistics(c)
+    logistic = Logistics(c)
 
-    l.children_from_countries_to_deliver()
-    ret = l.get_children_from_countries_to_deliver()
+    logistic.children_from_countries_to_deliver()
+    ret = logistic.get_children_from_countries_to_deliver()
     assert len(ret) == 3
     assert "United Kingdom" in ret and "Germany" in ret and "Puerto Rico" in ret
     assert libby in ret["United Kingdom"]
@@ -293,15 +293,15 @@ def test_import_products_from_warehouse():
 
     c = [libby]
 
-    l = Logistics(c)
+    logistic = Logistics(c)
 
     # zebra_jumpy = Product("Zebra Jumpy", 25, 1, 1337)
     # princess_dress = Product("Princess dress", 17, 5, 278)
     # lego_death_star = Product("Lego death star", 599, 30, 2000)
     # expected = {'Zebra Jumpy': zebra_jumpy, 'Princess dress': princess_dress, 'Lego death star': lego_death_star}
-    assert len(l.get_products()) == 0
-    l.import_products_from_warehouse()
-    ret = l.get_products()
+    assert len(logistic.get_products()) == 0
+    logistic.import_products_from_warehouse()
+    ret = logistic.get_products()
     assert len(ret) == 3
     assert isinstance(ret["Zebra Jumpy"], Product)
     assert isinstance(ret["Princess dress"], Product)
@@ -324,9 +324,9 @@ def test_import_products_from_warehouse():
     assert ret["Lego death star"].weight == 2000
 
     c.append(keira)
-    l.import_products_from_warehouse()
+    logistic.import_products_from_warehouse()
 
-    assert len(l.get_products()) == 5
+    assert len(logistic.get_products()) == 5
 
 
 def test_country_of_origin():
@@ -340,16 +340,16 @@ def test_country_of_origin():
     jaden = Child("Jaden", "Germany", ['Dungeons and Dragons 5th Edition Starter Set',
                                        'New phone', 'Ninja Turtles backpack'])
     c = [libby, keira, evelyn]
-    l = Logistics(c)
+    logistic = Logistics(c)
 
-    assert l.country_of_origin("United Kingdom") == [libby]
-    assert l.country_of_origin("Germany") == [keira]
-    assert l.country_of_origin("Puerto Rico") == [evelyn]
+    assert logistic.country_of_origin("United Kingdom") == [libby]
+    assert logistic.country_of_origin("Germany") == [keira]
+    assert logistic.country_of_origin("Puerto Rico") == [evelyn]
 
-    assert l.country_of_origin("Estonia") == []
+    assert logistic.country_of_origin("Estonia") == []
 
     c.append(jaden)
-    assert l.country_of_origin("Germany") == [keira, jaden]
+    assert logistic.country_of_origin("Germany") == [keira, jaden]
 
 
 def test_get_products_total_volume():
@@ -526,11 +526,11 @@ def test_delivery_notes_for_carriage_per_country():
 def test_write_delivery_notes_for_carriage_empty():
     """Logistic class test. Write into file."""
     c = []
-    l = Logistics(c)
-    l.import_products_from_warehouse()
-    l.children_from_countries_to_deliver()
-    l.pack_all_carriages_to_countries()
-    l.delivery_notes_for_carriage_all("result.txt")
+    logistic = Logistics(c)
+    logistic.import_products_from_warehouse()
+    logistic.children_from_countries_to_deliver()
+    logistic.pack_all_carriages_to_countries()
+    logistic.delivery_notes_for_carriage_all("result.txt")
     with open('expected_output_empty.txt', 'r') as file1, open('result.txt', 'r') as file2:
         assert file1.read() == file2.read()
 
