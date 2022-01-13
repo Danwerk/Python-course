@@ -164,10 +164,10 @@ class Child:
 
 
 class Logistics:
-    """Logistics class"""
+    """Logistic class"""
 
     def __init__(self, children: list):
-        """Logistics class constructor."""
+        """Logistic class constructor."""
         self.children = children
         self.carriages = {}
         self.product_objects = {}
@@ -293,7 +293,7 @@ class Logistics:
         return self.carriages
 
     def delivery_notes_for_carriage_per_country(self, country: str, filename):
-        """Print"""
+        """Complete notes for carriages to given country."""
         ret = ''
         if country not in self.carriages:
             return None
@@ -302,6 +302,7 @@ class Logistics:
         self.write_contents_to_file(filename, ret)
 
     def delivery_notes_for_carriage_all(self, filename):
+        """Complete notes for all carriages."""
         ret = ''
         for k in self.carriages:
             for v in self.carriages[k]:
@@ -410,27 +411,12 @@ if __name__ == '__main__':
 
     amelia = Child("Amelia", 'Germany', ['Zebra Jumpy', 'Princess dress', 'Lego death star', 'LED light up sneakers',
                                          '7200 Riot Points gift card'])
-    #
-    # l2 = Logistics(nice_children.get_children_list())
-    # print(l2.country_of_origin('Estonia'))
 
-    # l = Logistics(nice_children.get_nice_children())
-    l = Logistics([libby, keira])
-    l.import_products_from_warehouse()
+    # logisic = Logistics(nice_children.get_nice_children())
+    logistic = Logistics([libby, keira])
+    logistic.import_products_from_warehouse()
 
-    # print(l.country_of_origin("Germany"))  # check where person comes from.
-    # print(l.get_products())
-    # print(l.get_products_total_volume())
-    # l.children_from_countries_to_deliver()
-    # print(l.products_total_volume_per_child("Germany"))
+    # print(logistic.delivery_notes_for_carriage_all("delivery_note.txt"))
 
-    # print(l.amount_of_carriages_needed_to_carry_products_to_country("Germany"))
-    # print(l.get_children_from_countries_to_deliver())
-
-    # l.pack_all_carriages_to_countries()
-    # print(l.get_packed_carriages_to_countries())
-    # print(l.delivery_notes_for_carriage_per_country("Estonia"))
-    # print(l.delivery_notes_for_carriage_all("delivery_note.txt"))
-
-    # print(l.pack_carriages_to_country("Germany"))
-    # print(l.delivery_notes_for_carriage_per_country("Germany", "delivery_note.txt"))
+    # print(logistic.pack_carriages_to_country("Germany"))
+    # print(logistic.delivery_notes_for_carriage_per_country("Germany", "delivery_note.txt"))
