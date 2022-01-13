@@ -57,6 +57,8 @@ print(range_with_count(1, 5, 1))  # [1.0]
 print(range_with_count(1, 5, 2))  # [1.0, 5.0]
 print(range_with_count(1, 5, 3))  # [1.0, 3.0, 5.0]
 print(range_with_count(1, 5, 4))  # [1.0, 2.333333333333333, 3.6666666666666665, 5.0]
+
+
 # print(range_with_count(1, 5, 5))  # [1.0, 2.0, 3.0, 4.0, 5.0]
 # print(range_with_count(5, 1, 5))  # [5.0, 4.0, 3.0, 2.0, 1.0]
 # print(range_with_count(897, -585, 191))  # [5.0, 4.0, 3.0, 2.0, 1.0]
@@ -276,8 +278,8 @@ class DonutFactory:
                 ret[(donut.filling, donut.icing)] = [donut]
             else:
                 ret[(donut.filling, donut.icing)].append(donut)
-            self.donuts.remove(donut)
 
+        self.donuts = []
         return ret
 
     def sort_donuts_by_icing_and_filling(self) -> list:
@@ -299,17 +301,15 @@ class DonutFactory:
         :return: dict with icing and filling of most pop donut
         """
         ret = {}
-        donut_f_and_i = []
 
         for d in self.donuts:
-            donut_f_and_i.append((d.icing, d.filling))
+            key = (d.filling, d.icing)
+            if key not in ret:
+                ret[key] = []
+            ret[key].append(d)
 
-        max_combination = max(donut_f_and_i, key=donut_f_and_i.count)
-        max_combination = sorted(max_combination, key=lambda d: d[0])
-
-        ret['icing'] = max_combination[1]
-        ret['filling'] = max_combination[0]
-        return ret
+        top_donut = sorted(ret, key=lambda d: (-len(ret[key]), key[1]))
+        return {'icing': top_donut[0][1], 'filling': top_donut[0][0]}
 
     def get_donuts_by_flavour(self, flavour: str) -> list:
         """
@@ -561,10 +561,10 @@ if __name__ == '__main__':
 
     donuts = [donut1, donut2, donut3, donut4, donut5, donut6, donut7, donut8]
 
-    # print(donut_factory.add_donuts(donuts))
+    print(donut_factory.add_donuts(donuts))
     #
     # print(donut_factory.get_donuts_by_flavour('marshmallow'))  # [donut3, donut7]
-    # print(donut_factory.get_most_popular_donut())  # {icing: sugar, filling: chocolate}
+    print(donut_factory.get_most_popular_donut())  # {icing: sugar, filling: chocolate}
     # print(donut_factory.sort_donuts_by_icing_and_filling())  # [donut2, donut5, donut6, donut3, donut7, donut1,
     #                                                           donut4, donut8]
     # print(donut_factory.pack_donuts_by_filling_and_icing())  # {(chocolate, sugar): [donut1, donut4, donut8],
