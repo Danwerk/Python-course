@@ -483,10 +483,10 @@ def test_pack_all_carriages_to_countries():
     assert "Estonia" in logistic.get_packed_carriages_to_countries()
     assert logistic.get_packed_carriages_to_countries()["Germany"][0].country == "Germany"
     assert logistic.get_packed_carriages_to_countries()["Estonia"][0].country == "Estonia"
-    assert logistic.get_packed_carriages_to_countries()["Germany"][0].products[alexis] == ["Carbon fiber road bike",
-                                                                                    'Zebra Jumpy', "Lego death star"]
-    assert logistic.get_packed_carriages_to_countries()["Estonia"][0].products[eleanor] == ["Carbon fiber road bike",
-                                                                                     'Zebra Jumpy', "Lego death star"]
+    assert logistic.get_packed_carriages_to_countries()["Germany"][0].products[alexis] == \
+           ["Carbon fiber road bike", 'Zebra Jumpy', "Lego death star"]
+    assert logistic.get_packed_carriages_to_countries()["Estonia"][0].products[eleanor] == \
+           ["Carbon fiber road bike", 'Zebra Jumpy', "Lego death star"]
 
 
 def test_delivery_notes_for_carriage_per_country():
