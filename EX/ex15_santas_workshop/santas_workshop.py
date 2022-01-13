@@ -164,7 +164,7 @@ class Child:
 
 
 class Logistics:
-    """Logistic class"""
+    """Logistic class."""
 
     def __init__(self, children: list):
         """Logistic class constructor."""
@@ -363,8 +363,8 @@ TO: /{self.country.upper()}/\n\n"""
         if gift_len > max_gift_len:
             max_gift_len = gift_len
 
-        table.append('//' + '=' * (max_name_len + 2) + '[]' + '=' * (
-                max_gift_len + 2) + '[]' + '=' * max_total_weight_len + '=' * 2 + f'\\\\' + '\n')
+        table.append('//' + '=' * (max_name_len + 2) + '[]' + '=' * (max_gift_len + 2) + '[]' +
+                     '=' * max_total_weight_len + '=' * 2 + f'\\\\' + '\n')
         table.append(f'|| {str_name:^{max_name_len}} || {str_gifts:^{max_gift_len}} || {str_total_weight:^2} ||\n')
         table.append('|]' + '=' * (max_name_len + 2) + '[]' + '=' * (
                 max_gift_len + 2) + '[]' + '=' * max_total_weight_len + '=' * 2 + f'[|' + '\n')
