@@ -147,7 +147,6 @@ def who_gets_gingerbread(students: dict, total_gingerbreads: int) -> dict:
     :return: dict of students with amount of gingerbreads they got
     """
     best = []
-    avg_grade = sum(students.values()) / len(students)
     ret = {}
     i = 0
     for i in students:
@@ -155,7 +154,7 @@ def who_gets_gingerbread(students: dict, total_gingerbreads: int) -> dict:
             best.append((i, students[i]))
 
     sorted_students = sorted(best, key=lambda x: -x[1])
-    if sorted_students is []:
+    if sorted_students == []:
         return ret
     while total_gingerbreads != 0:
         if i >= len(sorted_students):
