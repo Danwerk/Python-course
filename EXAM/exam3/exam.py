@@ -148,13 +148,15 @@ def who_gets_gingerbread(students: dict, total_gingerbreads: int) -> dict:
     """
     best = []
     avg_grade = sum(students.values()) / len(students)
+    ret = {}
+    i = 0
     for i in students:
         if students[i] > 2.0:
             best.append((i, students[i]))
 
     sorted_students = sorted(best, key=lambda x: -x[1])
-    ret = {}
-    i = 0
+    if sorted_students is []:
+        return ret
     while total_gingerbreads != 0:
         if i >= len(sorted_students):
             i = 0
@@ -170,7 +172,7 @@ def who_gets_gingerbread(students: dict, total_gingerbreads: int) -> dict:
     return ret
 
 
-print(who_gets_gingerbread({'Mart': 4.0, 'Kristi': 4.5, 'Kevin': 3.2, 'Markus': 2.0}, 11))
+print(who_gets_gingerbread({'Mart': 2.0, 'Kristi': 2.0, 'Kevin': 2.0, 'Markus': 2.0}, 11))
 
 
 def fuel_calculator(fuel: int) -> int:
