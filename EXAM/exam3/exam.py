@@ -301,19 +301,18 @@ class University:
         :return: bool
         """
 
-        if student.gpa > self.gpa_required and student not in self.students and student.age >= 16:
+        if student.gpa >= self.gpa_required and student not in self.students and student.age >= 16:
             return True
         if len(student.name) == 13:
             return True
         else:
             return False
 
-# tudengi enda gpa ei ole ülikooli gpa_required väärtusest väiksem
-# tudengit ei ole juba ülikoolis olemas.
-# tudeng on vähemalt 16 aastat vana
-# kui aga tudengi nime pikkus (tähtede arv) on täpselt 13, siis tudeng saab ülikooli astuda vaatamata tema gpa väärtusele (ehk saab ka madalama keskmise hindega sisse).
-# Funktsioon tagastab True, kui tudengit saab ülikooli lisada, ja False vastasel juhul.
-
+    # tudengi enda gpa ei ole ülikooli gpa_required väärtusest väiksem
+    # tudengit ei ole juba ülikoolis olemas.
+    # tudeng on vähemalt 16 aastat vana
+    # kui aga tudengi nime pikkus (tähtede arv) on täpselt 13, siis tudeng saab ülikooli astuda vaatamata tema gpa väärtusele (ehk saab ka madalama keskmise hindega sisse).
+    # Funktsioon tagastab True, kui tudengit saab ülikooli lisada, ja False vastasel juhul.
 
     def enroll_student(self, student: Student):
         """
@@ -367,8 +366,10 @@ class University:
         :return: list of Student objects
         """
         ret = []
-        student_max = max(student.gpa for student in self.students)
-
+        if self.students is not []:
+            student_max = max(student.gpa for student in self.students)
+        else:
+            return []
         for s in self.students:
             if s.gpa == student_max:
                 ret.append(s)
@@ -380,7 +381,8 @@ class Accessory:
 
     def __init__(self, name: str, value: int):
         """Constructor."""
-        pass
+        self.name = name
+        self.value = value
 
     def __repr__(self):
         """
@@ -388,7 +390,7 @@ class Accessory:
 
         Returns string in form "{name}, value : {value}."
         """
-        pass
+        return f"{self.name}, value : {self.value}."
 
 
 class Car:
@@ -396,11 +398,15 @@ class Car:
 
     def __init__(self, name: str, color: str):
         """Constructor."""
-        pass
+        self.name = name
+        self.color = color
+        self.fuel = 100
+        self.accessories = []
+        self.price = 0
 
     def add_accessory(self, accessory: Accessory):
         """Add accessory to the car."""
-        pass
+        self.accessories.append(accessory)
 
     def get_value(self) -> int:
         """
@@ -409,7 +415,10 @@ class Car:
         Regular car base price is 9500, for premium car its 42 500.
         All the values of accessories are summed up.
         """
-        pass
+        if self.accessories is []:
+            self.price = 9500
+
+
 
     def get_fuel_left(self):
         """Return how much fuel is left in percentage."""
@@ -425,7 +434,7 @@ class Car:
 
         Should return "This {color} {name} contains {accessory_amount} accessories and has {fuel}% fuel left."
         """
-        pass
+        return f'This {self.color} {self.name} contains ... accessories and gas {self.fuel}% fuel left.'
 
 
 class Customer:
@@ -445,7 +454,7 @@ class Customer:
 
         For example: "Cheap Red", "Expensive Yellow".
         """
-        pass
+        self.name = name
 
     def get_garage(self):
         """
@@ -478,15 +487,16 @@ class Dealership:
 
     def __init__(self, name: str):
         """Constructor."""
-        pass
+        self.name = name
+        self.cars = []
 
     def add_car(self, car: Car):
         """Car is added to dealership."""
-        pass
+        self.cars.append(car)
 
     def get_all_regular_cars(self):
         """Return all the regular cars sorted by value (ascending, lower to higher)."""
-        pass
+
 
     def make_car_premium(self, car: Car):
         """Make a car premium, which can can be sold only to premium customers."""
@@ -503,7 +513,7 @@ class Dealership:
         After selling, the car is removed from the dealership and moved into customer's garage.
         In the given exercise, there is always a matching car.
         """
-        pass
+
 
 
 if __name__ == '__main__':
@@ -558,18 +568,18 @@ if __name__ == '__main__':
 
     # university
 
-    university = University("taltech", 60)
-    student = Student("Bob", 61, 18)
-    print(university.can_enroll_student(student))  # True
-    print(university.can_unenroll_student(student))  # False; student is not yet in university
-
-    university.enroll_student(student)
-    print(university.get_students())  # [student]
-    print(university.get_student_highest_gpa())  # [student]; since this student is the only one
-
-    print(university.can_unenroll_student(student))  # True
-    university.unenroll_student(student)
-    print(university.get_students())  # []
+    # university = University("taltech", 60)
+    # student = Student("Bob", 61, 18)
+    # print(university.can_enroll_student(student))  # True
+    # print(university.can_unenroll_student(student))  # False; student is not yet in university
+    #
+    # university.enroll_student(student)
+    # print(university.get_students())  # [student]
+    # print(university.get_student_highest_gpa())  # [student]; since this student is the only one
+    #
+    # print(university.can_unenroll_student(student))  # True
+    # university.unenroll_student(student)
+    # print(university.get_students())  # []
 
     # dealership
 
