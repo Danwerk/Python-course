@@ -146,25 +146,31 @@ def who_gets_gingerbread(students: dict, total_gingerbreads: int) -> dict:
     :param total_gingerbreads: number of gingerbreads that elves have
     :return: dict of students with amount of gingerbreads they got
     """
-    ret = {}
-    avg_grade = 0
-    names_to_remove = []
+    best = []
     avg_grade = sum(students.values()) / len(students)
     for i in students:
-        if students[i] < avg_grade:
-            pass
-    avg_grade = avg_grade / len(students)
+        if students[i] > 2.0:
+            best.append((i, students[i]))
 
-    sorted_students = sorted(students, key=lambda x: -students[x])
+    sorted_students = sorted(best, key=lambda x: -x[1])
+    ret = {}
+    i = 0
+    while total_gingerbreads != 0:
+        if i >= len(sorted_students):
+            i = 0
+        g_count = 1
+        if sorted_students[i][0] not in ret:
+            ret[sorted_students[i][0]] = g_count
+        else:
+            ret[sorted_students[i][0]] = g_count + ret[sorted_students[i][0]]
+        i += 1
+        total_gingerbreads -= 1
 
-    for s in range(total_gingerbreads):
-        gingerbreads = 1
-        ret[s] = gingerbreads
 
     return ret
 
 
-# print(who_gets_gingerbread({'Mart': 4.0, 'Kristi': 4.5, 'Kevin': 3.2, 'Markus': 2.0}, 11))
+print(who_gets_gingerbread({'Mart': 4.0, 'Kristi': 4.5, 'Kevin': 3.2, 'Markus': 2.0}, 11))
 
 
 def fuel_calculator(fuel: int) -> int:
@@ -406,7 +412,7 @@ class Car:
     def add_accessory(self, accessory: Accessory):
         """Add accessory to the car."""
         self.accessories.append(accessory)
-        print("a")
+
 
     def get_value(self) -> int:
         """
@@ -416,8 +422,15 @@ class Car:
         All the values of accessories are summed up.
         """
         price = 0
+        result = 0
         if self.accessories is []:
             return price
+        elif self.accessories is not []:
+            for acc in self.accessories:
+                result += acc.value
+
+        return result
+
 
     def get_fuel_left(self):
         """Return how much fuel is left in percentage."""
@@ -433,7 +446,7 @@ class Car:
 
         Should return "This {color} {name} contains {accessory_amount} accessories and has {fuel}% fuel left."
         """
-        return f'This {self.color} {self.name} contains ... accessories and gas {self.fuel}% fuel left.'
+        return f'This {self.color} {self.name} contains {len(self.accessories)} accessories and has {self.fuel}% fuel left.'
 
 
 class Customer:
@@ -456,7 +469,7 @@ class Customer:
         self.name = name
         self.wish = wish
         self.cars = []
-        self.type = None
+        self.premium = False
 
     def get_garage(self):
         """
@@ -464,10 +477,12 @@ class Customer:
 
         Both regular and premium cars are kept in garage.
         """
-        return sorted(self.cars, key= lambda x: x.price)
+        return sorted(self.cars, key= lambda x: x.get_value)
 
     def make_premium(self):
         """Make customer a premium customer, premium cars can be sold to the customer now."""
+        self.premium = True
+
 
     def drive_with_car(self, driving_style: str):
         """
@@ -481,6 +496,19 @@ class Customer:
         If the fuel gets to zero during the drive, the car is left behind (it is no longer part of garage).
         """
 
+        sorted_cars = sorted(self.cars, key=lambda x: x.get_value, reverse=True)
+        max_fuel = max(car.fuel for car in sorted_cars)
+
+        if driving_style == "Rally":
+            c = sorted(self.cars, key=lambda x: x.get_value())
+            cheapest = c[0]
+            if cheapest.fuel - 35 <= 0:
+                self.cars.remove(cheapest)
+            cheapest.fuel -= 35
+        else:
+            pass
+
+
 
 class Dealership:
     """Dealership."""
@@ -491,6 +519,9 @@ class Dealership:
         self.cars = []
         self.premium = []
         self.regular = []
+
+    def __repr__(self):
+        return self.name
 
     def add_car(self, car: Car):
         """Car is added to dealership."""
@@ -508,7 +539,7 @@ class Dealership:
 
     def get_all_premium_cars(self):
         """Return all the premium cars sorted by value (ascending, lower to higher)."""
-        return sorted(self.premium, key=lambda x: x.price)
+        return sorted(self.premium, key=lambda x: x.get_value)
 
     def sell_car_to_customer(self, customer: Customer):
         """
@@ -517,6 +548,21 @@ class Dealership:
         After selling, the car is removed from the dealership and moved into customer's garage.
         In the given exercise, there is always a matching car.
         """
+        wishes = customer.wish.split(' ')
+        if wishes[0] == 'Expensive':
+            for car in self.premium:
+                if wishes[1] == car.color:
+                    customer.cars.append(car)
+                    self.cars.remove(car)
+                    self.premium.remove(car)
+        elif wishes[0] == 'Cheap':
+            for car in self.regular:
+                if wishes[1] == car.color:
+                    customer.cars.append(car)
+                    self.cars.remove(car)
+                    self.regular.remove(car)
+
+
 
 
 if __name__ == '__main__':
