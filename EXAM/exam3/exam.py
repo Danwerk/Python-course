@@ -402,11 +402,11 @@ class Car:
         self.color = color
         self.fuel = 100
         self.accessories = []
-        self.price = 0
 
     def add_accessory(self, accessory: Accessory):
         """Add accessory to the car."""
         self.accessories.append(accessory)
+        print("a")
 
     def get_value(self) -> int:
         """
@@ -415,18 +415,17 @@ class Car:
         Regular car base price is 9500, for premium car its 42 500.
         All the values of accessories are summed up.
         """
+        price = 0
         if self.accessories is []:
-            self.price = 9500
-
-
+            return price
 
     def get_fuel_left(self):
         """Return how much fuel is left in percentage."""
-        pass
+        return self.fuel
 
     def get_accessories_by_value(self):
         """Return accessories sorted by value (descending i.e. higher to lower)."""
-        pass
+        return sorted(self.accessories, key=lambda x: x.value)
 
     def __repr__(self):
         """
@@ -455,6 +454,9 @@ class Customer:
         For example: "Cheap Red", "Expensive Yellow".
         """
         self.name = name
+        self.wish = wish
+        self.cars = []
+        self.type = None
 
     def get_garage(self):
         """
@@ -462,11 +464,10 @@ class Customer:
 
         Both regular and premium cars are kept in garage.
         """
-        pass
+        return sorted(self.cars, key= lambda x: x.price)
 
     def make_premium(self):
         """Make customer a premium customer, premium cars can be sold to the customer now."""
-        pass
 
     def drive_with_car(self, driving_style: str):
         """
@@ -479,7 +480,6 @@ class Customer:
         Regular driving takes 15 percentage points of fuel, "Rally" takes 35 percentage points (85% - 35% => 50%).
         If the fuel gets to zero during the drive, the car is left behind (it is no longer part of garage).
         """
-        pass
 
 
 class Dealership:
@@ -489,6 +489,8 @@ class Dealership:
         """Constructor."""
         self.name = name
         self.cars = []
+        self.premium = []
+        self.regular = []
 
     def add_car(self, car: Car):
         """Car is added to dealership."""
@@ -496,15 +498,17 @@ class Dealership:
 
     def get_all_regular_cars(self):
         """Return all the regular cars sorted by value (ascending, lower to higher)."""
-
+        self.regular = [i for i in self.cars]
+        return sorted(self.regular, key=lambda x: x.get_value())
 
     def make_car_premium(self, car: Car):
         """Make a car premium, which can can be sold only to premium customers."""
-        pass
+        self.premium.append(car)
+        self.regular.remove(car)
 
     def get_all_premium_cars(self):
         """Return all the premium cars sorted by value (ascending, lower to higher)."""
-        pass
+        return sorted(self.premium, key=lambda x: x.price)
 
     def sell_car_to_customer(self, customer: Customer):
         """
@@ -513,7 +517,6 @@ class Dealership:
         After selling, the car is removed from the dealership and moved into customer's garage.
         In the given exercise, there is always a matching car.
         """
-
 
 
 if __name__ == '__main__':
