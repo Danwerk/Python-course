@@ -612,4 +612,3 @@ if __name__ == '__main__':
     species_list = [Species.Beast, Species.Vampire, Species.Beast]
     print(species_list[0] == species_list[1])  # False
     print(species_list[0] == species_list[2])  # True
-#
