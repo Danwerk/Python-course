@@ -164,7 +164,7 @@ def who_gets_gingerbread(students: dict, total_gingerbreads: int) -> dict:
     return ret
 
 
-print(who_gets_gingerbread({'Mart': 4.0, 'Kristi': 4.5, 'Kevin': 3.2, 'Markus': 2.0}, 11))
+# print(who_gets_gingerbread({'Mart': 4.0, 'Kristi': 4.5, 'Kevin': 3.2, 'Markus': 2.0}, 11))
 
 
 def fuel_calculator(fuel: int) -> int:
@@ -261,6 +261,9 @@ class Student:
         self.gpa = gpa
         self.name = name
 
+    def __repr__(self):
+        return self.name
+
 
 class University:
     """Represent university model."""
@@ -275,7 +278,12 @@ class University:
         :param name: university name
         :param gpa_required: university required gpa
         """
-        pass
+        self.name = name
+        self.gpa_required = gpa_required
+        self.students = []
+
+    def __repr__(self):
+        return self.students
 
     def can_enroll_student(self, student: Student) -> bool:
         """
@@ -292,7 +300,20 @@ class University:
 
         :return: bool
         """
-        pass
+
+        if student.gpa > self.gpa_required and student not in self.students and student.age >= 16:
+            return True
+        if len(student.name) == 13:
+            return True
+        else:
+            return False
+
+# tudengi enda gpa ei ole ülikooli gpa_required väärtusest väiksem
+# tudengit ei ole juba ülikoolis olemas.
+# tudeng on vähemalt 16 aastat vana
+# kui aga tudengi nime pikkus (tähtede arv) on täpselt 13, siis tudeng saab ülikooli astuda vaatamata tema gpa väärtusele (ehk saab ka madalama keskmise hindega sisse).
+# Funktsioon tagastab True, kui tudengit saab ülikooli lisada, ja False vastasel juhul.
+
 
     def enroll_student(self, student: Student):
         """
@@ -303,7 +324,8 @@ class University:
         :param student: Student
         Function does not return anything
         """
-        pass
+        if self.can_enroll_student(student) is True:
+            self.students.append(student)
 
     def can_unenroll_student(self, student: Student) -> bool:
         """
@@ -315,7 +337,10 @@ class University:
 
         :return: bool
         """
-        pass
+        if student in self.students:
+            return True
+        else:
+            return False
 
     def unenroll_student(self, student: Student):
         """
@@ -324,7 +349,8 @@ class University:
         Before unenrolling, you have to make sure the student can be unenrolled.
         Function does not return anything
         """
-        pass
+        if self.can_unenroll_student(student) is True:
+            self.students.remove(student)
 
     def get_students(self) -> list:
         """
@@ -332,7 +358,7 @@ class University:
 
         :return: list of Student objects
         """
-        pass
+        return self.students
 
     def get_student_highest_gpa(self) -> list:
         """
@@ -340,7 +366,13 @@ class University:
 
         :return: list of Student objects
         """
-        pass
+        ret = []
+        student_max = max(student.gpa for student in self.students)
+
+        for s in self.students:
+            if s.gpa == student_max:
+                ret.append(s)
+        return ret
 
 
 class Accessory:
@@ -475,34 +507,34 @@ class Dealership:
 
 
 if __name__ == '__main__':
-    assert count_camel_case_words("") == 0
-    assert count_camel_case_words("helloWorld") == 2
-    assert count_camel_case_words("ABC") == 3
-
-    assert odd_index_sum([]) == 0
-    assert odd_index_sum([1]) == 0
-    assert odd_index_sum([1, 2]) == 2
-    assert odd_index_sum([1, 2, 4, 3]) == 5
-
-    assert encode_string_with_hex_key("hello", "01234") == "hfnos"
-    assert encode_string_with_hex_key("a", "f") == "p"
-
-    assert who_gets_gingerbread(
-        {
-            'Mart': 4.0,
-            'Kristi': 4.5,
-            'Kevin': 3.2,
-        },
-        11
-    ) == {
-               "Kristi": 4,
-               "Mart": 4,
-               "Kevin": 3
-           }
-
-    assert fuel_calculator(151) == 64
-
-    print(make_table(9))
+    # assert count_camel_case_words("") == 0
+    # assert count_camel_case_words("helloWorld") == 2
+    # assert count_camel_case_words("ABC") == 3
+    #
+    # assert odd_index_sum([]) == 0
+    # assert odd_index_sum([1]) == 0
+    # assert odd_index_sum([1, 2]) == 2
+    # assert odd_index_sum([1, 2, 4, 3]) == 5
+    #
+    # assert encode_string_with_hex_key("hello", "01234") == "hfnos"
+    # assert encode_string_with_hex_key("a", "f") == "p"
+    #
+    # assert who_gets_gingerbread(
+    #     {
+    #         'Mart': 4.0,
+    #         'Kristi': 4.5,
+    #         'Kevin': 3.2,
+    #     },
+    #     11
+    # ) == {
+    #            "Kristi": 4,
+    #            "Mart": 4,
+    #            "Kevin": 3
+    #        }
+    #
+    # assert fuel_calculator(151) == 64
+    #
+    # print(make_table(9))
     r"""
 \##/|\##/
 #\/#|#\/#
@@ -514,15 +546,15 @@ if __name__ == '__main__':
 #/\#|#/\#
 /##\|/##\
     """
-    table = make_table(9).split("\n")
-    assert table[0] == r"\##/|\##/"
-    assert table[4] == r"----+----"
-    assert table[6] == r"#\/#|#\/#"
-    assert table[8] == "/##\\|/##\\"
-    assert table[-1] != "\n"  # no new-line in the end
-
-    table = make_table(7)
-    assert table[8:15] == "#X#|#X#"
+    # table = make_table(9).split("\n")
+    # assert table[0] == r"\##/|\##/"
+    # assert table[4] == r"----+----"
+    # assert table[6] == r"#\/#|#\/#"
+    # assert table[8] == "/##\\|/##\\"
+    # assert table[-1] != "\n"  # no new-line in the end
+    #
+    # table = make_table(7)
+    # assert table[8:15] == "#X#|#X#"
 
     # university
 
