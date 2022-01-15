@@ -235,7 +235,7 @@ class Service:
         for c in self.service_queue:
             if c.make == car.make and c.color == car.color:
                 can_add = False
-        if len(self.service_queue) < self.max_car_num and can_add is True:
+        if len(self.service_queue) + 1 <= self.max_car_num and can_add is True:
             return True
         else:
             return False
@@ -301,7 +301,7 @@ class Plant:
 
     def __repr__(self):
         """String representation of the plant, which is the species of the plant."""
-        pass
+        return self.species
 
     def update_rarity(self, rarity: int):
         """Update the rarity of the plant."""
@@ -498,6 +498,8 @@ if __name__ == '__main__':
 
     print(service.can_add_to_service_queue(
         car2))  # False; since there is already car in service with the same make and color
+    car3 = Car("red", "honda", 1600)
+    print(service.can_add_to_service_queue(car3))
 
     # Plant store
     jungle_garden = PlantStore("Jungle Garden", 1.2)
