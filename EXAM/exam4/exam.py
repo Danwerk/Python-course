@@ -201,7 +201,7 @@ class Car:
 
     def __repr__(self):
         """Representation for car."""
-        return self.make
+        return f'({self.make} {self.color})'
 
 
 class Service:
@@ -263,11 +263,11 @@ class Service:
         After the repair, car is no longer in queue (is removed).
         :return: chosen and repaired car
         """
+        car_to_repair = self.service_queue[0]
         for car in self.service_queue:
             if len(car.color) + len(car.make) == 13:
                 car_to_repair = car
-        else:
-            car_to_repair = self.service_queue[0]
+
         self.service_queue.remove(car_to_repair)
         return car_to_repair
 
@@ -494,12 +494,19 @@ if __name__ == '__main__':
     service.add_car_to_service_queue(car)
     print(service.get_service_cars())  # [car]
 
-    car2 = Car("blue", "honda", 1500)
+    car2 = Car("blue", "hond", 1500)
 
     print(service.can_add_to_service_queue(
         car2))  # False; since there is already car in service with the same make and color
-    car3 = Car("red", "honda", 1600)
-    print(service.can_add_to_service_queue(car3))
+    car3 = Car("red", "hoenda", 1600)
+    car4 = Car("reed", "hoeenda", 1600)
+    car5 = Car("reeed", "hoeeenda", 1600)
+    service.add_car_to_service_queue(car2)
+    service.add_car_to_service_queue(car3)
+    service.add_car_to_service_queue(car4)
+    service.add_car_to_service_queue(car5)
+    print(service.repair())
+    print(service.repair())
 
     # Plant store
     jungle_garden = PlantStore("Jungle Garden", 1.2)
