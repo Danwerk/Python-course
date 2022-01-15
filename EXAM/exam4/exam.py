@@ -124,7 +124,22 @@ def max_average(data: list, n: int) -> float:
 
     :return Maximum average achievable with current parameters.
     """
-    pass
+    ret = []
+    end = n
+    for i in range(n):
+        s = data[i:end]
+        ret.append(s)
+        end += 1
+
+    max_sum = -1000000000000
+    for r in ret:
+        if sum(r) > max_sum:
+            max_sum = sum(r)
+    return max_sum / n
+
+
+print(max_average([-1, -2, -3], 2))
+print(max_average([1, 7, 4, 5, 6], 3))
 
 
 def find_parenthesis(s: str) -> str:
@@ -491,37 +506,19 @@ if __name__ == '__main__':
     car = Car("blue", "honda", 1800)
     service = Service("autoLUX", 5)
 
-    print(service.can_add_to_service_queue(car))  # True
-    service.add_car_to_service_queue(car)
-    print(service.get_service_cars())  # [car]
-
-    car2 = Car("blue", "hond", 1500)
-
-    print(service.can_add_to_service_queue(
-        car2))  # False; since there is already car in service with the same make and color
-    car3 = Car("red", "hoenda", 1600)
-    car5 = Car("reeed", "hoeeenda", 1600)
-    car6 = Car("reeed", "hoeeeeaa", 1600)
-    service.add_car_to_service_queue(car2)
-    service.add_car_to_service_queue(car3)
-    service.add_car_to_service_queue(car5)
-    service.add_car_to_service_queue(car6)
-    print(service.get_service_cars())
-
-    print(service.repair())
-    print(service.get_service_cars())
-
-    print(service.repair())
-    print(service.get_service_cars())
-
-    print(service.repair())
-    print(service.get_service_cars())
-    print(service.repair())
-    print(service.get_service_cars())
-    print(service.repair())
-    print(service.get_service_cars())
-    print(service.repair())
-
+    # print(service.can_add_to_service_queue(car))  # True
+    # service.add_car_to_service_queue(car)
+    # print(service.get_service_cars())  # [car]
+    #
+    # car2 = Car("blue", "hond", 1500)
+    #
+    # print(service.can_add_to_service_queue(
+    #     car2))  # False; since there is already car in service with the same make and color
+    # car3 = Car("red", "hoenda", 1600)
+    # car5 = Car("reeed", "hoeeenda", 1600)
+    # car6 = Car("reeed", "hoeeeeaa", 1600)
+    # service.add_car_to_service_queue(car2)
+    # service.add_car_to_service_queue(car3)
 
     # Plant store
     jungle_garden = PlantStore("Jungle Garden", 1.2)
