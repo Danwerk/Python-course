@@ -235,7 +235,7 @@ class Service:
         for c in self.service_queue:
             if c.make == car.make and c.color == car.color:
                 can_add = False
-        if len(self.service_queue) + 1 <= self.max_car_num and can_add is True:
+        if len(self.service_queue) + 1 <= self.max_car_num and can_add == True:
             return True
         else:
             return False
@@ -267,6 +267,7 @@ class Service:
         for car in self.service_queue:
             if len(car.color) + len(car.make) == 13:
                 car_to_repair = car
+                break
 
         self.service_queue.remove(car_to_repair)
         return car_to_repair
@@ -499,14 +500,28 @@ if __name__ == '__main__':
     print(service.can_add_to_service_queue(
         car2))  # False; since there is already car in service with the same make and color
     car3 = Car("red", "hoenda", 1600)
-    car4 = Car("reed", "hoeenda", 1600)
     car5 = Car("reeed", "hoeeenda", 1600)
+    car6 = Car("reeed", "hoeeeeaa", 1600)
     service.add_car_to_service_queue(car2)
     service.add_car_to_service_queue(car3)
-    service.add_car_to_service_queue(car4)
     service.add_car_to_service_queue(car5)
+    service.add_car_to_service_queue(car6)
+    print(service.get_service_cars())
+
     print(service.repair())
+    print(service.get_service_cars())
+
     print(service.repair())
+    print(service.get_service_cars())
+
+    print(service.repair())
+    print(service.get_service_cars())
+    print(service.repair())
+    print(service.get_service_cars())
+    print(service.repair())
+    print(service.get_service_cars())
+    print(service.repair())
+
 
     # Plant store
     jungle_garden = PlantStore("Jungle Garden", 1.2)
