@@ -370,7 +370,10 @@ class PlantStore:
 
         If the plant is already in stock, adds new amount to current amount.
         """
-        pass
+        if plant not in self.stock:
+            self.stock[plant] = amount
+        else:
+            self.stock[plant] += amount
 
     def update_members_only_stock(self, plant: Plant, amount: int):
         """
@@ -378,7 +381,10 @@ class PlantStore:
 
         If the plant is already in stock, adds new amount to current amount.
         """
-        pass
+        if plant not in self.members_only_stock:
+            self.members_only_stock[plant] = amount
+        else:
+            self.members_only_stock[plant] += amount
 
     def sell_plant(self, plant: Plant, customer: 'PlantCollector'):
         """
