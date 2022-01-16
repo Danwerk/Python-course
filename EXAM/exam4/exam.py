@@ -497,7 +497,10 @@ class PlantCollector:
         If there are no spaces of that size, create a new entry in the dict, otherwise
         add to the amount that already exists.
         """
-        pass
+        if space_type not in self.room:
+            self.room[space_type] = space_amount
+        else:
+            self.room[space_type] += space_amount
 
     def calculate_collection_value(self):
         """
