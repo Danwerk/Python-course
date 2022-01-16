@@ -477,15 +477,18 @@ class PlantCollector:
 
     def add_to_collection(self, plant: Plant):
         """Add a plant to the collector's collection if not already there."""
-        pass
+        if plant not in self.collection:
+            self.collection.append(plant)
 
     def add_to_wishlist(self, plant_name: str):
         """Add a plant's name to the collector's wishlist if not already there."""
-        pass
+        if plant_name not in self.wishlist:
+            self.wishlist.append(plant_name)
 
     def remove_from_wishlist(self, plant_name: str):
         """Remove a plant name from the collector's wishlist."""
-        pass
+        if plant_name in self.wishlist:
+            self.wishlist.remove(plant_name)
 
     def add_space(self, space_type: int, space_amount: int):
         """
