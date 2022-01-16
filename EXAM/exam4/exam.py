@@ -116,7 +116,7 @@ def prettify_string(input_string: str) -> str:
     return result
 
 
-print(prettify_string('Hello,I am the input of this function.please make me pretty!'))
+# print(prettify_string('Hello,I am the input of this function.please make me pretty!'))
 
 
 def max_average(data: list, n: int) -> float:
@@ -147,8 +147,8 @@ def max_average(data: list, n: int) -> float:
     return max_sum / n
 
 
-print(max_average([1, 2, 3, 1, 6, 5, 2, 3], 2))
-print(max_average([1, 7, 4, 5, 6], 3))
+# print(max_average([1, 2, 3, 1, 6, 5, 2, 3], 2))
+# print(max_average([1, 7, 4, 5, 6], 3))
 
 
 def find_parenthesis(s: str) -> str:
@@ -217,13 +217,13 @@ def convert_to_roman(nr: int) -> str:
     return ''.join(result)
 
 
-print(convert_to_roman(1))  # "I"
-print(convert_to_roman(55))  # "LV"
-
-print(convert_to_roman(44))  # "XLIV"
-print(convert_to_roman(2021))  # MXXI
-print(convert_to_roman(1999))  # MCMXCIX
-print(convert_to_roman(1009))  # MIX
+# print(convert_to_roman(1))  # "I"
+# print(convert_to_roman(55))  # "LV"
+#
+# print(convert_to_roman(44))  # "XLIV"
+# print(convert_to_roman(2021))  # MXXI
+# print(convert_to_roman(1999))  # MCMXCIX
+# print(convert_to_roman(1009))  # MIX
 
 
 class Car:
@@ -394,19 +394,25 @@ class PlantStore:
         from that particular stock and are only sold to customers with a
         membership.
         """
-        pass
+        if customer in self.members_club:
+            if plant in self.members_only_stock:
+                self.members_only_stock.pop(plant)
+        elif customer not in self.members_club:
+            if plant in self.stock:
+                self.stock.pop(plant)
 
     def get_members_only_stock(self):
         """Return the members only stock."""
-        pass
+        return self.members_only_stock
 
     def get_stock(self):
         """Return the stock available to all customers."""
-        pass
+        return self.stock
 
     def assign_membership(self, customer: 'PlantCollector'):
         """Add a customer to the members list."""
-        pass
+        if customer not in self.members_club:
+            self.members_club.append(customer)
 
     def get_stock_value(self) -> int:
         """
