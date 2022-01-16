@@ -85,29 +85,38 @@ def prettify_string(input_string: str) -> str:
     """
     punctuation = {'.': '. ', ',': ', ', '!': '! ', '?': '? ', ':': ': ', ';': ';', '-': '- '}
     #  lauselõpumärk(.?!)
-    # kirjavahemärgid(',.!?:;-')
-    fixed_sentence = ''
-    sentence_end = ['?', '!', '.']
-    for s in range(len(input_string)):
-        inp = input_string[s]
-        if inp in punctuation:
-            fixed_sentence += punctuation[inp]
+    # # kirjavahemärgid(',.!?:;-')
+    # fixed_sentence = ''
+    # sentence_end = ['?', '!', '.']
+    # for s in range(len(input_string)):
+    #     inp = input_string[s]
+    #     if inp in punctuation:
+    #         fixed_sentence += punctuation[inp]
+    #     else:
+    #         fixed_sentence += inp
+    #
+
+    result = ""
+    add_space = False
+    capitalize = True
+    for c in input_string:
+        if c in '!?.':
+            capitalize = True
+        if c in "!?.,;:-":
+            add_space = True
         else:
-            fixed_sentence += inp
+            if add_space and c != ' ':
+                result += " "
+            add_space = False
+            if capitalize and c != ' ':
+                c = c.upper()
+                capitalize = False
 
-    fixed_sentence = ' '.join(fixed_sentence.split())
-    splitted = fixed_sentence.split('.') or fixed_sentence.split('!') or fixed_sentence.split('?')
-    print(splitted)
-    modified = []
-    for i in splitted:
-        i = i.strip()
-        i = i.capitalize()
-        modified.append(i)
-
-    return modified
+        result += c
+    return result
 
 
-print(prettify_string('Hello,I am the !input of this function.please make me pretty!'))
+print(prettify_string('Hello,I am the input of this function.please make me pretty!'))
 
 
 def max_average(data: list, n: int) -> float:
@@ -138,7 +147,7 @@ def max_average(data: list, n: int) -> float:
     return max_sum / n
 
 
-print(max_average([1,2,3,1,6, 5,2,3], 2))
+print(max_average([1, 2, 3, 1, 6, 5, 2, 3], 2))
 print(max_average([1, 7, 4, 5, 6], 3))
 
 
@@ -196,7 +205,25 @@ def convert_to_roman(nr: int) -> str:
     convert_to_roman(1009) => MIX
 
     """
-    pass
+    result = []
+    amnts = {1000: 'M', 500: 'D', 100: 'C', 50: 'L', 10: 'X', 5: 'V', 1: 'I'}
+    ret = [1000, 500, 100, 50, 10, 5, 1]
+    for i in ret:
+        amnt = nr // i
+        if amnt > 0:
+            nr -= i
+            result.append(amnts[i])
+
+    return ''.join(result)
+
+print(convert_to_roman(1))  # "I"
+print(convert_to_roman(55))  # "LV"
+
+
+print(convert_to_roman(44))  # "XLIV"
+print(convert_to_roman(2021))  # MXXI
+print(convert_to_roman(1999))  # MCMXCIX
+print(convert_to_roman(1009))  # MIX
 
 
 class Car:
