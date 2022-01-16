@@ -508,7 +508,9 @@ class PlantCollector:
 
         Add the prices of all the plants together.
         """
-        pass
+        total = 0
+        for plant in self.collection:
+            total += plant.price
 
     def most_expensive_wishlist_plant(self, store: PlantStore):
         """
@@ -518,7 +520,13 @@ class PlantCollector:
         different), a PlantStore object is also given as an argument to the function. Return the name of the most expensive
         plant or if none of the plants in the wishlist are in stock at the store, return None.
         """
-        pass
+        most_expensive = 0
+        if store.stock == []:
+            return None
+        else:
+            most_expensive = [plant for plant in store.stock]
+            sorted_most_expensive = sorted(most_expensive, key=lambda x: x.price, reverse=True)
+        return sorted_most_expensive[0]
 
     def buy_wishlist_plant(self, store: PlantStore) -> str:
         """
