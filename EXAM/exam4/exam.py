@@ -341,7 +341,6 @@ class Plant:
         self.rarity = rarity
         self.size = size
 
-
         self.price = 0
 
     def __repr__(self):
@@ -432,7 +431,20 @@ class PlantStore:
         the plant is not 'in stock' for them, even if the store actually has the plant they are asking for.
         Returns the boolean True if the plant is in stock, and False if not.
         """
-        pass
+
+        # is_in_stock = False
+        # for plant in self.members_only_stock:
+        #     if plant.species == plant_name and customer not in self.members_club:
+        #         is_in_stock = False
+        #         return is_in_stock
+        #     elif plant.species == plant_name and customer in self.members_club:
+        #         is_in_stock = True
+        #         return is_in_stock
+        #
+        #
+        # for p in self.stock:
+        #     if plant.species == plant_name and customer
+        # return is_in_stock
 
     def get_plant_details(self, plant_name: str) -> Plant:
         """
@@ -440,7 +452,17 @@ class PlantStore:
 
         If no such plant exists in the store's stock, returns None.
         """
-        pass
+        plant = None
+        get_plant = None
+        for p in self.stock:
+            if p.species == plant_name:
+                plant = p
+                get_plant = True
+
+        if get_plant:
+            return plant
+        else:
+            return None
 
 
 class PlantCollector:
