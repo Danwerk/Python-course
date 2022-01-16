@@ -216,9 +216,9 @@ def convert_to_roman(nr: int) -> str:
 
     return ''.join(result)
 
+
 print(convert_to_roman(1))  # "I"
 print(convert_to_roman(55))  # "LV"
-
 
 print(convert_to_roman(44))  # "XLIV"
 print(convert_to_roman(2021))  # MXXI
@@ -340,6 +340,8 @@ class Plant:
         self.species = species
         self.rarity = rarity
         self.size = size
+
+
         self.price = 0
 
     def __repr__(self):
@@ -348,7 +350,7 @@ class Plant:
 
     def update_rarity(self, rarity: int):
         """Update the rarity of the plant."""
-        pass
+        self.rarity = rarity
 
 
 class PlantStore:
