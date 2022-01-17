@@ -429,7 +429,7 @@ class Car:
         self.fuel = 100
         self.accessories = []
         self.premium = False
-        self.basic = False
+        self.basic = True
 
     def add_accessory(self, accessory: Accessory):
         """Add accessory to the car."""
@@ -557,6 +557,7 @@ class Dealership:
 
     def make_car_premium(self, car: Car):
         """Make a car premium, which can can be sold only to premium customers."""
+        car.basic = False
         car.premium = True
         self.premium.append(car)
 
@@ -676,8 +677,7 @@ if __name__ == '__main__':
     customer.drive_with_car("Rally")
     customer.drive_with_car("Rally")
     print(customer.get_garage())  # []]
-
-    car_dealer.make_car_premium(blue_car)
+    print(blue_car.get_value())
     # print(car_dealer.get_all_premium_cars())  # [This blue Audi R4 contains 1 accessories and has 100% fuel left.]
 
     customer_premium = Customer("Ago", "Expensive black")
