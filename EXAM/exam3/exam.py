@@ -111,6 +111,7 @@ def encode_string_with_hex_key(input_str: str, key: str) -> str:
 # print(encode_string_with_hex_key("z", "1"))  # "a"
 # print(encode_string_with_hex_key("abc", "101"))  # "bbd"
 # print(encode_string_with_hex_key("z.z.z", "fffff"))  # "o.o.o"
+print(encode_string_with_hex_key("1abc", "2345"))  # "o.o.o"
 
 
 def who_gets_gingerbread(students: dict, total_gingerbreads: int) -> dict:
@@ -166,7 +167,6 @@ def who_gets_gingerbread(students: dict, total_gingerbreads: int) -> dict:
             ret[sorted_students[i][0]] = g_count + ret[sorted_students[i][0]]
         i += 1
         total_gingerbreads -= 1
-
 
     return ret
 
@@ -248,7 +248,26 @@ def make_table(n: int) -> str:
     /##\|/##\
 
     """
-    pass
+    result = ""
+    outer = 0
+    inner = n - 2
+    for i in range(n):
+        if i == n // 2:
+            result += "#" * outer + "X" + "#" * outer + "\n"
+            outer -= 1
+            inner = 1
+        elif i < n // 2:
+            result += "#" * outer + "\\" + "#" * inner + "/" + "#" * outer + "\n"
+            outer += 1
+            inner -= 2
+        else:
+            result += "#" * outer + "/" + "#" * inner + "\\" + "#" * outer + "\n"
+            outer -= 1
+            inner += 2
+    return result
+
+
+print(make_table(7))
 
 
 class Student:
@@ -409,11 +428,13 @@ class Car:
         self.color = color
         self.fuel = 100
         self.accessories = []
+        self.premium = False
+        self.basic = False
 
     def add_accessory(self, accessory: Accessory):
         """Add accessory to the car."""
-        self.accessories.append(accessory)
-
+        if accessory not in self.accessories:
+            self.accessories.append(accessory)
 
     def get_value(self) -> int:
         """
@@ -424,14 +445,17 @@ class Car:
         """
         price = 0
         result = 0
-        if self.accessories is []:
+        if not self.accessories:
             return price
-        elif self.accessories is not []:
+        elif self.accessories:
             for acc in self.accessories:
                 result += acc.value
 
+        if self.premium:
+            result += 42500
+        elif self.basic:
+            result += 9500
         return result
-
 
     def get_fuel_left(self):
         """Return how much fuel is left in percentage."""
@@ -478,12 +502,11 @@ class Customer:
 
         Both regular and premium cars are kept in garage.
         """
-        return sorted(self.cars, key= lambda x: x.get_value)
+        return sorted(self.cars, key=lambda x: x.get_value)
 
     def make_premium(self):
         """Make customer a premium customer, premium cars can be sold to the customer now."""
         self.premium = True
-
 
     def drive_with_car(self, driving_style: str):
         """
@@ -510,7 +533,6 @@ class Customer:
             pass
 
 
-
 class Dealership:
     """Dealership."""
 
@@ -535,8 +557,8 @@ class Dealership:
 
     def make_car_premium(self, car: Car):
         """Make a car premium, which can can be sold only to premium customers."""
+        car.premium = True
         self.premium.append(car)
-        self.regular.remove(car)
 
     def get_all_premium_cars(self):
         """Return all the premium cars sorted by value (ascending, lower to higher)."""
@@ -562,8 +584,6 @@ class Dealership:
                     customer.cars.append(car)
                     self.cars.remove(car)
                     self.regular.remove(car)
-
-
 
 
 if __name__ == '__main__':
@@ -641,6 +661,8 @@ if __name__ == '__main__':
     car_dealer.add_car(blue_car)
     car_dealer.add_car(green_car)
 
+
+
     print(car_dealer.get_all_regular_cars())
     # [This green Ford contains 0 accessories and has 100% fuel left.,
     # This blue Audi R4 contains 1 accessories and has 100% fuel left.]
@@ -656,7 +678,7 @@ if __name__ == '__main__':
     print(customer.get_garage())  # []]
 
     car_dealer.make_car_premium(blue_car)
-    print(car_dealer.get_all_premium_cars())  # [This blue Audi R4 contains 1 accessories and has 100% fuel left.]
+    # print(car_dealer.get_all_premium_cars())  # [This blue Audi R4 contains 1 accessories and has 100% fuel left.]
 
     customer_premium = Customer("Ago", "Expensive black")
     customer_premium.make_premium()
