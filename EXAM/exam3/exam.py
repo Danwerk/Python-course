@@ -463,7 +463,7 @@ class Car:
 
     def get_accessories_by_value(self):
         """Return accessories sorted by value (descending i.e. higher to lower)."""
-        return sorted(self.accessories, key=lambda x: x.value)
+        return sorted(self.accessories, key=lambda x: x.value, reverse=True)
 
     def __repr__(self):
         """
@@ -563,7 +563,8 @@ class Dealership:
 
     def get_all_premium_cars(self):
         """Return all the premium cars sorted by value (ascending, lower to higher)."""
-        return sorted(self.premium, key=lambda x: x.get_value)
+        if self.premium:
+            return sorted(self.premium, key=lambda x: x.get_value)
 
     def sell_car_to_customer(self, customer: Customer):
         """
