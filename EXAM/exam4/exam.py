@@ -530,7 +530,7 @@ class PlantCollector:
 
         if ret != []:
             sorted_most_expensive = sorted(ret, key=lambda x: x.price, reverse=True)
-            return sorted_most_expensive[0]
+            return sorted_most_expensive[0].species
         else:
             return None
 
