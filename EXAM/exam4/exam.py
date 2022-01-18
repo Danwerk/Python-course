@@ -520,13 +520,19 @@ class PlantCollector:
         different), a PlantStore object is also given as an argument to the function. Return the name of the most expensive
         plant or if none of the plants in the wishlist are in stock at the store, return None.
         """
+        ret = []
         most_expensive = 0
-        if store.stock == []:
-            return None
+        for wish_plant in self.wishlist:
+            for plant in store.stock:
+                if plant.species == wish_plant:
+                    ret.append(plant)
+                    break
+
+        if ret != []:
+            sorted_most_expensive = sorted(ret, key=lambda x: x.price, reverse=True)
+            return sorted_most_expensive[0]
         else:
-            most_expensive = [plant for plant in store.stock]
-            sorted_most_expensive = sorted(most_expensive, key=lambda x: x.price, reverse=True)
-        return sorted_most_expensive[0]
+            return None
 
     def buy_wishlist_plant(self, store: PlantStore) -> str:
         """
@@ -549,7 +555,12 @@ class PlantCollector:
         remove from the stock of the store and amend the amount of space available in the home.
         If the purchase is successful, returns the species of the plant, if not, returns the string "Cannot buy this plant!"
         """
-        pass
+        for plant in store.stock:
+            if plant.species == plant_name:
+                p = plant
+                self.collection.append(p)
+                self.wishlist.remove(p)
+                self.room[p.size] -= p.size
 
 
 if __name__ == '__main__':
@@ -599,11 +610,11 @@ if __name__ == '__main__':
 
     # Plant store
     jungle_garden = PlantStore("Jungle Garden", 1.2)
-    assert jungle_garden.name == "Jungle Garden"
-    assert jungle_garden.pricing_coefficient == 1.2
-    assert jungle_garden.stock == {}
-    assert jungle_garden.members_club == []
-    assert jungle_garden.members_only_stock == {}
+    # assert jungle_garden.name == "Jungle Garden"
+    # assert jungle_garden.pricing_coefficient == 1.2
+    # assert jungle_garden.stock == {}
+    # assert jungle_garden.members_club == []
+    # assert jungle_garden.members_only_stock == {}
 
     lancifolia = Plant("Calathea Lancifolia", 0, 2)
     monstera_deliciosa = Plant("Monstera Deliciosa", 0, 0)
@@ -611,6 +622,13 @@ if __name__ == '__main__':
     jungle_garden.update_stock(lancifolia, 9)
     jungle_garden.update_stock(monstera_deliciosa, 3)
     jungle_garden.update_stock(micans, 8)
+
+    ago = PlantCollector('ago')
+    ago.add_to_wishlist('Calathea Lancifolia')
+    ago.add_to_wishlist('Monstera Deliciosa')
+
+    ago.most_expensive_wishlist_plant(jungle_garden)
+
 
     expected_stock = {
         micans: 8,
