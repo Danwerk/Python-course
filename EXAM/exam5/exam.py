@@ -139,9 +139,9 @@ def recursive_max(numbers: list, max_num=-10000000) -> int:
         return recursive_max(numbers[1:])
 
 
-print(recursive_max([]))  # 0
-print(recursive_max([8]))  # 8
-print(recursive_max([8, 9, 10, 2]))  # 10
+# print(recursive_max([]))  # 0
+# print(recursive_max([8]))  # 8
+# print(recursive_max([8, 9, 10, 2]))  # 10
 
 
 def make_cupboard(total_width: int, total_height: int, levels: int, sections_on_levels: list) -> str:
@@ -311,15 +311,16 @@ class ComputerPart:
 
         Each computer part has a name and a cost.
         """
-        pass
+        self.name = name
+        self.cost = cost
 
     def get_cost(self) -> float:
         """Return the cost of the computer part."""
-        pass
+        return self.cost
 
     def __repr__(self) -> str:
         """Return the name of the computer part."""
-        pass
+        return self.name
 
 
 class Computer:
@@ -335,7 +336,10 @@ class Computer:
         :param name: computer name
         :param total_parts_needed: the amount of parts needed for the computer to function
         """
-        pass
+        self.name = name
+        self.total_parts_needed = total_parts_needed
+        self.parts = []
+        self.cost = 0
 
     def add_part(self, part: ComputerPart):
         """
@@ -345,7 +349,9 @@ class Computer:
 
         The part is not added if the computer is already working.
         """
-        pass
+        if not self.is_working():
+            self.parts.append(part)
+            self.cost += part.cost
 
     def get_parts_needed(self) -> int:
         """
@@ -353,11 +359,15 @@ class Computer:
 
         If the computer needs a total of 3 parts and currently has 1 part, this should return 2.
         """
-        pass
+        parts_at_the_moment = len(self.parts)
+        return self.total_parts_needed - parts_at_the_moment
 
     def is_working(self) -> bool:
         """Return if the computer has the correct amount of parts."""
-        pass
+        if len(self.parts) == self.total_parts_needed:
+            return True
+        else:
+            return False
 
     def get_parts(self) -> list[ComputerPart]:
         """
@@ -365,11 +375,24 @@ class Computer:
 
         Parts should be in the same order as they were added.
         """
-        pass
+        return self.parts
 
     def get_cost(self) -> float:
         """Return the cost of the computer."""
-        pass
+        total = 0
+        for part in self.parts:
+            total += part.cost
+        return total
+
+    def get_correct_representation(self):
+        ret = []
+        if not self.parts:
+            result = "nothing"
+        else:
+            for part in self.parts:
+                ret.append(part.name)
+            result = ", ".join(ret)
+        return result
 
     def __repr__(self) -> str:
         """
@@ -386,7 +409,7 @@ class Computer:
         "A hardcore gaming computer for 540.30€ with gtx1070, r5 2600, CX650F, EV860"
         "A pc for 0.00€ with nothing"
         """
-        pass
+        return f'A {self.name} for {"{:.2f}".format(self.get_cost())}€ with {self.get_correct_representation()}'
 
 
 class Customer:
@@ -398,11 +421,16 @@ class Customer:
 
         Each customer must have a name, money and it should also keep track of owned computers.
         """
-        pass
+        self.name = name
+        self.money = money
+        self.computers = []
 
     def can_buy_computer(self, computer: Computer) -> bool:
         """Return if this customer has enough money to buy a computer."""
-        pass
+        if self.money >= computer.get_cost():
+            return True
+        else:
+            return False
 
     def buy_computer(self, computer: Computer) -> bool:
         """
@@ -416,7 +444,7 @@ class Customer:
 
     def get_computers(self) -> list[Computer]:
         """Return all computers owned by this customer."""
-        pass
+        return self.computers
 
     def __repr__(self) -> str:
         """
@@ -447,27 +475,32 @@ class ComputerStore:
 
     def __init__(self):
         """Constructor."""
-        pass
+        self.computers = []
+        self.parts = []
 
     def add_computer(self, computer: Computer):
         """Add a computer to the store."""
-        pass
+        self.computers.append(computer)
 
     def add_part(self, part: ComputerPart):
         """Add a computer part to the storage of the store."""
-        pass
+        self.parts.append(part)
 
     def get_computers(self) -> list[Computer]:
         """Return all computers in the stores as a list."""
-        pass
+        return self.computers
 
     def get_parts(self) -> list[ComputerPart]:
         """Return all unused computer parts in the store."""
-        pass
+        return self.parts
 
     def get_working_computers(self) -> list[Computer]:
         """Return all computers which are working."""
-        pass
+        ret = []
+        for computer in self.computers:
+            if computer.is_working():
+                ret.append(computer)
+        return ret
 
     def build_computer(self) -> Optional[Computer]:
         """
@@ -535,17 +568,16 @@ if __name__ == '__main__':
 
     # Book store
 
-    store = Store("Apollo", 98.9)
-    book = Book("War & Peace", "Leo Tolstoy", 10.5, 99)
-    book2 = Book("War & Peace2", "Leo Tolstoy", 10.5, 99)
-
-    print(store.can_add_book(book))  # True
-
-    store.add_book(book)
-    store.add_book(book2)
-    print(store.get_all_books())  # [book]
-    print(store.get_most_popular_book())
-
+    # store = Store("Apollo", 98.9)
+    # book = Book("War & Peace", "Leo Tolstoy", 10.5, 99)
+    # book2 = Book("War & Peace2", "Leo Tolstoy", 10.5, 99)
+    #
+    # print(store.can_add_book(book))  # True
+    #
+    # store.add_book(book)
+    # store.add_book(book2)
+    # print(store.get_all_books())  # [book]
+    # print(store.get_most_popular_book())
 
     # book2 = Book("War & Peace", "Leo Tolstoy", 10.5, 99)
     # assert store.can_add_book(book2) is False  # cannot add book with the same title and author
