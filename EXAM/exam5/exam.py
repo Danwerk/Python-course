@@ -120,7 +120,7 @@ def sum_of_multipliers(first_num: int, second_num: int, limit: int) -> int:
 # print(sum_of_multipliers(3, 1, 20))  # 210
 
 
-def recursive_max(numbers: list, max_num=-10000000) -> int:
+def recursive_max(numbers: list) -> int:
     """
     Find max value from the list using recursion.
 
@@ -131,17 +131,17 @@ def recursive_max(numbers: list, max_num=-10000000) -> int:
     recursive_max([8]) => 8
     recursive_max([8, 9, 10]) => 10
     """
-    if not numbers:
-        return 0
+
     if len(numbers) == 1:
-        return max(numbers)
+        return numbers[0]
     else:
-        return recursive_max(numbers[1:])
+        recursive = recursive_max(numbers[1:])
+        return recursive if recursive > numbers[0] else numbers[0]
 
 
 # print(recursive_max([]))  # 0
 # print(recursive_max([8]))  # 8
-# print(recursive_max([8, 9, 10, 2]))  # 10
+# print(recursive_max([8, 9, 10, 2, 6, 3]))  # 10
 
 
 def make_cupboard(total_width: int, total_height: int, levels: int, sections_on_levels: list) -> str:
@@ -561,7 +561,10 @@ class ComputerStore:
 
         If a computer is successfully built and it is cheap enough to buy, then the customer buys that computer.
         """
-        pass
+        computers_can_buy_with_money = [computer for computer in self.get_working_computers() if computer.get_cost() <= customer.money]
+        most_expensive = sorted(self.get_working_computers(), key=lambda e: e.get_cost(), reverse=True)
+        print(most_expensive)
+
 
 
 if __name__ == '__main__':
@@ -644,6 +647,7 @@ if __name__ == '__main__':
     # assert len(store.get_computers()) == 1  # only laptop left in store
     # assert repr(laura) == "Laura with 669.50€\nA pc for 330.50€ with cpu, mobo, case"  # Laura has a pc now
 
+    customer1 = Customer('Ago', 500)
     computer1 = Computer('dell1', 3)
     computer2 = Computer('dell2', 3)
     computer3 = Computer('dell3', 2)
@@ -672,4 +676,6 @@ if __name__ == '__main__':
 
     print(store1.get_parts())
     print(store1.build_computer())
+
+    store1.sell_customer_computer(customer1)
 
