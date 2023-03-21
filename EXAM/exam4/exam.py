@@ -147,7 +147,7 @@ def max_average(data: list, n: int) -> float:
     return max_sum / n
 
 
-# print(max_average([1, 2, 3, 1, 6, 5, 2, 3], 2))
+print(max_average([1, 2, 3, 1, 6, 5, 2, 3], 3))
 # print(max_average([1, 7, 4, 5, 6], 3))
 
 

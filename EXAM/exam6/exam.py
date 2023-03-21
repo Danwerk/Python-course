@@ -203,21 +203,18 @@ def remove_duplicate(number_list):
     :return: new list
     """
     """Sisendiks on arvude järjend.Tagasta järjend, kus kohe pärast mingit arvu olevad tema kordused on eemaldatud."""
-    pairs = []
+    instances = []
     result = []
+
     for i in range(0, len(number_list) - 1):
-        pair = number_list[i:i + 2]
-        pairs.append(pair)
+        instance = number_list[0]
 
-    for p in pairs:
-        if p[0] != p[1]:
-            pass
-    return pairs
+    return result
 
 
-# print(remove_duplicate([1, 1, 2, 2, 3, 3]))  # [1, 2, 3]
-# print(remove_duplicate([1, 2, 3]))  # [1, 2, 3]
-# print(remove_duplicate([1, 1, 1, 1, 1, 2, 1, 1, 3]))  # [1, 2, 1, 3]
+print(remove_duplicate([1, 1, 2, 2, 3, 3]))  # [1, 2, 3]
+print(remove_duplicate([1, 2, 3]))  # [1, 2, 3]
+print(remove_duplicate([1, 1, 1, 1, 1, 2, 1, 1, 3]))  # [1, 2, 1, 3]
 
 
 def who_called(calls, name):
@@ -235,7 +232,17 @@ def who_called(calls, name):
     :param name: name of the receiver
     :return: name of the caller
     """
-    pass
+    if calls == {}:
+        return -1
+    for person in calls:
+        if calls[person] == name:
+            return person
+    return -1
+
+
+# print(who_called({}, "Nathan"))  # -1
+# print(who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Alex"))  # "James"
+# print(who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Olaf"))  # -1
 
 
 def remove_lowest_digit(number):
@@ -283,7 +290,8 @@ def show_highest_grade(grade1, grade2):
     :return:
     """
     highest_grade = max(grade1, grade2)
-    return f'Highest grade: {highest_grade}'
+    print(f'Highest grade: {highest_grade}')
+    return None
 
 
 # print(show_highest_grade(10, 14))
@@ -547,7 +555,7 @@ class Subject:
 
         :return: nr of EAPs
         """
-        pass
+        return self.eaps
 
 
 class Curriculum:
@@ -564,7 +572,9 @@ class Curriculum:
         :param name: name of the subject.
         :return: subject object.
         """
-        pass
+        for n in self.curriculum:
+            if n == name:
+                return n
 
     def add_subject(self, subject):
         """
@@ -606,11 +616,6 @@ class Curriculum:
 
 
 if __name__ == '__main__':
-
-    # assert who_called({}, "Nathan") == -1
-    # assert who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Alex") == "James"
-    # assert who_called({"Alex": "James", "Jeff": "Bill", "James": "Alex", "Daniel": "Matt"}, "Olaf") == -1
-    #
     # assert transactions("A,B,100") == [0, 200, 100]
     # assert transactions("C,A,200") == [300, 100, -100]
     # assert transactions("") == [100, 100, 100]
@@ -619,15 +624,15 @@ if __name__ == '__main__':
     #
     # OOP1 - stargate
 
-    sg1 = Stargate("Earth", True)
-    sg2 = Stargate("Another planet", False)
-    assert sg1.dial(sg2) is True
-    assert sg1.get_connected_planet_name() == "Another planet"
-    sg2.disconnect()
-    assert sg2.get_connected_planet_name() == "Earth"
-    sg1.disconnect()
-    assert sg2.get_connected_planet_name() is None
-    assert sg2.dial(sg1) is False
+    # sg1 = Stargate("Earth", True)
+    # sg2 = Stargate("Another planet", False)
+    # assert sg1.dial(sg2) is True
+    # assert sg1.get_connected_planet_name() == "Another planet"
+    # sg2.disconnect()
+    # assert sg2.get_connected_planet_name() == "Earth"
+    # sg1.disconnect()
+    # assert sg2.get_connected_planet_name() is None
+    # assert sg2.dial(sg1) is False
     #
     # OOP2 - student
     student = Student(Curriculum())
@@ -643,8 +648,9 @@ if __name__ == '__main__':
     student.add_grade(subj1, 3)
     student.add_grade(subj2, 5)
 
+
     assert student.get_subject_grade(subj3) is None
-    assert student.get_eaps() == 11
+    # assert student.get_eaps() == 11
     assert student.get_subject_grade(subj2) == 5
     assert student.get_average_grade() == 4
 

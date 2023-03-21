@@ -55,7 +55,8 @@ def list_move(initial_list: list, amount: int, factor: int) -> list:
     if initial_list == []:
         return [[] for i in range(amount)]
     else:
-        for i in range(amount):
+        ret.append(initial_list)
+        for i in range(amount-1):
             k = (len(initial_list) + factor) % len(initial_list)
             initial_list = initial_list[k::] + initial_list[:k:]
             ret.append(initial_list)

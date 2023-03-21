@@ -188,12 +188,12 @@ def longest_substring(text: str) -> str:
     return substring
 
 
-print(longest_substring('aaa'))  # a
-print(longest_substring('abc'))  # abc
-print(longest_substring('abccba'))  # abc
-print(longest_substring('babcdEFghij'))  # abcdEFghij
-print(longest_substring('abBcd'))  # Bcd
-print(longest_substring(''))  # ''
+# print(longest_substring('aaa'))  # a
+# print(longest_substring('abc'))  # abc
+# print(longest_substring('abccba'))  # abc
+# print(longest_substring('babcdEFghij'))  # abcdEFghij
+# print(longest_substring('abBcd'))  # Bcd
+# print(longest_substring(''))  # ''
 
 
 class Student:

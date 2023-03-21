@@ -404,19 +404,24 @@ if __name__ == '__main__':
     # naughty_child1 = (naughty_children.get_children_dict()['Tanya'])
     # print(naughty_child1)
 
-    libby = Child("Libby", 'Germany', ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
-    keira = Child("Keira", 'Germany', ['LED light up sneakers', '7200 Riot Points gift card'])
-    lexie = Child("Lexie", 'Estonia',
-                  ['Mermaid barbie', 'Pink fluffy pen', 'World of Warcraft: Shadowlands Collectors Edition'])
+    # libby = Child("Libby", 'Germany', ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
+    # keira = Child("Keira", 'Germany', ['LED light up sneakers', '7200 Riot Points gift card'])
+    # lexie = Child("Lexie", 'Estonia',
+    #               ['Mermaid barbie', 'Pink fluffy pen', 'World of Warcraft: Shadowlands Collectors Edition'])
+    #
+    # amelia = Child("Amelia", 'Germany', ['Zebra Jumpy', 'Princess dress', 'Lego death star', 'LED light up sneakers',
+    #                                      '7200 Riot Points gift card'])
 
-    amelia = Child("Amelia", 'Germany', ['Zebra Jumpy', 'Princess dress', 'Lego death star', 'LED light up sneakers',
-                                         '7200 Riot Points gift card'])
+    elmo = Child("Elmo", 'Estonia', ['Zebra Jumpy', 'Princess dress', 'Lego death star'])
+    slavik = Child("Slavik", 'Estonia', ['LED light up sneakers', '7200 Riot Points gift card'])
 
     # logisic = Logistics(nice_children.get_nice_children())
-    logistic = Logistics([libby, keira])
+    logistic = Logistics([elmo, slavik])
     logistic.import_products_from_warehouse()
+    logistic.children_from_countries_to_deliver()
+    logistic.pack_all_carriages_to_countries()
 
-    # print(logistic.delivery_notes_for_carriage_all("delivery_note.txt"))
+    print(logistic.delivery_notes_for_carriage_all("delivery_note.txt"))
 
     # print(logistic.pack_carriages_to_country("Germany"))
     # print(logistic.delivery_notes_for_carriage_per_country("Germany", "delivery_note.txt"))

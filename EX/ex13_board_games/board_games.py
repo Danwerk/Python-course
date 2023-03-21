@@ -427,7 +427,7 @@ if __name__ == '__main__':
     print(statistics.get('/total/places'))  # 1
     # print(statistics.get('/player/kristjan/amount'))  # 3
     # print(statistics.get('/player/kristjan/favourite'))  # 7 wonders
-    # print(statistics.get('/player/joosep/won'))
+    print(statistics.get('/player/joosep/won'))
     # print(statistics.get('/game/terraforming mars/amount'))  # 2
     # print(statistics.get('/game/terraforming mars/player-amount'))
     # print(statistics.get('/game/terraforming mars/most-wins'))

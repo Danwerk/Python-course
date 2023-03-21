@@ -74,7 +74,7 @@ def index_index_value(nums: list) -> int:
             another_val = nums[last_elem]
             return nums[another_val]
 
-print(index_index_value([0, 5, 1]))
+print(index_index_value([1]))
 print(index_index_value([0, -1, 4, 1, 1, 1, 1]))
 print(index_index_value([0, 2, 6, 2]))
 print(index_index_value([0, 2, 4, 5]))

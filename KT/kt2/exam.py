@@ -51,17 +51,6 @@ def take_partial(text: str, leave_count: int, take_count: int) -> str:
             s += text[:take_count]
             text = text.replace(text[0:take_count], '', 1)
     return s
-    # new_str = ''
-    # while text != '':
-    #     a = text[:leave_count]
-    #     text = text.replace(a, '', len(a))
-    #     b = text[:take_count]
-    #     if text == '':
-    #         break
-    #     else:
-    #         text = text.replace(b, '', len(b))
-    #         new_str += b
-    # return new_str
 
 
 print(take_partial("a,d", 1, 1))

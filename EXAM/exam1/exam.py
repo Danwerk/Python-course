@@ -37,6 +37,11 @@ def sum_of_multiples(limit: int, multiplier: int) -> int:
     sum_of_multiples(10, 1) -> 45
     sum_of_multiples(5, 5) -> 0
     """
+    s = 0
+    for i in range(0, limit, multiplier):
+        s += i
+    return s
+    '''
     ret = 0
     if limit <= multiplier:
         return ret
@@ -48,11 +53,11 @@ def sum_of_multiples(limit: int, multiplier: int) -> int:
                 ret += i * multiplier
 
     return ret
+    '''
 
-
-# print(sum_of_multiples(20, 5))  # 30
-# print(sum_of_multiples(10, 1))  # 45
-# print(sum_of_multiples(5, 5))  # 0
+print(sum_of_multiples(20, 5))  # 30
+print(sum_of_multiples(10, 1))  # 45
+print(sum_of_multiples(5, 5))  # 0
 
 
 def mix_string(s1: str, s2: str) -> str:
@@ -63,30 +68,19 @@ def mix_string(s1: str, s2: str) -> str:
     mix_string("AA", "") -> "AA"
     mix_string("mxdsrn", "ie tig") -> "mixed string"
     """
-    ret = []
-    ret1 = [el for el in s1]
-    ret2 = [el for el in s2]
-    max_list = max(ret1, ret2, key=len)
-    min_list = min(ret1, ret2, key=len)
-    if len(ret1) == 0:
-        ret = ret2
-    elif len(ret2) == 0:
-        ret = ret1
-    else:
-        # return [sub[item] for item in range(len(ret2)) for sub in [ret1, ret2]]
-        for item in range(len(max_list)):
-            if item >= len(min_list):
-                ret.extend(max_list[item::])
-                break
-            else:
-                for sub in [ret1, ret2]:
-                    ret.append(sub[item])
-    return ''.join(ret)
 
+    ret = ''
+    for i in range(max(len(s1), len(s2))):
+        if len(s1) > i:
+            ret += s1[i]
+        if len(s2) > i:
+            ret += s2[i]
 
-# print(mix_string("AAA", "bbb"))  # "AbAbAb"
-# print(mix_string("AA", ""))  # "AA"
-# print(mix_string("mxdsrn", "ie tig"))  # "mixed string"
+    return ret
+
+print(mix_string("AAA", "bbb"))  # "AbAbAb"
+print(mix_string("AA", ""))  # "AA"
+print(mix_string("mxdsrn", "ie tig"))  # "mixed string"
 # print(mix_string("mxdsrfffffffffffffff", "ie tilsgggg"))  # "mixed string"
 
 
@@ -211,12 +205,12 @@ def prime_factorization(number: int) -> dict:
     list_of_factors = []
     list_of_factors_unique = set()
     i = 2
-    while number > 1:
+    while i <= number:
         if number % i == 0:
             list_of_factors.append(i)
             number = number / i
-            i = i - 1
-        i += 1
+        else:
+            i += 1
 
     for i in list_of_factors:
         list_of_factors_unique.add(i)
@@ -227,12 +221,12 @@ def prime_factorization(number: int) -> dict:
     return ret
 
 
-print(prime_factorization(2))
-print(prime_factorization(12))
-print(prime_factorization(1960))
-print(prime_factorization(1024))
-print(prime_factorization(79))
-print(prime_factorization(121))
+# print(prime_factorization(2))
+# print(prime_factorization(12))
+# print(prime_factorization(1960))
+# print(prime_factorization(1024))
+# print(prime_factorization(79))
+# print(prime_factorization(121))
 
 
 class Candy:
@@ -385,7 +379,7 @@ class Grade:
         self.previous_grades = {date: grade}
 
     def __repr__(self):
-        return f'{self.previous_grades}'
+        return f'{self.value}'
 
     def change_grade(self, new_grade: int, date: str):
         """
@@ -427,9 +421,9 @@ class Student:
         This function is only used when an assignment has been attempted at least once before. Keep in mind that you
         need to also keep the history of grades, not create a new grade!
         """
-        # for grade in self.grades:
-        #     if assignment == grade.assignment:
-        #         a = 'hello'
+        for grade in self.grades:
+            if assignment == grade:
+                self.grades[grade].change_grade(new_grade,date)
 
     def calculate_weighted_average(self):
         """
@@ -609,7 +603,6 @@ if __name__ == '__main__':
     gr = Grade("!", 3, "KT", "01/09/2020")
     jyri.grade(gr)
     teele.grade(Grade(4, 3, "KT", "01/09/2020"))
-    print(gr.change_grade(3, '02/09/2020'))
 
     print(f"Jyri keskmine hinne on {jyri.calculate_weighted_average()}.")  # 1
 
@@ -624,9 +617,9 @@ if __name__ == '__main__':
     teele.grade(Grade(3, 1, "TK", "30/11/2020"))
 
     print(f"Teele keskmine hinne on {teele.calculate_weighted_average()}.")  # 4
-    # print(cl.get_grade_sheet())
-    # print()
+    print(cl.get_grade_sheet())
+    print()
 
-    # tuuli = Student("Tuuli Karu")
-    # cl.add_student(tuuli)
-    # print(len(cl.students))  # 4
+    tuuli = Student("Tuuli Karu")
+    cl.add_student(tuuli)
+    print(len(cl.students))  # 4

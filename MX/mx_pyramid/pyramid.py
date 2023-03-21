@@ -102,12 +102,10 @@ def join_pyramids(pyramid_a: list, pyramid_b: list) -> list:
         return pyramid_b
 
 
-a = join_pyramids(make_pyramid(5, "A"), make_pyramid(3, "A"))
+a = join_pyramids(make_pyramid(35, "A"), make_pyramid(3, "A"))
 
 for i in a:
     print(i)
-
-
 
 
 def to_string(pyramid: list) -> str:

@@ -548,17 +548,20 @@ class Dealership:
 
     def add_car(self, car: Car):
         """Car is added to dealership."""
-        self.cars.append(car)
+        if car not in self.cars:
+            self.cars.append(car)
 
     def get_all_regular_cars(self):
         """Return all the regular cars sorted by value (ascending, lower to higher)."""
         self.regular = [i for i in self.cars]
-        return sorted(self.regular, key=lambda x: x.get_value())
+        if self.regular:
+            return sorted(self.regular, key=lambda x: x.get_value())
 
     def make_car_premium(self, car: Car):
         """Make a car premium, which can can be sold only to premium customers."""
         car.basic = False
         car.premium = True
+        self.regular.remove(car)
         self.premium.append(car)
 
     def get_all_premium_cars(self):
@@ -662,7 +665,6 @@ if __name__ == '__main__':
     car_dealer = Dealership("Ago Carfriend")
     car_dealer.add_car(blue_car)
     car_dealer.add_car(green_car)
-
 
 
     print(car_dealer.get_all_regular_cars())
